@@ -31,13 +31,12 @@ public class CentroDeMineral implements Construible, Recolector {
 	}
 	
 	@Override
-	public void recolectar() {
+	public void recolectar() throws RecursoAgotado {
 
-		try {
+		if (!this.nodoMineral.estaAgotado()) {
 			int extraidos = this.nodoMineral.extraer();
-			Juego.getInstance().turnoDe().recolectarMinerarles(extraidos);
-		} catch (RecursoAgotado ra) {}
-			
+			Juego.getInstance().turnoDe().recolectarMinerarles(extraidos);		
+		}
 		
 	}
 	
