@@ -1,0 +1,34 @@
+Inforeme sobre Excepciones:
+
+RAZAS
+
+- YaFueDestruido: Indica que una unidad( ya sea construccion o guerrero) ya fue destruida, cuando se la intente atacar.
+
+  Situacion de Uso: Es utlizada en caso de que un objeto (por ej un guerrero zealot) quiera atacar a otro que ya esta en
+                      estado de destruido, es decir, que este ultimo tenga "vida" o "defensas" cero.
+
+  Falta poner que se hace con la captura, y en donde se las atrapa.
+
+Mapa
+
+- CeldaNoVacia: Indica que una celda ya esta ocupada por otra entidad, en un lugar determinado del mapa.
+
+  Situacion de Uso: Se ejecuta en el caso en el cual se haya incorporado una entidad en una celda, determinada por unas coordenadas y 
+                    posteriormente se quiera ubicar otra entidad en las mismas coordenadas del mapa, es decir, en la misma celda en la
+                    cual se ubico la primera entidad.
+
+  Falta poner que se hace con la captura, y en donde se las atrapa. 
+
+-RecursoAgotado: Señala que un recurso( ya sea gas o mineral)en un determinado lugar( sea nodo o volcan) ya no puede recolectarse
+                 pues se ha agotado del todo.   
+
+  Situacion de Uso: Se utiliza en el caso de que el jugador se encuentre  recolectando alguno de los dos recursos(nodos o gas)
+                    y este se acabe de manera inesperada de su correspondiente lugar( nodo o volcan). Entonces esta excepcion le 
+                    indicar al jugador que debe dirigirse a otro lugar, para poder seguir obteniendo recursos.
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+Protos
+
+-EscudoNoPuedeRegenerarse:
+-EscudoSobrepasaValorMaximo:
