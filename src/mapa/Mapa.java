@@ -23,72 +23,47 @@ public class Mapa {
 		this.celdas = new HashMap<Coordenada, Celda>();
 	}
 	
+	public void agregarCelda(Coordenada coord, Materiales material, Recurso recurso) {		
+		Celda celda = new Celda(material, recurso);
+		this.celdas.put(coord, celda);
+	}
+	
+	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaNoVacia, CoordenadaFueraDeBordes {
+		Celda celda = this.obtenerCelda(c);
+		
+		controlable.ubicarseEnCelda(celda);
+		
+		this.cantidadDeControlablees++;
+	}
+	
 	public void asignarBordes(int xMaximo, int yMaximo) {
 		this.xMaximo = xMaximo;
 		this.yMaximo = yMaximo;
 	}
 	
-	public Celda obtenerCelda(Coordenada c) throws CoordenadaFueraDeBordes {
-		if(c.getX() > this.xMaximo || c.getY() > this.yMaximo) {
-			throw new CoordenadaFueraDeBordes();
-		}
-		else {
-			return celdas.get(c);
-		}
-	}
-	
-	public Controlable obtenerControlable(Coordenada c) throws CoordenadaFueraDeBordes {
-		return this.obtenerCelda(c).getControlable();
-	}
-	
-	public void moverControlable(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
-		Controlable original = this.obtenerCelda(c1).getControlable();
-		
-		this.removerControlable(c1);
-		
-		this.agregarControlable(c2, original);
-	}
-	
-	public void removerControlable(Coordenada c) throws CoordenadaFueraDeBordes {
-		this.obtenerCelda(c).removerControlable();
-		
-		this.cantidadDeControlablees--;
-	}
-	
-	public void agregarControlable(Coordenada c, Controlable Controlable) throws CeldaNoVacia, CoordenadaFueraDeBordes {
-		this.obtenerCelda(c).agregarControlable(Controlable);
-		
-		this.cantidadDeControlablees++;
-	}
-
-	public boolean ubicacionOcupada(Coordenada coordenada) {	
-		// Falta implementar, deberia decir si la ubicacion esta ocupada en esa coordenada 
-		// tanto por enemigos como por aliados
-		return false; 
-	}
-
-
-	public boolean existeNodoDeMinerales(Coordenada coordenada) {
-		
-		//Debe responder si en esa coordenada existe un nodoDeMinerales
-		return true;
-	}
-
-
-	public Mineral getNodoDeMinerales(Coordenada coordenada) {
-		
-		//Deberia buscar el nodo y devolverlo, por ahora solo devuelve un nodo cualquiera
-		return (new Mineral(1000));
-		
-	}
-
-
 	public void enConstruccion(Construible construccion, Coordenada coordenada) {
 		
 		//Deberia ubicar la construccion en una celda y sus alrededores a partir de las coordenadas
 		
 	}
-
+	
+	public boolean existeNodoDeMinerales(Coordenada coordenada) {
+		
+		//Debe responder si en esa coordenada existe un nodoDeMinerales
+		return true;
+	}
+	
+	public Mineral getNodoDeMinerales(Coordenada coordenada) {
+		
+		/* 
+		 * Debería devolver un Recurso generico, y despues con Double Dispatch
+		 * verificar si podemos agregar el edificio correspondiente
+		 */
+		
+		//Deberia buscar el nodo y devolverlo, por ahora solo devuelve un nodo cualquiera
+		return (new Mineral(1000));
+	}
+	
 	public Collection<Recolector> getRecolectores() {
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
 		
@@ -97,10 +72,42 @@ public class Mapa {
 		//que no me tengo que preocupar por diferenciarlos, los trato a todos por igual
 		return null;
 	}
+	
+	public void moverControlableEnAire(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
+		Controlable original = this.obtenerCelda(c1).obtenerControlableEnAire();
+		
+		this.obtenerCelda(c1);
+		
+		this.agregarControlable(c2, original);
+	}
+	
+	public void moverControlableEnTierra(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
+		Controlable original = this.obtenerCelda(c1).obtenerControlableEnTierra();
+		
+		this.obtenerCelda(c1).removerControlableEnTierra();
+		
+		this.agregarControlable(c2, original);
+	}
 
-	public void agregarCelda(Coordenada coord, Materiales material) {		
-		Celda celda = new Celda(material);
-		this.celdas.put(coord, celda);
+	public Celda obtenerCelda(Coordenada c) throws CoordenadaFueraDeBordes {
+		if(c.getX() > this.xMaximo || c.getY() > this.yMaximo) {
+			throw new CoordenadaFueraDeBordes();
+		}
+		else {
+			return celdas.get(c);
+		}
+	}
+
+	public boolean ubicacionOcupada(Coordenada coordenada) {
+		
+		/*
+		 * Deberia acceder directamente a la celda en vez de usar este método
+		 * Sino llenamos a Mapa con copias de métodos de Celda
+		 */
+		
+		// Falta implementar, deberia decir si la ubicacion esta ocupada en esa coordenada 
+		// tanto por enemigos como por aliados
+		return false; 
 	}
 
 }

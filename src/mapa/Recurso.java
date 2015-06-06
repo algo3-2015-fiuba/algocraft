@@ -38,5 +38,7 @@ public abstract class Recurso implements Recolectable {
 		return resto;
 		
 	}
+
+	public abstract Recurso duplicar();
 	
 }
