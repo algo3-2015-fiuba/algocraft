@@ -13,8 +13,13 @@ import juego.razas.terran.construcciones.CentroDeMineral;
 
 
 public class ConstructorCentroDeMineral extends CommandConstructor {
+	
+	/*
+	 * Solo se ejecuta con un Terran
+	 */
+	
 	@Override
-	public void construir(Jugador jugador, Terran raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+	public void ejecutar(Terran raza, Jugador jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
 		int costoMinerales = 50;
