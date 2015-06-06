@@ -9,10 +9,11 @@ import juego.Juego;
 import juego.interfaces.CommandConstructor;
 import juego.interfaces.Construible;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
+import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
-import juego.mapa.Mapa;
+import mapa.Mapa;
 import juego.razas.terran.construcciones.CentroDeMineral;
 
 public class Terran extends Raza {
@@ -24,8 +25,8 @@ public class Terran extends Raza {
 	}
 	
 	@Override
-	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
-		//Double dispatch
+	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+		construccion.construir(this, coordenada);
 	}
 
 	public void construir(ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {

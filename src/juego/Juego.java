@@ -10,7 +10,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.Jugador;
-import juego.mapa.Mapa;
+import mapa.Mapa;
 import juego.razas.Raza;
 
 public class Juego {
