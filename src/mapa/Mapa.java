@@ -56,7 +56,7 @@ public class Mapa {
 	public Mineral getNodoDeMinerales(Coordenada coordenada) {
 		
 		/* 
-		 * Debería devolver un Recurso generico, y despues con Double Dispatch
+		 * Deberia devolver un Recurso generico, y despues con Double Dispatch
 		 * verificar si podemos agregar el edificio correspondiente
 		 */
 		
@@ -96,18 +96,6 @@ public class Mapa {
 		else {
 			return celdas.get(c);
 		}
-	}
-
-	public boolean ubicacionOcupada(Coordenada coordenada) {
-		
-		/*
-		 * Deberia acceder directamente a la celda en vez de usar este método
-		 * Sino llenamos a Mapa con copias de métodos de Celda
-		 */
-		
-		// Falta implementar, deberia decir si la ubicacion esta ocupada en esa coordenada 
-		// tanto por enemigos como por aliados
-		return false; 
 	}
 
 }

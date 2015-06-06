@@ -4,12 +4,11 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 
-import mapa.Coordenada;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import juego.Juego;
+import mapa.Coordenada;
 import juego.excepciones.*;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.*;
@@ -21,18 +20,19 @@ public class CentroDeMineralTest {
 	
 	@Before 
 	public void iniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores {
-		Juego.resetInstance();
 		
 		Juego juego = Juego.getInstance(); 
 		
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
 		
+		//Se genera un mapa, se inicializan los datos, etc...
 		juego.iniciarJuego();
 	}
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() {
+	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() 
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		
 		Juego juego = Juego.getInstance();
 		
@@ -45,32 +45,26 @@ public class CentroDeMineralTest {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		try {
-			// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-			// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-			jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(10,12));
-		} 
-		catch (ImposibleConstruir cnd) { assertTrue(false); } 
-		catch (RecursosInsuficientes ri) { assertTrue(false); }
-		catch (UbicacionInvalida ui) { assertTrue(false); }
+		// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
+		// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(10,12));
 
-		for (int i = 1; i <= 8; i++) {
+		for (int i = 1; i < 8; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
 				assertFalse(jugadorActual.recolectoMinerales());
 			}
-				
-		}
 		
-		assertTrue(jugadorActual.recolectoMineralesFinalizadaLaConstruccion());
+		}
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
-		jugadorActual.finalizarTurno();
 		
-		assertTrue(jugadorActual.recolectoMineralesFinalizadaLaConstruccion());
+		//Pasaron 4 turnos del jugador Terran, por lo que la construccion del centro de mineral deberia haber finalizado
+		
+		assertTrue(jugadorActual.recolectoMinerales());
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el centro de mineral costa 50 minerales.

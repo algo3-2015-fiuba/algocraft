@@ -24,11 +24,8 @@ public class Juego {
 		return instance;
 	}
 	
-	/*
-	 * Solo para tests
-	 */
-	public static void resetInstance() {
-		Juego.instance = new Juego();
+	public void reiniciar() {
+		instance = new Juego();
 	}
 	
 	private Juego(){
