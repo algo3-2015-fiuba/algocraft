@@ -13,12 +13,10 @@ public class CentroDeMineral implements Construible, Recolector {
 	private int vida;
 	
 	public CentroDeMineral(Mineral nodoAExtraer) {
-		
 		super();
 		this.nodoMineral = nodoAExtraer;
 		this.vida = 0;
 		this.tiempoDeConstruccion = 0;
-		
 	}
 
 	@Override

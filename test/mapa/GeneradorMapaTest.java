@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import mapa.Material.Materiales;
+import mapa.excepciones.CoordenadaFueraDeBordes;
 
 import org.junit.Test;
 
 public class GeneradorMapaTest {
 
 	@Test
-	public void testCreacionDeCentroMapaAPartirDeArchivoParseaCorrectamente() throws IOException {
+	public void testCreacionDeCentroMapaAPartirDeArchivoParseaCorrectamente() throws IOException, CoordenadaFueraDeBordes {
 		//primero tengo que incializar un mapa
 		
 		Mapa mapa = new GeneradorMapa("mapas/test.map").crearAPartirDeArchivo();

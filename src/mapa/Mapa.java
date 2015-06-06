@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import mapa.Material.Materiales;
 import mapa.excepciones.CeldaNoVacia;
+import mapa.excepciones.CoordenadaFueraDeBordes;
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Recolector;
@@ -27,15 +28,20 @@ public class Mapa {
 		this.yMaximo = yMaximo;
 	}
 	
-	public Celda obtenerCelda(Coordenada c) {
-		return celdas.get(c);
+	public Celda obtenerCelda(Coordenada c) throws CoordenadaFueraDeBordes {
+		if(c.getX() > this.xMaximo || c.getY() > this.yMaximo) {
+			throw new CoordenadaFueraDeBordes();
+		}
+		else {
+			return celdas.get(c);
+		}
 	}
 	
-	public Controlable obtenerControlable(Coordenada c) {
+	public Controlable obtenerControlable(Coordenada c) throws CoordenadaFueraDeBordes {
 		return this.obtenerCelda(c).getControlable();
 	}
 	
-	public void moverControlable(Coordenada c1, Coordenada c2) throws CeldaNoVacia {
+	public void moverControlable(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
 		Controlable original = this.obtenerCelda(c1).getControlable();
 		
 		this.removerControlable(c1);
@@ -43,13 +49,13 @@ public class Mapa {
 		this.agregarControlable(c2, original);
 	}
 	
-	public void removerControlable(Coordenada c) {
+	public void removerControlable(Coordenada c) throws CoordenadaFueraDeBordes {
 		this.obtenerCelda(c).removerControlable();
 		
 		this.cantidadDeControlablees--;
 	}
 	
-	public void agregarControlable(Coordenada c, Controlable Controlable) throws CeldaNoVacia {
+	public void agregarControlable(Coordenada c, Controlable Controlable) throws CeldaNoVacia, CoordenadaFueraDeBordes {
 		this.obtenerCelda(c).agregarControlable(Controlable);
 		
 		this.cantidadDeControlablees++;
