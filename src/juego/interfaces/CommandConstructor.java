@@ -15,8 +15,7 @@ public abstract class CommandConstructor {
 		raza.construir(this, coordenada);
 	}
 	
-	/*
-	 * Por default, asumimos que no se puede ejecutar un CommandConstructor en ninguna raza.
+	/* Por default, asumimos que no se puede ejecutar un CommandConstructor en ninguna raza.
 	 * Luego hacemos un @Override para las correctas
 	 */
 

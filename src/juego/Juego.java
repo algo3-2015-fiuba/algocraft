@@ -82,8 +82,9 @@ public class Juego {
 
 	public void iniciarJuego() throws FaltanJugadores {
 		
-		// Iniciar Juego, cargar mapa, etc...
 		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
+		
+		//Faltaria inicializar el mapa, usar el generador del mismo
 		
 	}
 

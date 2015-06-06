@@ -23,12 +23,6 @@ public class JuegoTest {
 		
 		Juego juego = Juego.getInstance();
 		juego.reiniciar();
-		juego = Juego.getInstance();
-		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
-		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
-		
-		juego.iniciarJuego();
 		
 	}
 	
@@ -36,18 +30,25 @@ public class JuegoTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() throws NombreInvalido, ColorInvalido {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() throws NombreInvalido, ColorInvalido, FaltanJugadores {
 		
+		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
 		
-		exception.expect(NombreInvalido.class);
 		juego.crearJugador("jugadorTerran", new Terran(), Color.black);
+		
+		exception.expect(NombreInvalido.class);
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 
 	}
 
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() throws ColorInvalido, NombreInvalido {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+		
+		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
+		
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		exception.expect(ColorInvalido.class);
 		juego.crearJugador("jugadorTerran2", new Terran(), Color.red);
@@ -56,30 +57,25 @@ public class JuegoTest {
 
 	@Test
 	public void testJuegoNoPuedeEmpezarSinJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido {
+		
+		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
-		juego.reiniciar();
-		juego = Juego.getInstance();
 		
 		exception.expect(FaltanJugadores.class);
 		juego.iniciarJuego();	
-		
-		this.inicioJuegoCorrectamente();
 		
 	}
 	
 	@Test 
 	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido {
 		
+		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
-		juego.reiniciar();
-		juego = Juego.getInstance();
 		
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		exception.expect(FaltanJugadores.class);
 		juego.iniciarJuego();
-		
-		this.inicioJuegoCorrectamente();
 		
 	}
 
