@@ -4,7 +4,6 @@ import juego.Juego;
 import juego.recursos.Mineral;
 import juego.recursos.excepciones.RecursoAgotado;
 import juego.interfaces.Construible;
-import juego.interfaces.Observador;
 import juego.interfaces.Recolector;
 
 public class CentroDeMineral implements Construible, Recolector {

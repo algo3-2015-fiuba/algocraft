@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 
+import mapa.Coordenada;
+
 import org.junit.Test;
 
 import juego.Juego;
@@ -51,7 +53,7 @@ public class CentroDeMineralTest {
 				
 			// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 			// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-			jugadorActual.construir(new ConstructorCentroDeMineral(),10,12);
+			jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(10,12));
 					
 
 		} 

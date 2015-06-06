@@ -2,6 +2,7 @@ package juego.mapa;
 
 import java.util.Collection;
 
+import mapa.Coordenada;
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Recolector;
@@ -16,27 +17,27 @@ public class Mapa {
 
 	}
 
-	public boolean ubicacionOcupada(int x, int y) {	
+	public boolean ubicacionOcupada(Coordenada coordenada) {	
 		// Falta implementar, deberia decir si la ubicacion esta ocupada en esa coordenada 
 		// tanto por enemigos como por aliados
 		return false; 
 	}
 
-	public boolean existeNodoDeMinerales(int x, int y) {
+	public boolean existeNodoDeMinerales(Coordenada coordenada) {
 		
 		//Debe responder si en esa coordenada existe un nodoDeMinerales
 		return true;
 		
 	}
 
-	public Mineral getNodoDeMinerales(int x, int y) {
+	public Mineral getNodoDeMinerales(Coordenada coordenada) {
 		
 		//Deberia buscar el nodo y devolverlo, por ahora solo devuelve un nodo cualquiera
 		return (new Mineral(1000));
 		
 	}
 
-	public void enConstruccion(Construible construccion, int x, int y) {
+	public void enConstruccion(Construible construccion, Coordenada coordenada) {
 		
 		//Deberia ubicar la construccion en una celda y sus alrededores a partir de las coordenadas
 		

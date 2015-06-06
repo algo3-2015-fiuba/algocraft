@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import mapa.Coordenada;
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
@@ -22,20 +23,20 @@ public class Terran extends Raza {
 	}
 
 	@Override
-	public void construir(ConstructorCentroDeMineral construccion, int x, int y) throws RecursosInsuficientes, UbicacionInvalida {
+	public void construir(ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
 		Jugador jugador = juego.turnoDe();
 		int costoMinerales = 50;
 		
-		if ((!mapa.existeNodoDeMinerales(x,y)) || (mapa.ubicacionOcupada(x,y))) throw new UbicacionInvalida();
+		if ((!mapa.existeNodoDeMinerales(coordenada)) || (mapa.ubicacionOcupada(coordenada))) throw new UbicacionInvalida();
 		
 		jugador.gastarMinerales(costoMinerales);
 		
-		CentroDeMineral centroDeMineral = new CentroDeMineral(mapa.getNodoDeMinerales(x,y));
+		CentroDeMineral centroDeMineral = new CentroDeMineral(mapa.getNodoDeMinerales(coordenada));
 		
-		mapa.enConstruccion(centroDeMineral, x, y);
+		mapa.enConstruccion(centroDeMineral, coordenada);
 		this.enConstruccion.add(centroDeMineral);
 		
 	}

@@ -1,19 +1,14 @@
 package juego.jugadores;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
+import mapa.Coordenada;
 import juego.Juego;
 import juego.interfaces.CommandConstructor;
-import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.mapa.Mapa;
 import juego.razas.Raza;
-import juego.recursos.excepciones.RecursoAgotado;
 
 public class Jugador {
 
@@ -59,10 +54,10 @@ public class Jugador {
 		
 	}
 
-	public void construir(CommandConstructor constructor, int x, int y) 
+	public void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		
-		constructor.construir(this.raza, x, y);
+		constructor.construir(this.raza, coordenada);
 		
 	}
 
