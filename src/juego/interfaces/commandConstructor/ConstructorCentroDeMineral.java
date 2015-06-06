@@ -14,10 +14,6 @@ import juego.razas.terran.construcciones.CentroDeMineral;
 
 public class ConstructorCentroDeMineral extends CommandConstructor {
 	
-	/*
-	 * Solo se ejecuta con un Terran
-	 */
-	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
 		Juego juego = Juego.getInstance();
@@ -33,7 +29,9 @@ public class ConstructorCentroDeMineral extends CommandConstructor {
 		
 		CentroDeMineral centroDeMineral = new CentroDeMineral(mapa.getNodoDeMinerales(coordenada));
 		
-		mapa.enConstruccion(centroDeMineral, coordenada);
+		jugador.agregarConstructor(this);
+		this.enConstruccion = centroDeMineral;
+		//Falta agregar el centro de mineral al mapa
 	}
 	
 }

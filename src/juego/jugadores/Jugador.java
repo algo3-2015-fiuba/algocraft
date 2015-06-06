@@ -1,6 +1,9 @@
 package juego.jugadores;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import mapa.Coordenada;
 import juego.Juego;
@@ -16,6 +19,7 @@ public class Jugador {
 	private Raza raza;
 	private Color color;
 	private int mineralesRecolectados, gasVespenoRecolectado;
+	private Collection<CommandConstructor> constructores;
 	
 	public Jugador(String nombre, Raza raza, Color color) {
 		
@@ -24,6 +28,7 @@ public class Jugador {
 		this.color = color;
 		this.mineralesRecolectados = 200;
 		this.gasVespenoRecolectado = 0;
+		this.constructores = new ArrayList<CommandConstructor>();
 		
 	}
 	
@@ -45,11 +50,27 @@ public class Jugador {
 	*/
 		
 	}
+	
+	private void actualizarConstrucciones() {
+			
+		ArrayList<CommandConstructor> constructoresFinalizados = new ArrayList<CommandConstructor>();
+			
+		Iterator<CommandConstructor> it = this.constructores.iterator();
+			
+		while (it.hasNext()) {			
+			CommandConstructor constructor = it.next();
+			constructor.actualizarConstruccion();
+			if (constructor.construccionFinalizada()) constructoresFinalizados.add(constructor);			
+		}
+			
+		this.constructores.removeAll(constructoresFinalizados);
+
+	}
 
 	public void finalizarTurno() {
 		
 		this.recolectarRecursos();
-		this.raza.turnoFinalizado();
+		this.actualizarConstrucciones();
 		Juego.getInstance().finalizarTurno();
 		
 	}
@@ -58,8 +79,9 @@ public class Jugador {
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		
 		//Cuando querermos construir, buscamos a la raza a la cual pertenece el jugador
-		//y ella decide que hacer con el constructor
+		//y de esta manera verificamos si esta construccion esta disponible para la misma.
 		this.raza.construir(constructor, coordenada);
+		
 	}
 
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
@@ -79,5 +101,9 @@ public class Jugador {
 	//Deberian borrarse en el futuro
 	public boolean recolectoMinerales() { return false;	}
 	public boolean recolectoMineralesFinalizadaLaConstruccion() { return true; }
+
+	public void agregarConstructor(CommandConstructor constructor) {
+		this.constructores.add(constructor);		
+	}
 	
 }

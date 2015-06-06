@@ -13,31 +13,8 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 
 public abstract class Raza {
-	
-	private Collection<Construible> enConstruccion;
-	
-	public Raza() {
-		this.enConstruccion = new ArrayList<Construible>();
-	}
 
 	public abstract void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir;	
-
-	
-	public void turnoFinalizado() {
-		
-		ArrayList<Construible> construccionesFinalizadas = new ArrayList<Construible>();
-		
-		Iterator<Construible> it = this.enConstruccion.iterator();
-		
-		while (it.hasNext()) {			
-			Construible construccion = it.next();
-			construccion.actualizarConstruccion();
-			if (construccion.construccionFinalizada()) construccionesFinalizadas.add(construccion);			
-		}
-		
-		this.enConstruccion.removeAll(construccionesFinalizadas);
-		
-	}
 
 }

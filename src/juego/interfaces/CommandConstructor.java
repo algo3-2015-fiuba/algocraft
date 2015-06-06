@@ -4,13 +4,14 @@ import mapa.Coordenada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.Jugador;
 import juego.razas.Protoss;
 import juego.razas.Raza;
 import juego.razas.Terran;
 
 public abstract class CommandConstructor {
-
+	
+	protected Construible enConstruccion;
+	
 	public void ejecutar(Raza raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		raza.construir(this, coordenada);
 	}
@@ -27,6 +28,12 @@ public abstract class CommandConstructor {
 		throw new ImposibleConstruir();
 	}
 	
+	public void actualizarConstruccion() {
+		if (!enConstruccion.construccionFinalizada()) enConstruccion.actualizarConstruccion();
+	}
 	
+	public boolean construccionFinalizada() {
+		return (this.enConstruccion.construccionFinalizada());
+	}
 	
 }
