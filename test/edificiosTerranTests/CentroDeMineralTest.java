@@ -31,7 +31,6 @@ public class CentroDeMineralTest {
 		juego.iniciarJuego();
 	}
 	
-	
 	@Test
 	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() throws ColorInvalido, NombreInvalido {
 		

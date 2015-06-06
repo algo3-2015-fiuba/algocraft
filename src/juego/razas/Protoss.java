@@ -4,11 +4,13 @@ import mapa.Coordenada;
 import juego.interfaces.CommandConstructor;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.ImposibleConstruir;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.UbicacionInvalida;
 
 public class Protoss extends Raza {
 
 	@Override
-	public void construir(CommandConstructor constructor, Coordenada coordenada) 
-			throws ImposibleConstruir { throw new ImposibleConstruir(); }
-	
+	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
+		//Double dispatch
+	}
 }
