@@ -13,34 +13,39 @@ import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
 import juego.razas.*;
 
+/*
+ * OJO
+ * estas unit test no son independientes una de otra
+ * esto es porque Juego.getInstance() se comparte entre pruebas
+ * rompe la independencia entre tests
+ */
+
 public class CentroDeMineralTest {
 	
-	public CentroDeMineralTest() {
-		
+	@Test
+	public void testLala() {
 		Juego juego = Juego.getInstance(); //Es un singleton
 		
 		try {
-			try {
-			
 				juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 				juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
-		
-			} catch (NombreInvalido ni) { assertTrue(false); }
-		} catch (ColorInvalido ci) { assertTrue(false); }
+		} 
+		catch (ColorInvalido ci) { assertTrue(false); }
+		catch (NombreInvalido ni) { assertTrue(false); }
 		
 		try {
 			
 			juego.iniciarJuego();
 			
 		} catch (FaltanJugadores fj) { assertTrue(false); }
-
 	}
 	
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() {
+	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() throws ColorInvalido, NombreInvalido {
 		
 		Juego juego = Juego.getInstance();
+		juego.crearJugador("jugadorTerran2", new Terran(), Color.black);
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
@@ -51,17 +56,16 @@ public class CentroDeMineralTest {
 		}
 		
 		try {
-			try {
-				try {
 				
-					// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-					// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-					jugadorActual.construir(new ConstructorCentroDeMineral(),10,12);
+			// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
+			// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
+			jugadorActual.construir(new ConstructorCentroDeMineral(),10,12);
 					
-				} catch (UbicacionInvalida ui) { assertTrue(false); }
-			} catch (RecursosInsuficientes ri) { assertTrue(false); }
-		//Si el jugador trata de crear una construccion perteneciente a otra raza, aunque esto deberia ser un caso muy extranio.
-		} catch (ImposibleConstruir cnd) { assertTrue(false); } 
+
+		} 
+		catch (ImposibleConstruir cnd) { assertTrue(false); } 
+		catch (RecursosInsuficientes ri) { assertTrue(false); }
+		catch (UbicacionInvalida ui) { assertTrue(false); }
 
 		for (int i = 1; i <= 8; i++) {
 		
