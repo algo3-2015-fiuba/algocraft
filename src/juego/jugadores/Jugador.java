@@ -76,8 +76,6 @@ public class Jugador {
 	public void mineralesRecolectados(int cantidad) { this.mineralesRecolectados += cantidad; }
 	public void gasVespenoRecolectado(int cantidad) { this.mineralesRecolectados += cantidad; }
 
-	public String getNombre() { return this.nombre;	}
-
 	//Estos metodo los puse para que pase el test, ya que son necesarios algunos metodos del mapa en realidad
 	//Deberian borrarse en el futuro
 	public boolean recolectoMinerales() { return false;	}

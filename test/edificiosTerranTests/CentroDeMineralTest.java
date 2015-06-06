@@ -13,17 +13,10 @@ import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
 import juego.razas.*;
 
-/*
- * OJO
- * estas unit test no son independientes una de otra
- * esto es porque Juego.getInstance() se comparte entre pruebas
- * rompe la independencia entre tests
- */
 
 public class CentroDeMineralTest {
 	
-	@Test
-	public void testLala() {
+	public CentroDeMineralTest() {
 		Juego juego = Juego.getInstance(); //Es un singleton
 		
 		try {
@@ -45,7 +38,6 @@ public class CentroDeMineralTest {
 	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() throws ColorInvalido, NombreInvalido {
 		
 		Juego juego = Juego.getInstance();
-		juego.crearJugador("jugadorTerran2", new Terran(), Color.black);
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
