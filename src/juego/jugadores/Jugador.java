@@ -61,15 +61,18 @@ public class Jugador {
 		
 	}
 
-	public void gastarMinerales(int costoMinerales) throws RecursosInsuficientes {
-	
-		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();
-		
+	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
+		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();		
 		this.mineralesRecolectados -= costoMinerales;
 	}
+	
+	public void consumirGas(int costoGas) throws RecursosInsuficientes {	
+		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
+		this.gasVespenoRecolectado -= costoGas;
+	}
 
-	public void mineralesRecolectados(int cantidad) { this.mineralesRecolectados += cantidad; }
-	public void gasVespenoRecolectado(int cantidad) { this.mineralesRecolectados += cantidad; }
+	public void recolectarMinerarles(int cantidad) { this.mineralesRecolectados += cantidad; }
+	public void recolectarGasVespeno(int cantidad) { this.mineralesRecolectados += cantidad; }
 
 	//Estos metodo los puse para que pase el test, ya que son necesarios algunos metodos del mapa en realidad
 	//Deberian borrarse en el futuro

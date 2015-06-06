@@ -37,7 +37,7 @@ public class Terran extends Raza {
 		
 		if ((!mapa.existeNodoDeMinerales(coordenada)) || (mapa.ubicacionOcupada(coordenada))) throw new UbicacionInvalida();
 		
-		jugador.gastarMinerales(costoMinerales);
+		jugador.consumirMinerales(costoMinerales);
 		
 		CentroDeMineral centroDeMineral = new CentroDeMineral(mapa.getNodoDeMinerales(coordenada));
 		

@@ -37,7 +37,7 @@ public class CentroDeMineral implements Construible, Recolector {
 
 		try {
 			int extraidos = this.nodoMineral.extraer();
-			Juego.getInstance().turnoDe().mineralesRecolectados(extraidos);
+			Juego.getInstance().turnoDe().recolectarMinerarles(extraidos);
 		} catch (RecursoAgotado ra) {}
 			
 		
