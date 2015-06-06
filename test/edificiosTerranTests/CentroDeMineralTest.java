@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import mapa.Coordenada;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import juego.Juego;
@@ -18,7 +19,13 @@ import juego.razas.*;
 
 public class CentroDeMineralTest {
 	
-	public CentroDeMineralTest() {
+	@Before 
+	public void reset() {
+		Juego.resetInstance();
+	}
+	
+	@Test
+	public void testJuegoEmpiezaCorrectamente() {
 		Juego juego = Juego.getInstance(); //Es un singleton
 		
 		try {
@@ -40,6 +47,9 @@ public class CentroDeMineralTest {
 	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() throws ColorInvalido, NombreInvalido {
 		
 		Juego juego = Juego.getInstance();
+		
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran

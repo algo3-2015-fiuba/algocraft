@@ -24,6 +24,13 @@ public class Juego {
 		return instance;
 	}
 	
+	/*
+	 * Solo para tests
+	 */
+	public static void resetInstance() {
+		Juego.instance = new Juego();
+	}
+	
 	private Juego(){
 		
 		this.listaDeJugadores = new ArrayList<Jugador>();
