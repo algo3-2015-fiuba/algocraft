@@ -41,11 +41,6 @@ public class Mapa {
 		this.yMaximo = yMaximo;
 	}
 	
-	public void enConstruccion(Construible construccion, Coordenada coordenada) {
-		
-		//Deberia ubicar la construccion en una celda y sus alrededores a partir de las coordenadas
-		
-	}
 	
 	public boolean existeNodoDeMinerales(Coordenada coordenada) {
 		

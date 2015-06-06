@@ -17,5 +17,6 @@ public class Material {
 	   public boolean esEspacial() {
 	     return this.espacial;
 	   }
-	 }
+	 
+	}
 }

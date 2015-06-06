@@ -51,7 +51,7 @@ public class Jugador {
 		
 	}
 	
-	private void actualizarConstrucciones() {
+	private void notificarConstructores() {
 			
 		ArrayList<CommandConstructor> constructoresFinalizados = new ArrayList<CommandConstructor>();
 			
@@ -70,7 +70,7 @@ public class Jugador {
 	public void finalizarTurno() {
 		
 		this.recolectarRecursos();
-		this.actualizarConstrucciones();
+		this.notificarConstructores();
 		Juego.getInstance().finalizarTurno();
 		
 	}

@@ -11,10 +11,6 @@ public abstract class Recurso implements Recolectable {
 		this.cantidad = cantidadInicial;
 	}
 	
-	public int getCantidad() {
-		return (this.cantidad);
-	}
-	
 	@Override
 	public boolean estaAgotado() {
 		return (this.cantidad == 0);
