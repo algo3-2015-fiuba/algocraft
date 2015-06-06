@@ -57,8 +57,9 @@ public class Jugador {
 	public void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		
-		constructor.construir(this.raza, coordenada);
-		
+		//Cuando querermos construir, buscamos a la raza a la cual pertenece el jugador
+		//y ella decide que hacer con el constructor
+		this.raza.construir(this, constructor, coordenada);
 	}
 
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	

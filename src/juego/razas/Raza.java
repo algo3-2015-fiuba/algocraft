@@ -11,6 +11,7 @@ import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 
 public abstract class Raza {
 	
@@ -20,7 +21,7 @@ public abstract class Raza {
 		this.enConstruccion = new ArrayList<Construible>();
 	}
 
-	public abstract void construir(CommandConstructor constructor, Coordenada coordenada) 
+	public abstract void construir(Jugador jugador, CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir;	
 
 	

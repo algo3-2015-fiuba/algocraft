@@ -61,11 +61,13 @@ public class Mapa {
 		return false; 
 	}
 
+
 	public boolean existeNodoDeMinerales(Coordenada coordenada) {
 		
 		//Debe responder si en esa coordenada existe un nodoDeMinerales
 		return true;
 	}
+
 
 	public Mineral getNodoDeMinerales(Coordenada coordenada) {
 		
@@ -73,6 +75,7 @@ public class Mapa {
 		return (new Mineral(1000));
 		
 	}
+
 
 	public void enConstruccion(Construible construccion, Coordenada coordenada) {
 		

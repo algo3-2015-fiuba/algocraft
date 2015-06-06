@@ -25,25 +25,13 @@ public class Terran extends Raza {
 	}
 	
 	@Override
-	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
-		construccion.construir(this, coordenada);
+	public void construir(Jugador jugador, CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
+		//Double dispatch
 	}
 
-	public void construir(ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
+	public void construir(Jugador jugador, ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Jugador jugador = juego.turnoDe();
-		int costoMinerales = 50;
-		
-		if ((!mapa.existeNodoDeMinerales(coordenada)) || (mapa.ubicacionOcupada(coordenada))) throw new UbicacionInvalida();
-		
-		jugador.consumirMinerales(costoMinerales);
-		
-		CentroDeMineral centroDeMineral = new CentroDeMineral(mapa.getNodoDeMinerales(coordenada));
-		
-		mapa.enConstruccion(centroDeMineral, coordenada);
-		this.enConstruccion.add(centroDeMineral);
+		construccion.construir(jugador, this, coordenada);
 		
 	}
 	
