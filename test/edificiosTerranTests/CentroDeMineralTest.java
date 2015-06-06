@@ -20,26 +20,15 @@ import juego.razas.*;
 public class CentroDeMineralTest {
 	
 	@Before 
-	public void reset() {
+	public void reset() throws ColorInvalido, NombreInvalido, FaltanJugadores {
 		Juego.resetInstance();
-	}
-	
-	@Test
-	public void testJuegoEmpiezaCorrectamente() {
-		Juego juego = Juego.getInstance(); //Es un singleton
 		
-		try {
-				juego.crearJugador("jugadorTerran", new Terran(), Color.red);
-				juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
-		} 
-		catch (ColorInvalido ci) { assertTrue(false); }
-		catch (NombreInvalido ni) { assertTrue(false); }
+		Juego juego = Juego.getInstance(); 
 		
-		try {
-			
-			juego.iniciarJuego();
-			
-		} catch (FaltanJugadores fj) { assertTrue(false); }
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
+		
+		juego.iniciarJuego();
 	}
 	
 	

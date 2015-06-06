@@ -25,7 +25,7 @@ public class Terran extends Raza {
 	
 	@Override
 	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
-	
+		//Double dispatch
 	}
 
 	public void construir(ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {

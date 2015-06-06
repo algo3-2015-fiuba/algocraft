@@ -20,8 +20,8 @@ public abstract class Raza {
 		this.enConstruccion = new ArrayList<Construible>();
 	}
 
-	public void construir(CommandConstructor constructor, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir{}	
+	public abstract void construir(CommandConstructor constructor, Coordenada coordenada) 
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir;	
 
 	
 	public void turnoFinalizado() {
