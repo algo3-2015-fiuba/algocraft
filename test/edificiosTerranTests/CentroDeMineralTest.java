@@ -46,12 +46,9 @@ public class CentroDeMineralTest {
 		}
 		
 		try {
-				
 			// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 			// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
 			jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(10,12));
-					
-
 		} 
 		catch (ImposibleConstruir cnd) { assertTrue(false); } 
 		catch (RecursosInsuficientes ri) { assertTrue(false); }

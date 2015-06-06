@@ -9,7 +9,6 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.razas.Terran;
 import juego.recursos.Mineral;
-import mapa.Coordenada;
 import mapa.GeneradorMapa;
 import mapa.Mapa;
 
@@ -23,7 +22,7 @@ public class jugadorTest {
 		
 		Mapa mapa = new GeneradorMapa("mapas/test.map").crearAPartirDeArchivo();		
 		Terran jugador = new Terran();
-	
+		
 		Mineral nodoAExtraer = new Mineral(500);
 		//construyo un centro de mineral en la posicion donde se que esta el mineral
 		ConstructorCentroDeMineral constructorMineral = new ConstructorCentroDeMineral();
