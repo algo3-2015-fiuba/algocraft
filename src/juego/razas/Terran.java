@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import mapa.Coordenada;
 import juego.Juego;
+import juego.interfaces.CommandConstructor;
 import juego.interfaces.Construible;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -19,10 +20,14 @@ public class Terran extends Raza {
 	private Collection<Construible> enConstruccion;
 	
 	public Terran() {
-		this.enConstruccion = new ArrayList<Construible>();
+		super();
+	}
+	
+	@Override
+	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
+	
 	}
 
-	@Override
 	public void construir(ConstructorCentroDeMineral construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
 		
 		Juego juego = Juego.getInstance();
@@ -44,19 +49,7 @@ public class Terran extends Raza {
 	@Override
 	public void turnoFinalizado() {
 		
-		ArrayList<Construible> construccionesFinalizadas = new ArrayList<Construible>();
-		
-		Iterator<Construible> it = this.enConstruccion.iterator();
-		
-		while (it.hasNext()) {
-			
-			Construible construccion = it.next();
-			construccion.actualizarConstruccion();
-			if (construccion.construccionFinalizada()) construccionesFinalizadas.add(construccion);
-			
-		}
-		
-		this.enConstruccion.removeAll(construccionesFinalizadas);
+		super.turnoFinalizado();
 		
 	}
 	
