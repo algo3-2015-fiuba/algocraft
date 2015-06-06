@@ -21,7 +21,7 @@ public abstract class Raza {
 		this.enConstruccion = new ArrayList<Construible>();
 	}
 
-	public abstract void construir(Jugador jugador, CommandConstructor constructor, Coordenada coordenada) 
+	public abstract void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir;	
 
 	

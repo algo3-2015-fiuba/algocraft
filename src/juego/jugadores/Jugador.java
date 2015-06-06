@@ -59,7 +59,7 @@ public class Jugador {
 		
 		//Cuando querermos construir, buscamos a la raza a la cual pertenece el jugador
 		//y ella decide que hacer con el constructor
-		this.raza.construir(this, constructor, coordenada);
+		this.raza.construir(constructor, coordenada);
 	}
 
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	

@@ -20,7 +20,7 @@ import juego.razas.*;
 public class CentroDeMineralTest {
 	
 	@Before 
-	public void reset() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void iniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores {
 		Juego.resetInstance();
 		
 		Juego juego = Juego.getInstance(); 
@@ -32,7 +32,7 @@ public class CentroDeMineralTest {
 	}
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() throws ColorInvalido, NombreInvalido {
+	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() {
 		
 		Juego juego = Juego.getInstance();
 		

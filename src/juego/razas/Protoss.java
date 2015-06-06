@@ -11,7 +11,7 @@ import juego.jugadores.Jugador;
 public class Protoss extends Raza {
 	
 	@Override
-	public void construir(Jugador jugador, CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir{
-		construccion.ejecutar(this, jugador, coordenada);
+	public void construir(CommandConstructor construccion, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir{
+		construccion.ejecutar(this, coordenada);
 	}
 }

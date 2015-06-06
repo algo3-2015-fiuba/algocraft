@@ -19,8 +19,9 @@ public class ConstructorCentroDeMineral extends CommandConstructor {
 	 */
 	
 	@Override
-	public void ejecutar(Terran raza, Jugador jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+	public void ejecutar(Terran raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		Juego juego = Juego.getInstance();
+		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
 		int costoMinerales = 50;
 		

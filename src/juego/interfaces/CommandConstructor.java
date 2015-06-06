@@ -11,8 +11,8 @@ import juego.razas.Terran;
 
 public abstract class CommandConstructor {
 
-	public void ejecutar(Raza raza, Jugador jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
-		raza.construir(jugador, this, coordenada);
+	public void ejecutar(Raza raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+		raza.construir(this, coordenada);
 	}
 	
 	/*
@@ -20,11 +20,11 @@ public abstract class CommandConstructor {
 	 * Luego hacemos un @Override para las correctas
 	 */
 
-	public void ejecutar(Terran raza, Jugador jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+	public void ejecutar(Terran raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		throw new ImposibleConstruir();
 	}
 	
-	public void ejecutar(Protoss raza, Jugador jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+	public void ejecutar(Protoss raza, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		throw new ImposibleConstruir();
 	}
 	
