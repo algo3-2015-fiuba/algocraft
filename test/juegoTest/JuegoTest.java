@@ -38,5 +38,37 @@ public class JuegoTest {
 			
 		} catch (FaltanJugadores fj) { assertTrue(false); }
 	}
+	
+	@Test (expected=NombreInvalido.class)
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() throws ColorInvalido, NombreInvalido {
+		Juego juego = Juego.getInstance();
+		
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador("jugadorTerran", new Terran(), Color.blue);
+	}
+	
+	@Test (expected=ColorInvalido.class)
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() throws ColorInvalido, NombreInvalido {
+		Juego juego = Juego.getInstance();
+		
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador("jugadorProtoss", new Protoss(), Color.red);
+	}
+
+	@Test (expected=FaltanJugadores.class)
+	public void testJuegoNoPuedeEmpezarSinJugadores() throws FaltanJugadores {
+		Juego juego = Juego.getInstance();
+		
+		juego.iniciarJuego();
+	}
+	
+	@Test (expected=FaltanJugadores.class)
+	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido {
+		Juego juego = Juego.getInstance();
+		
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		
+		juego.iniciarJuego();
+	}
 
 }

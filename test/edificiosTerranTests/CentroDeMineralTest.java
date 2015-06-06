@@ -37,8 +37,6 @@ public class CentroDeMineralTest {
 		
 		Juego juego = Juego.getInstance();
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
-		
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
