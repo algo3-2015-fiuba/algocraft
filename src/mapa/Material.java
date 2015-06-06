@@ -8,20 +8,14 @@ public class Material {
 	   MINERAL(false),
 	   GAS(false);
 	   
-	   private boolean caminable;
+	   private boolean espacial;
 	   
 	   private Materiales(boolean caminable) {
-	     this.caminable = caminable;
+	     this.espacial = caminable;
 	   }
 	   
-	   public boolean esCaminable() {
-	     return this.caminable;
+	   public boolean esEspacial() {
+	     return this.espacial;
 	   }
 	 }
-	
-	private boolean esCaminable = true;
-	
-	public boolean esCaminable() {
-		return this.esCaminable;
-	}
 }

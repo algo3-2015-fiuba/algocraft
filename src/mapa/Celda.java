@@ -5,24 +5,24 @@ import juego.razas.interfaces.Controlable;
 
 public class Celda {
 	
-	private Controlable Controlable;
+	private Controlable controlable;
 	private Material.Materiales base;
 	
 	public Celda(Material.Materiales base) {
 		this.base = base;
-		this.Controlable = null;
+		this.controlable = null;
 	}
 
 	public void agregarControlable(Controlable Controlable) throws CeldaNoVacia {
 		if (this.estaVacia()) {
-			this.Controlable = Controlable;
+			this.controlable = Controlable;
 		} else {
 			throw new CeldaNoVacia();
 		}
 	}
 	
 	public Controlable getControlable() {
-		return this.Controlable;
+		return this.controlable;
 	}
 	
 	public Material.Materiales getBase() {
@@ -30,11 +30,11 @@ public class Celda {
 	}
 	
 	public void removerControlable() {
-		this.Controlable = null;
+		this.controlable = null;
 	}
 	
 	public boolean estaVacia() {
-		return (this.Controlable == null);
+		return (this.controlable == null);
 	}
 	
 	public boolean puedeExistirControlable(Controlable Controlable) {

@@ -92,9 +92,9 @@ public class Mapa {
 		return null;
 	}
 
-	public void agregarCelda(Coordenada coord, Materiales material) {
-		// TODO Auto-generated method stub
-		
+	public void agregarCelda(Coordenada coord, Materiales material) {		
+		Celda celda = new Celda(material);
+		this.celdas.put(coord, celda);
 	}
 
 }
