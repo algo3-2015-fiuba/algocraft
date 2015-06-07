@@ -35,9 +35,9 @@ public class Mapa {
 			
 			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 
 				
-				Construible recolector = (Construible) celda.obtenerControlableEnTierra();
+				Controlable recolector = celda.obtenerControlableEnTierra();
 				
-				if ((recolector.getPropietario().equals(jugadorActual)) && (recolector.construccionFinalizada()))	
+				if ((recolector.esPropietario(jugadorActual)) && (((Construible)recolector).construccionFinalizada()))	
 					recolectores.add((Recolector)recolector);
 			}
 			

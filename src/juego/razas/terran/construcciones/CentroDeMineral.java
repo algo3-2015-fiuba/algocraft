@@ -50,8 +50,8 @@ public class CentroDeMineral implements Construible, Recolector, Controlable {
 	}
 	
 	@Override
-	public Jugador getPropietario() {
-		return this.propietario;
+	public boolean esPropietario(Jugador aComprobar) {
+		return (this.propietario.equals(aComprobar));
 	}
 
 	@Override
