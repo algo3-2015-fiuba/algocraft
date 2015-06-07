@@ -14,6 +14,7 @@ import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.*;
 
 
@@ -33,7 +34,7 @@ public class CentroDeMineralTest {
 	
 	@Test
 	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		Juego juego = Juego.getInstance();
 		
@@ -46,16 +47,18 @@ public class CentroDeMineralTest {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		// El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		// si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(10,12));
+		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
+		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
+		 * En la coordenada (1,1) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
+		 */
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(1,1));
 
 		for (int i = 1; i < 8; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertFalse(jugadorActual.recolectoMinerales());
+				assertFalse(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -65,7 +68,7 @@ public class CentroDeMineralTest {
 		
 		//Pasaron 4 turnos del jugador Terran, por lo que la construccion del centro de mineral deberia haber finalizado
 		
-		assertTrue(jugadorActual.recolectoMinerales());
+		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el centro de mineral costa 50 minerales.

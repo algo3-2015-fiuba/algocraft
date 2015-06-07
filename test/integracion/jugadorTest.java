@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
+import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Terran;
 import juego.recursos.Mineral;
 
@@ -19,7 +21,7 @@ import org.junit.Test;
 public class jugadorTest {
 
 	@Test
-	public void testCreacionDeCentroMineral() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
+	public void testCreacionDeCentroMineral() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		//primero tengo que incializar un mapa
 		
 		Mapa mapa = new GeneradorMapa().obtenerMapa("mapas/test.map");		

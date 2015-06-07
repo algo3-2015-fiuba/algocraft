@@ -2,6 +2,7 @@ package juego.mapa;
 
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.materiales.Material;
 import juego.recursos.Recurso;
 
@@ -19,7 +20,7 @@ public class Celda {
 		this.controlableTierra = null;
 	}
 
-	public void agregarControlable(Controlable controlable) throws CeldaOcupada {
+	public void agregarControlable(Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeRango {
 		controlable.ocuparCelda(this);
 	}
 	

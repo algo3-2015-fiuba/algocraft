@@ -9,7 +9,7 @@ import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.jugadores.Jugador;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.recursos.Mineral;
+import juego.recursos.Recurso;
 
 public class Mapa {
 	
@@ -21,33 +21,12 @@ public class Mapa {
 	
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
-	}
-	
-	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeRango {
-		
-	/* Este metodo sirve para agregar un controlable en caso de que no exista en el mapa si no 
-	 * debe indicarsele al controlable que se mueva
-	 */
-		Celda celda = this.obtenerCelda(c);
-		controlable.ocuparCelda(celda);		
-	}
-	
+	}	
 	
 	public boolean existeNodoDeMinerales(Coordenada coordenada) {
 		
 		//Debe responder si en esa coordenada existe un nodoDeMinerales
 		return true;
-	}
-	
-	public Mineral getNodoDeMinerales(Coordenada coordenada) {
-		
-		/* 
-		 * Deberia devolver un Recurso generico, y despues con Double Dispatch
-		 * verificar si podemos agregar el edificio correspondiente
-		 */
-		
-		//Deberia buscar el nodo y devolverlo, por ahora solo devuelve un nodo cualquiera
-		return (new Mineral(1000));
 	}
 	
 	public Collection<Recolector> getRecolectores() {
@@ -75,5 +54,10 @@ public class Mapa {
 			throw new CoordenadaFueraDeRango();
 		}
 		
+	}
+
+	public Recurso getRecurso(Coordenada coordenada) throws CoordenadaFueraDeRango {
+		Celda celda = this.obtenerCelda(coordenada);
+		return celda.obtenerRecurso();
 	}
 }
