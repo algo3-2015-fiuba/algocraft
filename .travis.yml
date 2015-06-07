@@ -6,5 +6,6 @@ notifications:
      recipients:
        -  Ale.92xx@yahoo.com
        -  me@dancodes.com.ar
+       -  mati_otegui@hotmail.com
      on_failure: always
      on_success: always
