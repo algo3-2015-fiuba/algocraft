@@ -49,16 +49,16 @@ public class CentroDeMineralTest {
 		
 		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (1,1) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
+		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
 		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(1,1));
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
 
-		for (int i = 1; i < 8; i++) {
+		for (int i = 0; i < 9; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertFalse(jugadorActual.getMineralesRecolectados() == 150);
+				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -69,6 +69,13 @@ public class CentroDeMineralTest {
 		//Pasaron 4 turnos del jugador Terran, por lo que la construccion del centro de mineral deberia haber finalizado
 		
 		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		assertTrue(jugadorActual.getMineralesRecolectados() == 170);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el centro de mineral costa 50 minerales.

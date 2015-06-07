@@ -43,7 +43,7 @@ public class Mapa {
 				
 				Construible recolector = (Construible) celda.obtenerControlableEnTierra();
 				
-				if (recolector.getPropietario().equals(jugadorActual))	
+				if ((recolector.getPropietario().equals(jugadorActual)) && (recolector.construccionFinalizada()))	
 					recolectores.add((Recolector)recolector);
 			}
 			
