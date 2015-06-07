@@ -40,10 +40,6 @@ public class Celda {
 		}
 	}
 	
-	public void agregarRecurso(Recurso nuevoRecurso) {
-		this.recurso = nuevoRecurso;
-	}
-	
 	public Material obtenerMaterial() {
 		return this.material;
 	}
@@ -75,6 +71,10 @@ public class Celda {
 
 	public void removerControlableEnTierra() {
 		this.controlableTierra = null;
+	}
+
+	public boolean poseeRecursos() {
+		return (this.recurso != null);
 	}
 	
 	

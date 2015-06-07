@@ -1,12 +1,15 @@
 package juego.mapa;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 import juego.Juego;
+import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
+import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.recursos.Recurso;
@@ -30,15 +33,27 @@ public class Mapa {
 	}
 	
 	public Collection<Recolector> getRecolectores() {
-		Jugador jugadorActual = Juego.getInstance().turnoDe();
 		
-		//Le pido al mapa los recolectores e itero sobre los recolectores pidiendoles recolectar
-		//cada recolector agrega al contador especifico del material/gasvespeno del jugador asi
-		//que no me tengo que preocupar por diferenciarlos, los trato a todos por igual
-		return null;
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
+
+		for (Celda celda : this.celdas.values()) { 
+			
+			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 
+				
+				Construible recolector = (Construible) celda.obtenerControlableEnTierra();
+				
+				if (recolector.getPropietario().equals(jugadorActual))	
+					recolectores.add((Recolector)recolector);
+			}
+			
+		}
+		
+		return recolectores;
+
 	}
 	
-	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeRango {
+	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven {
 		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
 		//ya que el controlable sabe como debe moverse.
 		//Debe conocer su posicion
