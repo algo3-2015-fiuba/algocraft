@@ -21,15 +21,13 @@ public class GeneradorMapaTest {
 		GeneradorMapa generadorMapa = new GeneradorMapa();
 		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map");
 		
-		//Las primeras 5 celdas son tierra
+		
 		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(0, 0)).obtenerMaterial());
 		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(1, 0)).obtenerMaterial());
 		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(2, 0)).obtenerMaterial());
-		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(3, 0)).obtenerMaterial());
+		assertEquals(Material.aire, mapa.obtenerCelda(new Coordenada(3, 0)).obtenerMaterial());
 		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(4, 0)).obtenerMaterial());
-		
-		//Las primeras 3 celdas son minerales, luego un gas, y luego tierra
-		
+				
 		assertFalse(mapa.obtenerCelda(new Coordenada(0, 0)).obtenerRecurso().estaAgotado());
 		
 	}
