@@ -124,4 +124,101 @@ public class CentroDeMineralTest {
 		
 	}
 	
+	@Test
+	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		
+		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
+		//si es negativa seguro no debe existir.
+		exception.expect(CoordenadaFueraDeRango.class);
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(-10,3));
+		
+	}
+	
+	@Test
+	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		
+		exception.expect(CeldaOcupada.class);
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		
+	}
+	
+	@Test
+	public void testSiLaCoordenadaIndicadaNoPoseeMineralesErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		//La coordenada (1,0) en el mapa de pruebas siempre contiene gas vespeno
+		
+		exception.expect(UbicacionInvalida.class);
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(1,0));
+		
+	}
+	
+	@Test
+	public void testSiUnProtossIntentaConstruirUnCentroDeMineralErrorImposibleConstruir() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorProtoss")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		exception.expect(ImposibleConstruir.class);
+		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		
+	}
+	
 }

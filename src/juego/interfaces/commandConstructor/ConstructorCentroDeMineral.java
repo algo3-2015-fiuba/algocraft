@@ -11,7 +11,6 @@ import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Terran;
 import juego.razas.terran.construcciones.CentroDeMineral;
-import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 
@@ -26,7 +25,7 @@ public class ConstructorCentroDeMineral extends CommandConstructor {
 		Mapa mapa = juego.getMapa();
 		int costoMinerales = 50;
 		
-		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new UbicacionInvalida();
+		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new CeldaOcupada();
 		Recurso recurso = mapa.getRecurso(coordenada);
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
@@ -41,10 +40,8 @@ public class ConstructorCentroDeMineral extends CommandConstructor {
 		
 	}
 	
-	@Override
-	public boolean esPosibleExtraer(Mineral recurso) { return true; }
 	
 	@Override
-	public boolean esPosibleExtraer(GasVespeno recurso) { return false; }
+	public boolean esPosibleExtraer(Mineral recurso) { return true; }
 	
 }

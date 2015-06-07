@@ -49,7 +49,7 @@ public abstract class CommandConstructor {
 		return (this.enConstruccion.construccionFinalizada());
 	}
 	
-	//Por default consideramos que no puede extraer recursos
+	//Por default consideramos que no puede extraer recursos	
 	public boolean esPosibleExtraer(Mineral recurso) {
 		return false;
 	}
