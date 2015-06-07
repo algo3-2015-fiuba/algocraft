@@ -4,17 +4,15 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import juego.Juego;
-import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.jugadores.Jugador;
-import juego.mapa.excepciones.CoordenadaFueraDeBordes;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.recursos.Mineral;
 
 public class Mapa {
 	
-	private int xMaximo, yMaximo;
 	private HashMap<Coordenada,Celda> celdas;
 	
 	public Mapa() {
@@ -25,18 +23,13 @@ public class Mapa {
 		this.celdas.put(coord, celda);
 	}
 	
-	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeBordes {
+	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeRango {
 		
 	/* Este metodo sirve para agregar un controlable en caso de que no exista en el mapa si no 
 	 * debe indicarsele al controlable que se mueva
 	 */
 		Celda celda = this.obtenerCelda(c);
 		controlable.ocuparCelda(celda);		
-	}
-	
-	public void asignarBordes(int xMaximo, int yMaximo) {
-		this.xMaximo = xMaximo;
-		this.yMaximo = yMaximo;
 	}
 	
 	
@@ -66,7 +59,7 @@ public class Mapa {
 		return null;
 	}
 	
-	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeBordes {
+	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeRango {
 		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
 		//ya que el controlable sabe como debe moverse.
 		//Debe conocer su posicion
@@ -74,13 +67,13 @@ public class Mapa {
 	}
 	
 
-	public Celda obtenerCelda(Coordenada c) throws CoordenadaFueraDeBordes {
-		if(c.getX() > this.xMaximo || c.getY() > this.yMaximo) {
-			throw new CoordenadaFueraDeBordes();
+	public Celda obtenerCelda(Coordenada coord) throws CoordenadaFueraDeRango {
+		
+		if (celdas.containsKey(coord)) {
+			return celdas.get(coord); 
+		} else {
+			throw new CoordenadaFueraDeRango();
 		}
-		else {
-			return celdas.get(c);
-		}
+		
 	}
-
 }

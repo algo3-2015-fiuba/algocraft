@@ -59,18 +59,15 @@ public class GeneradorMapa {
         int x = 0;
         int y = 0;
         
-        int xMax = 0;
-        int yMax = 0;
-        
         while ((caracter = reader.read()) != -1) {
+        	
             char ch = (char) caracter;
             
             if(ch == '\n') {
-            	y++;
             	
-            	if(x > xMax) xMax = x - 1;
-            	
+            	y++;          	
             	x = 0;
+            	
             } else {
 
             	Coordenada coord = new Coordenada(x, y);
@@ -82,10 +79,6 @@ public class GeneradorMapa {
             	x++;
             }
         }
-        
-        yMax = y - 1;
-        
-        mapa.asignarBordes(xMax, yMax);
         
         buffer.close();
        
