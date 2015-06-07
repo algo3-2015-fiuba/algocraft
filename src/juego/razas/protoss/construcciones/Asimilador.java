@@ -4,22 +4,17 @@ import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
-import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
-import juego.mapa.Celda;
-import juego.mapa.Coordenada;
-import juego.mapa.excepciones.PropietarioInvalido;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class Asimilador implements Construible, Recolector, Controlable {
+public class Asimilador extends EdificioRecolector implements Construible, Recolector, Controlable {
 	
-	private GasVespeno nodoGasVespeno;
-	private int tiempoDeConstruccion;
-	private Jugador propietario;
-	private int vida;
+	GasVespeno nodoGasVespeno;
+	int tiempoDeConstruccion;
+	Jugador propietario;
+	int vida;
 	
 	public Asimilador(Recurso recurso) {
 		super();
@@ -29,9 +24,6 @@ public class Asimilador implements Construible, Recolector, Controlable {
 		this.propietario = Juego.getInstance().turnoDe();
 	}
 
-	@Override
-	public boolean construccionFinalizada() { return (this.tiempoDeConstruccion == 6); }
-	
 	@Override
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
@@ -47,25 +39,11 @@ public class Asimilador implements Construible, Recolector, Controlable {
 			int extraidos = this.nodoGasVespeno.extraer();
 			Juego.getInstance().turnoDe().recolectarGasVespeno(extraidos);		
 		}
-		
 	}
 	
 	@Override
-	public boolean esPropietario(Jugador aComprobar) {
-		return (this.propietario.equals(aComprobar));
-	}
-
-	@Override
-	public void ocuparCelda(Celda celda) throws CeldaOcupada{
-		celda.ocuparTierra(this);
-	}
-
-	@Override
-	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven, PropietarioInvalido {
-		
-		if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
-		
-		throw new ConstruccionesNoSeMueven();
+	public boolean construccionFinalizada() {
+		return (this.tiempoDeConstruccion == 6);
 	}
 
 }
