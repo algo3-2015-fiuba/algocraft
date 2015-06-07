@@ -5,25 +5,31 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import juego.Juego;
-import juego.excepciones.*;
-import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
-import juego.interfaces.excepciones.*;
+import juego.excepciones.ColorInvalido;
+import juego.excepciones.FaltanJugadores;
+import juego.excepciones.NombreInvalido;
+import juego.interfaces.commandConstructor.ConstructorRefineria;
+import juego.interfaces.excepciones.CeldaOcupada;
+import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
+import juego.interfaces.excepciones.ImposibleConstruir;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.mapa.excepciones.PropietarioInvalido;
-import juego.razas.*;
+import juego.razas.Protoss;
+import juego.razas.Terran;
 
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-public class CentroDeMineralTest {
-	
+public class RefineriaTester {
+
 	@Before 
 	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		
@@ -41,7 +47,7 @@ public class CentroDeMineralTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() 
+	public void testJugadorTerranCreaRefineriaEnNodoDeGasVespenoSatisfactoriamente() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
 			ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		
@@ -58,18 +64,19 @@ public class CentroDeMineralTest {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
+		/* La refineria se crea alrededor de las coordenadas centrales especificadas (x,y) 
+		 * si existe un nodo de gas vespeno y no esta ocupado por ninguna construccion propia o enemiga.
+		 * En la coordenada (1,0) del mapa 'test' existe un nodo de gas vespeno, por lo que es correcto crearlo en esta ubicacion.
 		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 13; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
+				assertTrue(jugadorActual.getMineralesRecolectados() == 100);
+				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
 			}
 		
 		}
@@ -77,21 +84,20 @@ public class CentroDeMineralTest {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		//Pasaron 4 turnos del jugador Terran, por lo que la construccion del centro de mineral deberia haber finalizado
-		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
+		//Pasaron 6 turnos del jugador Terran, por lo que la construccion de la refineria deberia haber finalizado
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 170);
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 20);
 		
 		/* El jugador inicia el juego con 200 de mineral
-		 * construir el centro de mineral costa 50 minerales.
+		 * construir la refineria costa 100 minerales.
 		 * Por turno recolecta, en un nodo con recursos,
-		 * un total de 10 minerales.
+		 * un total de 10 gas vespeno.
 		 */
 		
 	}
@@ -107,22 +113,16 @@ public class CentroDeMineralTest {
 		
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		//El centro de mineral vale 50, si gasto 160 de los 200 iniciales le quedan 40 minerales.
+		//La refineria vale 100, si gasto 160 de los 200 iniciales le quedan 40 gasVespeno.
 		jugadorActual.consumirMinerales(160);
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));
 		
 	}
 	
@@ -137,8 +137,6 @@ public class CentroDeMineralTest {
 		
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -148,7 +146,7 @@ public class CentroDeMineralTest {
 		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
 		//si es negativa seguro no debe existir.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(-10,3));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(-10,3));
 		
 	}
 	
@@ -162,22 +160,20 @@ public class CentroDeMineralTest {
 		
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));
 		
 		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));
 		
 	}
 	
 	@Test
-	public void testSiLaCoordenadaIndicadaNoPoseeMineralesErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
+	public void testSiLaCoordenadaIndicadaNoPoseeGasVespenoErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
 	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		this.reiniciarJuego();
@@ -186,22 +182,20 @@ public class CentroDeMineralTest {
 		
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		//La coordenada (1,0) en el mapa de pruebas siempre contiene gas vespeno
+		//La coordenada (0,0) en el mapa de pruebas siempre contiene un nodo de minerales
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(1,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(0,0));
 		
 	}
 	
 	@Test
-	public void testSiUnProtossIntentaConstruirUnCentroDeMineralErrorImposibleConstruir() 
+	public void testSiUnProtossIntentaConstruirUnaRefineriaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -211,20 +205,18 @@ public class CentroDeMineralTest {
 		
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorProtoss")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
 		exception.expect(ImposibleConstruir.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));
 		
 	}
 	
 	@Test
-	public void testSiUnJugadorEsPropietarioDeUnCentroDeMineralEsUnRecolectorAliado() 
+	public void testSiUnJugadorEsPropietarioDeUnaRefineriaEsUnRecolectorAliado() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -232,21 +224,15 @@ public class CentroDeMineralTest {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(1,0);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorRefineria(), coord);
 
 		for (int i = 0; i < 9; i++) {		
 			jugadorActual.finalizarTurno();
@@ -261,7 +247,7 @@ public class CentroDeMineralTest {
 	}
 	
 	@Test
-	public void testSiUnJugadorNoEsPropietarioDeUnCentroDeMineralEsUnRecolectorEnemigo() 
+	public void testSiUnJugadorNoEsPropietarioDeUnaRefineriaEsUnRecolectorEnemigo() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -269,21 +255,15 @@ public class CentroDeMineralTest {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(1,0);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorRefineria(), coord);
 
 		for (int i = 0; i < 9; i++) {		
 			jugadorActual.finalizarTurno();
@@ -295,7 +275,7 @@ public class CentroDeMineralTest {
 	}
 	
 	@Test
-	public void testSiUnJugadorTerranTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
+	public void testSiUnJugadorProtossTrataDeMoverUnaRefineriaTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -304,21 +284,47 @@ public class CentroDeMineralTest {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(1,0);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
 		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorRefineria(), coord);
+
+		for (int i = 0; i < 9; i++) {
+		
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+			
+		}
+		
+		exception.expect(PropietarioInvalido.class);
+		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(4,0));
+		
+	}
+	
+	@Test
+	public void testSiUnJugadorTerranTrataDeMoverUnaRefineriaErrorConstruccionesNoSeMueven() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		Mapa mapa = juego.getMapa();
+		Coordenada coord = new Coordenada(1,0);
+		Jugador jugadorActual = juego.turnoDe();
+		
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		jugadorActual.construir(new ConstructorRefineria(), coord);
 
 		for (int i = 0; i < 9; i++) {		
 			jugadorActual.finalizarTurno();
@@ -329,46 +335,8 @@ public class CentroDeMineralTest {
 		jugadorActual = juego.turnoDe();
 		
 		exception.expect(ConstruccionesNoSeMueven.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
+		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(4,0));
 		
 	}
-	
-	@Test
-	public void testSiUnJugadorProtossTrataDeMoverUnCentroDeMineralTerranErrorPropietarioInvalido() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
-		
-		this.reiniciarJuego();
-		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
-		Jugador jugadorActual = juego.turnoDe();
-		
-		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
-		//No existe ningun metodo similar implementado en el juego.
-		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-		}
-		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {
-		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			
-		}
-		
-		exception.expect(PropietarioInvalido.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
-		
-	}
-	
 }

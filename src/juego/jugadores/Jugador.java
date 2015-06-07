@@ -55,8 +55,6 @@ public class Jugador {
 			}
 		}
 		
-		
-		
 	}
 	
 	private void notificarConstructores() {
@@ -97,16 +95,16 @@ public class Jugador {
 		this.mineralesRecolectados -= costoMinerales;
 	}
 	
-	public void consumirGas(int costoGas) throws RecursosInsuficientes {	
+	public void consumirGasVespeno(int costoGas) throws RecursosInsuficientes {	
 		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
 		this.gasVespenoRecolectado -= costoGas;
 	}
 
 	public void recolectarMinerarles(int cantidad) { this.mineralesRecolectados += cantidad; }
-	public void recolectarGasVespeno(int cantidad) { this.mineralesRecolectados += cantidad; }
+	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
 
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
-	public int getGasVespenoRecolectado() { return this.mineralesRecolectados;	}
+	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
 
 	public void agregarConstructor(CommandConstructor constructor) {
 		this.constructores.add(constructor);		
