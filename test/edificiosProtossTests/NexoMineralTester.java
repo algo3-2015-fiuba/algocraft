@@ -103,7 +103,7 @@ public class NexoMineralTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//El nexo de mineral vale 50, si gasto 160 de los 200 iniciales le quedan 40 minerales.
+		//El nexo de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
 		jugadorActual.consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);

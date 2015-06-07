@@ -96,7 +96,7 @@ public class CentroDeMineralTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//El centro de mineral vale 50, si gasto 160 de los 200 iniciales le quedan 40 minerales.
+		//El centro de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
 		jugadorActual.consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);

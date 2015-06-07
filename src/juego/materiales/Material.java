@@ -1,3 +1,3 @@
 package juego.materiales;
 
-public enum Material { tierra, aire, mineral, gas }
+public enum Material { tierra, aire };
