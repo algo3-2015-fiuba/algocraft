@@ -43,9 +43,9 @@ public abstract class EdificioRecolector implements Construible, Recolector, Con
 	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven,
 			PropietarioInvalido {
 				
-				if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
+		if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
 				
-				throw new ConstruccionesNoSeMueven();
-			}
+		throw new ConstruccionesNoSeMueven();
+	}
 
 }

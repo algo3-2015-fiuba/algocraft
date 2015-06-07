@@ -1,6 +1,5 @@
 package juego.razas.terran.construcciones;
 
-import juego.Juego;
 import juego.razas.construcciones.EdificioRecolector;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
@@ -8,7 +7,6 @@ import juego.recursos.excepciones.RecursoAgotado;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
-import juego.jugadores.Jugador;
 
 public class CentroDeMineral extends EdificioRecolector implements Construible, Recolector, Controlable {
 	

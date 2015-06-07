@@ -1,10 +1,8 @@
 package juego.razas.terran.construcciones;
 
-import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
-import juego.jugadores.Jugador;
 import juego.razas.construcciones.EdificioRecolector;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
