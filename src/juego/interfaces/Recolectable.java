@@ -6,6 +6,5 @@ public interface Recolectable {
 	
 	public boolean estaAgotado();
 	public int extraer() throws RecursoAgotado;
-	public Recolectable duplicar();
 
 }
