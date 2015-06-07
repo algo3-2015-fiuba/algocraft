@@ -8,11 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import juego.Juego;
-import mapa.Coordenada;
 import juego.excepciones.*;
 import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
+import juego.mapa.Coordenada;
 import juego.razas.*;
 
 

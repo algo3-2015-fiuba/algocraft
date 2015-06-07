@@ -8,11 +8,11 @@ import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.mapa.Coordenada;
+import juego.mapa.GeneradorMapa;
+import juego.mapa.Mapa;
 import juego.razas.Terran;
 import juego.recursos.Mineral;
-import mapa.Coordenada;
-import mapa.GeneradorMapa;
-import mapa.Mapa;
 
 import org.junit.Test;
 

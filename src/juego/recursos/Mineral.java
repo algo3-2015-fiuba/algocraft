@@ -1,6 +1,5 @@
 package juego.recursos;
 
-import mapa.Recurso;
 
 public class Mineral extends Recurso {
 

@@ -24,7 +24,7 @@ public class CentroDeMineral implements Construible, Recolector {
 	
 	@Override
 	public void actualizarConstruccion() { 
-		if (!construccionFinalizada()) {
+		if (!this.construccionFinalizada()) {
 			this.vida += 125; 
 			this.tiempoDeConstruccion++;
 		}

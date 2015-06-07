@@ -1,35 +1,41 @@
-package mapa;
+package juego.mapa;
 
-import mapa.excepciones.CeldaNoVacia;
-import juego.razas.interfaces.Controlable;
+import juego.interfaces.Controlable;
+import juego.interfaces.excepciones.CeldaOcupada;
+import juego.materiales.Material;
+import juego.recursos.Recurso;
 
 public class Celda {
 	
 	private Controlable controlableAire;
 	private Controlable controlableTierra;
-	private Material.Materiales base;
+	private Material material;
 	private Recurso recurso;
 	
-	public Celda(Material.Materiales base, Recurso recurso) {
-		this.base = base;
+	public Celda(Material material, Recurso recurso) {
+		this.material = material;
+		this.recurso = recurso;
 		this.controlableAire = null;
 		this.controlableTierra = null;
-		this.recurso = recurso;
 	}
 
-	public void agregarControlableEnAire(Controlable Controlable) throws CeldaNoVacia {
-		if (!this.ocupadoEnAire()) {
-			this.controlableAire = Controlable;
+	public void agregarControlable(Controlable controlable) throws CeldaOcupada {
+		controlable.ocuparCelda(this);
+	}
+	
+	public void ocuparTierra(Controlable controlable) throws CeldaOcupada { 
+		if (!this.ocupadoEnTierra()) {
+			this.controlableTierra = controlable; 
 		} else {
-			throw new CeldaNoVacia();
+			throw new CeldaOcupada();
 		}
 	}
 	
-	public void agregarControlableEnTierra(Controlable Controlable) throws CeldaNoVacia {
-		if (!this.ocupadoEnTierra()) {
-			this.controlableTierra = Controlable;
+	public void ocuparAire(Controlable controlable) throws CeldaOcupada {
+		if (!this.ocupadoEnAire()) {
+			this.controlableAire = controlable; 
 		} else {
-			throw new CeldaNoVacia();
+			throw new CeldaOcupada();
 		}
 	}
 	
@@ -37,8 +43,8 @@ public class Celda {
 		this.recurso = nuevoRecurso;
 	}
 	
-	public Material.Materiales materialBase() {
-		return this.base;
+	public Material obtenerMaterial() {
+		return this.material;
 	}
 	
 	public Controlable obtenerControlableEnAire() {
@@ -60,10 +66,6 @@ public class Celda {
 	
 	public boolean ocupadoEnTierra() {
 		return (this.controlableTierra != null);
-	}
-	
-	public boolean puedeExistirControlable(Controlable Controlable) {
-		return true;
 	}
 	
 	public void removerControlableEnAire() {

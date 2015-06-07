@@ -1,39 +1,37 @@
-package mapa;
+package juego.mapa;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-import mapa.Material.Materiales;
-import mapa.excepciones.CeldaNoVacia;
-import mapa.excepciones.CoordenadaFueraDeBordes;
 import juego.Juego;
 import juego.interfaces.Construible;
+import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
+import juego.interfaces.excepciones.CeldaOcupada;
 import juego.jugadores.Jugador;
-import juego.razas.interfaces.Controlable;
+import juego.mapa.excepciones.CoordenadaFueraDeBordes;
 import juego.recursos.Mineral;
 
 public class Mapa {
 	
 	private int xMaximo, yMaximo;
 	private HashMap<Coordenada,Celda> celdas;
-	private int cantidadDeControlablees;
 	
 	public Mapa() {
 		this.celdas = new HashMap<Coordenada, Celda>();
 	}
 	
-	public void agregarCelda(Coordenada coord, Materiales material, Recurso recurso) {		
-		Celda celda = new Celda(material, recurso);
+	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}
 	
-	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaNoVacia, CoordenadaFueraDeBordes {
+	public void agregarControlable(Coordenada c, Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeBordes {
+		
+	/* Este metodo sirve para agregar un controlable en caso de que no exista en el mapa si no 
+	 * debe indicarsele al controlable que se mueva
+	 */
 		Celda celda = this.obtenerCelda(c);
-		
-		controlable.ubicarseEnCelda(celda);
-		
-		this.cantidadDeControlablees++;
+		controlable.ocuparCelda(celda);		
 	}
 	
 	public void asignarBordes(int xMaximo, int yMaximo) {
@@ -68,21 +66,13 @@ public class Mapa {
 		return null;
 	}
 	
-	public void moverControlableEnAire(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
-		Controlable original = this.obtenerCelda(c1).obtenerControlableEnAire();
-		
-		this.obtenerCelda(c1);
-		
-		this.agregarControlable(c2, original);
+	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeBordes {
+		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
+		//ya que el controlable sabe como debe moverse.
+		//Debe conocer su posicion
+		controlable.moverse(coordFinal);
 	}
 	
-	public void moverControlableEnTierra(Coordenada c1, Coordenada c2) throws CeldaNoVacia, CoordenadaFueraDeBordes {
-		Controlable original = this.obtenerCelda(c1).obtenerControlableEnTierra();
-		
-		this.obtenerCelda(c1).removerControlableEnTierra();
-		
-		this.agregarControlable(c2, original);
-	}
 
 	public Celda obtenerCelda(Coordenada c) throws CoordenadaFueraDeBordes {
 		if(c.getX() > this.xMaximo || c.getY() > this.yMaximo) {

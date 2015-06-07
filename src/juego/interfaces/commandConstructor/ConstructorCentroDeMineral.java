@@ -1,13 +1,13 @@
 package juego.interfaces.commandConstructor;
 
-import mapa.Coordenada;
-import mapa.Mapa;
-import mapa.excepciones.CoordenadaFueraDeBordes;
 import juego.Juego;
 import juego.interfaces.CommandConstructor;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeBordes;
 import juego.razas.Terran;
 import juego.razas.terran.construcciones.CentroDeMineral;
 

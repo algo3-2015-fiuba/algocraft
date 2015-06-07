@@ -1,4 +1,4 @@
-package mapa.excepciones;
+package juego.mapa.excepciones;
 
 public class CoordenadaFueraDeBordes extends Exception {
 

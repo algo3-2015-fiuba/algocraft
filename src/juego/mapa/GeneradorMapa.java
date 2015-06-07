@@ -1,4 +1,4 @@
-package mapa;
+package juego.mapa;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,40 +8,45 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import java.util.HashMap;
+import java.util.Random;
 
-import juego.interfaces.Recolectable;
+import juego.materiales.Material;
 import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
-import mapa.Material.Materiales;
+import juego.recursos.Recurso;
 
 public class GeneradorMapa {
 	
 	private File archivo;
 	private Mapa mapaAGenerar;
-	private HashMap<Character, DefinicionDeCelda> materiales;
 	
 	public GeneradorMapa(String nombreDeArchivo) {		
-		this.archivo = new File(nombreDeArchivo);
 		
-		this.definicionesDeTerrenos();
+		this.archivo = new File(nombreDeArchivo);
+		this.mapaAGenerar = new Mapa();
+		
 	}
 	
-	private void definicionesDeTerrenos() {
-		this.materiales = new HashMap<Character, DefinicionDeCelda>();
+	private int generarCantidadRandom() {
+		Random rnd = new Random();
+		//El rango es de 500 a 1000
+		int cantidad = (int)(rnd.nextDouble() * 500) + 500;
+		return cantidad;
+	}
+	
+	private Material deducirMaterial(char ch) {
+		return (ch == 'A') ? Material.aire : Material.tierra;
+	}
+	
+	private Recurso deducirRecurso(char ch) {
 		
-		this.materiales.put(
-				'T', new DefinicionDeCelda(Materiales.TIERRA, null));
+		Recurso recurso;
 		
-		this.materiales.put(
-				'A', new DefinicionDeCelda(Materiales.AIRE, null));
+		if (ch == 'M') { recurso = new Mineral(this.generarCantidadRandom()); }
+		else if (ch == 'G') { recurso = new GasVespeno(this.generarCantidadRandom()); }
+		else recurso = null;
 		
-		this.materiales.put(
-				'M', new DefinicionDeCelda(Materiales.TIERRA, new Mineral(500)));
-		
-		this.materiales.put(
-				'G', new DefinicionDeCelda(Materiales.TIERRA, new GasVespeno(500)));
-		
+		return recurso;
 	}
 	
 	public Mapa crearAPartirDeArchivo() throws IOException {		
@@ -76,12 +81,12 @@ public class GeneradorMapa {
             	
             	x = 0;
             } else {
+
             	Coordenada coord = new Coordenada(x, y);
-            	
-            	Material.Materiales material = this.materiales.get(ch).obtenerMaterial();
-            	Recurso recurso = (Recurso) this.materiales.get(ch).obtenerRecurso();
-            	
-            	this.mapaAGenerar.agregarCelda(coord, material, recurso);
+            	Material material = this.deducirMaterial(ch);
+            	Recurso recurso = this.deducirRecurso(ch);
+            	Celda celda = new Celda(material, recurso);  	
+            	this.mapaAGenerar.agregarCelda(coord, celda);
             	
             	x++;
             }
@@ -94,30 +99,4 @@ public class GeneradorMapa {
         buffer.close();
 	}
 	
-	/*
-	 * Clase usada internamente para relacionar letras con celdas
-	 */
-	
-	private class DefinicionDeCelda {
-		
-		private Material.Materiales material;
-		private Recolectable recurso;
-		
-		public DefinicionDeCelda(Material.Materiales material, Recolectable recurso) {
-			this.material = material;
-			this.recurso = recurso;
-		}
-		
-		public Material.Materiales obtenerMaterial() {
-			return this.material;
-		}
-		
-		public Recolectable obtenerRecurso() {
-			Recolectable nuevoRecurso = null;
-			if(recurso != null) {
-				nuevoRecurso = recurso.duplicar();
-			}
-			return nuevoRecurso;
-		}
-	}
 }

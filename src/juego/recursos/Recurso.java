@@ -1,4 +1,4 @@
-package mapa;
+package juego.recursos;
 
 import juego.recursos.excepciones.RecursoAgotado;
 import juego.interfaces.Recolectable;
