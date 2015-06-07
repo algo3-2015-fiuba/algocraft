@@ -26,12 +26,6 @@ public class Mapa {
 		this.celdas.put(coord, celda);
 	}	
 	
-	public boolean existeNodoDeMinerales(Coordenada coordenada) {
-		
-		//Debe responder si en esa coordenada existe un nodoDeMinerales
-		return true;
-	}
-	
 	public Collection<Recolector> getRecolectores() {
 		
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
