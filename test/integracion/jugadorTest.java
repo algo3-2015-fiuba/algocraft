@@ -22,7 +22,7 @@ public class jugadorTest {
 	public void testCreacionDeCentroMineral() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir {
 		//primero tengo que incializar un mapa
 		
-		Mapa mapa = new GeneradorMapa("mapas/test.map").crearAPartirDeArchivo();		
+		Mapa mapa = new GeneradorMapa().obtenerMapa("mapas/test.map");		
 		Terran jugador = new Terran();
 		
 		Mineral nodoAExtraer = new Mineral(500);

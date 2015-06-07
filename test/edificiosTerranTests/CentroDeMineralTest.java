@@ -3,6 +3,7 @@ package edificiosTerranTests;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ import juego.razas.*;
 public class CentroDeMineralTest {
 	
 	@Before 
-	public void iniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void iniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		
 		Juego juego = Juego.getInstance(); 
 		

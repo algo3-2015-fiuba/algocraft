@@ -3,12 +3,12 @@ package juegoTest;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
-import juego.razas.Protoss;
 import juego.razas.Terran;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class JuegoTest {
 	}
 
 	@Test
-	public void testJuegoNoPuedeEmpezarSinJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido {
+	public void testJuegoNoPuedeEmpezarSinJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido, IOException {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
@@ -67,7 +67,7 @@ public class JuegoTest {
 	}
 	
 	@Test 
-	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido {
+	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido, IOException {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();

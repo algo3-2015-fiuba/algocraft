@@ -17,16 +17,14 @@ import juego.recursos.Recurso;
 
 public class GeneradorMapa {
 	
-	private File archivo;
-	private Mapa mapaAGenerar;
-	
-	public GeneradorMapa(String nombreDeArchivo) {		
+	public Mapa obtenerMapa(String ubicacion) throws IOException {	
 		
-		this.archivo = new File(nombreDeArchivo);
-		this.mapaAGenerar = new Mapa();
+		Mapa mapa = new Mapa();		
+		this.llenarMapa(mapa, ubicacion);
 		
+		return mapa;
 	}
-	
+
 	private int generarCantidadRandom() {
 		Random rnd = new Random();
 		//El rango es de 500 a 1000
@@ -48,19 +46,12 @@ public class GeneradorMapa {
 		
 		return recurso;
 	}
-	
-	public Mapa crearAPartirDeArchivo() throws IOException {		
-		this.mapaAGenerar = new Mapa();		
-		this.llenarMapa();
-		
-		return this.mapaAGenerar;
-	}
 
-	private void llenarMapa() throws IOException {
+	private void llenarMapa(Mapa mapa, String ubicacion) throws IOException {
 		
 		Charset encoding = Charset.forName("UTF-8");
-		
-		InputStream in = new FileInputStream(this.archivo);
+		File file = new File(ubicacion);
+		InputStream in = new FileInputStream(file);
 		Reader reader = new InputStreamReader(in, encoding);
         Reader buffer = new BufferedReader(reader);
         
@@ -86,7 +77,7 @@ public class GeneradorMapa {
             	Material material = this.deducirMaterial(ch);
             	Recurso recurso = this.deducirRecurso(ch);
             	Celda celda = new Celda(material, recurso);  	
-            	this.mapaAGenerar.agregarCelda(coord, celda);
+            	mapa.agregarCelda(coord, celda);
             	
             	x++;
             }
@@ -94,9 +85,10 @@ public class GeneradorMapa {
         
         yMax = y - 1;
         
-        this.mapaAGenerar.asignarBordes(xMax, yMax);
+        mapa.asignarBordes(xMax, yMax);
         
         buffer.close();
+       
 	}
 	
 }

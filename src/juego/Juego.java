@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.Jugador;
+import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
 import juego.razas.Raza;
 
@@ -80,11 +82,11 @@ public class Juego {
 		
 	}
 
-	public void iniciarJuego() throws FaltanJugadores {
+	public void iniciarJuego() throws FaltanJugadores, IOException {
 		
 		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
-		
-		//Faltaria inicializar el mapa, usar el generador del mismo
+		GeneradorMapa generadorMapa = new GeneradorMapa();
+		this.mapa = generadorMapa.obtenerMapa("mapas/test.map");
 		
 	}
 
