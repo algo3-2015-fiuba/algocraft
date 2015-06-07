@@ -40,7 +40,7 @@ public class NexoMineralTester {
 		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
-		juego.iniciarJuego();
+		juego.iniciarJuego("mapas/test.map");
 		
 	}
 	

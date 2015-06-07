@@ -62,7 +62,7 @@ public class JuegoTester {
 		Juego juego = Juego.getInstance();
 		
 		exception.expect(FaltanJugadores.class);
-		juego.iniciarJuego();	
+		juego.iniciarJuego("mapas/test.map");	
 		
 	}
 	
@@ -75,7 +75,7 @@ public class JuegoTester {
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		exception.expect(FaltanJugadores.class);
-		juego.iniciarJuego();
+		juego.iniciarJuego("mapas/test.map");
 		
 	}
 

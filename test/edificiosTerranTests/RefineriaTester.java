@@ -39,7 +39,7 @@ public class RefineriaTester {
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
 		
-		juego.iniciarJuego();
+		juego.iniciarJuego("mapas/test.map");
 		
 	}
 	

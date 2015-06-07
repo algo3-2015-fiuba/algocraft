@@ -81,12 +81,12 @@ public class Juego {
 		}
 	}
 
-	public void iniciarJuego() throws FaltanJugadores, IOException {
+	public void iniciarJuego(String mapa) throws FaltanJugadores, IOException {
 		
 		//Podria pasarse como parametro la ubicacion del mapa en el cual se quiere jugar.
 		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
 		GeneradorMapa generadorMapa = new GeneradorMapa();
-		this.mapa = generadorMapa.obtenerMapa("mapas/test.map");
+		this.mapa = generadorMapa.obtenerMapa(mapa);
 		
 	}
 
