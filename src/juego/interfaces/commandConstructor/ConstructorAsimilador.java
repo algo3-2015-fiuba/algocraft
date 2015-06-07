@@ -16,27 +16,27 @@ import juego.recursos.Recurso;
 
 public class ConstructorAsimilador extends CommandConstructor {
 
+	private int costoMinerales = 100;
+
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
-		int costoMinerales = 100;
 		
 		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new CeldaOcupada();
 		Recurso recurso = mapa.getRecurso(coordenada);
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(costoMinerales);
+		jugador.consumirMinerales(this.costoMinerales);
 		
 		Asimilador asimilador = new Asimilador(recurso);
 		
 		jugador.agregarConstructor(this);
 		mapa.obtenerCelda(coordenada).agregarControlable(asimilador);
 		this.enConstruccion = asimilador;
-		
 	}
 	
 	@Override

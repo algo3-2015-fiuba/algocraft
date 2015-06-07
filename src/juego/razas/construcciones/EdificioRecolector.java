@@ -16,6 +16,7 @@ public abstract class EdificioRecolector implements Construible, Recolector, Con
 
 	protected Jugador propietario;
 	protected float vida;
+	protected Celda celdaOcupada;
 
 	public EdificioRecolector() {
 		super();

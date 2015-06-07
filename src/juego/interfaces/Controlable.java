@@ -13,5 +13,4 @@ public interface Controlable {
 	public boolean esPropietario(Jugador jugador);
 	public void ocuparCelda(Celda celda) throws CeldaOcupada, CoordenadaFueraDeRango;
 	public void moverse(Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven, PropietarioInvalido;
-	
 }

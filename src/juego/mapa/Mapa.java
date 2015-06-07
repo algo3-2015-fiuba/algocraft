@@ -34,8 +34,7 @@ public class Mapa {
 
 		for (Celda celda : this.celdas.values()) { 
 			
-			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 
-				
+			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 				
 				Controlable recolector = celda.obtenerControlableEnTierra();
 				
 				if ((recolector.esPropietario(jugadorActual)) && (((Construible)recolector).construccionFinalizada()))	
