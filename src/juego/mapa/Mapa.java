@@ -12,6 +12,7 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.mapa.excepciones.PropietarioInvalido;
 import juego.recursos.Recurso;
 
 public class Mapa {
@@ -47,7 +48,8 @@ public class Mapa {
 
 	}
 	
-	public void moverControlable(Controlable controlable, Coordenada coordFinal) throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven {
+	public void moverControlable(Controlable controlable, Coordenada coordFinal) 
+			throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven, PropietarioInvalido {
 		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
 		//ya que el controlable sabe como debe moverse.
 		//Debe conocer su posicion

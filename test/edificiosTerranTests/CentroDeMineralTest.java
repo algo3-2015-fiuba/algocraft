@@ -18,6 +18,7 @@ import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.mapa.excepciones.PropietarioInvalido;
 import juego.razas.*;
 
 
@@ -247,14 +248,9 @@ public class CentroDeMineralTest {
 		 */
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {
-		
+		for (int i = 0; i < 9; i++) {		
 			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
-			}
-		
+			jugadorActual = juego.turnoDe();		
 		}
 		
 		jugadorActual.finalizarTurno();
@@ -289,17 +285,89 @@ public class CentroDeMineralTest {
 		 */
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
+		for (int i = 0; i < 9; i++) {		
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();		
+		}
+		
+		assertFalse(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		
+	}
+	
+	@Test
+	public void testSiUnJugadorTerranTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		Mapa mapa = juego.getMapa();
+		Coordenada coord = new Coordenada(0,0);
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
+		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
+		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
+		 */
+		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+
+		for (int i = 0; i < 9; i++) {		
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();		
+		}
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		exception.expect(ConstruccionesNoSeMueven.class);
+		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
+		
+	}
+	
+	@Test
+	public void testSiUnJugadorProtossTrataDeMoverUnCentroDeMineralTerranErrorPropietarioInvalido() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+		
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		Mapa mapa = juego.getMapa();
+		Coordenada coord = new Coordenada(0,0);
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Esto es simplemente para asegurarme que estoy testeando sobre el jugador de raza terran
+		//No existe ningun metodo similar implementado en el juego.
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
+		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
+		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
+		 */
+		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+
 		for (int i = 0; i < 9; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
-			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
-			}
-		
+			
 		}
 		
-		assertFalse(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		exception.expect(PropietarioInvalido.class);
+		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
 		
 	}
 	

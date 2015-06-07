@@ -12,6 +12,7 @@ import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.excepciones.PropietarioInvalido;
 
 public class CentroDeMineral implements Construible, Recolector, Controlable {
 	
@@ -60,7 +61,10 @@ public class CentroDeMineral implements Construible, Recolector, Controlable {
 	}
 
 	@Override
-	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven {
+	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven, PropietarioInvalido {
+		
+		if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
+		
 		throw new ConstruccionesNoSeMueven();
 	}
 	
