@@ -33,6 +33,8 @@ public class UnidadTest {
 	@Test
 	public void testCreoUnaUnidadYSeMueve() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		this.reiniciarJuego();
+		
+		
 	}
 
 }

@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 
 import juego.Juego;
 import juego.excepciones.*;
-import juego.interfaces.commandConstructor.ConstructorCentroDeMineral;
+import juego.interfaces.commandConstructor.recolectores.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;

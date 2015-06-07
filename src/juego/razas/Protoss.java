@@ -15,4 +15,10 @@ public class Protoss extends Raza {
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada{
 		construccion.ejecutar(this, coordenada);
 	}
+	
+	@Override
+	public void construir(CommandConstructor construccion, Coordenada coordInicial, Coordenada coordFinal) 
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada{
+		construccion.ejecutar(this, coordInicial, coordFinal);
+	}
 }

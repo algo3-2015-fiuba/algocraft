@@ -65,6 +65,22 @@ public class Mapa {
 		}
 		
 	}
+	
+	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordIncial, Coordenada coordFinal) throws CoordenadaFueraDeRango {
+		ArrayList<Celda> celdas = new ArrayList<Celda>();
+		
+		celdas.add(this.obtenerCelda(coordIncial));
+		
+		for(int i = coordIncial.getX(); i < coordFinal.getX(); i++) {
+			for(int j = coordIncial.getY(); j < coordFinal.getY(); j++) {
+				celdas.add(this.obtenerCelda(new Coordenada(i, j)));
+			}			
+		}
+		
+		celdas.add(this.obtenerCelda(coordFinal));
+		
+		return celdas;
+	}
 
 	public Recurso getRecurso(Coordenada coordenada) throws CoordenadaFueraDeRango {
 		Celda celda = this.obtenerCelda(coordenada);

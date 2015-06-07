@@ -29,9 +29,7 @@ public abstract class CommandConstructor {
 
 	public void ejecutar(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
-		
 		throw new ImposibleConstruir();
-		
 	}
 	
 	public void ejecutar(Protoss raza, Coordenada coordenada) 
@@ -56,6 +54,25 @@ public abstract class CommandConstructor {
 	
 	public boolean esPosibleExtraer(GasVespeno recurso) {
 		return false;
+	}
+	
+	public void ejecutar(Raza raza, Coordenada coordIncial,
+			Coordenada coordFinal) throws RecursosInsuficientes,
+			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
+		
+		raza.construir(this, coordIncial, coordFinal);		
+	}
+
+	public void ejecutar(Protoss raza, Coordenada coordIncial,
+			Coordenada coordFinal) throws RecursosInsuficientes,
+			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
+		throw new ImposibleConstruir();		
+	}
+	
+	public void ejecutar(Terran raza, Coordenada coordIncial,
+			Coordenada coordFinal) throws RecursosInsuficientes,
+			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
+		throw new ImposibleConstruir();		
 	}
 	
 }

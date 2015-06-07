@@ -1,4 +1,7 @@
-package juego.interfaces.commandConstructor;
+package juego.interfaces.commandConstructor.creadores;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import juego.Juego;
 import juego.interfaces.CommandConstructor;
@@ -6,40 +9,43 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Protoss;
 import juego.razas.protoss.construcciones.Asimilador;
-import juego.recursos.GasVespeno;
+import juego.razas.terran.construcciones.Barraca;
 import juego.recursos.Recurso;
 
-public class ConstructorAsimilador extends CommandConstructor {
-
-	private int costoMinerales = 100;
+public class ConstructorBarraca extends CommandConstructor {
+	
+	private int costoMinerales = 150;
 
 	@Override
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void ejecutar(Protoss raza, Coordenada coordIncial, Coordenada coordFinal) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
 		
-		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new CeldaOcupada();
-		Recurso recurso = mapa.getRecurso(coordenada);
+		ArrayList<Celda> celdasAConstruir = (ArrayList<Celda>) mapa.obtenerRangoDeCeldas(coordIncial, coordFinal);
 		
-		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
+		for (Celda celda : celdasAConstruir) { 
+			if (celda.ocupadoEnTierra()) throw new CeldaOcupada();
+		}
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		Asimilador asimilador = new Asimilador(recurso);
+		Barraca barraca = new Barraca();
 		
 		jugador.agregarConstructor(this);
-		mapa.obtenerCelda(coordenada).agregarControlable(asimilador);
-		this.enConstruccion = asimilador;
+		
+		for (Celda celda : celdasAConstruir) { 
+			celda.agregarControlable(barraca);
+		}
+		
+		this.enConstruccion = barraca;
 	}
-	
-	@Override
-	public boolean esPosibleExtraer(GasVespeno recurso) { return true; }
 	
 }
