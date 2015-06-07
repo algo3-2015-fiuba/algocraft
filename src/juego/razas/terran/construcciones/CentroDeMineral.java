@@ -1,7 +1,7 @@
 package juego.razas.terran.construcciones;
 
 import juego.Juego;
-import juego.razas.protoss.construcciones.EdificioRecolector;
+import juego.razas.construcciones.EdificioRecolector;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
@@ -12,15 +12,13 @@ import juego.jugadores.Jugador;
 
 public class CentroDeMineral extends EdificioRecolector implements Construible, Recolector, Controlable {
 	
-	private Mineral nodoMineral;
-	private int tiempoDeConstruccion;
+	protected Mineral nodoMineral;
+	protected int tiempoDeConstruccion;
 	
 	public CentroDeMineral(Recurso recurso) {
 		super();
 		this.nodoMineral = (Mineral) recurso;
-		this.vida = 0;
 		this.tiempoDeConstruccion = 0;
-		this.propietario = Juego.getInstance().turnoDe();
 	}
 
 	@Override
@@ -36,7 +34,7 @@ public class CentroDeMineral extends EdificioRecolector implements Construible, 
 
 		if (!this.nodoMineral.estaAgotado()) {
 			int extraidos = this.nodoMineral.extraer();
-			Juego.getInstance().turnoDe().recolectarMinerarles(extraidos);		
+			this.propietario.recolectarMinerarles(extraidos);		
 		}
 	}
 	

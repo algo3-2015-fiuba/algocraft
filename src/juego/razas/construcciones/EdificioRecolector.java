@@ -1,4 +1,4 @@
-package juego.razas.protoss.construcciones;
+package juego.razas.construcciones;
 
 import juego.Juego;
 import juego.interfaces.Construible;
@@ -12,7 +12,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.excepciones.PropietarioInvalido;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public abstract class EdificioRecolector implements Controlable {
+public abstract class EdificioRecolector implements Construible, Recolector, Controlable {
 
 	protected Jugador propietario;
 	protected float vida;
