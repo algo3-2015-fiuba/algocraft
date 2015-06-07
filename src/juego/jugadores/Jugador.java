@@ -73,12 +73,10 @@ public class Jugador {
 
 	}
 
-	public void finalizarTurno() {
-		
+	public void finalizarTurno() {		
 		this.recolectarRecursos();
 		this.notificarConstructores();
-		Juego.getInstance().finalizarTurno();
-		
+		Juego.getInstance().finalizarTurno();		
 	}
 
 	public void construir(CommandConstructor constructor, Coordenada coordenada) 
