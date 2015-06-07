@@ -67,5 +67,5 @@ public class Asimilador implements Construible, Recolector, Controlable {
 		
 		throw new ConstruccionesNoSeMueven();
 	}
-	
+
 }

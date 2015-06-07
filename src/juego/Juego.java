@@ -79,7 +79,6 @@ public class Juego {
 				}
 			}
 		}
-		
 	}
 
 	public void iniciarJuego() throws FaltanJugadores, IOException {
