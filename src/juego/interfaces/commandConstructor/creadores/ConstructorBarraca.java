@@ -1,7 +1,6 @@
 package juego.interfaces.commandConstructor.creadores;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import juego.Juego;
 import juego.interfaces.CommandConstructor;
@@ -14,9 +13,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Protoss;
-import juego.razas.protoss.construcciones.Asimilador;
 import juego.razas.terran.construcciones.Barraca;
-import juego.recursos.Recurso;
 
 public class ConstructorBarraca extends CommandConstructor {
 	

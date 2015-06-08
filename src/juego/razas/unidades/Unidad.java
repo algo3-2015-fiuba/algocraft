@@ -2,14 +2,11 @@ package juego.razas.unidades;
 
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
-import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.mapa.excepciones.PropietarioInvalido;
 
-public class Unidad implements Controlable {
+public abstract class Unidad implements Controlable {
 	
 	protected Jugador propietario;
 	protected float vida;
@@ -28,14 +25,6 @@ public class Unidad implements Controlable {
 		} else {
 			celda.ocuparTierra(this);
 		}
-	}
-
-	@Override
-	public void moverse(Coordenada coordFinal) throws CeldaOcupada,
-			CoordenadaFueraDeRango, ConstruccionesNoSeMueven,
-			PropietarioInvalido {
-		// TODO Auto-generated method stub
-
 	}
 
 }

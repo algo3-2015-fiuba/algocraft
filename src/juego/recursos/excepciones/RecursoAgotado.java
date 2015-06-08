@@ -5,6 +5,6 @@ public class RecursoAgotado extends Exception {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 3909506974700235372L;
 	
 }

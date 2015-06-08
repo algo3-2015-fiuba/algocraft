@@ -17,20 +17,21 @@ import juego.recursos.Recurso;
 
 public class ConstructorCentroDeMineral extends CommandConstructor {
 	
+	private int costoMinerales = 50;
+	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
-		int costoMinerales = 50;
 		
 		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new CeldaOcupada();
 		Recurso recurso = mapa.getRecurso(coordenada);
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(costoMinerales);
+		jugador.consumirMinerales(this.costoMinerales);
 		
 		CentroDeMineral centroDeMineral = new CentroDeMineral(recurso);
 		

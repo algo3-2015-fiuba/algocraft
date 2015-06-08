@@ -16,20 +16,21 @@ import juego.recursos.Recurso;
 
 public class ConstructorRefineria extends CommandConstructor {
 
+	private int costoMinerales = 100;
+	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
-		int costoMinerales = 100;
 		
 		if (mapa.obtenerCelda(coordenada).ocupadoEnTierra()) throw new CeldaOcupada();
 		Recurso recurso = mapa.getRecurso(coordenada);
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(costoMinerales);
+		jugador.consumirMinerales(this.costoMinerales);
 		
 		Refineria refineria = new Refineria(recurso);
 		

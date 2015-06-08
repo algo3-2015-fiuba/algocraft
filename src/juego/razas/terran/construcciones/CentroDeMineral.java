@@ -4,11 +4,8 @@ import juego.razas.construcciones.EdificioRecolector;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
-import juego.interfaces.Construible;
-import juego.interfaces.Controlable;
-import juego.interfaces.Recolector;
 
-public class CentroDeMineral extends EdificioRecolector implements Construible, Recolector, Controlable {
+public class CentroDeMineral extends EdificioRecolector {
 	
 	protected Mineral nodoMineral;
 	protected int tiempoDeConstruccion;

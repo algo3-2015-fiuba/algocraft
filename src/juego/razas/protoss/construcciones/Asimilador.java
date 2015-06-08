@@ -1,14 +1,11 @@
 package juego.razas.protoss.construcciones;
 
-import juego.interfaces.Construible;
-import juego.interfaces.Controlable;
-import juego.interfaces.Recolector;
 import juego.razas.construcciones.EdificioRecolector;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class Asimilador extends EdificioRecolector implements Construible, Recolector, Controlable {
+public class Asimilador extends EdificioRecolector {
 	
 	protected GasVespeno nodoGasVespeno;
 	protected int tiempoDeConstruccion;

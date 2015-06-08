@@ -82,10 +82,14 @@ public class Jugador {
 	public void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
-		//Cuando querermos construir, buscamos a la raza a la cual pertenece el jugador
+		//Cuando queremos construir, buscamos a la raza a la cual pertenece el jugador
 		//y de esta manera verificamos si esta construccion esta disponible para la misma.
 		this.raza.construir(constructor, coordenada);
 		
+	}
+	
+	public void agregarConstructor(CommandConstructor constructor) {
+		this.constructores.add(constructor);		
 	}
 
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
@@ -103,9 +107,5 @@ public class Jugador {
 
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
 	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
-
-	public void agregarConstructor(CommandConstructor constructor) {
-		this.constructores.add(constructor);		
-	}
 	
 }
