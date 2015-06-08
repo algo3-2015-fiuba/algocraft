@@ -56,23 +56,4 @@ public abstract class CommandConstructor {
 		return false;
 	}
 	
-	public void ejecutar(Raza raza, Coordenada coordIncial,
-			Coordenada coordFinal) throws RecursosInsuficientes,
-			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
-		
-		raza.construir(this, coordIncial, coordFinal);		
-	}
-
-	public void ejecutar(Protoss raza, Coordenada coordIncial,
-			Coordenada coordFinal) throws RecursosInsuficientes,
-			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
-		throw new ImposibleConstruir();		
-	}
-	
-	public void ejecutar(Terran raza, Coordenada coordIncial,
-			Coordenada coordFinal) throws RecursosInsuficientes,
-			UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada, ImposibleConstruir {
-		throw new ImposibleConstruir();		
-	}
-	
 }

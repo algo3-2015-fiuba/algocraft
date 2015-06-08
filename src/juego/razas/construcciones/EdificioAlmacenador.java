@@ -81,4 +81,9 @@ public abstract class EdificioAlmacenador implements Construible, Controlable, A
 		}
 	}
 	
+	@Override
+	public boolean puedeAlmacenarUnidades() {
+		return true;
+	}
+	
 }

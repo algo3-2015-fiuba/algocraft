@@ -12,8 +12,5 @@ public abstract class Raza {
 
 	public abstract void construir(CommandConstructor constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada;	
-	
-	public abstract void construir(CommandConstructor constructor, Coordenada coordInicial, Coordenada coordFinal) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada;	
 
 }

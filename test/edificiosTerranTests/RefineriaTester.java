@@ -9,6 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.Controlable;
 import juego.interfaces.commandConstructor.recolectores.ConstructorRefineria;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
@@ -16,6 +17,7 @@ import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -197,7 +199,10 @@ public class RefineriaTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
+		assertTrue(construccion.esPropietario(jugadorActual));
 		
 	}
 	
@@ -220,7 +225,10 @@ public class RefineriaTester {
 			jugadorActual = juego.turnoDe();		
 		}
 		
-		assertFalse(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
+		assertFalse(construccion.esPropietario(jugadorActual));
 		
 	}
 	
@@ -246,8 +254,11 @@ public class RefineriaTester {
 			
 		}
 		
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
 		exception.expect(PropietarioInvalido.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(4,0));
+		construccion.moverse(new Coordenada(4,0));
 		
 	}
 	
@@ -274,8 +285,11 @@ public class RefineriaTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
 		exception.expect(ConstruccionesNoSeMueven.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(4,0));
+		construccion.moverse(new Coordenada(4,0));
 		
 	}
 

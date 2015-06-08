@@ -23,5 +23,10 @@ public class DepositoSuministro extends EdificioAlmacenador {
 		} 
 		
 	}
+
+	@Override
+	public int unidadesAlmacenables() {
+		return this.capacidadDePoblacion;
+	}
 	
 }

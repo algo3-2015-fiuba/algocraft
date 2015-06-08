@@ -42,5 +42,11 @@ public abstract class EdificioRecolector implements Construible, Recolector, Con
 				
 		throw new ConstruccionesNoSeMueven();
 	}
+	
+	//Ningun edificio recolector puede almacenar unidades
+	@Override
+	public boolean puedeAlmacenarUnidades() {
+		return false;
+	}
 
 }

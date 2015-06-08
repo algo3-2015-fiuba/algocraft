@@ -12,9 +12,11 @@ import org.junit.rules.ExpectedException;
 
 import juego.Juego;
 import juego.excepciones.*;
+import juego.interfaces.Controlable;
 import juego.interfaces.commandConstructor.recolectores.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.*;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -190,7 +192,10 @@ public class CentroDeMineralTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
+		assertTrue(construccion.esPropietario(jugadorActual));
 		
 	}
 	
@@ -213,7 +218,10 @@ public class CentroDeMineralTester {
 			jugadorActual = juego.turnoDe();		
 		}
 		
-		assertFalse(mapa.obtenerCelda(coord).obtenerControlableEnTierra().esPropietario(jugadorActual));
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
+		assertFalse(construccion.esPropietario(jugadorActual));
 		
 	}
 	
@@ -239,8 +247,11 @@ public class CentroDeMineralTester {
 			
 		}
 		
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
 		exception.expect(PropietarioInvalido.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
+		construccion.moverse(new Coordenada(0,4));
 		
 	}
 	
@@ -267,8 +278,11 @@ public class CentroDeMineralTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
+		Celda celda = mapa.obtenerCelda(coord);
+		Controlable construccion = (Controlable)(celda.obtenerConstruible());
+		
 		exception.expect(ConstruccionesNoSeMueven.class);
-		mapa.obtenerCelda(coord).obtenerControlableEnTierra().moverse(new Coordenada(0,4));
+		construccion.moverse(new Coordenada(0,4));
 		
 	}
 	

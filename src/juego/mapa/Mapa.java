@@ -3,11 +3,14 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import juego.Juego;
+import juego.interfaces.Almacenable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Recolector;
+import juego.interfaces.commandConstructor.almacenadores.ConstructorDepositoSuministro;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
@@ -34,10 +37,11 @@ public class Mapa {
 
 		for (Celda celda : this.celdas.values()) { 
 			
+			//Un recolector es el unico que puede ocupar una celda con recursos.
 			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 				
-				Controlable recolector = celda.obtenerControlableEnTierra();
+				Construible recolector = celda.obtenerConstruible();
 				
-				if ((recolector.esPropietario(jugadorActual)) && (((Construible)recolector).construccionFinalizada()))	
+				if ((((Controlable)recolector).esPropietario(jugadorActual)) && (recolector.construccionFinalizada()))	
 					recolectores.add((Recolector)recolector);
 			}
 			
@@ -51,10 +55,14 @@ public class Mapa {
 			throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven, PropietarioInvalido {
 		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
 		//ya que el controlable sabe como debe moverse.
-		//Debe conocer su posicion
+		//Debe conocer su posicion o preguntarle al mapa su posicion actual.
 		controlable.moverse(coordFinal);
 	}
 	
+	public Recurso getRecurso(Coordenada coordenada) throws CoordenadaFueraDeRango {
+		Celda celda = this.obtenerCelda(coordenada);
+		return celda.obtenerRecurso();
+	}	
 
 	public Celda obtenerCelda(Coordenada coord) throws CoordenadaFueraDeRango {
 		
@@ -66,24 +74,42 @@ public class Mapa {
 		
 	}
 	
-	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordIncial, Coordenada coordFinal) throws CoordenadaFueraDeRango {
-		ArrayList<Celda> celdas = new ArrayList<Celda>();
+	public Collection<Celda> obtenerRangoDeCeldas(ConstructorDepositoSuministro constructorDepositoSuministro, Coordenada coordenadaDeterminante)
+			throws CoordenadaFueraDeRango, CeldaOcupada {
 		
-		celdas.add(this.obtenerCelda(coordIncial));
+		Collection<Celda> celdas = new ArrayList<Celda>();
 		
-		for(int i = coordIncial.getX(); i < coordFinal.getX(); i++) {
-			for(int j = coordIncial.getY(); j < coordFinal.getY(); j++) {
-				celdas.add(this.obtenerCelda(new Coordenada(i, j)));
-			}			
+		int x = coordenadaDeterminante.getX();
+		int y = coordenadaDeterminante.getY();
+		celdas.add(this.obtenerCelda(coordenadaDeterminante));
+		celdas.add(this.obtenerCelda(new Coordenada(x++, y)));	
+		
+		Iterator<Celda> it = celdas.iterator();
+		while (it.hasNext()) {
+			Celda celda = it.next();
+			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
 		}
-		
-		celdas.add(this.obtenerCelda(coordFinal));
 		
 		return celdas;
 	}
 
-	public Recurso getRecurso(Coordenada coordenada) throws CoordenadaFueraDeRango {
-		Celda celda = this.obtenerCelda(coordenada);
-		return celda.obtenerRecurso();
+	public Collection<Almacenable> getAlmacenadores() {
+		Jugador jugador = Juego.getInstance().turnoDe();
+		ArrayList<Almacenable> almacenadores = new ArrayList<Almacenable>();
+		
+		for (Celda celda : this.celdas.values()) { 
+			
+			if (celda.poseeConstruible()) {
+				Construible construccion = celda.obtenerConstruible();
+				if ((construccion.puedeAlmacenarUnidades()) && (((Controlable)construccion)).esPropietario(jugador)) {
+					almacenadores.add((Almacenable)construccion);
+				}
+			}
+			
+		}
+		
+		return almacenadores;
+		
 	}
+	
 }

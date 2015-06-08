@@ -1,56 +1,78 @@
 package juego.mapa;
 
+import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.mapa.excepciones.NoEstaOcupadoPorUnidad;
 import juego.materiales.Material;
+import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
 public class Celda {
 	
-	private Controlable controlableAire;
-	private Controlable controlableTierra;
+	private Unidad unidadVoladora;
+	private Unidad unidadTerrestre;
+	private Construible construible;
 	private Material material;
 	private Recurso recurso;
 	
 	public Celda(Material material, Recurso recurso) {
 		this.material = material;
 		this.recurso = recurso;
-		this.controlableAire = null;
-		this.controlableTierra = null;
+		this.unidadVoladora = null;
+		this.unidadTerrestre = null;
+		this.construible = null;
 	}
 
 	public void agregarControlable(Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeRango {
 		controlable.ocuparCelda(this);
 	}
 	
-	public void ocuparTierra(Controlable controlable) throws CeldaOcupada { 
-		if (!this.ocupadoEnTierra()) {
-			this.controlableTierra = controlable; 
+	public void ocuparTierra(Construible construible) throws CeldaOcupada {
+		if (!this.ocupadoEnAire()) {
+			this.construible = construible; 
 		} else {
 			throw new CeldaOcupada();
 		}
 	}
 	
-	public void ocuparAire(Controlable controlable) throws CeldaOcupada {
-		if (!this.ocupadoEnAire()) {
-			this.controlableAire = controlable; 
+	public void ocuparTierra(Unidad voladora) throws CeldaOcupada { 
+		if (!this.ocupadoEnTierra()) {
+			this.unidadTerrestre = voladora; 
 		} else {
 			throw new CeldaOcupada();
 		}
 	}
+	
+	public void ocuparAire(Unidad terrestre) throws CeldaOcupada {
+		if (!this.ocupadoEnAire()) {
+			this.unidadTerrestre = terrestre; 
+		} else {
+			throw new CeldaOcupada();
+		}
+	} 
 	
 	public Material obtenerMaterial() {
 		return this.material;
 	}
 	
-	public Controlable obtenerControlableEnAire() {
-		return this.controlableAire;
+	public Unidad obtenerUnidadVoladora() throws NoEstaOcupadoPorUnidad {
+		if (this.poseeUnidadVoladora())
+			return this.unidadVoladora;
+		else
+			throw new NoEstaOcupadoPorUnidad();
 	}
 	
+	public Controlable obtenerUnidadTerrestre() throws NoEstaOcupadoPorUnidad {
+		if (this.poseeUnidadTerrestre())
+			return this.unidadVoladora;
+		else
+			throw new NoEstaOcupadoPorUnidad();
+	}
 	
-	public Controlable obtenerControlableEnTierra() {
-		return this.controlableTierra;
+	public Construible obtenerConstruible() {
+		return this.construible;
 	}
 	
 	public Recurso obtenerRecurso() {
@@ -58,24 +80,35 @@ public class Celda {
 	}
 	
 	public boolean ocupadoEnAire() {
-		return (this.controlableAire != null);
+		return (this.unidadVoladora != null);
 	}
 	
 	public boolean ocupadoEnTierra() {
-		return (this.controlableTierra != null);
+		return ((this.poseeUnidadTerrestre()) || (this.poseeConstruible()));
 	}
 	
-	public void removerControlableEnAire() {
-		this.controlableAire = null;
+	public void removerUnidadEnAire() {
+		this.unidadVoladora = null;
 	}
 
-	public void removerControlableEnTierra() {
-		this.controlableTierra = null;
+	public void removerUnidadEnTierra() {
+		this.unidadTerrestre = null;
 	}
 
 	public boolean poseeRecursos() {
 		return (this.recurso != null);
 	}
+
+	public boolean poseeConstruible() {
+		return (this.construible != null);
+	}
 	
+	public boolean poseeUnidadTerrestre() {
+		return (this.unidadTerrestre != null);
+	}
+	
+	public boolean poseeUnidadVoladora() {
+		return (this.unidadVoladora != null);
+	}	
 	
 }

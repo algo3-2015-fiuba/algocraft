@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.interfaces.Almacenable;
 import juego.interfaces.CommandConstructor;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
@@ -107,5 +108,35 @@ public class Jugador {
 
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
 	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
+
+	public int poblacionAlmacenable() {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Almacenable> listaDeAlmacenadores = mapa.getAlmacenadores();
+		int poblacionAlmacenable = 0;
+		
+		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
+		while (it.hasNext()) {
+			poblacionAlmacenable += it.next().unidadesAlmacenables();
+		}
+		
+		return poblacionAlmacenable;
+		
+	}
+	
+	public int poblacionActual() {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Almacenable> listaDeAlmacenadores = mapa.getAlmacenadores();
+		int poblacionAlmacenable = 0;
+		
+		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
+		while (it.hasNext()) {
+			poblacionAlmacenable += it.next().cantidadUnidadesAlmacenadas();
+		}
+		
+		return poblacionAlmacenable;
+		
+	}
 	
 }

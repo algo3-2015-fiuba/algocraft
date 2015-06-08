@@ -12,5 +12,6 @@ public interface Almacenable {
 	public void desalojar(Unidad unidad) throws EdificioVacio, UnidadNoSeEncuentraEnEdificio;
 	public boolean tieneCapacidadDisponible();
 	public int cantidadUnidadesAlmacenadas();
+	public int unidadesAlmacenables();
 	
 }
