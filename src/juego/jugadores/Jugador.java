@@ -117,7 +117,7 @@ public class Jugador {
 		
 		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
 		while (it.hasNext()) {
-			poblacionAlmacenable += it.next().unidadesAlmacenables();
+			poblacionAlmacenable += it.next().cantidadUnidadesAlmacenables();
 		}
 		
 		return poblacionAlmacenable;
@@ -128,14 +128,14 @@ public class Jugador {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		Collection<Almacenable> listaDeAlmacenadores = mapa.getAlmacenadores();
-		int poblacionAlmacenable = 0;
+		int poblacionActual = 0;
 		
 		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
 		while (it.hasNext()) {
-			poblacionAlmacenable += it.next().cantidadUnidadesAlmacenadas();
+			poblacionActual += it.next().cantidadUnidadesAlmacenadas();
 		}
 		
-		return poblacionAlmacenable;
+		return poblacionActual;
 		
 	}
 	

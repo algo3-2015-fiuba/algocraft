@@ -37,7 +37,8 @@ public class Mapa {
 
 		for (Celda celda : this.celdas.values()) { 
 			
-			//Un recolector es el unico que puede ocupar una celda con recursos.
+			// Un recolector es el unico que puede ocupar una celda con recursos y
+			// ademas es el unico que ocupa una sola celda
 			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 				
 				Construible recolector = celda.obtenerConstruible();
 				
@@ -77,20 +78,21 @@ public class Mapa {
 	public Collection<Celda> obtenerRangoDeCeldas(ConstructorDepositoSuministro constructorDepositoSuministro, Coordenada coordenadaDeterminante)
 			throws CoordenadaFueraDeRango, CeldaOcupada {
 		
-		Collection<Celda> celdas = new ArrayList<Celda>();
+		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
 		
 		int x = coordenadaDeterminante.getX();
 		int y = coordenadaDeterminante.getY();
-		celdas.add(this.obtenerCelda(coordenadaDeterminante));
-		celdas.add(this.obtenerCelda(new Coordenada(x++, y)));	
+			
+		rangoDeCeldas.add(this.obtenerCelda(coordenadaDeterminante)); x++;
+		rangoDeCeldas.add(this.obtenerCelda(new Coordenada(x, y)));	
 		
-		Iterator<Celda> it = celdas.iterator();
+		Iterator<Celda> it = rangoDeCeldas.iterator();
 		while (it.hasNext()) {
 			Celda celda = it.next();
 			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
 		}
 		
-		return celdas;
+		return rangoDeCeldas;
 	}
 
 	public Collection<Almacenable> getAlmacenadores() {
@@ -99,10 +101,14 @@ public class Mapa {
 		
 		for (Celda celda : this.celdas.values()) { 
 			
-			if (celda.poseeConstruible()) {
+			if (celda.poseeConstruible()){
 				Construible construccion = celda.obtenerConstruible();
-				if ((construccion.puedeAlmacenarUnidades()) && (((Controlable)construccion)).esPropietario(jugador)) {
-					almacenadores.add((Almacenable)construccion);
+				
+				if ((construccion.construccionFinalizada()) && (construccion.puedeAlmacenarUnidades()) 
+						&& (((Controlable)construccion)).esPropietario(jugador)) {
+					
+					if (!almacenadores.contains(construccion)) almacenadores.add((Almacenable)construccion);
+					
 				}
 			}
 			

@@ -39,7 +39,7 @@ public class DepositoSuministroTester {
 	}
 	
 	@Test
-	public void creacionCorrectaDeUnDepositoSuministro() 
+	public void testCreacionCorrectaDeUnDepositoSuministro() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, 
 			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		
@@ -61,7 +61,7 @@ public class DepositoSuministroTester {
 		//En el caso del mapa 'test', la coordenada (0,1) cumple este requisito.
 		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
 		
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
@@ -72,7 +72,7 @@ public class DepositoSuministroTester {
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
-		
+
 		assertEquals(5, jugadorActual.poblacionAlmacenable());
 		assertEquals(0, jugadorActual.poblacionActual());
 		

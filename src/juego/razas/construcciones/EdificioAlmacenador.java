@@ -73,7 +73,7 @@ public abstract class EdificioAlmacenador implements Construible, Controlable, A
 	@Override
 	public void ocupar(Unidad unidad) throws UnidadYaSeEncuentraEnEdificio {
 		if (this.tieneCapacidadDisponible()) {
-			if (this.unidadesAlmacenadas.contains(unidad)) {
+			if (!this.unidadesAlmacenadas.contains(unidad)) {
 				this.unidadesAlmacenadas.add(unidad);
 			} else {
 				throw new UnidadYaSeEncuentraEnEdificio();

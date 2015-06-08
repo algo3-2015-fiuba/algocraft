@@ -36,7 +36,7 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 		jugador.agregarConstructor(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
-			mapa.obtenerCelda(coordenada).agregarControlable(depositoSuministro);
+			it.next().ocuparTierra(depositoSuministro);
 		}
 		
 		this.enConstruccion = depositoSuministro;
