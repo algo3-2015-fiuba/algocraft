@@ -45,7 +45,7 @@ public class Celda {
 	}
 	
 	public Controlable obtenerControlableEnAire() {
-		return this.controlableTierra;
+		return this.controlableAire;
 	}
 	
 	

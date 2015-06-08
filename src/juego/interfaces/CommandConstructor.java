@@ -40,7 +40,7 @@ public abstract class CommandConstructor {
 	}
 	
 	public void actualizarConstruccion() {
-		if (!enConstruccion.construccionFinalizada()) enConstruccion.actualizarConstruccion();
+		if (!this.enConstruccion.construccionFinalizada()) this.enConstruccion.actualizarConstruccion();
 	}
 	
 	public boolean construccionFinalizada() {

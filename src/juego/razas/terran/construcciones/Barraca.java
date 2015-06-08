@@ -25,8 +25,7 @@ public class Barraca implements Controlable, Construible {
 	}
 
 	@Override
-	public void ocuparCelda(Celda celda) throws CeldaOcupada,
-			CoordenadaFueraDeRango {
+	public void ocuparCelda(Celda celda) throws CeldaOcupada {
 		// TODO Auto-generated method stub
 		
 	}
