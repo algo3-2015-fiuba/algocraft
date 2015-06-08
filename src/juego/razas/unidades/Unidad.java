@@ -18,8 +18,7 @@ public abstract class Unidad implements Controlable {
 	}
 
 	@Override
-	public void ocuparCelda(Celda celda) throws CeldaOcupada,
-			CoordenadaFueraDeRango {
+	public void ocuparCelda(Celda celda) throws CeldaOcupada {
 		if(this.esVolador) {
 			celda.ocuparAire(this);
 		} else {
