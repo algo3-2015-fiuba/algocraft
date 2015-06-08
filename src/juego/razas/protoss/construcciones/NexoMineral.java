@@ -8,12 +8,10 @@ import juego.recursos.excepciones.RecursoAgotado;
 public class NexoMineral extends EdificioRecolector {
 	
 	protected Mineral nodoMineral;
-	protected int tiempoDeConstruccion;
 	
 	public NexoMineral(Recurso recurso) {
 		super();
 		this.nodoMineral = (Mineral) recurso;
-		this.tiempoDeConstruccion = 0;
 	}
 
 	@Override

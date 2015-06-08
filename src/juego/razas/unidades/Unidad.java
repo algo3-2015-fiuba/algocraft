@@ -4,7 +4,6 @@ import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 public abstract class Unidad implements Controlable {
 	

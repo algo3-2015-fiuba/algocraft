@@ -8,12 +8,10 @@ import juego.recursos.excepciones.RecursoAgotado;
 public class Refineria extends EdificioRecolector {
 	
 	protected GasVespeno nodoGasVespeno;
-	protected int tiempoDeConstruccion;
 	
 	public Refineria(Recurso recurso) {
 		super();
 		this.nodoGasVespeno = (GasVespeno) recurso;
-		this.tiempoDeConstruccion = 0;
 	}
 
 	@Override

@@ -10,26 +10,20 @@ import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.PropietarioInvalido;
-import juego.recursos.excepciones.RecursoAgotado;
 
 public abstract class EdificioRecolector implements Construible, Recolector, Controlable {
 
 	protected Jugador propietario;
 	protected float vida;
 	protected Celda celdaOcupada;
+	protected int tiempoDeConstruccion;
 
 	public EdificioRecolector() {
 		super();
 		this.vida = 0;
 		this.propietario = Juego.getInstance().turnoDe();
+		this.tiempoDeConstruccion = 0;
 	}
-
-	public abstract boolean construccionFinalizada();
-
-	public abstract void actualizarConstruccion();
-
-	public abstract void recolectar() throws RecursoAgotado;
-
 	
 	public boolean esPropietario(Jugador aComprobar) {
 		return (this.propietario.equals(aComprobar));
@@ -42,7 +36,8 @@ public abstract class EdificioRecolector implements Construible, Recolector, Con
 
 	@Override
 	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven,
-			PropietarioInvalido {				
+			PropietarioInvalido {	
+		
 		if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
 				
 		throw new ConstruccionesNoSeMueven();
