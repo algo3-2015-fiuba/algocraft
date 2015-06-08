@@ -1,34 +1,124 @@
-Inforeme sobre Excepciones:
 
-RAZAS
+
+Informe sobre Excepciones 2.0
+
+Juego:
+
+-ColorInvalido: Se realiza cuando dos jugadores intentan eligir el mismo color para desarrollar la partida.
+
+ Ejemplo: Trivial, si el jugador 1 elige color "rojo" y el jugador 2 elige "rojo" tambien.  
+
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+
+
+-FaltanJugadores: Esta excepcion se realiza cuando no se cumplen la cantidad necesaria de jugadores para comenzar una partida
+
+  Ejemplo: Se registra un jugador, y este quiere comenzar la partida sin haberse registrado un segundo jugador. Analogamente
+        
+           para el caso de que se quiera comenzar una partida sin haber registrado ningun jugador.
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+ 
+
+-NombreInvalido: Esta excepcion se realiza cuando un jugador se registra con un nombre, y posteriormente el otro jugador quiere
+
+                 registrarse utilizando el mismo nombre.
+
+Ejemplo: Es muy obvio, si el jugador uno se llama "Terran92", y el jugador dos tambien se quiere llamar "Terran92". 
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+
+JuegoInterfaces:
+
+-CeldaOcupada: Indica que una celda ya esta ocupada por otra entidad (ya sea una construccion o alguna unidad de combate) 
+          
+               que puede ser propia o ajena al jugador, entonces no es posible utilizar dicha celda. 
+
+ Ejemplo: Es trivial, si un jugador construye alguna edificacion en la posición (1,0), y luego el mismo o 
+
+                   otro jugador quiere realizar otra construccion ahi se lanzara dicha excepcion. 
+
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+
+-ConstruccionesNoSeMueven: ?
+
+-ImposibelConstruir: Se realiza en el caso de que alguna de las dos razas quiera construir una edificacion que no le 
+
+                     pertenece.
+
+Ejemplo: Si el jugador, juega con la raza Terran no deberia poder construir un asimilador, o un pilon, etc. Ya que estas
+         
+         construcciones solo le pertenecen a los protos.
+ 
+
+-UbicacionInvalida: Se ejecuta cuando se quiere construir una edificacion que recolecta recursos, en un lugar inapropiado 
+
+                    o invalido.
+
+ Ejemplo: Se crea un mapa, y en la posicion (0,0) existe un nodo de minerales, por lo tanto en ese lugar solo se puede crear
+          
+          un centro mineral. Pero si el jugador intenta construir una refineria, esta accion no se ralizara pues las refinerias
+
+          solo se construyen sobre los geisers de gas vespeno.
+
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+
+-RecursosInsuficientes: Indica que no se puede construir alguna edificacion o alguna unidad de combate, debido a que no se cuentan con 
+                        
+                        los recursos suficientes (minerales o gas vespeno) para satisfacer la creacion de los misnos.  
+
+Ejemplo: En el caso de que, el jugador cuente con 50 de mineral y quiera crear un asimilador.
+                  
+                       Como este cuesta 100 de minerales, no se podra realizar la accion y se lanzara dicha excepcion.   
+
+Falta poner que se hace con la captura, y en donde se las atrapa.
+
+
 
 - YaFueDestruido: Indica que una unidad( ya sea construccion o guerrero) ya fue destruida, cuando se la intente atacar.
 
-  Situacion de Uso: Es utlizada en caso de que un objeto (por ej un guerrero zealot) quiera atacar a otro que ya esta en
+  Ejemplo: En el caso de que una entidad (por ej un guerrero zealot) quiera atacar a otro que ya esta en
+
                       estado de destruido, es decir, que este ultimo tenga "vida" o "defensas" cero.
 
   Falta poner que se hace con la captura, y en donde se las atrapa.
 
-Mapa
 
-- CeldaNoVacia: Indica que una celda ya esta ocupada por otra entidad, en un lugar determinado del mapa.
+Mapa:
 
-  Situacion de Uso: Se ejecuta en el caso en el cual se haya incorporado una entidad en una celda, determinada por unas coordenadas y 
-                    posteriormente se quiera ubicar otra entidad en las mismas coordenadas del mapa, es decir, en la misma celda en la
-                    cual se ubico la primera entidad.
+-CoordenadasFueraDeRango: El nombre es bastante claro, se emplea en el caso de que el jugador utilize coordenadas que se 
+                          
+                          encuentran fuera del rango preestablecido.
 
-  Falta poner que se hace con la captura, y en donde se las atrapa. 
+ Ejemplo: Al iniciar el juego se crea un mapa de 100x100. Posteriormente el jugador intenta crear un
+                   
+                   centro mineral en la posicion (-3,4), o (101,5). Ambas posiciones se encuentran fuera de rango. 
 
--RecursoAgotado: Señala que un recurso( ya sea gas o mineral)en un determinado lugar( sea nodo o volcan) ya no puede recolectarse
-                 pues se ha agotado del todo.   
-
-  Situacion de Uso: Se utiliza en el caso de que el jugador se encuentre  recolectando alguno de los dos recursos(nodos o gas)
-                    y este se acabe de manera inesperada de su correspondiente lugar( nodo o volcan). Entonces esta excepcion le 
-                    indicar al jugador que debe dirigirse a otro lugar, para poder seguir obteniendo recursos.
 
 Falta poner que se hace con la captura, y en donde se las atrapa.
 
-Protos
 
--EscudoNoPuedeRegenerarse:
--EscudoSobrepasaValorMaximo:
+-PropietarioInvalido: ?
+
+
+Reucursos:
+
+-RecursoAgotado: Señala que un recurso( ya sea gas o mineral)en un determinado lugar( sea nodo o volcan) ya no puede recolectarse
+                 
+                 pues se ha agotado del todo.   
+
+  Ejemplo: En el caso de que el jugador se encuentre  recolectando alguno de los dos recursos(nodos o gas)
+                   
+           y este se acabe de manera inesperada de su correspondiente lugar( nodo o volcan). Entonces esta excepcion le 
+                    
+           indicara al jugador que debe dirigirse a otro lugar, para poder seguir obteniendo recursos.
+
+
