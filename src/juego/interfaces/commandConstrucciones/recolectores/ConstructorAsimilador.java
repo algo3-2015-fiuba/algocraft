@@ -24,7 +24,7 @@ public class ConstructorAsimilador extends CommandConstrucciones {
 	}
 
 	@Override
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();

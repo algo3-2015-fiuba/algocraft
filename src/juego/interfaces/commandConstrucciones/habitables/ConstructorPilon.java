@@ -25,7 +25,7 @@ public class ConstructorPilon extends CommandConstrucciones {
 	}
 	
 	@Override
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		Juego juego = Juego.getInstance();

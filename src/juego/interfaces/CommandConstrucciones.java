@@ -16,7 +16,7 @@ public abstract class CommandConstrucciones {
 	
 	protected Construible enConstruccion;
 	
-	public void ejecutar(Raza raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Raza raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		raza.construir(this, coordenada);
@@ -27,14 +27,14 @@ public abstract class CommandConstrucciones {
 	 * Luego hacemos un @Override para las construcciones habilitadas segun la raza.
 	 */
 
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		throw new ImposibleConstruir();
 		
 	}
 	
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		throw new ImposibleConstruir();

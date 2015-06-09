@@ -25,7 +25,7 @@ public class ConstructorDepositoSuministro extends CommandConstrucciones {
 	}
 	
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		Juego juego = Juego.getInstance();

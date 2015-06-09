@@ -25,7 +25,7 @@ public class ConstructorAcceso extends CommandConstrucciones {
 	}
 	
 	@Override
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Protoss raza, Coordenada coordenada) 
 			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes {
 		
 		Juego juego = Juego.getInstance();

@@ -24,7 +24,7 @@ public class ConstructorRefineria extends CommandConstrucciones {
 	}
 	
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();

@@ -25,7 +25,7 @@ public class ConstructorBarraca extends CommandConstrucciones {
 	}
 	
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
 			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes {
 		
 		Juego juego = Juego.getInstance();
