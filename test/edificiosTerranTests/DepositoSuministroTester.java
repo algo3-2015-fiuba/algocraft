@@ -91,6 +91,88 @@ public class DepositoSuministroTester {
 	}
 	
 	@Test
+	public void testSiCreoMasDe40DepositosDeSuministroElLimiteDePoblacionSigueSiendo200() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		int x = 0;
+		int y = 20;
+		
+		//Este metodo no debe utilizarse y lo usan los recolectores, pero para probar el test es util.
+		jugadorActual.recolectarMinerarles(1000000);
+		
+		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
+		for(int i = 0; i < 4; i++) {
+			for (int j = 0; j < 30; j += 2) {
+				jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(x+j,y+i));
+			}
+		}
+		
+		for (int i = 0; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+			if (jugadorActual.suNombreEs("jugadorTerran")) {
+				assertEquals(0, jugadorActual.limiteDePoblacion());
+				assertEquals(0, jugadorActual.poblacionActual());
+			}
+		}
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		assertEquals(200, jugadorActual.limiteDePoblacion());
+		assertEquals(0, jugadorActual.poblacionActual());
+		
+	}
+	
+	@Test
+	public void testSiDestruyenUnDepositoDeSuministroPeroElJugadorTieneMasDe40SuLimiteDePoblacionSigueSiendo200() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		Mapa mapa = juego.getMapa();
+		int x = 0;
+		int y = 20;
+		
+		// Este metodo no debe utilizarse y lo usan los recolectores para que el jugador recolecte los minerales que ya recogieron,
+		// pero para probar el test es util.
+		jugadorActual.recolectarMinerarles(1000000);
+		
+		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
+		for(int i = 0; i < 4; i++) {
+			for (int j = 0; j < 30; j += 2) {
+				jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(x+j,y+i));
+			}
+		}
+		
+		for (int i = 0; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		assertEquals(200, jugadorActual.limiteDePoblacion());
+		assertEquals(0, jugadorActual.poblacionActual());
+		
+		// Los construibles y unidades no se deben eliminar de esta forma,
+		// pero para probar el test es util el metodo.
+		mapa.obtenerCelda(new Coordenada(0,20)).removerConstruible();
+		mapa.obtenerCelda(new Coordenada(1,20)).removerConstruible();
+		
+		assertEquals(200, jugadorActual.limiteDePoblacion());
+		assertEquals(0, jugadorActual.poblacionActual());
+		
+	}
+	
+	@Test
 	public void testCreoUnDepositoSuministroYAgregoMarinesHastaElLimiteDePoblacion() {
 		
 	}
