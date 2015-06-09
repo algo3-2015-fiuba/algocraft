@@ -90,6 +90,11 @@ public class CentroDeMineralTester {
 	}
 	
 	@Test
+	public void testCreoUnCentroDeMineralYAgregoZealotsHastaElLimiteDePoblacion() {
+		
+	}
+	
+	@Test
 	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {

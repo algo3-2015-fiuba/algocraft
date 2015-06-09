@@ -1,4 +1,4 @@
-package juego.interfaces.commandConstructor.almacenadores;
+package juego.interfaces.commandConstructor.habitables;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -10,7 +10,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstructor.almacenadores.ConstructorDepositoSuministro;
+import juego.interfaces.commandConstructor.habitables.ConstructorDepositoSuministro;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -62,9 +62,11 @@ public class DepositoSuministroTester {
 		 * teniendo como coordenada determinante a la ingresada.
 		 * Si la misma es, por ejemplo, (0,0) el deposito ocupara las celdas
 		 * (0,0) y (1,0). 
+		 * (0,0) = D
+		 * (1,0) = X
 		 * Grafico:
 		 * - - - - - - 	
-		 * - - X X - - 
+		 * - - D X - - 
 		 * - - - - - -
 		 */
 		
@@ -85,6 +87,11 @@ public class DepositoSuministroTester {
 		
 		assertEquals(5, jugadorActual.limiteDePoblacion());
 		assertEquals(0, jugadorActual.poblacionActual());
+		
+	}
+	
+	@Test
+	public void testCreoUnDepositoSuministroYAgregoMarinesHastaElLimiteDePoblacion() {
 		
 	}
 	
