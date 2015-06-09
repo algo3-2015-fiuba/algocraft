@@ -8,6 +8,7 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.interfaces.Almacenable;
 import juego.interfaces.CommandConstructor;
+import juego.interfaces.Militable;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -60,7 +61,7 @@ public class Jugador {
 	
 	private void notificarConstructores() {
 			
-		ArrayList<CommandConstructor> constructoresFinalizados = new ArrayList<CommandConstructor>();
+		Collection<CommandConstructor> constructoresFinalizados = new ArrayList<CommandConstructor>();
 			
 		Iterator<CommandConstructor> it = this.constructores.iterator();
 			
@@ -127,6 +128,19 @@ public class Jugador {
 	public int poblacionActual() {
 		//Falta implementar
 		return 0;
+	}
+
+	public boolean puedeCrearMarines() {
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Militable> construccionesMilitares = mapa.getConstruccionesMilitares();
+		
+		Iterator<Militable> it = construccionesMilitares.iterator();
+		
+		while (it.hasNext()) {			
+			if (it.next().puedeCrearMarines()) return true;		
+		}
+			
+		return false;
 	}
 	
 }

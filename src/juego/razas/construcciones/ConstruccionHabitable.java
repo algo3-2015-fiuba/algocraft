@@ -52,4 +52,9 @@ public abstract class ConstruccionHabitable implements Construible, Controlable,
 		return true;
 	}
 	
+	@Override
+	public boolean puedeCrearUnidades() {
+		return false;
+	}
+	
 }

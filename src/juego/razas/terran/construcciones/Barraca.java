@@ -21,4 +21,9 @@ public class Barraca extends ConstruccionMilitar {
 		}	
 	}
 	
+	@Override
+	public boolean puedeCrearMarines() {
+		return true;
+	}
+	
 }

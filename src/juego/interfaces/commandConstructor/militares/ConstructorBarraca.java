@@ -1,4 +1,4 @@
-package juego.interfaces.commandConstructor.habitables;
+package juego.interfaces.commandConstructor.militares;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,15 +14,15 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Terran;
-import juego.razas.terran.construcciones.DepositoSuministro;
+import juego.razas.terran.construcciones.Barraca;
 
-public class ConstructorDepositoSuministro extends CommandConstructor {
+public class ConstructorBarraca extends CommandConstructor {
 
-	private int costoMinerales = 100;
+	private int costoMinerales = 150;
 	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 
-			throws RecursosInsuficientes, CoordenadaFueraDeRango, CeldaOcupada {
+			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes {
 		
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
@@ -31,15 +31,15 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		DepositoSuministro depositoSuministro = new DepositoSuministro();
+		Barraca barraca = new Barraca();
 		
 		jugador.agregarConstructor(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
-			it.next().ocuparTierra(depositoSuministro);
+			it.next().ocuparTierra(barraca);
 		}
 		
-		this.enConstruccion = depositoSuministro;
+		this.enConstruccion = barraca;
 		
 	}
 	
@@ -53,7 +53,9 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 		int y = coordenadaDeterminante.getY();
 			
 		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante));
-		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));	
+		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));
+		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y+1)));
+		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y+1)));
 		
 		Iterator<Celda> it = rangoDeCeldas.iterator();
 		while (it.hasNext()) {
@@ -62,6 +64,7 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 		}
 		
 		return rangoDeCeldas;
+		
 	}
 	
 }

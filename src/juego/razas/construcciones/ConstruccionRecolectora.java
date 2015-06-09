@@ -49,4 +49,9 @@ public abstract class ConstruccionRecolectora implements Construible, Recolector
 		return false;
 	}
 
+	@Override
+	public boolean puedeCrearUnidades() {
+		return false;
+	}
+	
 }

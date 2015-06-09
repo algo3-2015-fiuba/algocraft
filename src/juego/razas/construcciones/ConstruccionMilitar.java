@@ -3,6 +3,7 @@ package juego.razas.construcciones;
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
+import juego.interfaces.Militable;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
@@ -10,7 +11,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.PropietarioInvalido;
 
-public abstract class ConstruccionMilitar implements Construible, Controlable {
+public abstract class ConstruccionMilitar implements Construible, Controlable, Militable {
 
 	protected Jugador propietario;
 	protected float vida;
@@ -43,6 +44,18 @@ public abstract class ConstruccionMilitar implements Construible, Controlable {
 
 	@Override
 	public boolean puedeAlmacenarUnidades() {
+		return false;
+	}
+	
+	@Override
+	public boolean puedeCrearUnidades() {
+		return true;
+	}
+	
+	// Los siguientes metodos por defecto se crean como falsos.
+	// Estos metodos deberian eliminarse en el futuro y ser reemplazados por excepciones
+	@Override
+	public boolean puedeCrearMarines() {
 		return false;
 	}
 		

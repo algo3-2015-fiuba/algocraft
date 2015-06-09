@@ -8,6 +8,7 @@ import juego.Juego;
 import juego.interfaces.Almacenable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
+import juego.interfaces.Militable;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
@@ -31,7 +32,7 @@ public class Mapa {
 	public Collection<Recolector> getRecolectores() {
 		
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
-		ArrayList<Recolector> recolectores = new ArrayList<Recolector>();
+		Collection<Recolector> recolectores = new ArrayList<Recolector>();
 
 		for (Celda celda : this.celdas.values()) { 
 			
@@ -75,7 +76,7 @@ public class Mapa {
 
 	public Collection<Almacenable> getAlmacenadores() {
 		Jugador jugador = Juego.getInstance().turnoDe();
-		ArrayList<Almacenable> almacenadores = new ArrayList<Almacenable>();
+		Collection<Almacenable> almacenadores = new ArrayList<Almacenable>();
 		
 		for (Celda celda : this.celdas.values()) { 
 			
@@ -94,6 +95,29 @@ public class Mapa {
 		
 		return almacenadores;
 		
+	}
+
+	public Collection<Militable> getConstruccionesMilitares() {
+	
+		Jugador jugador = Juego.getInstance().turnoDe();
+		Collection<Militable> militables = new ArrayList<Militable>();
+		
+		for (Celda celda : this.celdas.values()) { 
+			
+			if (celda.poseeConstruible()) {
+				Construible construccion = celda.obtenerConstruible();
+				if ((construccion.construccionFinalizada()) && (((Controlable)construccion).esPropietario(jugador)) 
+						&& (construccion.puedeCrearUnidades())) {
+					if (!militables.contains(celda.obtenerConstruible())) {
+						militables.add((Militable)celda.obtenerConstruible());
+					}
+				}
+			}
+			
+		}
+		
+		return militables;
+	
 	}
 	
 }

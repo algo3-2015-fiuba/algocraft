@@ -52,8 +52,8 @@ public class ConstructorPilon extends CommandConstructor {
 		int x = coordenadaDeterminante.getX();
 		int y = coordenadaDeterminante.getY();
 			
-		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante)); x++;
-		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y)));	
+		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante));
+		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));	
 		
 		Iterator<Celda> it = rangoDeCeldas.iterator();
 		while (it.hasNext()) {
