@@ -1,6 +1,5 @@
 package juego.interfaces.commandConstructor.habitables;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -26,8 +25,9 @@ public class ConstructorPilon extends CommandConstructor {
 		
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
-				
-		Collection<Celda> celdas = this.obtenerRangoDeCeldas(coordenada);
+		Mapa mapa = juego.getMapa();
+		
+		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2);
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
@@ -41,28 +41,6 @@ public class ConstructorPilon extends CommandConstructor {
 		
 		this.enConstruccion = depositoSuministro;
 		
-	}
-	
-	private Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante) 
-			throws CoordenadaFueraDeRango, CeldaOcupada {
-	
-		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
-		Mapa mapa = Juego.getInstance().getMapa();
-		
-		int x = coordenadaDeterminante.getX();
-		int y = coordenadaDeterminante.getY();
-			
-		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante));
-		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));	
-		
-		Iterator<Celda> it = rangoDeCeldas.iterator();
-		while (it.hasNext()) {
-			Celda celda = it.next();
-			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
-		}
-		
-		return rangoDeCeldas;
-	
 	}
 	
 }

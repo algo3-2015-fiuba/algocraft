@@ -3,6 +3,7 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Almacenable;
@@ -118,6 +119,35 @@ public class Mapa {
 		
 		return militables;
 	
+	}
+
+	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int cantidadDeCeldas) 
+			throws CoordenadaFueraDeRango, CeldaOcupada {
+			
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
+			
+		int x = coordenadaDeterminante.getX();
+		int y = coordenadaDeterminante.getY();
+				
+		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante));
+		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));
+		if (cantidadDeCeldas >= 4) {
+			rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y+1)));
+			rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y+1)));
+			if (cantidadDeCeldas == 6) {
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y+2)));
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y+2)));
+			}
+		}
+		Iterator<Celda> it = rangoDeCeldas.iterator();
+		while (it.hasNext()) {
+			Celda celda = it.next();
+			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
+		}
+			
+		return rangoDeCeldas;
+			
 	}
 	
 }
