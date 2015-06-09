@@ -13,15 +13,15 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.Terran;
+import juego.razas.Protoss;
 import juego.razas.terran.construcciones.DepositoSuministro;
 
-public class ConstructorDepositoSuministro extends CommandConstructor {
+public class ConstructorPilon extends CommandConstructor {
 
 	private int costoMinerales = 100;
 	
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void ejecutar(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		Juego juego = Juego.getInstance();
@@ -45,9 +45,9 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 	
 	private Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante) 
 			throws CoordenadaFueraDeRango, CeldaOcupada {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
+	
 		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
+		Mapa mapa = Juego.getInstance().getMapa();
 		
 		int x = coordenadaDeterminante.getX();
 		int y = coordenadaDeterminante.getY();
@@ -62,6 +62,7 @@ public class ConstructorDepositoSuministro extends CommandConstructor {
 		}
 		
 		return rangoDeCeldas;
+	
 	}
 	
 }

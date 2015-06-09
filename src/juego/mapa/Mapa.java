@@ -74,26 +74,6 @@ public class Mapa {
 		}
 		
 	}
-	
-	public Collection<Celda> obtenerRangoDeCeldas(ConstructorDepositoSuministro constructorDepositoSuministro, Coordenada coordenadaDeterminante)
-			throws CoordenadaFueraDeRango, CeldaOcupada {
-		
-		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
-		
-		int x = coordenadaDeterminante.getX();
-		int y = coordenadaDeterminante.getY();
-			
-		rangoDeCeldas.add(this.obtenerCelda(coordenadaDeterminante)); x++;
-		rangoDeCeldas.add(this.obtenerCelda(new Coordenada(x, y)));	
-		
-		Iterator<Celda> it = rangoDeCeldas.iterator();
-		while (it.hasNext()) {
-			Celda celda = it.next();
-			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
-		}
-		
-		return rangoDeCeldas;
-	}
 
 	public Collection<Almacenable> getAlmacenadores() {
 		Jugador jugador = Juego.getInstance().turnoDe();

@@ -1,6 +1,8 @@
-package edificiosTerranTests;
+package edificiosProtossTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstructor.almacenadores.ConstructorDepositoSuministro;
+import juego.interfaces.commandConstructor.almacenadores.ConstructorPilon;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -30,7 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class DepositoSuministroTester {
+public class PilonTester {
 
 	@Before 
 	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
@@ -38,8 +40,8 @@ public class DepositoSuministroTester {
 		Juego.getInstance().reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		juego.iniciarJuego("mapas/test.map");
 		
@@ -49,7 +51,7 @@ public class DepositoSuministroTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testCreacionCorrectaDeUnDepositoSuministro() 
+	public void testCreacionCorrectaDeUnPilon() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, 
 			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
 		
@@ -58,9 +60,9 @@ public class DepositoSuministroTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		
-		/* El rango de celdas de un deposito de suministro debe ser de dos
+		/* El rango de celdas de un pilon debe ser de dos
 		 * teniendo como coordenada determinante a la ingresada.
-		 * Si la misma es, por ejemplo, (0,0) el deposito ocupara las celdas
+		 * Si la misma es, por ejemplo, (0,0) el pilon ocupara las celdas
 		 * (0,0) y (1,0). 
 		 * Grafico:
 		 * - - - - - - 	
@@ -69,12 +71,12 @@ public class DepositoSuministroTester {
 		 */
 		
 		//En el caso del mapa 'test', la coordenada (0,1) cumple este requisito.
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));
 		
 		for (int i = 0; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
-			if (jugadorActual.suNombreEs("jugadorTerran")) {
+			if (jugadorActual.suNombreEs("jugadorProtoss")) {
 				assertEquals(0, jugadorActual.limiteDePoblacion());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
@@ -89,7 +91,7 @@ public class DepositoSuministroTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorTerranNoPuedeCrearUnDepositoSuministroSiHayRecursosEncimaErrorImposibleConstruir() 
+	public void testSiUnJugadorTerranNoPuedeCrearUnPilonSiHayRecursosEncimaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -98,12 +100,12 @@ public class DepositoSuministroTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,0));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,0));
 		
 	}
 	
 	@Test
-	public void testSiUnJugadorProtossTrataDeCrearUnDepositoSuministroErrorImposibleConstruir() 
+	public void testSiUnJugadorTerranTrataDeCrearUnDepositoSuministroErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -111,15 +113,15 @@ public class DepositoSuministroTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe(); //Jugador Protoss
+		jugadorActual = juego.turnoDe(); //Jugador Terran
 		
 		exception.expect(ImposibleConstruir.class);
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));
 		
 	}
 	
 	@Test
-	public void testSiUnJugadorTrataDeCrearUnDepositoSuministroPeroNoTieneSuficientesRecursosErrorRecursosInsuficientes() 
+	public void testSiUnJugadorTrataDeCrearUnPilonPeroNoTieneSuficientesRecursosErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -127,11 +129,11 @@ public class DepositoSuministroTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 	
-		//Un Deposito Suministro costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
+		//Un pilon costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
 		jugadorActual.consumirMinerales(110);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));
 		
 	}
 	
@@ -147,7 +149,7 @@ public class DepositoSuministroTester {
 		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
 		//si es negativa seguro no debe existir.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(-10,3));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(-10,3));
 		
 	}
 	
@@ -160,10 +162,10 @@ public class DepositoSuministroTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));
 		
 		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));
 	
 	}
 
@@ -179,7 +181,7 @@ public class DepositoSuministroTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 	
-		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
+		jugadorActual.construir(new ConstructorPilon(), coord);
 	
 		for (int i = 0; i < 12; i++) {		
 			jugadorActual.finalizarTurno();
@@ -205,7 +207,7 @@ public class DepositoSuministroTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 	
-		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
+		jugadorActual.construir(new ConstructorPilon(), coord);
 	
 		for (int i = 0; i < 13; i++) {		
 			jugadorActual.finalizarTurno();
@@ -220,7 +222,7 @@ public class DepositoSuministroTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorProtossTrataDeMoverUnDepositoSuministroTerranErrorPropietarioInvalido() 
+	public void testSiUnJugadorTerranTrataDeMoverUnPilonProtossErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -232,7 +234,7 @@ public class DepositoSuministroTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
+		jugadorActual.construir(new ConstructorPilon(), coord);
 
 		for (int i = 0; i < 13; i++) {
 		
@@ -250,7 +252,7 @@ public class DepositoSuministroTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorTerranTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
+	public void testSiUnJugadorProtossTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -262,7 +264,7 @@ public class DepositoSuministroTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
+		jugadorActual.construir(new ConstructorPilon(), coord);
 
 		for (int i = 0; i < 12; i++) {		
 			jugadorActual.finalizarTurno();
