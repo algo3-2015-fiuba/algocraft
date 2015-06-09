@@ -10,7 +10,6 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstructor.habitables.ConstructorDepositoSuministro;
 import juego.interfaces.commandConstructor.militares.ConstructorBarraca;
 import juego.interfaces.commandConstructor.recolectores.ConstructorCentroDeMineral;
 import juego.interfaces.excepciones.CeldaOcupada;
