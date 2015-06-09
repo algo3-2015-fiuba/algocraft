@@ -120,7 +120,7 @@ public class Jugador {
 			limiteDePoblacion += it.next().capacidadDeHabitantes();
 		}
 		
-		return limiteDePoblacion;
+		return (limiteDePoblacion > 200) ? 200 : limiteDePoblacion;
 		
 	}
 	

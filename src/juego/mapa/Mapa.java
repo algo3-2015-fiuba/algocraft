@@ -151,8 +151,6 @@ public class Mapa {
 
 	public Collection<Unidad> getUnidades() {
 		
-		//Este metodo deberia modificarse, pedirle a la celda la unidad que sea si existe y que esta decida
-		// si agregarse a la lista o no, el esPropietario habria que eliminarlo.
 		Jugador jugador = Juego.getInstance().turnoDe();
 		Collection<Unidad> unidades = new ArrayList<Unidad>();
 		
