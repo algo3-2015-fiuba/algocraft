@@ -16,7 +16,12 @@ import juego.recursos.Recurso;
 
 public class ConstructorRefineria extends CommandConstructor {
 
-	private int costoMinerales = 100;
+	private int costoMinerales;
+	
+	public ConstructorRefineria() {
+		super();
+		this.costoMinerales = 100;
+	}
 	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 

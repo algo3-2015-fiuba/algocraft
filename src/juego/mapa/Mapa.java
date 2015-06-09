@@ -15,7 +15,9 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.jugadores.Jugador;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.mapa.excepciones.NoEstaOcupadoPorUnidad;
 import juego.mapa.excepciones.PropietarioInvalido;
+import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
 public class Mapa {
@@ -74,6 +76,32 @@ public class Mapa {
 		}
 		
 	}
+	
+	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
+			throws CoordenadaFueraDeRango, CeldaOcupada {
+			
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
+			
+		int x = coordenadaDeterminante.getX();
+		int y = coordenadaDeterminante.getY();
+		
+		for (int i = 0; i < (rangoY / rangoX); i++) {
+			for (int j = 0; j < rangoX; j++) {
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
+			}
+		}
+				
+		Iterator<Celda> it = rangoDeCeldas.iterator();
+		while (it.hasNext()) {
+			Celda celda = it.next();
+			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
+		}
+			
+		return rangoDeCeldas;
+			
+	}
 
 	public Collection<Hospedable> getHospedables() {
 		Jugador jugador = Juego.getInstance().turnoDe();
@@ -121,30 +149,38 @@ public class Mapa {
 	
 	}
 
-	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
-			throws CoordenadaFueraDeRango, CeldaOcupada {
-			
-		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
-			
-		int x = coordenadaDeterminante.getX();
-		int y = coordenadaDeterminante.getY();
+	public Collection<Unidad> getUnidades() {
 		
-		for (int i = 0; i < (rangoY / rangoX); i++) {
-			for (int j = 0; j < rangoX; j++) {
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
+		//Este metodo deberia modificarse, pedirle a la celda la unidad que sea si existe y que esta decida
+		// si agregarse a la lista o no, el esPropietario habria que eliminarlo.
+		Jugador jugador = Juego.getInstance().turnoDe();
+		Collection<Unidad> unidades = new ArrayList<Unidad>();
+		
+		for (Celda celda : this.celdas.values()) {
+			
+			if (celda.poseeUnidadTerrestre()) {
+				
+				try {
+					Controlable unidad = (Controlable) celda.obtenerUnidadTerrestre();
+					if ((unidad.esPropietario(jugador)) && (!unidades.contains(unidad))) {
+						unidades.add((Unidad)unidad);
+					}
+				} catch (NoEstaOcupadoPorUnidad neopu) {}
+				
+			} else if (celda.poseeUnidadVoladora()) {
+				
+				try {
+					Controlable unidad = (Controlable) celda.obtenerUnidadTerrestre();
+					if ((unidad.esPropietario(jugador)) && (!unidades.contains(unidad))) {
+						unidades.add((Unidad)unidad);
+					}
+				} catch (NoEstaOcupadoPorUnidad neopu) {}
+				
 			}
 		}
-				
-		Iterator<Celda> it = rangoDeCeldas.iterator();
-		while (it.hasNext()) {
-			Celda celda = it.next();
-			if ((celda.ocupadoEnTierra()) || (celda.poseeRecursos())) throw new CeldaOcupada();
-		}
-			
-		return rangoDeCeldas;
-			
+		
+		return unidades;
+		
 	}
 	
 }

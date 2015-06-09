@@ -17,7 +17,12 @@ import juego.razas.protoss.construcciones.Acceso;
 
 public class ConstructorAcceso extends CommandConstructor {
 
-	private int costoMinerales = 150;
+	private int costoMinerales;
+	
+	public ConstructorAcceso() {
+		super();
+		this.costoMinerales = 150;
+	}
 	
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 

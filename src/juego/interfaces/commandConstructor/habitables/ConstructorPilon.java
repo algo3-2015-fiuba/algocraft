@@ -17,7 +17,12 @@ import juego.razas.terran.construcciones.DepositoSuministro;
 
 public class ConstructorPilon extends CommandConstructor {
 
-	private int costoMinerales = 100;
+	private int costoMinerales;
+	
+	public ConstructorPilon() {
+		super();
+		this.costoMinerales = 100;
+	}
 	
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 

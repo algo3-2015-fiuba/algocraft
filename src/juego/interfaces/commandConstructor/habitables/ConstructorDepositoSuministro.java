@@ -17,7 +17,12 @@ import juego.razas.terran.construcciones.DepositoSuministro;
 
 public class ConstructorDepositoSuministro extends CommandConstructor {
 
-	private int costoMinerales = 100;
+	private int costoMinerales;
+	
+	public ConstructorDepositoSuministro() {
+		super();
+		this.costoMinerales = 100;
+	}
 	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 

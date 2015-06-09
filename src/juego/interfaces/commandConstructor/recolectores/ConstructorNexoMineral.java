@@ -16,7 +16,12 @@ import juego.recursos.Recurso;
 
 public class ConstructorNexoMineral extends CommandConstructor {
 
-	private int costoMinerales = 50;
+	private int costoMinerales;
+	
+	public ConstructorNexoMineral() {
+		super();
+		this.costoMinerales = 50;
+	}
 	
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 

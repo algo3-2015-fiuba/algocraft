@@ -16,7 +16,12 @@ import juego.recursos.Recurso;
 
 public class ConstructorAsimilador extends CommandConstructor {
 
-	private int costoMinerales = 100;
+	private int costoMinerales;
+	
+	public ConstructorAsimilador() {
+		super();
+		this.costoMinerales = 100;
+	}
 
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 

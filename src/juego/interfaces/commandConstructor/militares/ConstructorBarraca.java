@@ -16,8 +16,13 @@ import juego.razas.Terran;
 import juego.razas.terran.construcciones.Barraca;
 
 public class ConstructorBarraca extends CommandConstructor {
-
-	private int costoMinerales = 150;
+	
+	private int costoMinerales;
+	
+	public ConstructorBarraca() {
+		super();
+		this.costoMinerales = 150;
+	}
 	
 	@Override
 	public void ejecutar(Terran raza, Coordenada coordenada) 

@@ -124,9 +124,8 @@ public class Jugador {
 		
 	}
 	
-	public int poblacionActual() {
-		//Falta implementar, deberia devolver la cantidad de unidades que posee el jugador
-		return 0;
+	public int poblacionActual() {	
+		return Juego.getInstance().getMapa().getUnidades().size();
 	}
 	
 }
