@@ -42,6 +42,6 @@ public class ConstructorNexoMineral extends CommandConstructor {
 	
 	
 	@Override
-	public boolean esPosibleExtraer(Mineral recurso) { return true; }
+	public boolean puedeExtraer(Mineral recurso) { return true; }
 	
 }

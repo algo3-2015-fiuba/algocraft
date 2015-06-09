@@ -26,8 +26,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	public void recolectar() throws RecursoAgotado {
 
 		if (!this.nodoMineral.estaAgotado()) {
-			int extraidos = this.nodoMineral.extraer();
-			this.propietario.recolectarMinerarles(extraidos);		
+			this.propietario.recolectarMinerarles(this.nodoMineral.extraer());		
 		}
 	}
 	

@@ -37,9 +37,9 @@ public class Celda {
 		}
 	}
 	
-	public void ocuparTierra(Unidad voladora) throws CeldaOcupada { 
+	public void ocuparTierra(Unidad terrestre) throws CeldaOcupada { 
 		if (!this.ocupadoEnTierra()) {
-			this.unidadTerrestre = voladora; 
+			this.unidadTerrestre = terrestre; 
 		} else {
 			throw new CeldaOcupada();
 		}
@@ -93,6 +93,10 @@ public class Celda {
 
 	public void removerUnidadEnTierra() {
 		this.unidadTerrestre = null;
+	}
+	
+	public void removerConstruible() {
+		this.construible = null;
 	}
 
 	public boolean poseeRecursos() {

@@ -41,6 +41,6 @@ public class ConstructorRefineria extends CommandConstructor {
 	}
 	
 	@Override
-	public boolean esPosibleExtraer(GasVespeno recurso) { return true; }
+	public boolean puedeExtraer(GasVespeno recurso) { return true; }
 	
 }

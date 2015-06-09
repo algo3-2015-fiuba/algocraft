@@ -24,12 +24,14 @@ public abstract class CommandConstructor {
 	}
 	
 	/* Por default, asumimos que no se puede ejecutar un CommandConstructor en ninguna raza.
-	 * Luego hacemos un @Override para las correctas
+	 * Luego hacemos un @Override para las construcciones habilitadas segun la raza.
 	 */
 
 	public void ejecutar(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
 		throw new ImposibleConstruir();
+		
 	}
 	
 	public void ejecutar(Protoss raza, Coordenada coordenada) 
@@ -47,12 +49,12 @@ public abstract class CommandConstructor {
 		return (this.enConstruccion.construccionFinalizada());
 	}
 	
-	//Por default consideramos que no puede extraer recursos	
-	public boolean esPosibleExtraer(Mineral recurso) {
+	//Por default consideramos que no se pueden extraer recursos	
+	public boolean puedeExtraer(Mineral recurso) {
 		return false;
 	}
 	
-	public boolean esPosibleExtraer(GasVespeno recurso) {
+	public boolean puedeExtraer(GasVespeno recurso) {
 		return false;
 	}
 	

@@ -4,6 +4,10 @@ import juego.razas.construcciones.ConstruccionMilitar;
 
 public class Acceso extends ConstruccionMilitar {
 
+	public Acceso() {
+		super();
+	}
+	
 	@Override
 	public boolean construccionFinalizada() {
 		return (this.tiempoDeConstruccion == 8);
@@ -18,6 +22,4 @@ public class Acceso extends ConstruccionMilitar {
 		
 	}
 
-	
-	
 }

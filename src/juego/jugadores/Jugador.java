@@ -112,7 +112,7 @@ public class Jugador {
 	public int limiteDePoblacion() {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Hospedable> almacenadores = mapa.getAlmacenadores();
+		Collection<Hospedable> almacenadores = mapa.getHospedables();
 		int limiteDePoblacion = 0;
 		
 		Iterator<Hospedable> it = almacenadores.iterator();

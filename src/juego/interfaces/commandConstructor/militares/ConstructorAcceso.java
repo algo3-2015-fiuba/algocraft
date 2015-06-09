@@ -27,7 +27,7 @@ public class ConstructorAcceso extends CommandConstructor {
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
 		
-		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 4);
+		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 4);
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		

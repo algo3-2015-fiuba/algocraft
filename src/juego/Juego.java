@@ -22,6 +22,15 @@ public class Juego {
 	private Collection<Jugador> listaDeJugadores;
 	private Mapa mapa;
 	
+	private Juego(){
+		
+		super();
+		this.listaDeJugadores = new ArrayList<Jugador>();
+		this.turnoDe = null;
+		this.mapa = null;
+		
+	}
+	
 	public static Juego getInstance() {
 		return instance;
 	}
@@ -29,12 +38,17 @@ public class Juego {
 	public void reiniciar() {
 		instance = new Juego();
 	}
-	
-	private Juego(){
 		
-		this.listaDeJugadores = new ArrayList<Jugador>();
-		this.turnoDe = null;
-		this.mapa = null;
+	public Mapa getMapa() { return this.mapa; }
+	
+	public Jugador turnoDe() { return this.turnoDe; }
+	
+	public void iniciarJuego(String ubicacionDelMapa) throws FaltanJugadores, IOException {
+		
+		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
+		
+		GeneradorMapa generadorMapa = new GeneradorMapa();
+		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa);
 		
 	}
 	
@@ -63,8 +77,6 @@ public class Juego {
 			
 	}
 
-	public Jugador turnoDe() { return this.turnoDe; }
-
 	public void finalizarTurno() {
 		
 		Iterator<Jugador> it = this.listaDeJugadores.iterator();
@@ -80,16 +92,5 @@ public class Juego {
 			}
 		}
 	}
-
-	public void iniciarJuego(String mapa) throws FaltanJugadores, IOException {
-		
-		//Podria pasarse como parametro la ubicacion del mapa en el cual se quiere jugar.
-		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
-		GeneradorMapa generadorMapa = new GeneradorMapa();
-		this.mapa = generadorMapa.obtenerMapa(mapa);
-		
-	}
-
-	public Mapa getMapa() { return this.mapa; }
 	
 }

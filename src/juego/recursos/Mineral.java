@@ -9,6 +9,6 @@ public class Mineral extends Recurso {
 	}
 	
 	@Override
-	public boolean esPosibleConstruir(CommandConstructor constructor) { return constructor.esPosibleExtraer(this); }
+	public boolean esPosibleConstruir(CommandConstructor constructor) { return constructor.puedeExtraer(this); }
 	
 }

@@ -27,7 +27,7 @@ public class ConstructorPilon extends CommandConstructor {
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
 		
-		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2);
+		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		

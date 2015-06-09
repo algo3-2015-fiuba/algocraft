@@ -54,9 +54,9 @@ public class Mapa {
 	
 	public void moverControlable(Controlable controlable, Coordenada coordFinal) 
 			throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven, PropietarioInvalido {
-		//Si se le indica al controlable que se mueve no importa si es volador o de tierra
-		//ya que el controlable sabe como debe moverse.
-		//Debe conocer su posicion o preguntarle al mapa su posicion actual.
+		// Si se le indica al controlable que se mueve no importa si es volador o de tierra
+		// ya que el controlable sabe como debe moverse.
+		// Debe conocer su posicion o preguntarle al mapa su posicion actual.
 		controlable.moverse(coordFinal);
 	}
 	
@@ -75,9 +75,9 @@ public class Mapa {
 		
 	}
 
-	public Collection<Hospedable> getAlmacenadores() {
+	public Collection<Hospedable> getHospedables() {
 		Jugador jugador = Juego.getInstance().turnoDe();
-		Collection<Hospedable> almacenadores = new ArrayList<Hospedable>();
+		Collection<Hospedable> hospedables = new ArrayList<Hospedable>();
 		
 		for (Celda celda : this.celdas.values()) { 
 			
@@ -87,14 +87,14 @@ public class Mapa {
 				if ((construccion.construccionFinalizada()) && (construccion.puedeAlmacenarUnidades()) 
 						&& (((Controlable)construccion)).esPropietario(jugador)) {
 					
-					if (!almacenadores.contains(construccion)) almacenadores.add((Hospedable)construccion);
+					if (!hospedables.contains(construccion)) hospedables.add((Hospedable)construccion);
 					
 				}
 			}
 			
 		}
 		
-		return almacenadores;
+		return hospedables;
 		
 	}
 
@@ -121,7 +121,7 @@ public class Mapa {
 	
 	}
 
-	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int cantidadDeCeldas) 
+	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
 			throws CoordenadaFueraDeRango, CeldaOcupada {
 			
 		Mapa mapa = Juego.getInstance().getMapa();
@@ -129,17 +129,14 @@ public class Mapa {
 			
 		int x = coordenadaDeterminante.getX();
 		int y = coordenadaDeterminante.getY();
-				
-		rangoDeCeldas.add(mapa.obtenerCelda(coordenadaDeterminante));
-		rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y)));
-		if (cantidadDeCeldas >= 4) {
-			rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y+1)));
-			rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y+1)));
-			if (cantidadDeCeldas == 6) {
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x, y+2)));
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+1, y+2)));
+		
+		for (int i = 0; i < (rangoY / rangoX); i++) {
+			for (int j = 0; j < rangoX; j++) {
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
+				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
 			}
 		}
+				
 		Iterator<Celda> it = rangoDeCeldas.iterator();
 		while (it.hasNext()) {
 			Celda celda = it.next();
