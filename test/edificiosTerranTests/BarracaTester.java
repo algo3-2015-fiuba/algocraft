@@ -79,7 +79,7 @@ public class BarracaTester {
 		// El metodo 'puedeConstruirMarine' verifica unicamente si hay una barraca activa,
 		// no tiene en cuenta el costo mineral de construir un marine
 		
-		for (int i = 0; i < 23; i++) {
+		for (int i = 0; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
@@ -175,7 +175,7 @@ public class BarracaTester {
 
 		jugadorActual.construir(new ConstructorBarraca(), coord);
 
-		for (int i = 0; i < 24; i++) {		
+		for (int i = 0; i < 12; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -201,7 +201,7 @@ public class BarracaTester {
 		
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 25; i++) {		
+		for (int i = 0; i < 11; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -228,7 +228,7 @@ public class BarracaTester {
 		
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < 11; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -258,7 +258,7 @@ public class BarracaTester {
 
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 23; i++) {		
+		for (int i = 0; i < 11; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}

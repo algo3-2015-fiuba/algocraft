@@ -45,7 +45,7 @@ public class Jugador {
 	private void recolectarRecursos() {
 
 		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Recolector> listaDeRecolectores = mapa.getRecolectores();
+		Collection<Recolector> listaDeRecolectores = mapa.getRecolectores(this);
 		
 		Iterator<Recolector> it = listaDeRecolectores.iterator();
 		while (it.hasNext()) {
@@ -73,10 +73,13 @@ public class Jugador {
 		this.constructores.removeAll(constructoresFinalizados);
 
 	}
-
-	public void finalizarTurno() {		
+	
+	public void actualizar() {
 		this.recolectarRecursos();
 		this.notificarConstructores();
+	}
+
+	public void finalizarTurno() {		
 		Juego.getInstance().finalizarTurno();		
 	}
 
@@ -112,7 +115,7 @@ public class Jugador {
 	public int limiteDePoblacion() {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Hospedable> almacenadores = mapa.getHospedables();
+		Collection<Hospedable> almacenadores = mapa.getHospedables(this);
 		int limiteDePoblacion = 0;
 		
 		Iterator<Hospedable> it = almacenadores.iterator();
@@ -125,7 +128,7 @@ public class Jugador {
 	}
 	
 	public int poblacionActual() {	
-		return Juego.getInstance().getMapa().getUnidades().size();
+		return Juego.getInstance().getMapa().getUnidades(this).size();
 	}
 	
 }

@@ -57,29 +57,34 @@ public class CentroDeMineralTester {
 		 */
 		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 3; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
+				System.out.println(jugadorActual.getMineralesRecolectados());
 				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
 		}
 		
-		jugadorActual.finalizarTurno();
+		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
-		//Pasaron 4 turnos del jugador Terran, por lo que la construccion del centro de mineral deberia haber finalizado
+		// Pasaron 4 turnos desde que el jugador Terran construyo el centro de mineral, 
+		// por lo que la construccion deberia haber finalizado
 		
 		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
-		jugadorActual.finalizarTurno();
+		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 170);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 200); //El jugador Protoss no modifica su cantidad de minerales
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe(); //Recolecto otros 10
+		
+		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el centro de mineral costa 50 minerales.
@@ -189,13 +194,10 @@ public class CentroDeMineralTester {
 
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 4; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		Celda celda = mapa.obtenerCelda(coord);
 		Controlable construccion = (Controlable)(celda.obtenerConstruible());
@@ -218,7 +220,7 @@ public class CentroDeMineralTester {
 		
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 5; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -245,7 +247,7 @@ public class CentroDeMineralTester {
 		
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 5; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -275,7 +277,7 @@ public class CentroDeMineralTester {
 
 		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 5; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}

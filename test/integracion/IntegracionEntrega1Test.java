@@ -50,9 +50,8 @@ public class IntegracionEntrega1Test {
 		Jugador jugadorProtoss = juego.turnoDe(); //Protoss		
 		
 		//paso turnos, mientras verifico que no recolecta		
-		for(int i = 0; i < 5; i++) {		
+		for(int i = 0; i < 3; i++) {		
 			jugadorProtoss.finalizarTurno();
-			
 			juego.turnoDe().finalizarTurno();
 		}
 		
@@ -70,18 +69,18 @@ public class IntegracionEntrega1Test {
 		//paso turnos hasta completar construccion		
 		for(int i = 0; i < 4; i++) {		
 			jugadorProtoss.finalizarTurno();
-			
-			juego.turnoDe().finalizarTurno();
-		}
-		
-		//verifico que empiezo a sumar pasando turnos.
-		for(int i = 0; i < 5; i++) {		
-			jugadorProtoss.finalizarTurno();
-			
 			juego.turnoDe().finalizarTurno();
 		}
 		
 		assertEquals(jugadorProtoss.getMineralesRecolectados(), 200);
+		
+		//verifico que empiezo a sumar pasando turnos.
+		for(int i = 0; i < 4; i++) {		
+			jugadorProtoss.finalizarTurno();
+			juego.turnoDe().finalizarTurno();
+		}
+		
+		assertEquals(jugadorProtoss.getMineralesRecolectados(), 280);
 	}
 	
 	@Test
@@ -110,20 +109,22 @@ public class IntegracionEntrega1Test {
 		assertEquals(jugadorProtoss.getMineralesRecolectados(), 100);
 		
 		//paso turnos hasta completar construccion		
-		for(int i = 0; i < 6; i++) {		
+		for(int i = 0; i < 3; i++) {		
 			jugadorProtoss.finalizarTurno();
 			
 			juego.turnoDe().finalizarTurno();
 		}
+		
+		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 10);
 		
 		//verifico que empiezo a sumar pasando turnos.
-		for(int i = 0; i < 5; i++) {		
+		for(int i = 0; i < 3; i++) {		
 			jugadorProtoss.finalizarTurno();
 			
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 50);
+		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 70);
 	}
 	
 	@Test
@@ -167,7 +168,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getMineralesRecolectados(), 200);
+		assertEquals(jugadorTerran.getMineralesRecolectados(), 290);
 	}
 	
 	@Test
@@ -198,20 +199,22 @@ public class IntegracionEntrega1Test {
 		assertEquals(jugadorTerran.getMineralesRecolectados(), 100);
 		
 		//paso turnos hasta completar construccion		
-		for(int i = 0; i < 6; i++) {		
+		for(int i = 0; i < 3; i++) {		
 			jugadorTerran.finalizarTurno();
 			
 			juego.turnoDe().finalizarTurno();
 		}
+		
+		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 0);
 		
 		//verifico que empiezo a sumar pasando turnos.
-		for(int i = 0; i < 5; i++) {		
+		for(int i = 0; i < 3; i++) {		
 			jugadorTerran.finalizarTurno();
 			
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 50);
+		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 60);
 	}
 
 }

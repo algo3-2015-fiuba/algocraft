@@ -32,28 +32,6 @@ public class Mapa {
 		this.celdas.put(coord, celda);
 	}	
 	
-	public Collection<Recolector> getRecolectores() {
-		
-		Jugador jugadorActual = Juego.getInstance().turnoDe();
-		Collection<Recolector> recolectores = new ArrayList<Recolector>();
-
-		for (Celda celda : this.celdas.values()) { 
-			
-			// Un recolector es el unico que puede ocupar una celda con recursos y
-			// ademas es el unico que ocupa una sola celda
-			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 				
-				Construible recolector = celda.obtenerConstruible();
-				
-				if ((((Controlable)recolector).esPropietario(jugadorActual)) && (recolector.construccionFinalizada()))	
-					recolectores.add((Recolector)recolector);
-			}
-			
-		}
-		
-		return recolectores;
-
-	}
-	
 	public void moverControlable(Controlable controlable, Coordenada coordFinal) 
 			throws CeldaOcupada, CoordenadaFueraDeRango, ConstruccionesNoSeMueven, PropietarioInvalido {
 		// Si se le indica al controlable que se mueve no importa si es volador o de tierra
@@ -102,9 +80,31 @@ public class Mapa {
 		return rangoDeCeldas;
 			
 	}
+	
+	public Collection<Recolector> getRecolectores(Jugador jugador) {
+		
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		Collection<Recolector> recolectores = new ArrayList<Recolector>();
 
-	public Collection<Hospedable> getHospedables() {
-		Jugador jugador = Juego.getInstance().turnoDe();
+		for (Celda celda : this.celdas.values()) { 
+			
+			// Un recolector es el unico que puede ocupar una celda con recursos y
+			// ademas es el unico que ocupa una sola celda
+			if ((celda.ocupadoEnTierra()) && (celda.poseeRecursos())) { 				
+				Construible recolector = celda.obtenerConstruible();
+				
+				if ((((Controlable)recolector).esPropietario(jugadorActual)) && (recolector.construccionFinalizada()))	
+					recolectores.add((Recolector)recolector);
+			}
+			
+		}
+		
+		return recolectores;
+
+	}
+
+	public Collection<Hospedable> getHospedables(Jugador jugador) {
+		
 		Collection<Hospedable> hospedables = new ArrayList<Hospedable>();
 		
 		for (Celda celda : this.celdas.values()) { 
@@ -126,9 +126,8 @@ public class Mapa {
 		
 	}
 
-	public Collection<Militable> getConstruccionesMilitares() {
+	public Collection<Militable> getConstruccionesMilitares(Jugador jugador) {
 	
-		Jugador jugador = Juego.getInstance().turnoDe();
 		Collection<Militable> militables = new ArrayList<Militable>();
 		
 		for (Celda celda : this.celdas.values()) { 
@@ -149,9 +148,8 @@ public class Mapa {
 	
 	}
 
-	public Collection<Unidad> getUnidades() {
+	public Collection<Unidad> getUnidades(Jugador jugador) {
 		
-		Jugador jugador = Juego.getInstance().turnoDe();
 		Collection<Unidad> unidades = new ArrayList<Unidad>();
 		
 		for (Celda celda : this.celdas.values()) {

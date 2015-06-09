@@ -64,7 +64,7 @@ public class NexoMineralTester {
 		 */
 		jugadorActual.construir(new ConstructorNexoMineral(), new Coordenada(0,0));
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 3; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -75,18 +75,22 @@ public class NexoMineralTester {
 		}
 		
 		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
-		//Pasaron 4 turnos del jugador Protoss, por lo que la construccion del nexo mineral deberia haber finalizado
+		// Pasaron 4 turnos desde que el jugador Protoss construyo la refineria,
+		// por lo que la construccion deberia haber finalizado
 		
 		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
 		
 		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 170);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 200); //El jugador Terran no modifica su cantidad de minerales
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe(); //Recolecto otros 10
+		
+		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el nexo mineral costa 50 minerales.
@@ -192,13 +196,10 @@ public class NexoMineralTester {
 
 		jugadorActual.construir(new ConstructorNexoMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 4; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		Celda celda = mapa.obtenerCelda(coord);
 		Controlable construccion = (Controlable)(celda.obtenerConstruible());
@@ -221,7 +222,7 @@ public class NexoMineralTester {
 		
 		jugadorActual.construir(new ConstructorNexoMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 5; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -248,7 +249,7 @@ public class NexoMineralTester {
 			
 		jugadorActual.construir(new ConstructorNexoMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 5; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -278,13 +279,10 @@ public class NexoMineralTester {
 
 		jugadorActual.construir(new ConstructorNexoMineral(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 4; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		Celda celda = mapa.obtenerCelda(coord);
 		Controlable construccion = (Controlable)(celda.obtenerConstruible());

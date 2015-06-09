@@ -79,7 +79,7 @@ public class AccesoTester {
 		// El metodo 'puedeConstruirMarine' verifica unicamente si hay un acceso activo,
 		// no tiene en cuenta el costo mineral de construir un zealot o un dragon
 		
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 7; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorProtoss")) {
@@ -175,7 +175,7 @@ public class AccesoTester {
 
 		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 16; i++) {		
+		for (int i = 0; i < 8; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -201,7 +201,7 @@ public class AccesoTester {
 		
 		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 17; i++) {		
+		for (int i = 0; i < 7; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -228,7 +228,7 @@ public class AccesoTester {
 		
 		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < 7; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -258,7 +258,7 @@ public class AccesoTester {
 
 		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 16; i++) {		
+		for (int i = 0; i < 8; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}

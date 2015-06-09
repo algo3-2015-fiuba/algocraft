@@ -73,7 +73,7 @@ public class DepositoSuministroTester {
 		//En el caso del mapa 'test', la coordenada (0,1) cumple este requisito.
 		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
 		
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 5; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
@@ -111,7 +111,7 @@ public class DepositoSuministroTester {
 			}
 		}
 		
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 5; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
@@ -151,13 +151,10 @@ public class DepositoSuministroTester {
 			}
 		}
 		
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 6; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		assertEquals(200, jugadorActual.limiteDePoblacion());
 		assertEquals(0, jugadorActual.poblacionActual());
@@ -270,7 +267,7 @@ public class DepositoSuministroTester {
 	
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 	
-		for (int i = 0; i < 12; i++) {		
+		for (int i = 0; i < 6; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -296,7 +293,7 @@ public class DepositoSuministroTester {
 	
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 	
-		for (int i = 0; i < 11; i++) {		
+		for (int i = 0; i < 7; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -323,7 +320,7 @@ public class DepositoSuministroTester {
 		
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 7; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -353,7 +350,7 @@ public class DepositoSuministroTester {
 
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 
-		for (int i = 0; i < 12; i++) {		
+		for (int i = 0; i < 6; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}

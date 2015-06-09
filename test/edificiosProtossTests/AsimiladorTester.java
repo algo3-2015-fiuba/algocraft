@@ -63,7 +63,7 @@ public class AsimiladorTester {
 		 */
 		jugadorActual.construir(new ConstructorAsimilador(), new Coordenada(1,0));
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 5; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -74,18 +74,20 @@ public class AsimiladorTester {
 		
 		}
 		
-		jugadorActual.finalizarTurno();
+		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
 		//Pasaron 6 turnos del jugador Protoss, por lo que la construccion de la refineria deberia haber finalizado
 		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorActual.finalizarTurno(); //Recolecto 10
+		jugadorActual = juego.turnoDe(); 
 		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 20);
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 0); //El jugador Terran no modifica su cantidad de minerales
+		
+		jugadorActual.finalizarTurno(); //Recolecto otros 10
+		jugadorActual = juego.turnoDe();		
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 30);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir la refineria costa 100 minerales.
@@ -191,7 +193,7 @@ public class AsimiladorTester {
 		
 		jugadorActual.construir(new ConstructorAsimilador(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 7; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -220,7 +222,7 @@ public class AsimiladorTester {
 		
 		jugadorActual.construir(new ConstructorAsimilador(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 7; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -247,7 +249,7 @@ public class AsimiladorTester {
 		
 		jugadorActual.construir(new ConstructorAsimilador(), coord);
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 7; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -277,13 +279,10 @@ public class AsimiladorTester {
 		
 		jugadorActual.construir(new ConstructorAsimilador(), coord);
 
-		for (int i = 0; i < 9; i++) {		
+		for (int i = 0; i < 6; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		Celda celda = mapa.obtenerCelda(coord);
 		Controlable construccion = (Controlable)(celda.obtenerConstruible());
