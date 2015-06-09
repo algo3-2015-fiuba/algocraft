@@ -39,7 +39,7 @@ public class ConstructorAsimilador extends CommandConstrucciones {
 		
 		Asimilador asimilador = new Asimilador(recurso);
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		mapa.obtenerCelda(coordenada).agregarControlable(asimilador);
 		this.enConstruccion = asimilador;
 	}

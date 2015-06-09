@@ -38,7 +38,7 @@ public class ConstructorBarraca extends CommandConstrucciones {
 		
 		Barraca barraca = new Barraca();
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
 			it.next().ocuparTierra(barraca);

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.interfaces.CommandEntrenadores;
 import juego.interfaces.Hospedable;
 import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.Recolector;
@@ -26,6 +27,7 @@ public class Jugador {
 	private Color color;
 	private int mineralesRecolectados, gasVespenoRecolectado;
 	private Collection<CommandConstrucciones> constructores;
+	private Collection<CommandEntrenadores> entrenadores;
 	
 	public Jugador(String nombre, Raza raza, Color color) {
 		
@@ -35,6 +37,7 @@ public class Jugador {
 		this.mineralesRecolectados = 200;
 		this.gasVespenoRecolectado = 0;
 		this.constructores = new ArrayList<CommandConstrucciones>();
+		this.entrenadores = new ArrayList<CommandEntrenadores>();
 	}
 	
 	public boolean esDeColor(Color color) { return (this.color.equals(color)); }
@@ -56,6 +59,21 @@ public class Jugador {
 		}
 		
 	}
+	private void notificarEntrenadores() {
+		
+		Collection<CommandEntrenadores> entrenamientosFinalizados = new ArrayList<CommandEntrenadores>();
+			
+		Iterator<CommandEntrenadores> it = this.entrenadores.iterator();
+			
+		while (it.hasNext()) {			
+			CommandEntrenadores entrenador = it.next();
+			entrenador.actualizarEntrenamiento();
+			if (entrenador.entrenamientoFinalizado()) entrenamientosFinalizados.add(entrenador);			
+		}
+			
+		this.constructores.removeAll(entrenamientosFinalizados);
+
+	}
 	
 	private void notificarConstructores() {
 			
@@ -76,6 +94,7 @@ public class Jugador {
 	public void actualizar() {
 		this.recolectarRecursos();
 		this.notificarConstructores();
+		this.notificarEntrenadores();
 	}
 
 	public void finalizarTurno() {		
@@ -91,8 +110,12 @@ public class Jugador {
 		
 	}
 	
-	public void agregarConstructor(CommandConstrucciones constructor) {
+	public void observar(CommandConstrucciones constructor) {
 		this.constructores.add(constructor);		
+	}
+	
+	public void observar(CommandEntrenadores entrenador) {
+		this.entrenadores.add(entrenador);		
 	}
 
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	

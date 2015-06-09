@@ -39,7 +39,7 @@ public class ConstructorNexoMineral extends CommandConstrucciones {
 		
 		NexoMineral nexoMineral = new NexoMineral(recurso);
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		mapa.obtenerCelda(coordenada).agregarControlable(nexoMineral);
 		this.enConstruccion = nexoMineral;
 		

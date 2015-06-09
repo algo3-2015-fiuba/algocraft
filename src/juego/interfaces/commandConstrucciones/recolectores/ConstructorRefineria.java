@@ -39,7 +39,7 @@ public class ConstructorRefineria extends CommandConstrucciones {
 		
 		Refineria refineria = new Refineria(recurso);
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		mapa.obtenerCelda(coordenada).agregarControlable(refineria);
 		this.enConstruccion = refineria;
 		

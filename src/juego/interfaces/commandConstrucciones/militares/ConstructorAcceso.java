@@ -38,7 +38,7 @@ public class ConstructorAcceso extends CommandConstrucciones {
 		
 		Acceso acceso = new Acceso();
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
 			it.next().ocuparTierra(acceso);

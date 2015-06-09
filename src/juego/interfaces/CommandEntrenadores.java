@@ -18,7 +18,7 @@ public abstract class CommandEntrenadores {
 		throw new ImposibleConstruir();
 	}
 	
-	public abstract void actualizarEntrenamiento() throws CoordenadaFueraDeRango;
+	public abstract void actualizarEntrenamiento();
 	
 	public boolean entrenamientoFinalizado() {
 		return (this.tiempoDeEntrenamiento == 0);

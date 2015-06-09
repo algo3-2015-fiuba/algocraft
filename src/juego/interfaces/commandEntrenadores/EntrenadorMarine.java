@@ -36,23 +36,26 @@ public class EntrenadorMarine extends CommandEntrenadores {
 		
 		barraca.agregarEntrenamiento(this);
 		
+		jugador.observar(this);		
 		this.enEntrenamiento = marine;
 		this.posicion = coordenada;
 	}
 	
-	public void actualizarEntrenamiento() throws CoordenadaFueraDeRango {
+	public void actualizarEntrenamiento() {
 		this.tiempoDeEntrenamiento--;
 		
 		if(this.entrenamientoFinalizado()) {
 			Juego juego = Juego.getInstance();
 			Mapa mapa = juego.getMapa();
 			
-			Celda celdaAOcupar = mapa.obtenerCelda(posicion);
-			
+			Celda celdaAOcupar;
 			try {
+				celdaAOcupar = mapa.obtenerCelda(posicion);
 				this.enEntrenamiento.ocuparCelda(celdaAOcupar);
 			} catch (CeldaOcupada e) {
 				this.tiempoDeEntrenamiento++;
+			} catch (CoordenadaFueraDeRango cfdr) {
+				cfdr.printStackTrace(); //Ya es verificado previamente en ejecutar()
 			}
 		}
 	}

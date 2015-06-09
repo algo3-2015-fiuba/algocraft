@@ -41,7 +41,7 @@ public class ConstructorArchivosTemplarios extends CommandConstrucciones {
 		
 		ArchivosTemplarios archivosTemplarios = new ArchivosTemplarios();
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
 			it.next().ocuparTierra(archivosTemplarios);

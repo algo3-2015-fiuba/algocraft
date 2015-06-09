@@ -40,7 +40,7 @@ public class ConstructorCentroDeMineral extends CommandConstrucciones {
 		
 		CentroDeMineral centroDeMineral = new CentroDeMineral(recurso);
 		
-		jugador.agregarConstructor(this);
+		jugador.observar(this);
 		mapa.obtenerCelda(coordenada).agregarControlable(centroDeMineral);
 		this.enConstruccion = centroDeMineral;
 		

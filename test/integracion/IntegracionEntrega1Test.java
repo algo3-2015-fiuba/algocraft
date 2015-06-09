@@ -263,7 +263,6 @@ public class IntegracionEntrega1Test {
 		
 		
 		for (int i = 0; i < 3; i++) {
-			barraca.notificarEntrenadores();
 			jugadorTerran.finalizarTurno();
 			juego.turnoDe().finalizarTurno();;		
 		}
