@@ -6,7 +6,7 @@ public class DepositoSuministro extends EdificioAlmacenador {
 
 	public DepositoSuministro() {
 		super();
-		this.capacidadDePoblacion = 5;
+		this.capacidadDeHabitantes = 5;
 	}
 	
 	@Override
@@ -22,11 +22,6 @@ public class DepositoSuministro extends EdificioAlmacenador {
 			this.tiempoDeConstruccion++;
 		} 
 		
-	}
-
-	@Override
-	public int cantidadUnidadesAlmacenables() {
-		return this.capacidadDePoblacion;
 	}
 	
 }

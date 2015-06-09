@@ -65,7 +65,7 @@ public class DepositoSuministroTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertEquals(0, jugadorActual.poblacionAlmacenable());
+				assertEquals(0, jugadorActual.limiteDePoblacion());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
 		}
@@ -73,7 +73,7 @@ public class DepositoSuministroTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 
-		assertEquals(5, jugadorActual.poblacionAlmacenable());
+		assertEquals(5, jugadorActual.limiteDePoblacion());
 		assertEquals(0, jugadorActual.poblacionActual());
 		
 	}

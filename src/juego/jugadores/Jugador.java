@@ -109,34 +109,24 @@ public class Jugador {
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
 	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
 
-	public int poblacionAlmacenable() {
+	public int limiteDePoblacion() {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Almacenable> listaDeAlmacenadores = mapa.getAlmacenadores();
-		int poblacionAlmacenable = 0;
+		Collection<Almacenable> almacenadores = mapa.getAlmacenadores();
+		int limiteDePoblacion = 0;
 		
-		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
+		Iterator<Almacenable> it = almacenadores.iterator();
 		while (it.hasNext()) {
-			poblacionAlmacenable += it.next().cantidadUnidadesAlmacenables();
+			limiteDePoblacion += it.next().capacidadDeHabitantes();
 		}
 		
-		return poblacionAlmacenable;
+		return limiteDePoblacion;
 		
 	}
 	
 	public int poblacionActual() {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Almacenable> listaDeAlmacenadores = mapa.getAlmacenadores();
-		int poblacionActual = 0;
-		
-		Iterator<Almacenable> it = listaDeAlmacenadores.iterator();
-		while (it.hasNext()) {
-			poblacionActual += it.next().cantidadUnidadesAlmacenadas();
-		}
-		
-		return poblacionActual;
-		
+		//Falta implementar
+		return 0;
 	}
 	
 }
