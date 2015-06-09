@@ -1,11 +1,11 @@
 package juego.razas.terran.construcciones;
 
-import juego.razas.construcciones.EdificioRecolector;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class CentroDeMineral extends EdificioRecolector {
+public class CentroDeMineral extends ConstruccionRecolectora {
 	
 	protected Mineral nodoMineral;
 	

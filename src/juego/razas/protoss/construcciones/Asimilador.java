@@ -1,11 +1,11 @@
 package juego.razas.protoss.construcciones;
 
-import juego.razas.construcciones.EdificioRecolector;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class Asimilador extends EdificioRecolector {
+public class Asimilador extends ConstruccionRecolectora {
 	
 	protected GasVespeno nodoGasVespeno;
 	

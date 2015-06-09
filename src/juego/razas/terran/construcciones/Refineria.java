@@ -1,11 +1,11 @@
 package juego.razas.terran.construcciones;
 
-import juego.razas.construcciones.EdificioRecolector;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class Refineria extends EdificioRecolector {
+public class Refineria extends ConstruccionRecolectora {
 	
 	protected GasVespeno nodoGasVespeno;
 	

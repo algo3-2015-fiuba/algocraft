@@ -1,8 +1,8 @@
 package juego.razas.terran.construcciones;
 
-import juego.razas.construcciones.EdificioAlmacenador;
+import juego.razas.construcciones.ConstruccionHabitable;
 
-public class DepositoSuministro extends EdificioAlmacenador {
+public class DepositoSuministro extends ConstruccionHabitable {
 
 	public DepositoSuministro() {
 		super();

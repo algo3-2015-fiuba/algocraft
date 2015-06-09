@@ -1,8 +1,8 @@
 package juego.razas.protoss.construcciones;
 
-import juego.razas.construcciones.EdificioAlmacenador;
+import juego.razas.construcciones.ConstruccionHabitable;
 
-public class Pilon extends EdificioAlmacenador {
+public class Pilon extends ConstruccionHabitable {
 
 	public Pilon() {
 		super();

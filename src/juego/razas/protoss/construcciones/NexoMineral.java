@@ -1,11 +1,11 @@
 package juego.razas.protoss.construcciones;
 
-import juego.razas.construcciones.EdificioRecolector;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import juego.recursos.excepciones.RecursoAgotado;
 
-public class NexoMineral extends EdificioRecolector {
+public class NexoMineral extends ConstruccionRecolectora {
 	
 	protected Mineral nodoMineral;
 	

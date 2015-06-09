@@ -11,14 +11,14 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.PropietarioInvalido;
 
-public abstract class EdificioAlmacenador implements Construible, Controlable, Almacenable {
+public abstract class ConstruccionHabitable implements Construible, Controlable, Almacenable {
 
 	protected Jugador propietario;
 	protected float vida;
 	protected Celda celdaOcupada;
 	protected int tiempoDeConstruccion, capacidadDeHabitantes;
 
-	public EdificioAlmacenador() {
+	public ConstruccionHabitable() {
 		super();
 		this.vida = 0;
 		this.propietario = Juego.getInstance().turnoDe();
