@@ -1,7 +1,7 @@
-package juego.interfaces.commandConstructor.recolectores;
+package juego.interfaces.commandConstrucciones.recolectores;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -10,19 +10,19 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Protoss;
-import juego.razas.protoss.construcciones.Asimilador;
-import juego.recursos.GasVespeno;
+import juego.razas.protoss.construcciones.NexoMineral;
+import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 
-public class ConstructorAsimilador extends CommandConstructor {
+public class ConstructorNexoMineral extends CommandConstrucciones {
 
 	private int costoMinerales;
 	
-	public ConstructorAsimilador() {
+	public ConstructorNexoMineral() {
 		super();
-		this.costoMinerales = 100;
+		this.costoMinerales = 50;
 	}
-
+	
 	@Override
 	public void ejecutar(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
@@ -37,14 +37,16 @@ public class ConstructorAsimilador extends CommandConstructor {
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		Asimilador asimilador = new Asimilador(recurso);
+		NexoMineral nexoMineral = new NexoMineral(recurso);
 		
 		jugador.agregarConstructor(this);
-		mapa.obtenerCelda(coordenada).agregarControlable(asimilador);
-		this.enConstruccion = asimilador;
+		mapa.obtenerCelda(coordenada).agregarControlable(nexoMineral);
+		this.enConstruccion = nexoMineral;
+		
 	}
 	
+	
 	@Override
-	public boolean puedeExtraer(GasVespeno recurso) { return true; }
+	public boolean puedeExtraer(Mineral recurso) { return true; }
 	
 }

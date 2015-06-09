@@ -1,10 +1,10 @@
-package juego.interfaces.commandConstructor.habitables;
+package juego.interfaces.commandConstrucciones.habitables;
 
 import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.jugadores.Jugador;
@@ -15,7 +15,7 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Terran;
 import juego.razas.terran.construcciones.DepositoSuministro;
 
-public class ConstructorDepositoSuministro extends CommandConstructor {
+public class ConstructorDepositoSuministro extends CommandConstrucciones {
 
 	private int costoMinerales;
 	

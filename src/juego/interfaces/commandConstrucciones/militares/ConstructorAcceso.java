@@ -1,10 +1,10 @@
-package juego.interfaces.commandConstructor.militares;
+package juego.interfaces.commandConstrucciones.militares;
 
 import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.jugadores.Jugador;
@@ -12,20 +12,20 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.Terran;
-import juego.razas.terran.construcciones.Barraca;
+import juego.razas.Protoss;
+import juego.razas.protoss.construcciones.Acceso;
 
-public class ConstructorBarraca extends CommandConstructor {
-	
+public class ConstructorAcceso extends CommandConstrucciones {
+
 	private int costoMinerales;
 	
-	public ConstructorBarraca() {
+	public ConstructorAcceso() {
 		super();
 		this.costoMinerales = 150;
 	}
 	
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void ejecutar(Protoss raza, Coordenada coordenada) 
 			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes {
 		
 		Juego juego = Juego.getInstance();
@@ -36,15 +36,15 @@ public class ConstructorBarraca extends CommandConstructor {
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		Barraca barraca = new Barraca();
+		Acceso acceso = new Acceso();
 		
 		jugador.agregarConstructor(this);
 		Iterator<Celda> it = celdas.iterator();
 		while (it.hasNext()) {
-			it.next().ocuparTierra(barraca);
+			it.next().ocuparTierra(acceso);
 		}
 		
-		this.enConstruccion = barraca;
+		this.enConstruccion = acceso;
 		
 	}
 	

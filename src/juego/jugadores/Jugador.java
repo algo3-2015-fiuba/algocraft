@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Hospedable;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -25,7 +25,7 @@ public class Jugador {
 	private Raza raza;
 	private Color color;
 	private int mineralesRecolectados, gasVespenoRecolectado;
-	private Collection<CommandConstructor> constructores;
+	private Collection<CommandConstrucciones> constructores;
 	
 	public Jugador(String nombre, Raza raza, Color color) {
 		
@@ -34,7 +34,7 @@ public class Jugador {
 		this.color = color;
 		this.mineralesRecolectados = 200;
 		this.gasVespenoRecolectado = 0;
-		this.constructores = new ArrayList<CommandConstructor>();
+		this.constructores = new ArrayList<CommandConstrucciones>();
 		
 	}
 	
@@ -60,12 +60,12 @@ public class Jugador {
 	
 	private void notificarConstructores() {
 			
-		Collection<CommandConstructor> constructoresFinalizados = new ArrayList<CommandConstructor>();
+		Collection<CommandConstrucciones> constructoresFinalizados = new ArrayList<CommandConstrucciones>();
 			
-		Iterator<CommandConstructor> it = this.constructores.iterator();
+		Iterator<CommandConstrucciones> it = this.constructores.iterator();
 			
 		while (it.hasNext()) {			
-			CommandConstructor constructor = it.next();
+			CommandConstrucciones constructor = it.next();
 			constructor.actualizarConstruccion();
 			if (constructor.construccionFinalizada()) constructoresFinalizados.add(constructor);			
 		}
@@ -80,7 +80,7 @@ public class Jugador {
 		Juego.getInstance().finalizarTurno();		
 	}
 
-	public void construir(CommandConstructor constructor, Coordenada coordenada) 
+	public void construir(CommandConstrucciones constructor, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
 		//Cuando queremos construir, buscamos a la raza a la cual pertenece el jugador
@@ -89,7 +89,7 @@ public class Jugador {
 		
 	}
 	
-	public void agregarConstructor(CommandConstructor constructor) {
+	public void agregarConstructor(CommandConstrucciones constructor) {
 		this.constructores.add(constructor);		
 	}
 

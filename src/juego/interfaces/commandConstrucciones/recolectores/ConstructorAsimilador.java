@@ -1,7 +1,7 @@
-package juego.interfaces.commandConstructor.recolectores;
+package juego.interfaces.commandConstrucciones.recolectores;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -9,22 +9,22 @@ import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.Terran;
-import juego.razas.terran.construcciones.Refineria;
+import juego.razas.Protoss;
+import juego.razas.protoss.construcciones.Asimilador;
 import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 
-public class ConstructorRefineria extends CommandConstructor {
+public class ConstructorAsimilador extends CommandConstrucciones {
 
 	private int costoMinerales;
 	
-	public ConstructorRefineria() {
+	public ConstructorAsimilador() {
 		super();
 		this.costoMinerales = 100;
 	}
-	
+
 	@Override
-	public void ejecutar(Terran raza, Coordenada coordenada) 
+	public void ejecutar(Protoss raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
@@ -37,12 +37,11 @@ public class ConstructorRefineria extends CommandConstructor {
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		Refineria refineria = new Refineria(recurso);
+		Asimilador asimilador = new Asimilador(recurso);
 		
 		jugador.agregarConstructor(this);
-		mapa.obtenerCelda(coordenada).agregarControlable(refineria);
-		this.enConstruccion = refineria;
-		
+		mapa.obtenerCelda(coordenada).agregarControlable(asimilador);
+		this.enConstruccion = asimilador;
 	}
 	
 	@Override

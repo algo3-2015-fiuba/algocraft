@@ -10,7 +10,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstructor.recolectores.ConstructorAsimilador;
+import juego.interfaces.commandConstrucciones.recolectores.ConstructorAsimilador;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;

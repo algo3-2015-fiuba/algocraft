@@ -1,6 +1,6 @@
 package juego.recursos;
 
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 
 public class GasVespeno extends Recurso {
 
@@ -9,5 +9,5 @@ public class GasVespeno extends Recurso {
 	}
 	
 	@Override
-	public boolean esPosibleConstruir(CommandConstructor constructor) { return constructor.puedeExtraer(this); }
+	public boolean esPosibleConstruir(CommandConstrucciones constructor) { return constructor.puedeExtraer(this); }
 }

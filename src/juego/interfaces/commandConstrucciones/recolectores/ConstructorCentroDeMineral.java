@@ -1,7 +1,7 @@
-package juego.interfaces.commandConstructor.recolectores;
+package juego.interfaces.commandConstrucciones.recolectores;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -15,7 +15,7 @@ import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 
 
-public class ConstructorCentroDeMineral extends CommandConstructor {
+public class ConstructorCentroDeMineral extends CommandConstrucciones {
 	
 	private int costoMinerales;
 	

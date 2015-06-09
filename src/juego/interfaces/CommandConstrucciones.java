@@ -12,7 +12,7 @@ import juego.razas.Terran;
 import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 
-public abstract class CommandConstructor {
+public abstract class CommandConstrucciones {
 	
 	protected Construible enConstruccion;
 	

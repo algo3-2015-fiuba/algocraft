@@ -1,7 +1,7 @@
-package juego.interfaces.commandConstructor.recolectores;
+package juego.interfaces.commandConstrucciones.recolectores;
 
 import juego.Juego;
-import juego.interfaces.CommandConstructor;
+import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -9,22 +9,22 @@ import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.Protoss;
-import juego.razas.protoss.construcciones.NexoMineral;
-import juego.recursos.Mineral;
+import juego.razas.Terran;
+import juego.razas.terran.construcciones.Refineria;
+import juego.recursos.GasVespeno;
 import juego.recursos.Recurso;
 
-public class ConstructorNexoMineral extends CommandConstructor {
+public class ConstructorRefineria extends CommandConstrucciones {
 
 	private int costoMinerales;
 	
-	public ConstructorNexoMineral() {
+	public ConstructorRefineria() {
 		super();
-		this.costoMinerales = 50;
+		this.costoMinerales = 100;
 	}
 	
 	@Override
-	public void ejecutar(Protoss raza, Coordenada coordenada) 
+	public void ejecutar(Terran raza, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida, CoordenadaFueraDeRango, CeldaOcupada {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
@@ -37,16 +37,15 @@ public class ConstructorNexoMineral extends CommandConstructor {
 		
 		jugador.consumirMinerales(this.costoMinerales);
 		
-		NexoMineral nexoMineral = new NexoMineral(recurso);
+		Refineria refineria = new Refineria(recurso);
 		
 		jugador.agregarConstructor(this);
-		mapa.obtenerCelda(coordenada).agregarControlable(nexoMineral);
-		this.enConstruccion = nexoMineral;
+		mapa.obtenerCelda(coordenada).agregarControlable(refineria);
+		this.enConstruccion = refineria;
 		
 	}
 	
-	
 	@Override
-	public boolean puedeExtraer(Mineral recurso) { return true; }
+	public boolean puedeExtraer(GasVespeno recurso) { return true; }
 	
 }
