@@ -21,7 +21,9 @@ import juego.razas.Protoss;
 import juego.razas.Terran;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class DepositoSuministroTester {
 
@@ -37,6 +39,9 @@ public class DepositoSuministroTester {
 		juego.iniciarJuego("mapas/test.map");
 		
 	}
+	
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
 	public void testCreacionCorrectaDeUnDepositoSuministro() 
@@ -78,6 +83,68 @@ public class DepositoSuministroTester {
 		
 	}
 	
+	@Test
+	public void testSiUnJugadorProtossTrataDeCrearUnDepositoSuministroErrorImposibleConstruir() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe(); //Jugador Protoss
+		
+		exception.expect(ImposibleConstruir.class);
+		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		
+	}
 	
+	@Test
+	public void testSiUnJugadorTrataDeCrearUnDepositoSuministroPeroNoTieneSuficientesRecursosErrorRecursosInsuficientes() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
 	
+		//Un Deposito Suministro costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
+		jugadorActual.consumirMinerales(110);
+		
+		exception.expect(RecursosInsuficientes.class);
+		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		
+	}
+	
+	@Test
+	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		
+		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
+		//si es negativa seguro no debe existir.
+		exception.expect(CoordenadaFueraDeRango.class);
+		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(-10,3));
+		
+	}
+	
+	@Test
+	public void testSiLaCeldaFuePreviamenteOcupadaNoSePuedeConstruir() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+		
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		
+		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+		
+		exception.expect(CeldaOcupada.class);
+		jugadorActual.construir(new ConstructorDepositoSuministro(), new Coordenada(0,1));
+	
+	}
 }
