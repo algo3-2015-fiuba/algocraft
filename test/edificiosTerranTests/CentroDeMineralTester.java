@@ -62,7 +62,6 @@ public class CentroDeMineralTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				System.out.println(jugadorActual.getMineralesRecolectados());
 				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
