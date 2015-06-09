@@ -9,6 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.commandConstrucciones.militares.ConstructorBarraca;
 import juego.interfaces.commandConstrucciones.recolectores.ConstructorAsimilador;
 import juego.interfaces.commandConstrucciones.recolectores.ConstructorCentroDeMineral;
 import juego.interfaces.commandConstrucciones.recolectores.ConstructorNexoMineral;
@@ -18,10 +19,15 @@ import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.mapa.excepciones.NoEstaOcupadoPorUnidad;
 import juego.razas.Protoss;
 import juego.razas.Terran;
+import juego.razas.terran.construcciones.Barraca;
+import juego.razas.terran.unidades.Marine;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -215,6 +221,57 @@ public class IntegracionEntrega1Test {
 		}
 		
 		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 60);
+	}
+	
+	@Test	
+	public void testBarracaIniciaEntrenamientoDeMarineYLoHaceAparecer() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, NoEstaOcupadoPorUnidad {
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		Mapa mapa = juego.getMapa();
+		
+		juego.turnoDe().finalizarTurno();
+		
+		Jugador jugadorTerran = juego.turnoDe();
+		
+		
+		/*
+		 * Creamos una barraca en (0,1), un lugar con tierra y cerca de los minerales.
+		 */
+		
+		Coordenada coordBarraca = new Coordenada(0,1);		
+		Coordenada coordMarine = new Coordenada(2,1);
+		jugadorTerran.construir(new ConstructorBarraca(), coordBarraca);
+
+		for (int i = 0; i < 12; i++) {		
+			jugadorTerran.finalizarTurno();
+			jugadorTerran = juego.turnoDe();		
+		}
+		
+		Celda celdaBarraca = mapa.obtenerCelda(coordBarraca);
+		Barraca barraca = (Barraca)(celdaBarraca.obtenerConstruible());
+		
+		/*
+		 * Una vez que tenemos la barraca, empezamos a entrenar a un marine
+		 */
+		
+		barraca.entrenarMarine(coordMarine);
+		
+		/*
+		 * Hacemos pasar 3 turnos
+		 */
+		
+		
+		for (int i = 0; i < 3; i++) {
+			barraca.notificarEntrenadores();
+			jugadorTerran.finalizarTurno();
+			juego.turnoDe().finalizarTurno();;		
+		}
+		
+		Celda celdaMarine = mapa.obtenerCelda(coordMarine);
+		Marine marine = (Marine)(celdaMarine.obtenerUnidadTerrestre());
+		
+		assertTrue(marine.esPropietario(jugadorTerran));
 	}
 
 }

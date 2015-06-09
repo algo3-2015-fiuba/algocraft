@@ -24,7 +24,6 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.mapa.excepciones.PropietarioInvalido;
 import juego.razas.Protoss;
 import juego.razas.Terran;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -270,7 +269,8 @@ public class BarracaTester {
 		
 		exception.expect(ConstruccionesNoSeMueven.class);
 		construccion.moverse(new Coordenada(0,1));
-		
 	}
+	
+	
 
 }

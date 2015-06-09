@@ -35,7 +35,6 @@ public class Jugador {
 		this.mineralesRecolectados = 200;
 		this.gasVespenoRecolectado = 0;
 		this.constructores = new ArrayList<CommandConstrucciones>();
-		
 	}
 	
 	public boolean esDeColor(Color color) { return (this.color.equals(color)); }
@@ -129,6 +128,26 @@ public class Jugador {
 	
 	public int poblacionActual() {	
 		return Juego.getInstance().getMapa().getUnidades(this).size();
+	}
+	
+	 @Override
+    public int hashCode() {
+        return this.nombre.hashCode() + this.color.hashCode();
+    }
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Jugador))
+            return false;
+        if (obj == this)
+            return true;
+        
+        Jugador j = (Jugador) obj;
+        if(j.esDeColor(this.color) && j.suNombreEs(this.nombre)) {
+        	return true;
+        } else {
+        	return false;
+        }
 	}
 	
 }

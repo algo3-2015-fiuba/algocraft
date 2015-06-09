@@ -66,7 +66,7 @@ public class Celda {
 	
 	public Controlable obtenerUnidadTerrestre() throws NoEstaOcupadoPorUnidad {
 		if (this.poseeUnidadTerrestre())
-			return this.unidadVoladora;
+			return this.unidadTerrestre;
 		else
 			throw new NoEstaOcupadoPorUnidad();
 	}

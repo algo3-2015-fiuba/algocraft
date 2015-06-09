@@ -10,6 +10,10 @@ public abstract class Unidad implements Controlable {
 	protected Jugador propietario;
 	protected float vida;
 	protected boolean esVolador;
+	
+	public Unidad(Jugador propietario) {
+		this.propietario = propietario;
+	}
 
 	@Override
 	public boolean esPropietario(Jugador jugador) {
