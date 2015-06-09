@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.Almacenable;
+import juego.interfaces.Hospedable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Militable;
@@ -75,9 +75,9 @@ public class Mapa {
 		
 	}
 
-	public Collection<Almacenable> getAlmacenadores() {
+	public Collection<Hospedable> getAlmacenadores() {
 		Jugador jugador = Juego.getInstance().turnoDe();
-		Collection<Almacenable> almacenadores = new ArrayList<Almacenable>();
+		Collection<Hospedable> almacenadores = new ArrayList<Hospedable>();
 		
 		for (Celda celda : this.celdas.values()) { 
 			
@@ -87,7 +87,7 @@ public class Mapa {
 				if ((construccion.construccionFinalizada()) && (construccion.puedeAlmacenarUnidades()) 
 						&& (((Controlable)construccion)).esPropietario(jugador)) {
 					
-					if (!almacenadores.contains(construccion)) almacenadores.add((Almacenable)construccion);
+					if (!almacenadores.contains(construccion)) almacenadores.add((Hospedable)construccion);
 					
 				}
 			}

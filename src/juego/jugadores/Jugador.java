@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.Almacenable;
+import juego.interfaces.Hospedable;
 import juego.interfaces.CommandConstructor;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
@@ -112,10 +112,10 @@ public class Jugador {
 	public int limiteDePoblacion() {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Almacenable> almacenadores = mapa.getAlmacenadores();
+		Collection<Hospedable> almacenadores = mapa.getAlmacenadores();
 		int limiteDePoblacion = 0;
 		
-		Iterator<Almacenable> it = almacenadores.iterator();
+		Iterator<Hospedable> it = almacenadores.iterator();
 		while (it.hasNext()) {
 			limiteDePoblacion += it.next().capacidadDeHabitantes();
 		}

@@ -1,7 +1,7 @@
 package juego.razas.construcciones;
 
 import juego.Juego;
-import juego.interfaces.Almacenable;
+import juego.interfaces.Hospedable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
@@ -11,7 +11,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.PropietarioInvalido;
 
-public abstract class ConstruccionHabitable implements Construible, Controlable, Almacenable {
+public abstract class ConstruccionHabitable implements Construible, Controlable, Hospedable {
 
 	protected Jugador propietario;
 	protected float vida;

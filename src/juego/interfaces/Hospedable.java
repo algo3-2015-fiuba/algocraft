@@ -1,6 +1,6 @@
 package juego.interfaces;
 
-public interface Almacenable {
+public interface Hospedable {
 
 	public int capacidadDeHabitantes();
 	
