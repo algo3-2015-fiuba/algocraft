@@ -51,12 +51,5 @@ public abstract class ConstruccionMilitar implements Construible, Controlable, M
 	public boolean puedeCrearUnidades() {
 		return true;
 	}
-	
-	// Los siguientes metodos por defecto se crean como falsos.
-	// Estos metodos deberian eliminarse en el futuro y ser reemplazados por excepciones
-	@Override
-	public boolean puedeCrearMarines() {
-		return false;
-	}
 		
 }

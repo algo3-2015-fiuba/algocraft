@@ -214,7 +214,7 @@ public class DepositoSuministroTester {
 	
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 	
-		for (int i = 0; i < 13; i++) {		
+		for (int i = 0; i < 11; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -241,7 +241,7 @@ public class DepositoSuministroTester {
 		
 		jugadorActual.construir(new ConstructorDepositoSuministro(), coord);
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 11; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();

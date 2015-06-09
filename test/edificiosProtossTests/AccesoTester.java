@@ -1,6 +1,7 @@
-package edificiosTerranTests;
+package edificiosProtossTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -10,8 +11,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstructor.militares.ConstructorBarraca;
-import juego.interfaces.commandConstructor.recolectores.ConstructorCentroDeMineral;
+import juego.interfaces.commandConstructor.militares.ConstructorAcceso;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -31,7 +31,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class BarracaTester {
+public class AccesoTester {
 
 	@Before 
 	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
@@ -39,8 +39,8 @@ public class BarracaTester {
 		Juego.getInstance().reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
+		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		juego.iniciarJuego("mapas/test.map");
 		
@@ -50,7 +50,7 @@ public class BarracaTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testCreacionDeBarracaSatisfactoria() 
+	public void testCreacionDeAccesoSatisfactoria() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -60,7 +60,7 @@ public class BarracaTester {
 		Mapa mapa = juego.getMapa();
 		Coordenada coord = new Coordenada(0,1);
 		
-		/* El rango de celdas de una barraca debe ser de cuatro
+		/* El rango de celdas de un acceso protoss debe ser de cuatro
 		 * teniendo como coordenada determinante a la ingresada.
 		 * Si la misma es, por ejemplo, (0,0) el deposito ocupara las celdas
 		 * (0,0), (1,0), (0,1), y (1,1). 
@@ -74,15 +74,15 @@ public class BarracaTester {
 		 */
 		
 		//En el mapa 'test' la coordenada (0,1) es una coordenada valida para crear la barraca
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));
 		
-		// El metodo 'puedeConstruirMarine' verifica unicamente si hay una barraca activa,
-		// no tiene en cuenta el costo mineral de construir un marine
+		// El metodo 'puedeConstruirMarine' verifica unicamente si hay un acceso activo,
+		// no tiene en cuenta el costo mineral de construir un zealot o un dragon
 		
-		for (int i = 0; i < 23; i++) {
+		for (int i = 0; i < 15; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
-			if (jugadorActual.suNombreEs("jugadorTerran")) {
+			if (jugadorActual.suNombreEs("jugadorProtoss")) {
 				assertFalse(mapa.obtenerCelda(coord).obtenerConstruible().construccionFinalizada());
 			}
 		}
@@ -95,7 +95,7 @@ public class BarracaTester {
 	}
 	
 	@Test
-	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
+	public void testSiJugadorProtossNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -103,11 +103,11 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//La barraca vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
+		//El acceso vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
 		jugadorActual.consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));
 		
 	}
 	
@@ -123,7 +123,7 @@ public class BarracaTester {
 		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
 		//si es negativa seguro no debe existir.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(-10,3));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(-10,3));
 		
 	}
 	
@@ -135,15 +135,15 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));
 		
 		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));
 		
 	}
 	
 	@Test
-	public void testSiUnProtossIntentaConstruirUnaBarracaErrorImposibleConstruir() 
+	public void testSiUnTerranIntentaConstruirUnAccesoErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -151,18 +151,18 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		if (!jugadorActual.suNombreEs("jugadorProtoss")) { 
+		if (!jugadorActual.suNombreEs("jugadorTerran")) { 
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
 		exception.expect(ImposibleConstruir.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));
 		
 	}
 	
 	@Test
-	public void testSiUnJugadorEsPropietarioDeUnaBarracaEsUnRecolectorAliado() 
+	public void testSiUnJugadorEsPropietarioDeUnAccesoEsUnRecolectorAliado() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -173,9 +173,9 @@ public class BarracaTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.construir(new ConstructorBarraca(), coord);
+		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 24; i++) {		
+		for (int i = 0; i < 16; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -188,7 +188,7 @@ public class BarracaTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorNoEsPropietarioDeUnaBarracaEsUnRecolectorEnemigo() 
+	public void testSiUnJugadorNoEsPropietarioDeUnAccesoEsUnRecolectorEnemigo() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -196,12 +196,12 @@ public class BarracaTester {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 25; i++) {		
+		for (int i = 0; i < 17; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
@@ -214,7 +214,7 @@ public class BarracaTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorProtossTrataDeMoverUnaBarracaTerranErrorPropietarioInvalido() 
+	public void testSiUnJugadorTerranTrataDeMoverUnAccesoProtossErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -223,12 +223,12 @@ public class BarracaTester {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < 17; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
@@ -244,7 +244,7 @@ public class BarracaTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorTerranTrataDeMoverUnaBarracaErrorConstruccionesNoSeMueven() 
+	public void testSiUnJugadorProtossTrataDeMoverUnAccesoErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -253,25 +253,23 @@ public class BarracaTester {
 		
 		Juego juego = Juego.getInstance();
 		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
+		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
+		jugadorActual.construir(new ConstructorAcceso(), coord);
 
-		for (int i = 0; i < 23; i++) {		
+		for (int i = 0; i < 16; i++) {		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();		
 		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
 		
 		Celda celda = mapa.obtenerCelda(coord);
 		Controlable construccion = (Controlable)(celda.obtenerConstruible());
 		
 		exception.expect(ConstruccionesNoSeMueven.class);
-		construccion.moverse(new Coordenada(0,1));
+		construccion.moverse(new Coordenada(0,4));
 		
 	}
 
+	
 }
