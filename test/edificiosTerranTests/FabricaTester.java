@@ -1,6 +1,7 @@
 package edificiosTerranTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.Controlable;
-import juego.interfaces.commandConstrucciones.militares.ConstructorBarraca;
+import juego.interfaces.commandConstrucciones.militares.ConstructorFabrica;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
@@ -30,7 +31,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class BarracaTester {
+public class FabricaTester {
 
 	@Before 
 	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
@@ -49,7 +50,7 @@ public class BarracaTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testCreacionDeBarracaSatisfactoria() 
+	public void testCreacionDeFabricaSatisfactoria() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
 			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
 		
@@ -59,21 +60,26 @@ public class BarracaTester {
 		Mapa mapa = juego.getMapa();
 		Coordenada coord = new Coordenada(0,1);
 		
-		/* El rango de celdas de una barraca debe ser de cuatro
+		/* El rango de celdas de una fabrica debe ser de seis
 		 * teniendo como coordenada determinante a la ingresada.
 		 * Si la misma es, por ejemplo, (0,0) el deposito ocupara las celdas
 		 * (0,0), (1,0), (0,1), y (1,1). 
 		 * (0,0) = D
-		 * (1,0), (0,1), (1,1) = X
+		 * (1,0), (0,1), (1,1), (0,2), (1,2)  = X
 		 * Grafico:
 		 * - - - - - -
+		 * - - X X - -
 		 * - - X X - - 	
 		 * - - D X - - 
 		 * - - - - - -
 		 */
 		
+		// Necesita 100 para construir la fabrica, este metodo no se debe usar,
+		// sirve para los test y para los recolectores.
+		jugadorActual.recolectarGasVespeno(100);
+		
 		//En el mapa 'test' la coordenada (0,1) es una coordenada valida para crear la barraca
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(0,1));
 		
 		// El metodo 'puedeConstruirMarine' verifica unicamente si hay una barraca activa,
 		// no tiene en cuenta el costo mineral de construir un marine
@@ -102,11 +108,10 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//La barraca vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		//La fabrica vale 200 minerales y 100 de gas vespeno, si no recolecto gas vespeno no podra construir.
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(0,1));
 		
 	}
 	
@@ -122,7 +127,7 @@ public class BarracaTester {
 		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
 		//si es negativa seguro no debe existir.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(-10,3));
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(-10,3));
 		
 	}
 	
@@ -134,10 +139,11 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.recolectarGasVespeno(100);
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(0,1));
 		
 		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(0,1));
 		
 	}
 	
@@ -156,7 +162,7 @@ public class BarracaTester {
 		}
 		
 		exception.expect(ImposibleConstruir.class);
-		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));
+		jugadorActual.construir(new ConstructorFabrica(), new Coordenada(0,1));
 		
 	}
 	
@@ -171,8 +177,9 @@ public class BarracaTester {
 		Mapa mapa = juego.getMapa();
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
-
-		jugadorActual.construir(new ConstructorBarraca(), coord);
+		
+		jugadorActual.recolectarGasVespeno(100);
+		jugadorActual.construir(new ConstructorFabrica(), coord);
 
 		for (int i = 0; i < 12; i++) {		
 			jugadorActual.finalizarTurno();
@@ -198,7 +205,8 @@ public class BarracaTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorBarraca(), coord);
+		jugadorActual.recolectarGasVespeno(100);
+		jugadorActual.construir(new ConstructorFabrica(), coord);
 
 		for (int i = 0; i < 11; i++) {		
 			jugadorActual.finalizarTurno();
@@ -213,7 +221,7 @@ public class BarracaTester {
 	}
 	
 	@Test
-	public void testSiUnJugadorProtossTrataDeMoverUnaBarracaTerranErrorPropietarioInvalido() 
+	public void testSiUnJugadorProtossTrataDeMoverUnaFabricaTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
 			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
@@ -225,7 +233,8 @@ public class BarracaTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorBarraca(), coord);
+		jugadorActual.recolectarGasVespeno(100);
+		jugadorActual.construir(new ConstructorFabrica(), coord);
 
 		for (int i = 0; i < 11; i++) {
 		
@@ -255,7 +264,8 @@ public class BarracaTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.construir(new ConstructorBarraca(), coord);
+		jugadorActual.recolectarGasVespeno(100);
+		jugadorActual.construir(new ConstructorFabrica(), coord);
 
 		for (int i = 0; i < 11; i++) {		
 			jugadorActual.finalizarTurno();
@@ -272,5 +282,5 @@ public class BarracaTester {
 		construccion.moverse(new Coordenada(0,1));
 		
 	}
-
+	
 }
