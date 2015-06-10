@@ -136,5 +136,37 @@ public class ataqueTest {
 		
 		assertFalse(marine2.estaMuerto());
 	}
+	
+	@Test
+	public void testUnMarineQueMuereDesapareceDeSuCelda() throws CeldaOcupada, CoordenadaFueraDeRango, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, YaFueDestruido {
+		this.reiniciarJuego();
+		
+		Juego juego = Juego.getInstance();
+		Mapa mapa = juego.getMapa();
+		
+		Jugador jugadorTerran = juego.turnoDe();
+		
+		Coordenada coordMarine1 = new Coordenada(2,1);
+		Coordenada coordMarine2 = new Coordenada(3,1);
+		
+		Celda celdaMarine1 = mapa.obtenerCelda(coordMarine1);
+		Marine marine1 = new Marine(jugadorTerran);
+		marine1.ocuparCelda(celdaMarine1);
+		
+		Celda celdaMarine2 = mapa.obtenerCelda(coordMarine2);
+		Marine marine2 = new Marine(jugadorTerran);
+		marine2.ocuparCelda(celdaMarine2);
+		
+		/*
+		 * Un marine tiene 40 de vida y ataca 6 a otros marines.
+		 * 
+		 */
+		
+		for(int i = 0; i < 7; i++) {
+			marine1.atacar(marine2);
+		}
+		
+		assertFalse(celdaMarine2.ocupadoEnTierra());
+	}
 
 }

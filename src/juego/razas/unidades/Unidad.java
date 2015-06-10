@@ -81,6 +81,11 @@ public abstract class Unidad implements Controlable, Atacable, Atacante {
 	}
 	
 	private void morir() {
+		if(this.esVolador) {
+			this.celdaOcupada.removerUnidadEnAire();
+		} else {
+			this.celdaOcupada.removerUnidadEnTierra();
+		}
 	}
 	
 	public void atacar(Atacable destino) throws YaFueDestruido {
