@@ -15,6 +15,10 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -51,7 +55,8 @@ public class AsimiladorTester {
 	@Test
 	public void testJugadorProtossCreaAsimiladorEnNodoDeGasVespenoSatisfactoriamente() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
-			ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso, RequierePuertoEstelar, 
+			RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -100,7 +105,8 @@ public class AsimiladorTester {
 	@Test
 	public void testSiJugadorProtossNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -117,7 +123,8 @@ public class AsimiladorTester {
 	@Test
 	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -132,7 +139,8 @@ public class AsimiladorTester {
 	
 	@Test
 	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -147,7 +155,8 @@ public class AsimiladorTester {
 	
 	@Test
 	public void testSiLaCoordenadaIndicadaNoPoseeGasVespenoErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -163,7 +172,8 @@ public class AsimiladorTester {
 	@Test
 	public void testSiUnProtossIntentaConstruirUnAsimiladorErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -182,7 +192,8 @@ public class AsimiladorTester {
 	@Test
 	public void testSiUnJugadorEsPropietarioDeUnAsimiladorEsUnRecolectorAliado() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -211,7 +222,8 @@ public class AsimiladorTester {
 	@Test
 	public void testSiUnJugadorNoEsPropietarioDeUnAsimiladorEsUnRecolectorEnemigo() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -238,7 +250,8 @@ public class AsimiladorTester {
 	public void testSiUnJugadorProtossTrataDeMoverUnAsimiladorTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, 
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -268,7 +281,8 @@ public class AsimiladorTester {
 	public void testSiUnJugadorTerranTrataDeMoverUnAsimiladorErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		

@@ -17,6 +17,10 @@ import juego.interfaces.commandConstrucciones.recolectores.ConstructorRefineria;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -48,7 +52,11 @@ public class IntegracionEntrega1Test {
 	}
 
 	@Test
-	public void testRecoleccionDeMineralesParaJugadorProtoss() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testRecoleccionDeMineralesParaJugadorProtoss() 
+			throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, RequiereAcceso, RequierePuertoEstelar,
+			RequiereBarraca, RequiereFabrica {
+		
 		//primero tengo que incializar un mapa
 		
 		this.reiniciarJuego();
@@ -90,7 +98,11 @@ public class IntegracionEntrega1Test {
 	}
 	
 	@Test
-	public void testRecoleccionDeGasParaJugadorProtoss() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testRecoleccionDeGasParaJugadorProtoss() 
+			throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, 
+			CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, 
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+		
 		//primero tengo que incializar un mapa
 		
 		this.reiniciarJuego();
@@ -134,7 +146,10 @@ public class IntegracionEntrega1Test {
 	}
 	
 	@Test
-	public void testRecoleccionDeMineralesParaJugadorTerran() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testRecoleccionDeMineralesParaJugadorTerran() 
+			throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir,
+			CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		//primero tengo que incializar un mapa
 		
 		this.reiniciarJuego();
@@ -178,7 +193,10 @@ public class IntegracionEntrega1Test {
 	}
 	
 	@Test
-	public void testRecoleccionDeGasParaJugadorTerran() throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testRecoleccionDeGasParaJugadorTerran() 
+			throws IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, 
+			CoordenadaFueraDeRango, CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		//primero tengo que incializar un mapa
 		
 		this.reiniciarJuego();
@@ -224,7 +242,10 @@ public class IntegracionEntrega1Test {
 	}
 	
 	@Test	
-	public void testBarracaIniciaEntrenamientoDeMarineYLoHaceAparecer() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, NoEstaOcupadoPorUnidad {
+	public void testBarracaIniciaEntrenamientoDeMarineYLoHaceAparecer() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, NoEstaOcupadoPorUnidad,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		this.reiniciarJuego();
 		
 		Juego juego = Juego.getInstance();

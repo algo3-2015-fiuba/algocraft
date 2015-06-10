@@ -5,6 +5,8 @@ import juego.interfaces.Construible;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.mapa.Coordenada;
@@ -14,8 +16,11 @@ public class Protoss extends Raza {
 	
 	@Override
 	public void construir(CommandConstrucciones construccion, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada{
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, RequiereAcceso, RequierePuertoEstelar {
+		
 		construccion.iniciarConstruccion(this, coordenada);
+		
 	}
 	
 	public Construible obtenerPuertoEstelar() {

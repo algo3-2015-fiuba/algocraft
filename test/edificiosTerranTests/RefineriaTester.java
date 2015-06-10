@@ -15,6 +15,10 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -51,7 +55,8 @@ public class RefineriaTester {
 	@Test
 	public void testJugadorTerranCreaRefineriaEnNodoDeGasVespenoSatisfactoriamente() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
-			ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso, RequierePuertoEstelar,
+			RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -102,7 +107,8 @@ public class RefineriaTester {
 	@Test
 	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -119,7 +125,8 @@ public class RefineriaTester {
 	@Test
 	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -134,7 +141,8 @@ public class RefineriaTester {
 	
 	@Test
 	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -149,7 +157,8 @@ public class RefineriaTester {
 	
 	@Test
 	public void testSiLaCoordenadaIndicadaNoPoseeGasVespenoErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -165,7 +174,8 @@ public class RefineriaTester {
 	@Test
 	public void testSiUnProtossIntentaConstruirUnaRefineriaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -184,7 +194,8 @@ public class RefineriaTester {
 	@Test
 	public void testSiUnJugadorEsPropietarioDeUnaRefineriaEsUnRecolectorAliado() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -210,7 +221,8 @@ public class RefineriaTester {
 	@Test
 	public void testSiUnJugadorNoEsPropietarioDeUnaRefineriaEsUnRecolectorEnemigo() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -237,7 +249,8 @@ public class RefineriaTester {
 	public void testSiUnJugadorProtossTrataDeMoverUnaRefineriaTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, 
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -267,7 +280,8 @@ public class RefineriaTester {
 	public void testSiUnJugadorTerranTrataDeMoverUnaRefineriaErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, RequierePuertoEstelar, 
+			RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		

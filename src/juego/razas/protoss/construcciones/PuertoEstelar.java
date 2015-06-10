@@ -4,9 +4,15 @@ import juego.razas.construcciones.ConstruccionMilitar;
 
 public class PuertoEstelar extends ConstruccionMilitar {
 	
+	private static int cantidadDePuertosEstelares = 0;
+	
 	public PuertoEstelar() {
 		super();
 	}
+	
+	public static int getCantidadDePuertosEstelares() { return cantidadDePuertosEstelares; }
+	
+	public static void reiniciar() { cantidadDePuertosEstelares = 0; }
 	
 	@Override
 	public boolean construccionFinalizada() {
@@ -18,6 +24,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 		if (!this.construccionFinalizada()) {
 			this.vida += 60;
 			this.tiempoDeConstruccion++;
+			if (this.construccionFinalizada()) cantidadDePuertosEstelares++;
 		}
 		
 	}

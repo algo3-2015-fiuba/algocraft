@@ -15,6 +15,10 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -51,7 +55,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testCreacionCorrectaDeUnDepositoSuministro() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, 
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -93,7 +98,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiCreoMasDe40DepositosDeSuministroElLimiteDePoblacionSigueSiendo200() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -102,7 +108,7 @@ public class DepositoSuministroTester {
 		int y = 20;
 		
 		//Este metodo no debe utilizarse y lo usan los recolectores, pero para probar el test es util.
-		jugadorActual.recolectarMinerarles(1000000);
+		jugadorActual.recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -131,7 +137,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiDestruyenUnDepositoDeSuministroPeroElJugadorTieneMasDe40SuLimiteDePoblacionSigueSiendo200() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -142,7 +149,7 @@ public class DepositoSuministroTester {
 		
 		// Este metodo no debe utilizarse y lo usan los recolectores para que el jugador recolecte los minerales que ya recogieron,
 		// pero para probar el test es util.
-		jugadorActual.recolectarMinerarles(1000000);
+		jugadorActual.recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -177,7 +184,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiUnJugadorTerranNoPuedeCrearUnDepositoSuministroSiHayRecursosEncimaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -191,7 +199,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiUnJugadorProtossTrataDeCrearUnDepositoSuministroErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -207,7 +216,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiUnJugadorTrataDeCrearUnDepositoSuministroPeroNoTieneSuficientesRecursosErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -224,7 +234,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -240,7 +251,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiLaCeldaFuePreviamenteOcupadaNoSePuedeConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -256,7 +268,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiUnJugadorEsPropietarioDelDepositoSuministroEsAliado() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 	
@@ -282,7 +295,8 @@ public class DepositoSuministroTester {
 	@Test
 	public void testSiUnJugadorNoEsPropietarioDelDepositoSuministroEsEnemigo() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 	
@@ -309,7 +323,8 @@ public class DepositoSuministroTester {
 	public void testSiUnJugadorProtossTrataDeMoverUnDepositoSuministroTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, RequierePuertoEstelar,
+			RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -339,7 +354,8 @@ public class DepositoSuministroTester {
 	public void testSiUnJugadorTerranTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, RequierePuertoEstelar,
+			RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		

@@ -13,6 +13,10 @@ import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
@@ -102,7 +106,8 @@ public class Jugador {
 	}
 
 	public void construir(CommandConstrucciones constructor, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		//Cuando queremos construir, buscamos a la raza a la cual pertenece el jugador
 		//y de esta manera verificamos si esta construccion esta disponible para la misma.
@@ -128,7 +133,7 @@ public class Jugador {
 		this.gasVespenoRecolectado -= costoGas;
 	}
 
-	public void recolectarMinerarles(int cantidad) { this.mineralesRecolectados += cantidad; }
+	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
 	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
 
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}

@@ -17,6 +17,10 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -53,7 +57,8 @@ public class PilonTester {
 	@Test
 	public void testCreacionCorrectaDeUnPilon() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, 
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -95,7 +100,8 @@ public class PilonTester {
 	@Test
 	public void testSiCreoMasDe40DPilonesElLimiteDePoblacionSigueSiendo200() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -104,7 +110,7 @@ public class PilonTester {
 		int y = 20;
 		
 		//Este metodo no debe utilizarse y lo usan los recolectores, pero para probar el test es util.
-		jugadorActual.recolectarMinerarles(1000000);
+		jugadorActual.recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -133,7 +139,8 @@ public class PilonTester {
 	@Test
 	public void testSiDestruyenUnPilonPeroElJugadorTieneMasDe40SuLimiteDePoblacionSigueSiendo200() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -144,7 +151,7 @@ public class PilonTester {
 		
 		// Este metodo no debe utilizarse y lo usan los recolectores para que el jugador recolecte los minerales que ya recogieron,
 		// pero para probar el test es util.
-		jugadorActual.recolectarMinerarles(1000000);
+		jugadorActual.recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -179,7 +186,8 @@ public class PilonTester {
 	@Test
 	public void testSiUnJugadorTerranNoPuedeCrearUnPilonSiHayRecursosEncimaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -193,7 +201,8 @@ public class PilonTester {
 	@Test
 	public void testSiUnJugadorTerranTrataDeCrearUnDepositoSuministroErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -209,7 +218,8 @@ public class PilonTester {
 	@Test
 	public void testSiUnJugadorTrataDeCrearUnPilonPeroNoTieneSuficientesRecursosErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -226,7 +236,8 @@ public class PilonTester {
 	@Test
 	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -242,7 +253,8 @@ public class PilonTester {
 	@Test
 	public void testSiLaCeldaFuePreviamenteOcupadaNoSePuedeConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -258,7 +270,8 @@ public class PilonTester {
 	@Test
 	public void testSiUnJugadorEsPropietarioDelDepositoSuministroEsAliado() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso, 
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 	
@@ -284,7 +297,8 @@ public class PilonTester {
 	@Test
 	public void testSiUnJugadorNoEsPropietarioDelDepositoSuministroEsEnemigo() 
 			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+			CeldaOcupada, ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 	
@@ -311,7 +325,8 @@ public class PilonTester {
 	public void testSiUnJugadorTerranTrataDeMoverUnPilonProtossErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, 
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -341,7 +356,8 @@ public class PilonTester {
 	public void testSiUnJugadorProtossTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, 
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		

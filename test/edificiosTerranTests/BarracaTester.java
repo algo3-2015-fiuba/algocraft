@@ -15,6 +15,10 @@ import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
@@ -24,6 +28,7 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.mapa.excepciones.PropietarioInvalido;
 import juego.razas.Protoss;
 import juego.razas.Terran;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -50,7 +55,8 @@ public class BarracaTester {
 	@Test
 	public void testCreacionDeBarracaSatisfactoria() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes,
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -95,7 +101,8 @@ public class BarracaTester {
 	@Test
 	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -112,7 +119,8 @@ public class BarracaTester {
 	@Test
 	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -127,7 +135,8 @@ public class BarracaTester {
 	
 	@Test
 	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -143,7 +152,8 @@ public class BarracaTester {
 	@Test
 	public void testSiUnProtossIntentaConstruirUnaBarracaErrorImposibleConstruir() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
@@ -162,7 +172,8 @@ public class BarracaTester {
 	@Test
 	public void testSiUnJugadorEsPropietarioDeUnaBarracaEsUnRecolectorAliado() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
+			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -188,7 +199,8 @@ public class BarracaTester {
 	@Test
 	public void testSiUnJugadorNoEsPropietarioDeUnaBarracaEsUnRecolectorEnemigo() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -215,7 +227,8 @@ public class BarracaTester {
 	public void testSiUnJugadorProtossTrataDeMoverUnaBarracaTerranErrorPropietarioInvalido() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -245,7 +258,8 @@ public class BarracaTester {
 	public void testSiUnJugadorTerranTrataDeMoverUnaBarracaErrorConstruccionesNoSeMueven() 
 			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
 			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido {
+			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso,
+			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		this.reiniciarJuego();
 		
@@ -271,6 +285,4 @@ public class BarracaTester {
 		construccion.moverse(new Coordenada(0,1));
 	}
 	
-	
-
 }

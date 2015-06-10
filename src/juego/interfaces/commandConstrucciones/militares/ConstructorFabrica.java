@@ -7,12 +7,14 @@ import juego.Juego;
 import juego.interfaces.CommandConstrucciones;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereBarraca;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.Terran;
+import juego.razas.terran.construcciones.Barraca;
 import juego.razas.terran.construcciones.Fabrica;
 
 public class ConstructorFabrica extends CommandConstrucciones {
@@ -29,11 +31,13 @@ public class ConstructorFabrica extends CommandConstrucciones {
 	
 	@Override
 	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
-			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes {
+			throws CoordenadaFueraDeRango, CeldaOcupada, RecursosInsuficientes, RequiereBarraca {
 		
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		Mapa mapa = juego.getMapa();
+		
+		if (Barraca.getCantidadDeBarracas() == 0) throw new RequiereBarraca();
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 6);
 		

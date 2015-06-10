@@ -3,6 +3,10 @@ package juego.interfaces;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -17,7 +21,8 @@ public abstract class CommandConstrucciones {
 	protected Construible enConstruccion;
 	
 	public void iniciarConstruccion(Raza raza, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
+			CeldaOcupada, RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
 		
 		raza.construir(this, coordenada);
 		
@@ -28,14 +33,16 @@ public abstract class CommandConstrucciones {
 	 */
 
 	public void iniciarConstruccion(Terran raza, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, 
+			CoordenadaFueraDeRango, CeldaOcupada, RequiereBarraca, RequiereFabrica {
 		
 		throw new ImposibleConstruir();
 		
 	}
 	
 	public void iniciarConstruccion(Protoss raza, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada {
+			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir,
+			CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso, RequierePuertoEstelar {
 		
 		throw new ImposibleConstruir();
 		

@@ -27,7 +27,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 
 		if (!this.nodoMineral.estaAgotado()) {
 			int extraidos = this.nodoMineral.extraer();
-			this.propietario.recolectarMinerarles(extraidos);		
+			this.propietario.recolectarMinerales(extraidos);		
 		}
 	}
 	
