@@ -36,7 +36,7 @@ public class ConstructorCentroDeMineral extends CommandConstrucciones {
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		CentroDeMineral centroDeMineral = new CentroDeMineral(recurso);
 		

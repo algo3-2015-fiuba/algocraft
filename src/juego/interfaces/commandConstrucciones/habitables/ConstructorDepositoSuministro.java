@@ -34,7 +34,7 @@ public class ConstructorDepositoSuministro extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		DepositoSuministro depositoSuministro = new DepositoSuministro();
 		

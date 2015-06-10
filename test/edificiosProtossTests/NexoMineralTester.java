@@ -74,7 +74,7 @@ public class NexoMineralTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorProtoss")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
+				assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -85,17 +85,17 @@ public class NexoMineralTester {
 		// Pasaron 4 turnos desde que el jugador Protoss construyo la refineria,
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
+		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 160);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 200); //El jugador Terran no modifica su cantidad de minerales
+		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 200); //El jugador Terran no modifica su cantidad de minerales
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto otros 10
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
+		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 180);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir el nexo mineral costa 50 minerales.
@@ -116,7 +116,7 @@ public class NexoMineralTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//El nexo de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.recursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorNexoMineral(), new Coordenada(0,0));

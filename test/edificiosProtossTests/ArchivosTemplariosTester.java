@@ -87,8 +87,8 @@ public class ArchivosTemplariosTester {
 		
 		// Necesita 200 de gas vespeno para construir la fabrica, este metodo no se debe usar,
 		// sirve para los test y para los recolectores.
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -139,8 +139,8 @@ public class ArchivosTemplariosTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		exception.expect(RequierePuertoEstelar.class);
 		jugadorActual.construir(new ConstructorArchivosTemplarios(), new Coordenada(0,1));
@@ -157,8 +157,8 @@ public class ArchivosTemplariosTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(150);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(150);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -191,8 +191,8 @@ public class ArchivosTemplariosTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(150);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(150);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -224,8 +224,8 @@ public class ArchivosTemplariosTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -261,8 +261,8 @@ public class ArchivosTemplariosTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -305,8 +305,8 @@ public class ArchivosTemplariosTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -350,8 +350,8 @@ public class ArchivosTemplariosTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		
@@ -398,8 +398,8 @@ public class ArchivosTemplariosTester {
 		Coordenada coord = new Coordenada(0,1);
 		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recursos().recolectarGasVespeno(1000);
+		jugadorActual.recursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,20));
 		

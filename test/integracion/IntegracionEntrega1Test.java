@@ -69,7 +69,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getMineralesRecolectados(), 200);
+		assertEquals(jugadorProtoss.recursos().getMineralesRecolectados(), 200);
 		
 		/* El nexo mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
@@ -78,7 +78,7 @@ public class IntegracionEntrega1Test {
 		jugadorProtoss.construir(new ConstructorNexoMineral(), new Coordenada(0,0));
 		
 		//Verifico que consuma recursos 
-		assertEquals(jugadorProtoss.getMineralesRecolectados(), 150);
+		assertEquals(jugadorProtoss.recursos().getMineralesRecolectados(), 150);
 		
 		//paso turnos hasta completar construccion		
 		for(int i = 0; i < 4; i++) {		
@@ -86,7 +86,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getMineralesRecolectados(), 200);
+		assertEquals(jugadorProtoss.recursos().getMineralesRecolectados(), 200);
 		
 		//verifico que empiezo a sumar pasando turnos.
 		for(int i = 0; i < 4; i++) {		
@@ -94,7 +94,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getMineralesRecolectados(), 280);
+		assertEquals(jugadorProtoss.recursos().getMineralesRecolectados(), 280);
 	}
 	
 	@Test
@@ -116,7 +116,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 0);
+		assertEquals(jugadorProtoss.recursos().getGasVespenoRecolectado(), 0);
 		
 		/* 
 		 * En la coordenada (1,0) del mapa 'test' existe un nodo de gas, por lo que es correcto crearlo en esta ubicacion.
@@ -124,7 +124,7 @@ public class IntegracionEntrega1Test {
 		jugadorProtoss.construir(new ConstructorAsimilador(), new Coordenada(1,0));
 		
 		//Verifico que consuma recursos 
-		assertEquals(jugadorProtoss.getMineralesRecolectados(), 100);
+		assertEquals(jugadorProtoss.recursos().getMineralesRecolectados(), 100);
 		
 		//paso turnos hasta completar construccion		
 		for(int i = 0; i < 3; i++) {		
@@ -133,7 +133,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 10);
+		assertEquals(jugadorProtoss.recursos().getGasVespenoRecolectado(), 10);
 		
 		//verifico que empiezo a sumar pasando turnos.
 		for(int i = 0; i < 3; i++) {		
@@ -142,7 +142,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorProtoss.getGasVespenoRecolectado(), 70);
+		assertEquals(jugadorProtoss.recursos().getGasVespenoRecolectado(), 70);
 	}
 	
 	@Test
@@ -164,7 +164,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getMineralesRecolectados(), 200);
+		assertEquals(jugadorTerran.recursos().getMineralesRecolectados(), 200);
 		
 		/* El nexo mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
@@ -173,7 +173,7 @@ public class IntegracionEntrega1Test {
 		jugadorTerran.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
 		
 		//Verifico que consuma recursos 
-		assertEquals(jugadorTerran.getMineralesRecolectados(), 150);
+		assertEquals(jugadorTerran.recursos().getMineralesRecolectados(), 150);
 		
 		//paso turnos hasta completar construccion		
 		for(int i = 0; i < 4; i++) {		
@@ -189,7 +189,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getMineralesRecolectados(), 290);
+		assertEquals(jugadorTerran.recursos().getMineralesRecolectados(), 290);
 	}
 	
 	@Test
@@ -211,7 +211,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 0);
+		assertEquals(jugadorTerran.recursos().getGasVespenoRecolectado(), 0);
 		
 		/* El nexo mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
 		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
@@ -220,7 +220,7 @@ public class IntegracionEntrega1Test {
 		jugadorTerran.construir(new ConstructorRefineria(), new Coordenada(1,0));
 		
 		//Verifico que consuma recursos 
-		assertEquals(jugadorTerran.getMineralesRecolectados(), 100);
+		assertEquals(jugadorTerran.recursos().getMineralesRecolectados(), 100);
 		
 		//paso turnos hasta completar construccion		
 		for(int i = 0; i < 3; i++) {		
@@ -229,7 +229,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 0);
+		assertEquals(jugadorTerran.recursos().getGasVespenoRecolectado(), 0);
 		
 		//verifico que empiezo a sumar pasando turnos.
 		for(int i = 0; i < 3; i++) {		
@@ -238,7 +238,7 @@ public class IntegracionEntrega1Test {
 			juego.turnoDe().finalizarTurno();
 		}
 		
-		assertEquals(jugadorTerran.getGasVespenoRecolectado(), 60);
+		assertEquals(jugadorTerran.recursos().getGasVespenoRecolectado(), 60);
 	}
 	
 	@Test	

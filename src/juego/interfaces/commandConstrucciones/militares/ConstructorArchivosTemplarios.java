@@ -40,8 +40,8 @@ public class ConstructorArchivosTemplarios extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 6);
 		
-		jugador.consumirMinerales(this.costoMinerales);
-		jugador.consumirGasVespeno(this.costoGasVespeno);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirGasVespeno(this.costoGasVespeno);
 		
 		ArchivosTemplarios archivosTemplarios = new ArchivosTemplarios();
 		

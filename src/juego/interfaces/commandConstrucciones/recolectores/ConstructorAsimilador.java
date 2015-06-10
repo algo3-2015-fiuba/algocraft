@@ -35,7 +35,7 @@ public class ConstructorAsimilador extends CommandConstrucciones {
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		Asimilador asimilador = new Asimilador(recurso);
 		

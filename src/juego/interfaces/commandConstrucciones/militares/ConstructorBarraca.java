@@ -34,7 +34,7 @@ public class ConstructorBarraca extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 4);
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		Barraca barraca = new Barraca();
 		

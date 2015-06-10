@@ -35,7 +35,7 @@ public class ConstructorRefineria extends CommandConstrucciones {
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		Refineria refineria = new Refineria(recurso);
 		

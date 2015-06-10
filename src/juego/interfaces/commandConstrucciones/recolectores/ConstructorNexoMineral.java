@@ -35,7 +35,7 @@ public class ConstructorNexoMineral extends CommandConstrucciones {
 		
 		if (!recurso.esPosibleConstruir(this)) throw new UbicacionInvalida();
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		NexoMineral nexoMineral = new NexoMineral(recurso);
 		

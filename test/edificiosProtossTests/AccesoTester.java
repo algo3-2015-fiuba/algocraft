@@ -110,7 +110,7 @@ public class AccesoTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//El acceso vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		jugadorActual.recursos().consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorAcceso(), new Coordenada(0,1));

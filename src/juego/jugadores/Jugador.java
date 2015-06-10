@@ -29,7 +29,7 @@ public class Jugador {
 	private String nombre;
 	private Raza raza;
 	private Color color;
-	private int mineralesRecolectados, gasVespenoRecolectado;
+	private RecursosJugador estructuraRecursos = new RecursosJugador();
 	private Collection<CommandConstrucciones> constructores;
 	private Collection<CommandEntrenadores> entrenadores;
 	
@@ -38,10 +38,14 @@ public class Jugador {
 		this.nombre = nombre;
 		this.raza = raza;
 		this.color = color;
-		this.mineralesRecolectados = 200;
-		this.gasVespenoRecolectado = 0;
+		this.estructuraRecursos.mineralesRecolectados = 200;
+		this.estructuraRecursos.gasVespenoRecolectado = 0;
 		this.constructores = new ArrayList<CommandConstrucciones>();
 		this.entrenadores = new ArrayList<CommandEntrenadores>();
+	}
+	
+	public RecursosJugador recursos() {
+		return this.estructuraRecursos;
 	}
 	
 	public boolean esDeColor(Color color) { return (this.color.equals(color)); }
@@ -123,21 +127,6 @@ public class Jugador {
 		this.entrenadores.add(entrenador);		
 	}
 
-	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
-		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();		
-		this.mineralesRecolectados -= costoMinerales;
-	}
-	
-	public void consumirGasVespeno(int costoGas) throws RecursosInsuficientes {	
-		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
-		this.gasVespenoRecolectado -= costoGas;
-	}
-
-	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
-	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
-
-	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
-	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
 
 	public int limiteDePoblacion() {
 		

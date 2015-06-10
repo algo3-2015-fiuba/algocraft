@@ -26,7 +26,7 @@ public class Asimilador extends ConstruccionRecolectora {
 	public void recolectar() throws RecursoAgotado {
 
 		if (!this.nodoGasVespeno.estaAgotado()) {
-			this.propietario.recolectarGasVespeno(this.nodoGasVespeno.extraer());		
+			this.propietario.recursos().recolectarGasVespeno(this.nodoGasVespeno.extraer());		
 		}
 	}
 	

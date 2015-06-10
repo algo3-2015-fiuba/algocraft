@@ -42,8 +42,8 @@ public class ConstructorPuertoEstelar extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 6);
 		
-		jugador.consumirMinerales(this.costoMinerales);
-		jugador.consumirGasVespeno(costoGasVespeno);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirGasVespeno(costoGasVespeno);
 		
 		Construible puertoEstelar = raza.obtenerPuertoEstelar();
 		
@@ -70,8 +70,8 @@ public class ConstructorPuertoEstelar extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 6);
 		
-		jugador.consumirMinerales(this.costoMinerales);
-		jugador.consumirGasVespeno(costoGasVespeno);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirGasVespeno(costoGasVespeno);
 		
 		Construible puertoEstelar = raza.obtenerPuertoEstelar();
 		

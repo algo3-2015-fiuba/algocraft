@@ -73,8 +73,8 @@ public class RefineriaTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 100);
-				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
+				assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 100);
+				assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 0);
 			}
 		
 		}
@@ -84,17 +84,17 @@ public class RefineriaTester {
 		
 		// Pasaron 6 turnos desde que el jugadorTerran creo la refineria,
 		// por lo que la construccion deberia haber finalizado
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 10);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 0); //El jugador Protoss no modifica su cantidad de minerales
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 0); //El jugador Protoss no modifica su cantidad de minerales
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto otros 10
 		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 30);
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 30);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir la refineria costa 100 minerales.
@@ -115,7 +115,7 @@ public class RefineriaTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//La refineria vale 100 minerales, si gasto 160 de los 200 iniciales le quedan 40 gasVespeno.
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.recursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorRefineria(), new Coordenada(1,0));

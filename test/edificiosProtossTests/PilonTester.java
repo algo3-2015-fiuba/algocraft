@@ -110,7 +110,7 @@ public class PilonTester {
 		int y = 20;
 		
 		//Este metodo no debe utilizarse y lo usan los recolectores, pero para probar el test es util.
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorActual.recursos().recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -151,7 +151,7 @@ public class PilonTester {
 		
 		// Este metodo no debe utilizarse y lo usan los recolectores para que el jugador recolecte los minerales que ya recogieron,
 		// pero para probar el test es util.
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorActual.recursos().recolectarMinerales(1000000);
 		
 		//En el caso del mapa 'test', a partir de la coordenada (0,20) se cumple este requisito.
 		for(int i = 0; i < 4; i++) {
@@ -226,7 +226,7 @@ public class PilonTester {
 		Jugador jugadorActual = juego.turnoDe();
 	
 		//Un pilon costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
-		jugadorActual.consumirMinerales(110);
+		jugadorActual.recursos().consumirMinerales(110);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorPilon(), new Coordenada(0,1));

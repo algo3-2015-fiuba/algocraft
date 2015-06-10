@@ -27,7 +27,7 @@ public class Refineria extends ConstruccionRecolectora {
 
 		if (!this.nodoGasVespeno.estaAgotado()) {
 			int extraidos = this.nodoGasVespeno.extraer();
-			this.propietario.recolectarGasVespeno(extraidos);		
+			this.propietario.recursos().recolectarGasVespeno(extraidos);		
 		}
 	}
 	

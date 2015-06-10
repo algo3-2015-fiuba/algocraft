@@ -30,7 +30,7 @@ public class EntrenadorMarine extends CommandEntrenadores {
 		Juego juego = Juego.getInstance();
 		Jugador jugador = juego.turnoDe();
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		Marine marine = new Marine(jugador);
 		

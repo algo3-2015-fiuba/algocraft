@@ -109,7 +109,7 @@ public class BarracaTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//La barraca vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		jugadorActual.recursos().consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorBarraca(), new Coordenada(0,1));

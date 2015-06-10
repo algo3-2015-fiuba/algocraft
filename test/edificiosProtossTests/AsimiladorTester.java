@@ -73,8 +73,8 @@ public class AsimiladorTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.suNombreEs("jugadorProtoss")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 100);
-				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
+				assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 100);
+				assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 0);
 			}
 		
 		}
@@ -83,16 +83,16 @@ public class AsimiladorTester {
 		jugadorActual = juego.turnoDe();
 		
 		//Pasaron 6 turnos del jugador Protoss, por lo que la construccion de la refineria deberia haber finalizado
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 10);
 		
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe(); 
 		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 0); //El jugador Terran no modifica su cantidad de minerales
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 0); //El jugador Terran no modifica su cantidad de minerales
 		
 		jugadorActual.finalizarTurno(); //Recolecto otros 10
 		jugadorActual = juego.turnoDe();		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 30);
+		assertTrue(jugadorActual.recursos().getGasVespenoRecolectado() == 30);
 		
 		/* El jugador inicia el juego con 200 de mineral
 		 * construir la refineria costa 100 minerales.
@@ -113,7 +113,7 @@ public class AsimiladorTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//El Asimilador vale 100 minerales, si gasto 160 de los 200 iniciales le quedan 40 gasVespeno.
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.recursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ConstructorAsimilador(), new Coordenada(1,0));

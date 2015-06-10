@@ -34,7 +34,7 @@ public class ConstructorAcceso extends CommandConstrucciones {
 		
 		Collection<Celda> celdas = mapa.obtenerRangoDeCeldas(coordenada, 2, 4);
 		
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.recursos().consumirMinerales(this.costoMinerales);
 		
 		Acceso acceso = new Acceso();
 		
