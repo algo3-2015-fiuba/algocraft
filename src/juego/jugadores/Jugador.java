@@ -171,11 +171,7 @@ public class Jugador {
             return true;
         
         Jugador j = (Jugador) obj;
-        if(j.esDeColor(this.color) && j.suNombreEs(this.nombre)) {
-        	return true;
-        } else {
-        	return false;
-        }
+        return ((j.esDeColor(this.color)) && (j.suNombreEs(this.nombre)));
 	}
 	
 }
