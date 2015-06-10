@@ -3,15 +3,18 @@ package juego.razas.unidades;
 import juego.Juego;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.interfaces.Atacable;
+import juego.interfaces.Atacante;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
+import juego.interfaces.excepciones.YaFueDestruido;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.mapa.excepciones.PropietarioInvalido;
 
-public abstract class Unidad implements Controlable {
+public abstract class Unidad implements Controlable, Atacable, Atacante {
 	
 	protected Jugador propietario;
 	protected float vida;
@@ -19,6 +22,9 @@ public abstract class Unidad implements Controlable {
 	protected int suministro;
 	protected Celda celdaOcupada;
 	protected int transporte;
+	protected int vision;
+	protected int ataqueTerrestre;
+	protected int ataqueAereo;
 	
 	public Unidad(Jugador propietario) {
 		this.propietario = propietario;
@@ -27,6 +33,14 @@ public abstract class Unidad implements Controlable {
 	@Override
 	public boolean esPropietario(Jugador jugador) {
 		return (this.propietario.equals(jugador));
+	}
+	
+	public float vidaRestante() {
+		return this.vida;
+	}
+	
+	public boolean estaMuerto() {
+		return this.vida <= 0.0;
 	}
 
 	@Override
@@ -63,6 +77,37 @@ public abstract class Unidad implements Controlable {
 			this.celdaOcupada = destino;
 		} else {
 			throw new CoordenadaFueraDeRango();
+		}
+	}
+	
+	private void morir() {
+	}
+	
+	public void atacar(Atacable destino) throws YaFueDestruido {
+		destino.recibirAtaqueAereo(this.ataqueTerrestre);
+		destino.recibirAtaqueTerrestre(this.ataqueTerrestre);
+	}
+	
+	private void recibirAtaque(int cantidad) {
+		
+		this.vida -= (float) cantidad;
+		
+		if(this.vida <= 0) {
+			this.morir();
+		}
+	}
+	
+	@Override
+	public void recibirAtaqueTerrestre(int cantidad) {
+		if(!this.esVolador) {
+			this.recibirAtaque(cantidad);
+		}
+	}
+	
+	@Override
+	public void recibirAtaqueAereo(int cantidad) {
+		if(this.esVolador) {
+			this.recibirAtaque(cantidad);
 		}
 	}
 

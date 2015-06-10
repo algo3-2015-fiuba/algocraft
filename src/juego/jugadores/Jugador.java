@@ -99,7 +99,6 @@ public class Jugador {
 		}
 			
 		this.constructores.removeAll(constructoresFinalizados);
-
 	}
 	
 	public void actualizarObservadores() {

@@ -4,6 +4,7 @@ import juego.interfaces.excepciones.YaFueDestruido;
 
 public interface Atacable {
 
-	public void atacadoPor(Atacable atacante) throws YaFueDestruido;
+	public void recibirAtaqueTerrestre(int cantidad) throws YaFueDestruido;
+	public void recibirAtaqueAereo(int cantidad) throws YaFueDestruido;
 	
 }

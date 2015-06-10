@@ -7,10 +7,13 @@ public class Marine extends Unidad {
 
 	public Marine(Jugador propietario) {
 		super(propietario);
-		this.vida = 40;
+		this.transporte = 3;
 		this.esVolador = false;
+		this.vision = 7;
+		this.ataqueAereo = 6;
+		this.ataqueTerrestre = 6;
 		this.suministro = 1;
-		this.transporte = 1;
+		this.vida = 40;
 	}
 
 }
