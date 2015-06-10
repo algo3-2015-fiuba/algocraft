@@ -50,7 +50,7 @@ public class EntrenadorMarine extends CommandEntrenadores {
 			
 			Celda celdaAOcupar;
 			try {
-				celdaAOcupar = mapa.obtenerCelda(posicion);
+				celdaAOcupar = mapa.obtenerCelda(this.posicion);
 				this.enEntrenamiento.ocuparCelda(celdaAOcupar);
 			} catch (CeldaOcupada e) {
 				this.tiempoDeEntrenamiento++;

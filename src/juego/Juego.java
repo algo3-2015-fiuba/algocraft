@@ -95,7 +95,7 @@ public class Juego {
 		it = this.listaDeJugadores.iterator();
 		
 		while (it.hasNext()) {
-			it.next().actualizar();
+			it.next().actualizarObservadores();
 		}
 		
 	}

@@ -16,13 +16,15 @@ public class Celda {
 	private Construible construible;
 	private Material material;
 	private Recurso recurso;
+	private Coordenada posicion;
 	
-	public Celda(Material material, Recurso recurso) {
+	public Celda(Material material, Recurso recurso, Coordenada posicion) {
 		this.material = material;
 		this.recurso = recurso;
 		this.unidadVoladora = null;
 		this.unidadTerrestre = null;
 		this.construible = null;
+		this.posicion = posicion;
 	}
 
 	public void agregarControlable(Controlable controlable) throws CeldaOcupada, CoordenadaFueraDeRango {
@@ -55,6 +57,10 @@ public class Celda {
 	
 	public Material obtenerMaterial() {
 		return this.material;
+	}
+	
+	public Coordenada obtenerPosicion() {
+		return this.posicion;
 	}
 	
 	public Unidad obtenerUnidadVoladora() throws NoEstaOcupadoPorUnidad {

@@ -3,8 +3,8 @@ package juego.jugadores;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 
 public class RecursosJugador {
-	public int mineralesRecolectados;
-	public int gasVespenoRecolectado;
+	private int mineralesRecolectados;
+	private int gasVespenoRecolectado;
 
 	public RecursosJugador() {
 		this.mineralesRecolectados = 200;
@@ -23,6 +23,7 @@ public class RecursosJugador {
 
 	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
 	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
+	
 
 	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
 	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}

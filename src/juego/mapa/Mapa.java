@@ -52,13 +52,23 @@ public class Mapa {
 		} else {
 			throw new CoordenadaFueraDeRango();
 		}
+	}
+	
+	public int distanciaEntreCeldas(Celda celdaInicial, Celda celdaFinal) {
 		
+		Coordenada posicionIncial = celdaInicial.obtenerPosicion();
+		Coordenada posicionFinal = celdaFinal.obtenerPosicion();
+		
+		int distanciaX = Math.abs(posicionIncial.getX() - posicionFinal.getX());
+		int distanciaY = Math.abs(posicionIncial.getY() - posicionFinal.getY());
+		
+		return distanciaX + distanciaY;
 	}
 	
 	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
 			throws CoordenadaFueraDeRango, CeldaOcupada {
 			
-		Mapa mapa = Juego.getInstance().getMapa();
+		
 		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
 			
 		int x = coordenadaDeterminante.getX();
@@ -66,8 +76,8 @@ public class Mapa {
 		
 		for (int i = 0; i < (rangoY / rangoX); i++) {
 			for (int j = 0; j < rangoX; j++) {
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
-				rangoDeCeldas.add(mapa.obtenerCelda(new Coordenada(x+j, y+i)));
+				rangoDeCeldas.add(this.obtenerCelda(new Coordenada(x+j, y+i)));
+				rangoDeCeldas.add(this.obtenerCelda(new Coordenada(x+j, y+i)));
 			}
 		}
 				

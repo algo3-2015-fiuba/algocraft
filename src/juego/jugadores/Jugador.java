@@ -32,20 +32,23 @@ public class Jugador {
 	private RecursosJugador estructuraRecursos = new RecursosJugador();
 	private Collection<CommandConstrucciones> constructores;
 	private Collection<CommandEntrenadores> entrenadores;
+	private ControlablesJugador estructuraControlables = new ControlablesJugador();
 	
 	public Jugador(String nombre, Raza raza, Color color) {
 		
 		this.nombre = nombre;
 		this.raza = raza;
 		this.color = color;
-		this.estructuraRecursos.mineralesRecolectados = 200;
-		this.estructuraRecursos.gasVespenoRecolectado = 0;
 		this.constructores = new ArrayList<CommandConstrucciones>();
 		this.entrenadores = new ArrayList<CommandEntrenadores>();
 	}
 	
 	public RecursosJugador recursos() {
 		return this.estructuraRecursos;
+	}
+	
+	public ControlablesJugador controlables() {
+		return this.estructuraControlables;
 	}
 	
 	public boolean esDeColor(Color color) { return (this.color.equals(color)); }
@@ -99,7 +102,7 @@ public class Jugador {
 
 	}
 	
-	public void actualizar() {
+	public void actualizarObservadores() {
 		this.recolectarRecursos();
 		this.notificarConstructores();
 		this.notificarEntrenadores();
@@ -116,7 +119,6 @@ public class Jugador {
 		//Cuando queremos construir, buscamos a la raza a la cual pertenece el jugador
 		//y de esta manera verificamos si esta construccion esta disponible para la misma.
 		this.raza.construir(constructor, coordenada);
-		
 	}
 	
 	public void observar(CommandConstrucciones constructor) {

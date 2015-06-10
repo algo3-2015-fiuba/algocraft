@@ -73,7 +73,7 @@ public class GeneradorMapa {
             	Coordenada coord = new Coordenada(x, y);
             	Material material = this.deducirMaterial(ch);
             	Recurso recurso = this.deducirRecurso(ch);
-            	Celda celda = new Celda(material, recurso);  	
+            	Celda celda = new Celda(material, recurso, coord);  	
             	mapa.agregarCelda(coord, celda);
             	
             	x++;

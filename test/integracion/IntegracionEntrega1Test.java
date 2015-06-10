@@ -48,7 +48,6 @@ public class IntegracionEntrega1Test {
 		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
 		
 		juego.iniciarJuego("mapas/test.map");
-		
 	}
 
 	@Test
