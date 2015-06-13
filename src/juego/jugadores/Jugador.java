@@ -8,7 +8,6 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.interfaces.Hospedable;
-import juego.interfaces.Jugable;
 import juego.interfaces.Militable;
 import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -17,7 +16,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
 
-public abstract class Jugador implements Jugable {
+public abstract class Jugador {
 
 	protected String nombre;
 	protected Color color;
