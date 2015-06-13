@@ -5,9 +5,8 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Entrenable;
-import juego.interfaces.Militable;
 
-public abstract class ConstruccionMilitar extends Construccion implements Militable {
+public abstract class ConstruccionMilitar extends Construccion {
 	
 	protected ArrayList<Entrenable> entrenamientos;
 

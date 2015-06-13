@@ -1,8 +1,6 @@
 package juego.razas.construcciones;
 
-import juego.interfaces.Hospedable;
-
-public abstract class ConstruccionHabitable extends Construccion implements Hospedable {
+public abstract class ConstruccionHabitable extends Construccion {
 
 	protected int capacidadDeHabitantes;
 
@@ -10,7 +8,6 @@ public abstract class ConstruccionHabitable extends Construccion implements Hosp
 		super();
 	}
 	
-	@Override
 	public int capacidadDeHabitantes() {
 		return this.capacidadDeHabitantes;
 	}

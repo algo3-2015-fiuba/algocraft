@@ -7,13 +7,13 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Construible;
-import juego.interfaces.Hospedable;
-import juego.interfaces.Militable;
-import juego.interfaces.Recolector;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
+import juego.razas.construcciones.ConstruccionHabitable;
+import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
 import juego.recursos.BolsaDeRecursos;
 
@@ -54,10 +54,10 @@ public abstract class Jugador {
 	
 	public int limiteDePoblacion() {
 		
-		Collection<Hospedable> hospedables = this.getHospedables();
+		Collection<ConstruccionHabitable> hospedables = this.getHospedables();
 		int limiteDePoblacion = 0;
 		
-		Iterator<Hospedable> it = hospedables.iterator();
+		Iterator<ConstruccionHabitable> it = hospedables.iterator();
 		while (it.hasNext()) {
 			limiteDePoblacion += it.next().capacidadDeHabitantes();
 		}
@@ -70,16 +70,16 @@ public abstract class Jugador {
 		return this.unidades.size();
 	}
 	
-	protected Collection<Recolector> getRecolectores() {
+	protected Collection<ConstruccionRecolectora> getRecolectores() {
 		
-		Collection<Recolector> recolectores = new ArrayList<Recolector>();
+		Collection<ConstruccionRecolectora> recolectores = new ArrayList<ConstruccionRecolectora>();
  		Iterator<Construible> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
 			Construible construible = it.next();
 			if (construible.puedeExtraerRecursos())  {
-				recolectores.add((Recolector)construible);
+				recolectores.add((ConstruccionRecolectora)construible);
 			}
 			
 		}
@@ -88,16 +88,16 @@ public abstract class Jugador {
 		
 	}
 	
-	protected Collection<Hospedable> getHospedables() {
+	protected Collection<ConstruccionHabitable> getHospedables() {
 		
-		Collection<Hospedable> hospedables = new ArrayList<Hospedable>();
+		Collection<ConstruccionHabitable> hospedables = new ArrayList<ConstruccionHabitable>();
  		Iterator<Construible> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
 			Construible construible = it.next();
 			if (construible.puedeHospedarUnidades())  {
-				hospedables.add((Hospedable)construible);
+				hospedables.add((ConstruccionHabitable)construible);
 			}
 			
 		}
@@ -106,16 +106,16 @@ public abstract class Jugador {
 		
 	}
 	
-	protected Collection<Militable> getMilitables() {
+	protected Collection<ConstruccionMilitar> getMilitables() {
 		
-		Collection<Militable> militables = new ArrayList<Militable>();
+		Collection<ConstruccionMilitar> militables = new ArrayList<ConstruccionMilitar>();
  		Iterator<Construible> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
 			Construible construible = it.next();
 			if (construible.puedeEntrenarUnidades())  {
-				militables.add((Militable)construible);
+				militables.add((ConstruccionMilitar)construible);
 			}
 			
 		}
@@ -126,7 +126,7 @@ public abstract class Jugador {
 	
 	private void recolectarRecursos() {
 		
-		Iterator<Recolector> it = this.getRecolectores().iterator();
+		Iterator<ConstruccionRecolectora> it = this.getRecolectores().iterator();
 		
 		while (it.hasNext()) {
 			it.next().recolectar();
@@ -136,7 +136,7 @@ public abstract class Jugador {
 	
 	private void actualizarEntrenamientos() {
 				
-		Iterator<Militable> it = this.getMilitables().iterator();
+		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
 			
 		while (it.hasNext()) {			
 			it.next().actualizarEntrenamientos();		
