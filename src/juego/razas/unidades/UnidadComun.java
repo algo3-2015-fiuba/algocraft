@@ -1,5 +1,9 @@
 package juego.razas.unidades;
 
-public class UnidadComun {
+public abstract class UnidadComun extends Unidad {
 
+	protected int danioTierra, adnioAire;
+	protected int rangoAtaqueTierra, rangoAtaqueAire;
+	protected int transporte;
+	
 }

@@ -1,5 +1,5 @@
 package juego.razas.unidades;
 
-public class UnidadMagica {
-
+public abstract class UnidadMagica extends Unidad {
+	
 }

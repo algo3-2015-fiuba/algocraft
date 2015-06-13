@@ -11,9 +11,6 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	protected int suministro;
 	protected int vida;
 	protected int tiempoDeConstruccion;
-	
-	public Unidad() {
-		
-	}
+	protected boolean esVolador;
 	
 }
