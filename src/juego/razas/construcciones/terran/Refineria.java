@@ -1,4 +1,4 @@
-package juego.razas.terran.construcciones;
+package juego.razas.construcciones.terran;
 
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;

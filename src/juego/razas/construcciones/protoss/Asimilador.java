@@ -1,4 +1,4 @@
-package juego.razas.protoss.construcciones;
+package juego.razas.construcciones.protoss;
 
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;

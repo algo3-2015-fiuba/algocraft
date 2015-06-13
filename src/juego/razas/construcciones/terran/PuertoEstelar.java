@@ -1,4 +1,4 @@
-package juego.razas.terran.construcciones;
+package juego.razas.construcciones.terran;
 
 import java.util.Collection;
 import java.util.Iterator;

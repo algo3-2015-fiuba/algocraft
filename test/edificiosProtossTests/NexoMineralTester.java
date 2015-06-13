@@ -17,7 +17,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.protoss.construcciones.NexoMineral;
+import juego.razas.construcciones.protoss.NexoMineral;
 
 import org.junit.Before;
 import org.junit.Rule;

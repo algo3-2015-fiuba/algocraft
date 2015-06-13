@@ -18,7 +18,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.terran.construcciones.Barraca;
+import juego.razas.construcciones.terran.Barraca;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,20 +1,20 @@
-package juego.razas.terran.construcciones;
+package juego.razas.construcciones.protoss;
 
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.JugadorTerran;
+import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.Mineral;
 
-public class CentroDeMineral extends ConstruccionRecolectora {
+public class NexoMineral extends ConstruccionRecolectora {
 	
 	private Mineral nodoMineral;
 	
-	public CentroDeMineral() {
+	public NexoMineral() {
 		super();
 		this.tiempoDeConstruccion = 4;
 		this.costoMinerales = 50;
@@ -32,7 +32,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	}
 	
 	@Override
-	public void construir(JugadorTerran jugador, Coordenada coordenada) 
+	public void construir(JugadorProtoss jugador, Coordenada coordenada) 
 			throws RecursosInsuficientes, UbicacionInvalida {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
@@ -61,7 +61,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	@Override
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
-			this.vida += 125; 
+			this.vida += 62.5; 
 			this.tiempoDeConstruccion--;
 		}
 	}

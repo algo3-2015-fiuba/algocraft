@@ -1,4 +1,4 @@
-package juego.razas.terran.construcciones;
+package juego.razas.construcciones.protoss;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -6,48 +6,37 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.JugadorTerran;
+import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.construcciones.ConstruccionHabitable;
 
-public class Barraca extends ConstruccionMilitar {
+public class Pilon extends ConstruccionHabitable {
 
-	public Barraca() {
+	public Pilon() {
 		super();
-		this.tiempoDeConstruccion = 12;
-		this.costoMinerales = 150;
+		this.capacidadDeHabitantes = 5;
+		this.tiempoDeConstruccion = 5;
+		this.costoMinerales = 100;
 	}
-
+	
 	@Override
-	public void actualizarConstruccion() {
-		if (!this.construccionFinalizada())	{
-			this.vida += 83.33;	
-			this.tiempoDeConstruccion--;
-			if (this.construccionFinalizada()) {
-				((JugadorTerran)this.propietario).activarFabrica(true);
-			}
-		}
-	}
-
-	@Override
-	public void construir(JugadorTerran jugador, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida {
+	public void construir(JugadorProtoss jugador, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
 		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
 		
-		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
+		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 1);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
-		
+	
 		while (it.hasNext()) {
 			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
 		}
 	
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-			
+		
 		it = rangoDeCeldas.iterator();
 			
 		while (it.hasNext()) {
@@ -56,6 +45,16 @@ public class Barraca extends ConstruccionMilitar {
 		
 		this.propietario = jugador;
 			
+	}
+
+	@Override
+	public void actualizarConstruccion() {
+		
+		if (!this.construccionFinalizada()) {
+			this.vida += 60;
+			this.tiempoDeConstruccion--;
+		} 
+		
 	}
 	
 }

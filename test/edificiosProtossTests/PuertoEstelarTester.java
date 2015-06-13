@@ -19,8 +19,8 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.protoss.construcciones.Acceso;
-import juego.razas.protoss.construcciones.PuertoEstelar;
+import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.protoss.PuertoEstelar;
 
 import org.junit.Before;
 import org.junit.Rule;

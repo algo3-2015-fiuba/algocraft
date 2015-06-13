@@ -17,7 +17,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.protoss.construcciones.Asimilador;
+import juego.razas.construcciones.protoss.Asimilador;
 
 import org.junit.Before;
 import org.junit.Rule;
