@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Construible;
+import juego.interfaces.Volador;
 import juego.interfaces.excepciones.CeldaOcupada;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.materiales.Material;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
@@ -29,7 +31,51 @@ public class Celda {
 	public boolean poseeConstruible() { return (!this.construibles.isEmpty()); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
+	
+	public void ocupar(Unidad unidad) throws UbicacionInvalida {
 		
+		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
+		
+		if (!this.construibles.isEmpty()) {
+			throw new CeldaOcupada();
+		}
+		
+		if (!this.unidades.isEmpty()) {
+			
+			Iterator<Unidad> it = this.unidades.iterator();
+			while (it.hasNext()) {
+				
+				if (it.next().ocupanMismoEspacio(unidad)) {
+					throw new CeldaOcupada();
+				}
+				
+			}
+			
+		}
+		
+		this.unidades.add(unidad);
+		
+	}
+	
+	public void ocupar(Volador volador) throws CeldaOcupada {
+		
+		if (!this.unidades.isEmpty()) {
+			
+			Iterator<Unidad> it = this.unidades.iterator();
+			while (it.hasNext()) {
+				
+				if (it.next().ocupanMismoEspacio(volador)) {
+					throw new CeldaOcupada();
+				}
+				
+			}
+			
+		}
+		
+		this.unidades.add((Unidad)volador);	
+		
+	}
+	
 	public void ocupar(Construible construible) throws CeldaOcupada {
 		
 		if ((this.construibles.isEmpty()) && (this.material.equals(Material.tierra))) {

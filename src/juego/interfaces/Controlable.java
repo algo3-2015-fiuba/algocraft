@@ -9,5 +9,6 @@ public interface Controlable {
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida;
 	public boolean ocupanMismoEspacio(Construible construible);
 	public boolean ocupanMismoEspacio(Unidad unidad);
+	public boolean ocupanMismoEspacio(Volador volador);
 	
 }

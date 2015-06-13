@@ -1,0 +1,41 @@
+Construcciones 
+
+Terran:
+
+- Centro de Mineral: ocupa 1 celda
+- Refineria: ocupa 1 celda
+- Deposito de suministro: ocupa 2 celdas
+- Barraca: ocupa 4 celdas
+- Fabrica: ocupa 6 celdas
+- Puerto Estelar: ocupa 6 celdas
+
+Protoss:
+
+- Nexo Mineral: ocupa 1 celda
+- Asimilador: ocupa 1 celda
+- Pilon: ocupa 2 celdas
+- Acceso: ocupa 4 celdas
+- Puerto Estelar: ocupa 6 celdas
+- Archivo Templario: ocupa 6 celdas
+
+
+
+Unidades
+
+Terran:
+
+- Marine: su velocidad es de 2 celdas por turno
+- Golliat: su velocidad es de 1 celdas por turno
+- Espectro: su velocidad es de 3 celdas por turno (es volador)
+- Nave ciencia: su velocidad es de 3 celdas por turno (es volador)
+- Nave Transporte: su velocidad es de 5 celdas por turno si posee hasta 4 de capacidad
+si posee 5 o mas de capacidad disminuye a 3 celdas por turno. (agregado al enunciado, no es tan complicado de hacer)
+
+Protoss:
+
+- Zealot: su velocidad es de 2 celdas por turno
+- Dragon: su velocidad es de 1 celda por turno
+- Scout: su velocidad es de 3 celdas por turno (es volador)
+- Alto Templario: su velocidad es de 2 celdas por turno.
+- Nave de transporte: su velocidad es de 5 celdas por turno si posee hasta 4 de capacidad
+si posee 5 o mas de capacidad disminuye a 3 celdas por turno. (agregado al enunciado, no es tan complicado de hacer)
