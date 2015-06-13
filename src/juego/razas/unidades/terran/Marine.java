@@ -1,14 +1,13 @@
 package juego.razas.unidades.terran;
 
 import juego.interfaces.Construible;
-import juego.interfaces.Volador;
+import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
-import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadComun;
 
-public class Marine extends UnidadComun {
+public class Marine extends UnidadComun implements Terrestre {
 
 	public Marine() {
 		super();
@@ -42,10 +41,7 @@ public class Marine extends UnidadComun {
 	}
 
 	@Override
-	public boolean ocupanMismoEspacio(Unidad unidad) { return true; }
-	
-	@Override
-	public boolean ocupanMismoEspacio(Volador volador) { return false; }
+	public boolean ocupanMismoEspacio(Terrestre terrestre) { return true; }
 	
 	@Override
 	public boolean ocupanMismoEspacio(Construible construible) { return true; }

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Construible;
+import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -32,7 +33,7 @@ public class Celda {
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
 	
-	public void ocupar(Unidad unidad) throws UbicacionInvalida {
+	public void ocupar(Terrestre terrestre) throws UbicacionInvalida {
 		
 		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
 		
@@ -45,7 +46,7 @@ public class Celda {
 			Iterator<Unidad> it = this.unidades.iterator();
 			while (it.hasNext()) {
 				
-				if (it.next().ocupanMismoEspacio(unidad)) {
+				if (it.next().ocupanMismoEspacio(terrestre)) {
 					throw new CeldaOcupada();
 				}
 				
@@ -53,7 +54,7 @@ public class Celda {
 			
 		}
 		
-		this.unidades.add(unidad);
+		this.unidades.add((Unidad)terrestre);
 		
 	}
 	

@@ -1,8 +1,11 @@
 package juego.razas.unidades;
 
 import juego.interfaces.Atacable;
+import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
+import juego.interfaces.Terrestre;
+import juego.interfaces.Volador;
 
 public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
@@ -23,5 +26,15 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	public boolean entrenamientoFinalizado() {
 		return (this.tiempoDeConstruccion == 0);
 	}
+	
+	//Por defecto no ocupan el mismo espacio, segun la unidad se especifican sus caracteristicas.
+	@Override
+	public boolean ocupanMismoEspacio(Terrestre terrestre) { return false; }
+	
+	@Override
+	public boolean ocupanMismoEspacio(Volador volador) { return false; }
+	
+	@Override
+	public boolean ocupanMismoEspacio(Construible construible) { return false; }
 	
 }
