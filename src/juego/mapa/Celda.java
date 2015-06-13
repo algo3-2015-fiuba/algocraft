@@ -59,7 +59,7 @@ public class Celda {
 		Iterator<Unidad> it = this.unidades.iterator();
 		
 		while (it.hasNext()) {
-			if (it.next().chocan(construible)) return false;
+			if (it.next().ocupanMismoEspacio(construible)) return false;
 		}
 		
 		return true;
