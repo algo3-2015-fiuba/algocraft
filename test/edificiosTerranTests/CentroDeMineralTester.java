@@ -61,8 +61,8 @@ public class CentroDeMineralTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
+		
 		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 		for (int i = 1; i < 4; i++) {

@@ -36,7 +36,7 @@ import juego.razas.terran.unidades.Marine;
 import org.junit.Before;
 import org.junit.Test;
 
-public class IntegracionEntrega1Test {
+public class IntegracionEntrega1Tester {
 	
 	@Before 
 	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {

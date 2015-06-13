@@ -8,10 +8,9 @@ import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 
-public class JugadorTerran extends Jugador{
+public class JugadorTerran extends Jugador {
 	
 	private int fabricaHabilitada, puertoEstelarHabilitado;
-	
 	
 	public JugadorTerran(String nombre, Color color) {
 		super(nombre, color);

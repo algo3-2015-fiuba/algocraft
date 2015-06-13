@@ -12,7 +12,7 @@ import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
@@ -20,6 +20,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.protoss.construcciones.Acceso;
+import juego.razas.protoss.construcciones.ArchivoTemplario;
 import juego.razas.protoss.construcciones.PuertoEstelar;
 
 import org.junit.Before;
@@ -27,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class PuertoEstelarTester {
+public class ArchivoTemplarioTester {
 
 	@Before 
 	public void reiniciarJuego() {
@@ -58,7 +59,7 @@ public class PuertoEstelarTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testCreacionDePuertoEstelarSatisfactoria() 
+	public void testCreacionDeArchivoTemplarioSatisfactoria() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
@@ -66,9 +67,10 @@ public class PuertoEstelarTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
-		PuertoEstelar nuevoPuertoEstelar = new PuertoEstelar();
+		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
+		ArchivoTemplario nuevoArchivoTemplario = new ArchivoTemplario();
 		
-		/* El rango de celdas de un puerto estelar debe ser de seis
+		/* El rango de celdas de un archivo templario debe ser de seis
 		 * teniendo como coordenada determinante a la ingresada.
 		 * Si la misma es, por ejemplo, (0,0) el deposito ocupara las celdas
 		 * (0,0), (1,0), (0,1), y (1,1). 
@@ -91,38 +93,45 @@ public class PuertoEstelarTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
+
+		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
-		jugadorActual.construir(nuevoPuertoEstelar, ubicacionValidaPuertoEstelar);
+		for (int i = 1; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+
+		jugadorActual.construir(nuevoArchivoTemplario, ubicacionValidaArchivoTemplario);
 		
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
-				assertFalse(nuevoPuertoEstelar.construccionFinalizada());
+				assertFalse(nuevoArchivoTemplario.construccionFinalizada());
 			}
 		}
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(nuevoPuertoEstelar.construccionFinalizada());
+		assertTrue(nuevoArchivoTemplario.construccionFinalizada());
 		
 	}
 
 	@Test
-	public void testSiUnJugadorProtossTrataDeCrearUnPuertoEstelarPeroNoPoseeAccesoErrorRequiereAcceso()
+	public void testSiUnJugadorProtossTrataDeCrearUnArchivoTemplarioPeroNoPoseePuertoEstelarErrorRequierePuertoEstelar()
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		Coordenada ubicacionValidaPuertoEstelar =  new Coordenada(0,1);
+		Coordenada ubicacionValidaArchivoTemplario =  new Coordenada(0,1);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		exception.expect(RequiereAcceso.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		exception.expect(RequierePuertoEstelar.class);
+		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 	
@@ -135,10 +144,11 @@ public class PuertoEstelarTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
+		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
-		jugadorActual.recolectarGasVespeno(100);
-		jugadorActual.recolectarMinerales(1000);
-		
+		jugadorActual.recolectarGasVespeno(150);
+		jugadorActual.recolectarMinerales(200);
+
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
@@ -146,8 +156,15 @@ public class PuertoEstelarTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		
+		for (int i = 1; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		exception.expect(RecursosInsuficientes.class);
+		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 
@@ -159,7 +176,8 @@ public class PuertoEstelarTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
-		Coordenada ubicacionInvalidaPuertoEstelar = new Coordenada(-10,3);
+		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
+		Coordenada ubicacionInvalidaArchivoTemplario = new Coordenada (-10,3);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
@@ -171,8 +189,15 @@ public class PuertoEstelarTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
+		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		
+		for (int i = 1; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
+		jugadorActual.construir(new ArchivoTemplario(), ubicacionInvalidaArchivoTemplario);
 		
 	}
 
@@ -184,7 +209,8 @@ public class PuertoEstelarTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
-		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(-10,3);
+		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
+		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
@@ -196,8 +222,17 @@ public class PuertoEstelarTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		exception.expect(UbicacionInvalida.class);
 		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		
+		for (int i = 1; i < 11; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
+		
+		exception.expect(UbicacionInvalida.class);
+		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 

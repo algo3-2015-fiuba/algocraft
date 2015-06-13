@@ -6,7 +6,7 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
@@ -14,13 +14,13 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 
-public class PuertoEstelar extends ConstruccionMilitar {
-	
-	public PuertoEstelar() {
+public class ArchivoTemplario extends ConstruccionMilitar {
+
+	public ArchivoTemplario() {
 		super();
-		this.tiempoDeConstruccion = 10;
+		this.tiempoDeConstruccion = 9;
 		this.costoMinerales = 150;
-		this.costoGasVespeno = 150;
+		this.costoGasVespeno = 200;
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
 		if (!jugador.gasVespenoSuficiente(this.costoGasVespeno)) throw new RecursosInsuficientes();
 		
-		if (!jugador.puertoEstelarHabilitado()) throw new RequiereAcceso();
+		if (!jugador.archivoTemplarioHabilitado()) throw new RequierePuertoEstelar();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 3);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -57,11 +57,8 @@ public class PuertoEstelar extends ConstruccionMilitar {
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
-			this.vida += 60;	
+			this.vida += 55.55;	
 			this.tiempoDeConstruccion--;		
-			if (this.construccionFinalizada()) {
-				((JugadorProtoss)this.propietario).activarArchivoTemplario(true);
-			}
 		}	
 	}
 	
