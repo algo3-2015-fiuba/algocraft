@@ -5,14 +5,13 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.interfaces.Atacable;
 import juego.interfaces.Atacante;
+import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
-import juego.interfaces.excepciones.YaFueDestruido;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.mapa.excepciones.PropietarioInvalido;
+import juego.razas.construcciones.ConstruccionHabitable;
 
 public abstract class Unidad implements Controlable, Atacable, Atacante {
 	
@@ -28,11 +27,6 @@ public abstract class Unidad implements Controlable, Atacable, Atacante {
 	
 	public Unidad(Jugador propietario) {
 		this.propietario = propietario;
-	}
-
-	@Override
-	public boolean esPropietario(Jugador jugador) {
-		return (this.propietario.equals(jugador));
 	}
 	
 	public float vidaRestante() {
@@ -116,4 +110,8 @@ public abstract class Unidad implements Controlable, Atacable, Atacante {
 		}
 	}
 
+	public boolean chocan(Construible construible) {
+		return (this.esVolador);
+	}
+	
 }

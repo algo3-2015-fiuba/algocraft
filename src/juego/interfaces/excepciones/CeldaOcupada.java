@@ -1,6 +1,6 @@
 package juego.interfaces.excepciones;
 
-public class CeldaOcupada extends Exception {
+public class CeldaOcupada extends UbicacionInvalida {
 
 	/**
 	 * 

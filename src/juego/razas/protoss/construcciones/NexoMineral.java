@@ -23,7 +23,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	}
 	
 	@Override
-	public void recolectar() throws RecursoAgotado {
+	public void recolectar() {
 
 		if (!this.nodoMineral.estaAgotado()) {
 			this.propietario.recursos().recolectarMinerales(this.nodoMineral.extraer());		

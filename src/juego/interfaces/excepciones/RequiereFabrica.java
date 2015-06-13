@@ -1,6 +1,6 @@
 package juego.interfaces.excepciones;
 
-public class RequiereFabrica extends Exception {
+public class RequiereFabrica extends RequerimientosInvalidos {
 
 	/**
 	 * 

@@ -1,6 +1,5 @@
 package juego.recursos;
 
-import juego.recursos.excepciones.RecursoAgotado;
 import juego.interfaces.Recolectable;
 
 public abstract class Recurso implements Recolectable {
@@ -17,11 +16,9 @@ public abstract class Recurso implements Recolectable {
 	}
 
 	@Override
-	public int extraer() throws RecursoAgotado {
+	public int extraer() {
 		
 		int resto;
-		
-		if (this.cantidad <= 0) throw new RecursoAgotado();
 		
 		if (this.cantidad >= 10) {
 			resto = 10;

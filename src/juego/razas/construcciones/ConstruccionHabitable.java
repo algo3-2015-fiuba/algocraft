@@ -16,8 +16,6 @@ public abstract class ConstruccionHabitable extends Construccion implements Hosp
 	}
 	
 	@Override
-	public boolean puedeAlmacenarUnidades() {
-		return true;
-	}
+	public boolean puedeHospedarUnidades() { return true; }
 	
 }

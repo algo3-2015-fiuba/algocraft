@@ -1,6 +1,5 @@
 package juego;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +12,6 @@ import juego.excepciones.NombreInvalido;
 import juego.jugadores.Jugador;
 import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
-import juego.razas.Raza;
 
 public class Juego {
 
@@ -52,26 +50,24 @@ public class Juego {
 		
 	}
 	
-	public void crearJugador(String nombre, Raza raza, Color color) throws ColorInvalido, NombreInvalido {
+	public void crearJugador(Jugador jugadorNuevo) throws ColorInvalido, NombreInvalido {
 		
 		if (this.listaDeJugadores.isEmpty()) {
 			
-			this.turnoDe = new Jugador(nombre, raza, color);
+			this.turnoDe = jugadorNuevo;
 			this.listaDeJugadores.add(turnoDe);
 			
 		} else {
 		
 			Iterator<Jugador> it  = this.listaDeJugadores.iterator();
 		
-			try {
-				while (it.hasNext()) {
-					Jugador jugadorActual = it.next();
-					if (jugadorActual.esDeColor(color)) throw new ColorInvalido();
-					if (jugadorActual.suNombreEs(nombre)) throw new NombreInvalido();
-				}
-			} finally {}
+			while (it.hasNext()) {
+				Jugador jugadorActual = it.next();
+				if (jugadorActual.getColor().equals(jugadorNuevo.getColor())) throw new ColorInvalido();
+				if (jugadorActual.getNombre().equals(jugadorNuevo.getNombre())) throw new NombreInvalido();
+			}
 		
-			this.listaDeJugadores.add(new Jugador(nombre, raza, color));
+			this.listaDeJugadores.add(jugadorNuevo);
 		
 		}
 			
@@ -80,7 +76,7 @@ public class Juego {
 	public void finalizarTurno() {
 		
 		Iterator<Jugador> it = this.listaDeJugadores.iterator();
-		
+
 		while (it.hasNext()) {
 			if (this.turnoDe.equals(it.next())) {
 				try {

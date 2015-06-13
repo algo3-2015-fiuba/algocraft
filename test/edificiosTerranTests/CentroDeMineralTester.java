@@ -5,37 +5,49 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.io.IOException;
 
+import juego.Juego;
+import juego.excepciones.ColorInvalido;
+import juego.excepciones.FaltanJugadores;
+import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
+import juego.jugadores.JugadorProtoss;
+import juego.jugadores.JugadorTerran;
+import juego.mapa.Coordenada;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.terran.construcciones.CentroDeMineral;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import juego.Juego;
-import juego.excepciones.*;
-import juego.interfaces.Controlable;
-import juego.interfaces.commandConstrucciones.recolectores.ConstructorCentroDeMineral;
-import juego.interfaces.excepciones.*;
-import juego.jugadores.Jugador;
-import juego.mapa.Celda;
-import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.mapa.excepciones.PropietarioInvalido;
-import juego.razas.*;
-
-
 public class CentroDeMineralTester {
 	
 	@Before 
-	public void reiniciarJuego() throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException {
+	public void reiniciarJuego() {
 		
 		Juego.getInstance().reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
-		juego.crearJugador("jugadorProtoss", new Protoss(), Color.blue);
+		try {
+			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
+			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
+		} catch (ColorInvalido ci) {
+			assertTrue(false);
+		} catch (NombreInvalido ni) {
+			assertTrue(false);
+		}
 		
-		juego.iniciarJuego("mapas/test.map");
+		try {
+			juego.iniciarJuego("mapas/test.map");
+		} catch (FaltanJugadores fj) {
+			assertTrue(false);
+		} catch (IOException ioe) {
+			assertTrue(false);
+		}
 		
 	}
 	
@@ -43,27 +55,22 @@ public class CentroDeMineralTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralEnNodoDeMineralesSatisfactoriamente() 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, 
-			ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RequiereAcceso,
-			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+	public void testJugadorTerranCreaCentroDeMineralesEnNodoSatisfactoriamenteYRecolectaMinerales() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		/* El centro de mineral se crea alrededor de las coordenadas centrales especificadas (x,y) 
-		 * si existe un nodo de minerales y no esta ocupado por ninguna construccion propia o enemiga.
-		 * En la coordenada (0,0) del mapa 'test' existe un nodo mineral, por lo que es correcto crearlo en esta ubicacion.
-		 */
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
-
-		for (int i = 0; i < 3; i++) {
+		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
+		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
+		
+		for (int i = 1; i < 4; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
-			if (jugadorActual.suNombreEs("jugadorTerran")) {
-				assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 150);
+			if (jugadorActual.getNombre().equals("jugadorTerran")) {
+				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -74,232 +81,87 @@ public class CentroDeMineralTester {
 		// Pasaron 4 turnos desde que el jugador Terran construyo el centro de mineral, 
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 160);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
 		
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 200); //El jugador Protoss no modifica su cantidad de minerales
+		//El jugador Protoss no modifica su cantidad de minerales
+		assertTrue(jugadorActual.getMineralesRecolectados() == 200);
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe(); //Recolecto otros 10
-		
-		assertTrue(jugadorActual.recursos().getMineralesRecolectados() == 180);
-		
-		/* El jugador inicia el juego con 200 de mineral
-		 * construir el centro de mineral costa 50 minerales.
-		 * Por turno recolecta, en un nodo con recursos,
-		 * un total de 10 minerales.
-		 */
+		jugadorActual.finalizarTurno(); //Recolecto otros 10
+		jugadorActual = juego.turnoDe();
+		;
+		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
 		
 	}
+
 	
 	@Test
-	public void testCreoUnCentroDeMineralYAgregoZealotsHastaElLimiteDePoblacion() {
-		
-	}
-	
-	@Test
-	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, RecursosInsuficientes, 
-			UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada, RequiereAcceso,
-			RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+	public void testSiJugadorNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//El centro de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
-		jugadorActual.recursos().consumirMinerales(160);
+		jugadorActual.consumirMinerales(160);
+		
+		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 	}
-	
+
 	@Test
-	public void testSiJugadorIndicaCoordenadaInvalidaErrorCoordenadaFueraDeRango() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+	public void testSiJugadorIndicaCoordenadaInvalidaErrorUbicacionInvalida() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		//Coloco una coordenada negativa, ya que los mapas no tienen un limite fijo, pero
-		//si es negativa seguro no debe existir.
+		Coordenada coordenadaInvalida = new Coordenada(-10,3);
+		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(-10,3));
+		jugadorActual.construir(new CentroDeMineral(), coordenadaInvalida);
 		
 	}
 	
+
 	@Test
-	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
-		exception.expect(CeldaOcupada.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
-	}
-	
-	@Test
-	public void testSiLaCoordenadaIndicadaNoPoseeMineralesErrorUbicacionInvalida() throws ColorInvalido, NombreInvalido, FaltanJugadores, 
-	IOException, RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-	RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
-		
-		this.reiniciarJuego();
-		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
-		
-		//La coordenada (1,0) en el mapa de pruebas siempre contiene gas vespeno
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(1,0));
+		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 	}
-	
+
+
 	@Test
-	public void testSiUnProtossIntentaConstruirUnCentroDeMineralErrorImposibleConstruir() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
+	public void testSiLaCoordenadaIndicadaNoPoseeMineralesErrorUbicacionInvalida() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		if (!jugadorActual.suNombreEs("jugadorProtoss")) { 
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-		}
-		
-		exception.expect(ImposibleConstruir.class);
-		jugadorActual.construir(new ConstructorCentroDeMineral(), new Coordenada(0,0));
+		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
+
+		exception.expect(UbicacionInvalida.class);
+		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoGasVespeno);
 		
 	}
-	
-	@Test
-	public void testSiUnJugadorEsPropietarioDeUnCentroDeMineralEsUnRecolectorAliado() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
-		
-		this.reiniciarJuego();
-		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
-		Jugador jugadorActual = juego.turnoDe();
 
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
-
-		for (int i = 0; i < 4; i++) {		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();		
-		}
-		
-		Celda celda = mapa.obtenerCelda(coord);
-		Controlable construccion = (Controlable)(celda.obtenerConstruible());
-		
-		assertTrue(construccion.esPropietario(jugadorActual));
-		
-	}
-	
-	@Test
-	public void testSiUnJugadorNoEsPropietarioDeUnCentroDeMineralEsUnRecolectorEnemigo() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango, CeldaOcupada,
-			RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
-		
-		this.reiniciarJuego();
-		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
-		Jugador jugadorActual = juego.turnoDe();
-		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
-
-		for (int i = 0; i < 5; i++) {		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();		
-		}
-		
-		Celda celda = mapa.obtenerCelda(coord);
-		Controlable construccion = (Controlable)(celda.obtenerConstruible());
-		
-		assertFalse(construccion.esPropietario(jugadorActual));
-		
-	}
-	
-	@Test
-	public void testSiUnJugadorProtossTrataDeMoverUnCentroDeMineralTerranErrorPropietarioInvalido() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, RequierePuertoEstelar,
-			RequiereBarraca, RequiereFabrica {
-		
-		this.reiniciarJuego();
-		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
-		Jugador jugadorActual = juego.turnoDe();
-		
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
-
-		for (int i = 0; i < 5; i++) {
-		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			
-		}
-		
-		Celda celda = mapa.obtenerCelda(coord);
-		Controlable construccion = (Controlable)(celda.obtenerConstruible());
-		
-		exception.expect(PropietarioInvalido.class);
-		construccion.moverse(new Coordenada(0,4));
-		
-	}
-	
-	@Test
-	public void testSiUnJugadorTerranTrataDeMoverUnCentroDeMineralErrorConstruccionesNoSeMueven() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores, IOException, 
-			RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, ConstruccionesNoSeMueven, PropietarioInvalido, RequiereAcceso, RequierePuertoEstelar,
-			RequiereBarraca, RequiereFabrica {
-		
-		this.reiniciarJuego();
-		
-		Juego juego = Juego.getInstance();
-		Mapa mapa = juego.getMapa();
-		Coordenada coord = new Coordenada(0,0);
-		Jugador jugadorActual = juego.turnoDe();
-
-		jugadorActual.construir(new ConstructorCentroDeMineral(), coord);
-
-		for (int i = 0; i < 5; i++) {		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();		
-		}
-		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
-		
-		Celda celda = mapa.obtenerCelda(coord);
-		Controlable construccion = (Controlable)(celda.obtenerConstruible());
-		
-		exception.expect(ConstruccionesNoSeMueven.class);
-		construccion.moverse(new Coordenada(0,4));
-		
-	}
-	
 }

@@ -1,31 +1,68 @@
 package juego.razas.terran.construcciones;
 
+import java.util.Collection;
+import java.util.Iterator;
+
+import juego.Juego;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
+import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 
 public class Fabrica extends ConstruccionMilitar {
 
-	private static int cantidadDeFabricas = 0;
-	
 	public Fabrica() {
 		super();
+		this.tiempoDeConstruccion = 12;
+		this.costoMinerales = 200;
+		this.costoGasVespeno = 100;
 	}
 	
-	public static int getCantidadDeFabricas() { return cantidadDeFabricas; }
-	
-	@Override
-	public boolean construccionFinalizada() {
-		return (this.tiempoDeConstruccion == 12);
-	}
-
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
 			this.vida += 104.17;	
-			this.tiempoDeConstruccion++;
-			if (this.construccionFinalizada()) cantidadDeFabricas++;
-		}	
+			this.tiempoDeConstruccion--;
+			if (this.construccionFinalizada()) {
+				((JugadorTerran)this.propietario).activarPuertoEstelar(true);
+			}
+		}
 	}
 
-	public static void reiniciar() { cantidadDeFabricas = 0; }
+	@Override
+	public void construir(JugadorTerran jugador, Coordenada coordenada) 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+				
+		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!jugador.gasVespenoSuficiente(this.costoGasVespeno)) throw new RecursosInsuficientes();
+		
+		if (!jugador.fabricaHabilitada()) throw new RequiereBarraca();
+		
+		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 3);
+		Iterator<Celda> it = rangoDeCeldas.iterator();
+		
+		while (it.hasNext()) {
+			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
+		}
+	
+		jugador.consumirMinerales(this.costoMinerales);
+		jugador.consumirGasVespeno(this.costoGasVespeno);
+			
+		it = rangoDeCeldas.iterator();
+			
+		while (it.hasNext()) {
+			it.next().ocupar(this);
+		}
+		
+		this.propietario = jugador;
+			
+	}
 	
 }

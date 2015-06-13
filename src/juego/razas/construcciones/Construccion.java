@@ -1,67 +1,55 @@
 package juego.razas.construcciones;
 
-import juego.Juego;
 import juego.interfaces.Construible;
-import juego.interfaces.Controlable;
-import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.ConstruccionesNoSeMueven;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
-import juego.mapa.Celda;
+import juego.jugadores.JugadorProtoss;
+import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.excepciones.PropietarioInvalido;
-import juego.recursos.GasVespeno;
-import juego.recursos.Mineral;
 
-public abstract class Construccion implements Construible, Controlable {
+public abstract class Construccion implements Construible {
 
-	protected Jugador propietario;
 	protected float vida;
 	protected int tiempoDeConstruccion;
+	protected Jugador propietario;
+	protected int costoMinerales, costoGasVespeno;
 	
-	public Construccion() {
-		
+	public Construccion() {		
 		super();
 		this.vida = 0;
-		this.propietario = Juego.getInstance().turnoDe();
-		this.tiempoDeConstruccion = 0;
-		
-	}
-	
-	public boolean esPropietario(Jugador aComprobar) {
-		return (this.propietario.equals(aComprobar));
+		this.propietario = null;
+		this.costoMinerales = 0;
+		this.costoGasVespeno = 0;
 	}
 	
 	@Override
-	public void ocuparCelda(Celda celda) throws CeldaOcupada {
-		celda.ocuparTierra(this);
+	public boolean construccionFinalizada() {
+		return (this.tiempoDeConstruccion == 0);
 	}
+	
+	@Override
+	public void construir(JugadorTerran jt, Coordenada coordenada)
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
 
 	@Override
-	public void moverse(Coordenada coordFinal) throws ConstruccionesNoSeMueven,
-			PropietarioInvalido {				
-		if (!this.esPropietario(Juego.getInstance().turnoDe())) { throw new PropietarioInvalido(); }
-				
-		throw new ConstruccionesNoSeMueven();
-	}
+	public void construir(JugadorProtoss jp, Coordenada coordenada)
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
 	
 	//Por defecto todos son falsos, segun la construccion se activan las propiedades.
 	@Override
-	public boolean puedeAlmacenarUnidades() {
+	public boolean puedeHospedarUnidades() {
 		return false;
 	}
 	
 	@Override
-	public boolean puedeCrearUnidades() {
+	public boolean puedeEntrenarUnidades() {
 		return false;
 	}
 	
 	@Override
-	public boolean puedeExtraer(Mineral recurso) {
-		return false;
-	}
-	
-	@Override
-	public boolean puedeExtraer(GasVespeno gv) {
+	public boolean puedeExtraerRecursos() {
 		return false;
 	}
 	

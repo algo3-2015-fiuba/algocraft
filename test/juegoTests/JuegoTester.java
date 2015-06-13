@@ -7,7 +7,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
-import juego.razas.Terran;
+import juego.jugadores.JugadorTerran;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,33 +28,36 @@ public class JuegoTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() throws NombreInvalido, ColorInvalido, FaltanJugadores {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() 
+			throws NombreInvalido, ColorInvalido, FaltanJugadores {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.black);
+		juego.crearJugador(new JugadorTerran("jugadorTerran", Color.black));
 		
 		exception.expect(NombreInvalido.class);
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
 
 	}
 
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() 
+			throws ColorInvalido, NombreInvalido, FaltanJugadores {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
 		
 		exception.expect(ColorInvalido.class);
-		juego.crearJugador("jugadorTerran2", new Terran(), Color.red);
+		juego.crearJugador(new JugadorTerran("jugadorTerran2", Color.red));
 	
 	}
 
 	@Test
-	public void testJuegoNoPuedeEmpezarSinJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido, IOException {
+	public void testJuegoNoPuedeEmpezarSinJugadores() 
+			throws FaltanJugadores, IOException, ColorInvalido, NombreInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
@@ -65,12 +68,13 @@ public class JuegoTester {
 	}
 	
 	@Test 
-	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() throws FaltanJugadores, ColorInvalido, NombreInvalido, IOException {
+	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() 
+			throws FaltanJugadores, IOException, ColorInvalido, NombreInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
 		
-		juego.crearJugador("jugadorTerran", new Terran(), Color.red);
+		juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
 		
 		exception.expect(FaltanJugadores.class);
 		juego.iniciarJuego("mapas/test.map");

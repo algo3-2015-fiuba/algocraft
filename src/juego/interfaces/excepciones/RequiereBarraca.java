@@ -1,6 +1,6 @@
 package juego.interfaces.excepciones;
 
-public class RequiereBarraca extends Exception {
+public class RequiereBarraca extends RequerimientosInvalidos {
 
 	/**
 	 * 

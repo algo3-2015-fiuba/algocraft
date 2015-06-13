@@ -1,14 +1,21 @@
 package juego.interfaces;
 
-import juego.recursos.GasVespeno;
-import juego.recursos.Mineral;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.JugadorProtoss;
+import juego.jugadores.JugadorTerran;
+import juego.mapa.Coordenada;
 
 public interface Construible {
 
-	public boolean construccionFinalizada();
+	public void construir(JugadorTerran jt, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
+	public void construir(JugadorProtoss jp, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
 	public void actualizarConstruccion();
-	public boolean puedeAlmacenarUnidades();
-	public boolean puedeCrearUnidades();
-	public boolean puedeExtraer(Mineral m);
-	public boolean puedeExtraer(GasVespeno gv);
+	public boolean construccionFinalizada();
+	
+	public boolean puedeHospedarUnidades();
+	public boolean puedeEntrenarUnidades();
+	public boolean puedeExtraerRecursos();
+	
 }

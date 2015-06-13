@@ -6,136 +6,78 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.CommandEntrenadores;
+import juego.interfaces.Construible;
 import juego.interfaces.Hospedable;
-import juego.interfaces.CommandConstrucciones;
+import juego.interfaces.Jugable;
+import juego.interfaces.Militable;
 import juego.interfaces.Recolector;
-import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.ImposibleConstruir;
 import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequiereAcceso;
-import juego.interfaces.excepciones.RequiereBarraca;
-import juego.interfaces.excepciones.RequiereFabrica;
-import juego.interfaces.excepciones.RequierePuertoEstelar;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.Raza;
-import juego.recursos.excepciones.RecursoAgotado;
+import juego.razas.unidades.Unidad;
 
-public class Jugador {
+public abstract class Jugador implements Jugable {
 
-	private String nombre;
-	private Raza raza;
-	private Color color;
-	private RecursosJugador estructuraRecursos = new RecursosJugador();
-	private Collection<CommandConstrucciones> constructores;
-	private Collection<CommandEntrenadores> entrenadores;
-	private ControlablesJugador estructuraControlables = new ControlablesJugador();
+	protected String nombre;
+	protected Color color;
+	protected Collection<Construible> enConstruccion;
+	protected Collection<Construible> construcciones;
+	protected Collection<Unidad> unidades;
+	protected int mineralesRecolectados;
+	protected int gasVespenoRecolectado;
 	
-	public Jugador(String nombre, Raza raza, Color color) {
-		
+	public Jugador(String nombre, Color color) {
+		super();
 		this.nombre = nombre;
-		this.raza = raza;
 		this.color = color;
-		this.constructores = new ArrayList<CommandConstrucciones>();
-		this.entrenadores = new ArrayList<CommandEntrenadores>();
+		this.construcciones = new ArrayList<Construible>();
+		this.enConstruccion = new ArrayList<Construible>();
+		this.unidades = new ArrayList<Unidad>();
+		this.mineralesRecolectados = 200;
+		this.gasVespenoRecolectado = 0;
 	}
-	
-	public RecursosJugador recursos() {
-		return this.estructuraRecursos;
-	}
-	
-	public ControlablesJugador controlables() {
-		return this.estructuraControlables;
-	}
-	
-	public boolean esDeColor(Color color) { return (this.color.equals(color)); }
-
-	public boolean suNombreEs(String nombre) { return this.nombre.equals(nombre); }
-	
-	private void recolectarRecursos() {
-
-		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Recolector> listaDeRecolectores = mapa.getRecolectores(this);
 		
-		Iterator<Recolector> it = listaDeRecolectores.iterator();
-		while (it.hasNext()) {
-			try {
-				it.next().recolectar();
-			} catch (RecursoAgotado ra) { 
-				//Esto deberia ser un caso extranio ya que se verifica si el nodo posee recursos antes de extraer	
-			}
-		}
-		
-	}
-	private void notificarEntrenadores() {
-		
-		Collection<CommandEntrenadores> entrenamientosFinalizados = new ArrayList<CommandEntrenadores>();
-			
-		Iterator<CommandEntrenadores> it = this.entrenadores.iterator();
-			
-		while (it.hasNext()) {			
-			CommandEntrenadores entrenador = it.next();
-			entrenador.actualizarEntrenamiento();
-			if (entrenador.entrenamientoFinalizado()) entrenamientosFinalizados.add(entrenador);			
-		}
-			
-		this.constructores.removeAll(entrenamientosFinalizados);
-
-	}
+	public Color getColor() { return this.color; }
+	public String getNombre() { return this.nombre; }
 	
-	private void notificarConstructores() {
-			
-		Collection<CommandConstrucciones> constructoresFinalizados = new ArrayList<CommandConstrucciones>();
-			
-		Iterator<CommandConstrucciones> it = this.constructores.iterator();
-			
-		while (it.hasNext()) {			
-			CommandConstrucciones constructor = it.next();
-			constructor.actualizarConstruccion();
-			if (constructor.construccionFinalizada()) constructoresFinalizados.add(constructor);			
-		}
-			
-		this.constructores.removeAll(constructoresFinalizados);
-	}
-	
-	public void actualizarObservadores() {
-		this.recolectarRecursos();
-		this.notificarConstructores();
-		this.notificarEntrenadores();
-	}
-
 	public void finalizarTurno() {		
 		Juego.getInstance().finalizarTurno();		
 	}
-
-	public void construir(CommandConstrucciones constructor, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, ImposibleConstruir, CoordenadaFueraDeRango,
-			CeldaOcupada, RequiereAcceso, RequierePuertoEstelar, RequiereBarraca, RequiereFabrica {
-		
-		//Cuando queremos construir, buscamos a la raza a la cual pertenece el jugador
-		//y de esta manera verificamos si esta construccion esta disponible para la misma.
-		this.raza.construir(constructor, coordenada);
+	
+	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
+		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();		
+		this.mineralesRecolectados -= costoMinerales;
 	}
 	
-	public void observar(CommandConstrucciones constructor) {
-		this.constructores.add(constructor);		
+	public void consumirGasVespeno(int costoGas) throws RecursosInsuficientes {	
+		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
+		this.gasVespenoRecolectado -= costoGas;
 	}
 	
-	public void observar(CommandEntrenadores entrenador) {
-		this.entrenadores.add(entrenador);		
+	public boolean mineralesSuficientes(int cantidad) { return (cantidad <= this.mineralesRecolectados); }
+	public boolean gasVespenoSuficiente(int cantidad) { return (cantidad <= this.gasVespenoRecolectado); }
+
+	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
+	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
+
+	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
+	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
+	
+	public void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
+	
+	public void actualizarObservadores() {
+		this.actualizarConstrucciones();
+		this.recolectarRecursos();
+		this.actualizarEntrenamientos();
 	}
-
-
+	
 	public int limiteDePoblacion() {
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Hospedable> almacenadores = mapa.getHospedables(this);
+		Collection<Hospedable> hospedables = this.getHospedables();
 		int limiteDePoblacion = 0;
 		
-		Iterator<Hospedable> it = almacenadores.iterator();
+		Iterator<Hospedable> it = hospedables.iterator();
 		while (it.hasNext()) {
 			limiteDePoblacion += it.next().capacidadDeHabitantes();
 		}
@@ -145,23 +87,100 @@ public class Jugador {
 	}
 	
 	public int poblacionActual() {	
-		return Juego.getInstance().getMapa().getUnidades(this).size();
+		return this.unidades.size();
 	}
 	
-	 @Override
-    public int hashCode() {
-        return this.nombre.hashCode() + this.color.hashCode();
-    }
+	protected Collection<Recolector> getRecolectores() {
+		
+		Collection<Recolector> recolectores = new ArrayList<Recolector>();
+ 		Iterator<Construible> it = this.construcciones.iterator();
+		
+		while (it.hasNext()) {
+		
+			Construible construible = it.next();
+			if (construible.puedeExtraerRecursos())  {
+				recolectores.add((Recolector)construible);
+			}
+			
+		}
+		
+		return recolectores;
+		
+	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Jugador))
-            return false;
-        if (obj == this)
-            return true;
-        
-        Jugador j = (Jugador) obj;
-        return ((j.esDeColor(this.color)) && (j.suNombreEs(this.nombre)));
+	protected Collection<Hospedable> getHospedables() {
+		
+		Collection<Hospedable> hospedables = new ArrayList<Hospedable>();
+ 		Iterator<Construible> it = this.construcciones.iterator();
+		
+		while (it.hasNext()) {
+		
+			Construible construible = it.next();
+			if (construible.puedeHospedarUnidades())  {
+				hospedables.add((Hospedable)construible);
+			}
+			
+		}
+		
+		return hospedables;
+		
+	}
+	
+	protected Collection<Militable> getMilitables() {
+		
+		Collection<Militable> militables = new ArrayList<Militable>();
+ 		Iterator<Construible> it = this.construcciones.iterator();
+		
+		while (it.hasNext()) {
+		
+			Construible construible = it.next();
+			if (construible.puedeEntrenarUnidades())  {
+				militables.add((Militable)construible);
+			}
+			
+		}
+		
+		return militables;
+		
+	}
+	
+	private void recolectarRecursos() {
+		
+		Iterator<Recolector> it = this.getRecolectores().iterator();
+		
+		while (it.hasNext()) {
+			it.next().recolectar();
+		}
+		
+	}
+	
+	private void actualizarEntrenamientos() {
+				
+		Iterator<Militable> it = this.getMilitables().iterator();
+			
+		while (it.hasNext()) {			
+			it.next().actualizarEntrenamientos();		
+		}
+
+	}
+	
+	private void actualizarConstrucciones() {
+			
+		Collection<Construible> construccionesFinalizadas = new ArrayList<Construible>();
+			
+		Iterator<Construible> it = this.enConstruccion.iterator();
+			
+		while (it.hasNext()) {			
+			Construible construible = it.next();
+			construible.actualizarConstruccion();
+			if (construible.construccionFinalizada()) {
+				construccionesFinalizadas.add(construible);	
+				construcciones.add(construible);
+			}
+		}
+			
+		this.enConstruccion.removeAll(construccionesFinalizadas);
+		
 	}
 	
 }

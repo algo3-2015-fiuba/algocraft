@@ -1,6 +1,6 @@
 package juego.recursos;
 
-import juego.interfaces.CommandConstrucciones;
+import juego.razas.construcciones.ConstruccionRecolectora;
 
 public class Mineral extends Recurso {
 
@@ -9,6 +9,8 @@ public class Mineral extends Recurso {
 	}
 	
 	@Override
-	public boolean esPosibleConstruir(CommandConstrucciones constructor) { return constructor.puedeExtraer(this); }
+	public boolean puedeRecolectar(ConstruccionRecolectora recolector) {
+		return recolector.puedeExtraer(this);
+	}
 	
 }

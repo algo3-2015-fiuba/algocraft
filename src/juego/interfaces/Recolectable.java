@@ -1,11 +1,11 @@
 package juego.interfaces;
 
-import juego.recursos.excepciones.RecursoAgotado;
+import juego.razas.construcciones.ConstruccionRecolectora;
 
 public interface Recolectable {
 	
 	public boolean estaAgotado();
-	public int extraer() throws RecursoAgotado;
-	boolean esPosibleConstruir(CommandConstrucciones constructor);
-
+	public int extraer();
+	public boolean puedeRecolectar(ConstruccionRecolectora recolector);
+	
 }

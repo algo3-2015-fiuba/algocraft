@@ -1,9 +1,11 @@
 package juego.interfaces;
 
+import juego.interfaces.excepciones.RecursosInsuficientes;
+
 public interface Entrenable {
 
-	boolean entrenamientoFinalizado();
-
-	void actualizarEntrenamiento();
-
+	public void entrenar() throws RecursosInsuficientes;
+	public void actualizarEntrenamiento();
+	public boolean entrenamientoFinalizado();
+	
 }

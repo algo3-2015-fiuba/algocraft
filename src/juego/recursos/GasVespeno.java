@@ -1,13 +1,16 @@
 package juego.recursos;
 
-import juego.interfaces.CommandConstrucciones;
+import juego.razas.construcciones.ConstruccionRecolectora;
 
 public class GasVespeno extends Recurso {
 
 	public GasVespeno(int cantidadInicial) {
 		super(cantidadInicial);
 	}
-	
+
 	@Override
-	public boolean esPosibleConstruir(CommandConstrucciones constructor) { return constructor.puedeExtraer(this); }
+	public boolean puedeRecolectar(ConstruccionRecolectora recolector) {
+		return recolector.puedeExtraer(this);
+	}
+	
 }

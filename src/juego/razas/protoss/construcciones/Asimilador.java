@@ -23,10 +23,10 @@ public class Asimilador extends ConstruccionRecolectora {
 	}
 	
 	@Override
-	public void recolectar() throws RecursoAgotado {
+	public void recolectar() {
 
 		if (!this.nodoGasVespeno.estaAgotado()) {
-			this.propietario.recursos().recolectarGasVespeno(this.nodoGasVespeno.extraer());		
+			this.propietario.recolectarGasVespeno(this.nodoGasVespeno.extraer());		
 		}
 	}
 	

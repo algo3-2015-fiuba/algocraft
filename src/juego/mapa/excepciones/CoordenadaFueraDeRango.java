@@ -1,6 +1,8 @@
 package juego.mapa.excepciones;
 
-public class CoordenadaFueraDeRango extends Exception {
+import juego.interfaces.excepciones.UbicacionInvalida;
+
+public class CoordenadaFueraDeRango extends UbicacionInvalida {
 
 	/**
 	 * 

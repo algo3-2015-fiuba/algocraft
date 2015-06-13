@@ -1,6 +1,6 @@
 package juego.interfaces.excepciones;
 
-public class RequierePuertoEstelar extends Exception {
+public class RequierePuertoEstelar extends RequerimientosInvalidos {
 
 	/**
 	 * 

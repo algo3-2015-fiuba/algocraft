@@ -12,20 +12,19 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 import org.junit.Test;
 
-public class GeneradorMapaTest {
+public class GeneradorMapaTester {
 
 	@Test
 	public void testGeneradorDeMapaObtieneMaterialesCorrectamente() throws IOException, CoordenadaFueraDeRango {
 		
-		// Debe ingresarse la ubicacion del mapa que se va a utilizar.
 		GeneradorMapa generadorMapa = new GeneradorMapa();
 		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map");
 		
 		// El mapa test posee las primeras tres celdas de tierra y la cuarta de aire		
-		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(0, 0)).obtenerMaterial());
-		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(1, 0)).obtenerMaterial());
-		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(2, 0)).obtenerMaterial());
-		assertEquals(Material.aire, mapa.obtenerCelda(new Coordenada(3, 0)).obtenerMaterial());
+		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(0, 0)).getMaterial());
+		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(1, 0)).getMaterial());
+		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(2, 0)).getMaterial());
+		assertEquals(Material.aire, mapa.obtenerCelda(new Coordenada(3, 0)).getMaterial());
 		
 	}
 	
