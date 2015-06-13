@@ -1,5 +1,5 @@
 package juego.razas.unidades;
 
-public class UnidadVoladora {
+public class UnidadComun {
 
 }

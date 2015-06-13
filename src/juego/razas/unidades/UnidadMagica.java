@@ -1,5 +1,5 @@
 package juego.razas.unidades;
 
-public class UnidadTerrestre {
+public class UnidadMagica {
 
 }
