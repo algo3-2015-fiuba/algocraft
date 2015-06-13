@@ -105,7 +105,7 @@ public class PilonTester {
 		int x = 0;
 		int y = 20;
 		
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000000);
 		
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {
@@ -153,7 +153,7 @@ public class PilonTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		//Un pilon costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
-		jugadorActual.consumirMinerales(110);
+		jugadorActual.bolsaDeRecursos().consumirMinerales(110);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new Pilon(), ubicacionValida);

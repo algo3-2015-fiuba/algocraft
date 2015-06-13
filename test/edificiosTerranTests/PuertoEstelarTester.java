@@ -84,8 +84,8 @@ public class PuertoEstelarTester {
 		 * - - - - - -
 		 */
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -130,8 +130,8 @@ public class PuertoEstelarTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaPuertoEstelar =  new Coordenada(0,1);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 
 		exception.expect(RequiereFabrica.class);
 		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
@@ -149,8 +149,8 @@ public class PuertoEstelarTester {
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		
-		jugadorActual.recolectarGasVespeno(100);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(100);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 		
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -182,8 +182,8 @@ public class PuertoEstelarTester {
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionInvalidaPuertoEstelar = new Coordenada(-10,3);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -215,8 +215,8 @@ public class PuertoEstelarTester {
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(-10,3);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		

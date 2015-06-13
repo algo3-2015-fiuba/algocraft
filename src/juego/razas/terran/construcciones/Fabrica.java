@@ -40,8 +40,8 @@ public class Fabrica extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 				
-		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
-		if (!jugador.gasVespenoSuficiente(this.costoGasVespeno)) throw new RecursosInsuficientes();
+		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!jugador.bolsaDeRecursos().gasVespenoSuficiente(this.costoGasVespeno)) throw new RecursosInsuficientes();
 		
 		if (!jugador.fabricaHabilitada()) throw new RequiereBarraca();
 		
@@ -52,8 +52,8 @@ public class Fabrica extends ConstruccionMilitar {
 			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
 		}
 	
-		jugador.consumirMinerales(this.costoMinerales);
-		jugador.consumirGasVespeno(this.costoGasVespeno);
+		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
+		jugador.bolsaDeRecursos().consumirGasVespeno(this.costoGasVespeno);
 			
 		it = rangoDeCeldas.iterator();
 			

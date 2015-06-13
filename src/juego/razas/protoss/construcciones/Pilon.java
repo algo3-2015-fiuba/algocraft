@@ -26,7 +26,7 @@ public class Pilon extends ConstruccionHabitable {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 1);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -35,7 +35,7 @@ public class Pilon extends ConstruccionHabitable {
 			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
 		}
 	
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 		
 		it = rangoDeCeldas.iterator();
 			

@@ -15,6 +15,7 @@ import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
+import juego.recursos.BolsaDeRecursos;
 
 public abstract class Jugador {
 
@@ -23,8 +24,7 @@ public abstract class Jugador {
 	protected Collection<Construible> enConstruccion;
 	protected Collection<Construible> construcciones;
 	protected Collection<Unidad> unidades;
-	protected int mineralesRecolectados;
-	protected int gasVespenoRecolectado;
+	protected BolsaDeRecursos bolsaDeRecursos;
 	
 	public Jugador(String nombre, Color color) {
 		super();
@@ -33,35 +33,16 @@ public abstract class Jugador {
 		this.construcciones = new ArrayList<Construible>();
 		this.enConstruccion = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
-		this.mineralesRecolectados = 200;
-		this.gasVespenoRecolectado = 0;
+		this.bolsaDeRecursos = new BolsaDeRecursos();
 	}
 		
 	public Color getColor() { return this.color; }
 	public String getNombre() { return this.nombre; }
+	public BolsaDeRecursos bolsaDeRecursos() { return this.bolsaDeRecursos; }
 	
 	public void finalizarTurno() {		
 		Juego.getInstance().finalizarTurno();		
 	}
-	
-	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
-		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();		
-		this.mineralesRecolectados -= costoMinerales;
-	}
-	
-	public void consumirGasVespeno(int costoGas) throws RecursosInsuficientes {	
-		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
-		this.gasVespenoRecolectado -= costoGas;
-	}
-	
-	public boolean mineralesSuficientes(int cantidad) { return (cantidad <= this.mineralesRecolectados); }
-	public boolean gasVespenoSuficiente(int cantidad) { return (cantidad <= this.gasVespenoRecolectado); }
-
-	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
-	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }
-
-	public int getMineralesRecolectados() { return this.mineralesRecolectados;	}
-	public int getGasVespenoRecolectado() { return this.gasVespenoRecolectado;	}
 	
 	public void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
 	

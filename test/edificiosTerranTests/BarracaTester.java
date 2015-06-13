@@ -134,7 +134,7 @@ public class BarracaTester {
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//La barraca vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		jugadorActual.bolsaDeRecursos().consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new Barraca(), ubicacionValida);
@@ -165,7 +165,7 @@ public class BarracaTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.recolectarMinerales(300);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(300);
 		
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		

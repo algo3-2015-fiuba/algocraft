@@ -27,7 +27,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	public void recolectar() {
 		if ((this.construccionFinalizada()) && (!this.nodoMineral.estaAgotado())) {
 			int extraidos = this.nodoMineral.extraer();
-			this.propietario.recolectarMinerales(extraidos);		
+			this.propietario.bolsaDeRecursos().recolectarMinerales(extraidos);		
 		}
 	}
 	
@@ -38,13 +38,13 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Celda celda;
 		
-		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
 		if (celda.esPosibleConstruir(this)) {
 		
-			jugador.consumirMinerales(this.costoMinerales);
+			jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 	
 			this.propietario = jugador;
 		

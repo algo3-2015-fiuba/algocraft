@@ -116,7 +116,7 @@ public class DepositoSuministroTester {
 		int x = 0;
 		int y = 20;
 		
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000000);
 		
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {
@@ -151,7 +151,7 @@ public class DepositoSuministroTester {
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//El deposito de suministro vale 100 minerales, si gasto 110 de los 200 iniciales le quedan 90 minerales.
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.bolsaDeRecursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new DepositoSuministro(), ubicacionValida);

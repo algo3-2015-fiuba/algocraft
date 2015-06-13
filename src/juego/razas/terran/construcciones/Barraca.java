@@ -37,7 +37,7 @@ public class Barraca extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!jugador.mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -46,7 +46,7 @@ public class Barraca extends ConstruccionMilitar {
 			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
 		}
 	
-		jugador.consumirMinerales(this.costoMinerales);
+		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 			
 		it = rangoDeCeldas.iterator();
 			

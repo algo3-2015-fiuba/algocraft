@@ -27,7 +27,7 @@ public class Asimilador extends ConstruccionRecolectora {
 	public void recolectar() {
 		if ((this.construccionFinalizada())  && (!this.nodoGasVespeno.estaAgotado())){
 			int extraidos = this.nodoGasVespeno.extraer();
-			this.propietario.recolectarGasVespeno(extraidos);		
+			this.propietario.bolsaDeRecursos().recolectarGasVespeno(extraidos);		
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class Asimilador extends ConstruccionRecolectora {
 		
 		if (celda.esPosibleConstruir(this)) {
 		
-			jugador.consumirMinerales(this.costoMinerales);
+			jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 	
 			this.propietario = jugador;
 		

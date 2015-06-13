@@ -70,7 +70,7 @@ public class NexoMineralTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
+				assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -78,18 +78,18 @@ public class NexoMineralTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
+		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 160);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto 10
 		
 		//El jugador Terran no modifica su cantidad de minerales
-		assertTrue(jugadorActual.getMineralesRecolectados() == 200); 
+		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 200); 
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe(); //Recolecto otros 10
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
+		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 180);
 		
 	}
 
@@ -102,7 +102,7 @@ public class NexoMineralTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.bolsaDeRecursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new NexoMineral(), ubicacionNodoMineral);

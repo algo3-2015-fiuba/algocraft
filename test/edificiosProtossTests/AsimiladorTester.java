@@ -70,8 +70,8 @@ public class AsimiladorTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 100);
-				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
+				assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 100);
+				assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 0);
 			}
 		
 		}
@@ -79,17 +79,17 @@ public class AsimiladorTester {
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
+		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 10);
 		
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe(); 
 		
 		//El jugador Terran no modifica su cantidad de minerales
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
+		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 0);
 		
 		jugadorActual.finalizarTurno(); //Recolecto otros 10
 		jugadorActual = juego.turnoDe();		
-		assertTrue(jugadorActual.getGasVespenoRecolectado() == 30);
+		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 30);
 		
 	}
 
@@ -102,7 +102,7 @@ public class AsimiladorTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 		//El Asimilador vale 100 minerales, si gasto 160 de los 200 iniciales le quedan 40 gasVespeno.
-		jugadorActual.consumirMinerales(160);
+		jugadorActual.bolsaDeRecursos().consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new Asimilador(), ubicacionNodoGasVespeno);
