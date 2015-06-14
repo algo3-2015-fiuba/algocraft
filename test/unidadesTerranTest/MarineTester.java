@@ -106,4 +106,30 @@ public class MarineTester {
 		
 	}
 	
+	@Test
+	public void testSiJugadorNoCreaDepositoSuministroEIntentaCrearMarineErrorSobrePoblacion() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+		
+		this.reiniciarJuego();
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		Barraca barraca = new Barraca();
+		Marine marine = new Marine();
+		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
+		
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		
+		for (int i = 1; i < 13; i++) {
+			
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+			
+		}
+		
+		exception.expect(SobrePoblacion.class);
+		jugadorActual.entrenar(barraca, marine);
+		
+	}
+	
 }
