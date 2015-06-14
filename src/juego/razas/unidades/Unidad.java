@@ -25,6 +25,8 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		this.esTerrestre = false;
 	}
 	
+	public int getSuministro() { return this.suministro; }
+	
 	@Override
 	public boolean entrenamientoFinalizado() {
 		return (this.tiempoDeConstruccion == 0);

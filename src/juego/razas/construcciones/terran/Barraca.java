@@ -5,12 +5,14 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.terran.Marine;
 
 public class Barraca extends ConstruccionMilitar {
 
@@ -60,6 +62,11 @@ public class Barraca extends ConstruccionMilitar {
 		
 		this.propietario = jugador;
 			
+	}
+	
+	public void entrenar(Marine marine) throws RecursosInsuficientes, SobrePoblacion {
+		marine.iniciarEntrenamiento();
+		this.entrenamientos.add(marine);
 	}
 	
 }

@@ -1,10 +1,12 @@
 package juego.interfaces;
 
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.SobrePoblacion;
+import juego.razas.construcciones.ConstruccionMilitar;
 
 public interface Entrenable {
 
-	public void entrenar() throws RecursosInsuficientes;
+	public void entrenador(ConstruccionMilitar cm) throws RecursosInsuficientes, SobrePoblacion;
 	public void actualizarEntrenamiento();
 	public boolean entrenamientoFinalizado();
 	

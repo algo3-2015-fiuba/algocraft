@@ -7,8 +7,10 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Construible;
+import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionHabitable;
@@ -44,12 +46,12 @@ public abstract class Jugador {
 		Juego.getInstance().finalizarTurno();		
 	}
 	
-	public void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
+	public abstract void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
 	
 	public void actualizarObservadores() {
 		this.actualizarConstrucciones();
-		this.recolectarRecursos();
 		this.actualizarEntrenamientos();
+		this.recolectarRecursos();
 	}
 	
 	public int limiteDePoblacion() {
@@ -67,7 +69,36 @@ public abstract class Jugador {
 	}
 	
 	public int poblacionActual() {	
-		return this.unidades.size();
+		
+		int poblacionActual = 0;
+		
+		Iterator<Unidad> it = this.unidades.iterator();
+		
+		while (it.hasNext()) {
+			poblacionActual += it.next().getSuministro();
+		}
+		
+		return poblacionActual;
+		
+	}
+	
+	public boolean suministrosSuficientes(int suministro) {
+		int suministrosRestantes = this.limiteDePoblacion() - this.poblacionActual();
+		return (suministrosRestantes >= suministro);
+	}
+	
+	public void entrenar(ConstruccionMilitar construccion, Entrenable entrenable) 
+			throws RecursosInsuficientes, SobrePoblacion {
+
+		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
+		
+		while (it.hasNext()) {
+			
+			if (it.next() == construccion) {
+				entrenable.entrenador(construccion);
+			}
+			
+		}
 	}
 	
 	protected Collection<ConstruccionRecolectora> getRecolectores() {
