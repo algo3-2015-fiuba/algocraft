@@ -16,7 +16,6 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.terran.Barraca;
 
@@ -62,7 +61,6 @@ public class BarracaTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		Mapa mapa = juego.getMapa();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Barraca nuevaBarraca = new Barraca();
 		
@@ -79,7 +77,6 @@ public class BarracaTester {
 		 * - - - - - -
 		 */
 		
-		assertFalse(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 		jugadorActual.construir(nuevaBarraca, ubicacionValida);
 			
 		for (int i = 0; i < 11; i++) {
@@ -87,7 +84,6 @@ public class BarracaTester {
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
 				assertFalse(nuevaBarraca.construccionFinalizada());
-				assertTrue(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 			}
 		}
 		
@@ -95,7 +91,6 @@ public class BarracaTester {
 		jugadorActual = juego.turnoDe();
 		
 		assertTrue(nuevaBarraca.construccionFinalizada());
-		assertTrue(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 		
 	}
 	
@@ -106,11 +101,9 @@ public class BarracaTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		Mapa mapa = juego.getMapa();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Barraca nuevaBarraca = new Barraca();
-				
-		assertFalse(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
+		
 		jugadorActual.construir(nuevaBarraca, ubicacionValida);
 			
 		assertFalse(((JugadorTerran)jugadorActual).fabricaHabilitada());

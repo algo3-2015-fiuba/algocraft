@@ -16,7 +16,6 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.protoss.Acceso;
 
@@ -62,7 +61,6 @@ public class AccesoTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		Mapa mapa = juego.getMapa();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Acceso nuevoAcceso = new Acceso();
 		
@@ -79,7 +77,6 @@ public class AccesoTester {
 		 * - - - - - -
 		 */
 		
-		assertFalse(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 		jugadorActual.construir(nuevoAcceso, ubicacionValida);
 			
 		for (int i = 1; i < 8; i++) {
@@ -87,7 +84,6 @@ public class AccesoTester {
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
 				assertFalse(nuevoAcceso.construccionFinalizada());
-				assertTrue(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 			}
 		}
 		
@@ -95,7 +91,6 @@ public class AccesoTester {
 		jugadorActual = juego.turnoDe();
 		
 		assertTrue(nuevoAcceso.construccionFinalizada());
-		assertTrue(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 		
 	}
 
@@ -106,11 +101,9 @@ public class AccesoTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		Mapa mapa = juego.getMapa();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Acceso nuevoAcceso = new Acceso();
 				
-		assertFalse(mapa.obtenerCelda(ubicacionValida).poseeConstruible());
 		jugadorActual.construir(nuevoAcceso, ubicacionValida);
 			
 		assertFalse(((JugadorProtoss)jugadorActual).puertoEstelarHabilitado());

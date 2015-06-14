@@ -1,6 +1,5 @@
 package juego.razas.unidades.terran;
 
-import juego.interfaces.Construible;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -20,6 +19,7 @@ public class Marine extends UnidadComun implements Terrestre {
 		this.suministro = 1;
 		this.rangoAtaqueAire = 4;
 		this.rangoAtaqueTierra = 4;
+		this.esTerrestre = true;
 	}
 
 	@Override
@@ -39,11 +39,5 @@ public class Marine extends UnidadComun implements Terrestre {
 			this.tiempoDeConstruccion--;
 		}
 	}
-
-	@Override
-	public boolean ocupanMismoEspacio(Terrestre terrestre) { return true; }
-	
-	@Override
-	public boolean ocupanMismoEspacio(Construible construible) { return true; }
 	
 }

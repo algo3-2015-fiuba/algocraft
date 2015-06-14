@@ -48,18 +48,22 @@ public class Fabrica extends ConstruccionMilitar {
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 3);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
 		
-		while (it.hasNext()) {
-			if (!it.next().esPosibleConstruir(this)) throw new UbicacionInvalida();
+		try {
+			while (it.hasNext()) {
+				Celda celda = it.next();
+				if (celda.poseeRecursos()) throw new UbicacionInvalida();
+				celda.ocupar(this);
+			}
+		} catch (UbicacionInvalida ui) {
+			it = rangoDeCeldas.iterator();
+			while (it.hasNext()) {
+				it.next().desocupar(this);
+			}
+			throw new UbicacionInvalida();
 		}
 	
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 		jugador.bolsaDeRecursos().consumirGasVespeno(this.costoGasVespeno);
-			
-		it = rangoDeCeldas.iterator();
-			
-		while (it.hasNext()) {
-			it.next().ocupar(this);
-		}
 		
 		this.propietario = jugador;
 			

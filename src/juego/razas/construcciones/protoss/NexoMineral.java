@@ -42,20 +42,18 @@ public class NexoMineral extends ConstruccionRecolectora {
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
-		if (celda.esPosibleConstruir(this)) {
+		if (!celda.poseeRecursos()) throw new UbicacionInvalida();
 		
-			jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-	
-			this.propietario = jugador;
+		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
 		
-			this.nodoMineral = (Mineral) celda.getRecurso();
-			
-			celda.ocupar(this);
+		celda.ocupar(this);
+		
+		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 	
-		} else {
-			throw new UbicacionInvalida();
-		}
-			
+		this.propietario = jugador;
+		
+		this.nodoMineral = (Mineral) celda.getRecurso();
+		
 	}
 	
 	@Override
