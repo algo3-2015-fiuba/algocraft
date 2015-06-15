@@ -15,7 +15,7 @@ public class Marine extends UnidadComun implements Terrestre {
 	public Marine() {
 		super();
 		
-		this.transporte = 1;
+		this.rangoDeMovimiento = 1;
 		this.vision = 7;
 		this.suministro = 1;
 		this.vida = 40;		

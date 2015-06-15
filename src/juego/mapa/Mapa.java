@@ -16,6 +16,8 @@ public class Mapa {
 		this.celdas = new HashMap<Coordenada, Celda>();
 	}
 	
+	
+	
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}	
@@ -75,6 +77,15 @@ public class Mapa {
 			unidad.moverse(coordenadaDisponible);
 		} catch (UbicacionInvalida ui) {}
 		
+	}
+	
+	public static int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
+		
+		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
+		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getX());
+		
+		
+		return distanciaX + distanciaY;
 	}
 	
 }

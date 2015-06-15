@@ -23,6 +23,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	protected int vision;
 	protected int vida;
 	protected int suministro;
+	protected int rangoDeMovimiento;
 	protected BolsaDeCostos bolsaDeCostos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
@@ -34,9 +35,15 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	public int getSuministro() { return this.suministro; }
 	
+
 	@Override
-	public boolean entrenamientoFinalizado() {
-		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
+	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
+		Jugador jugador = Juego.getInstance().turnoDe();
+		
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }			
+		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
+		
+		bolsaDeCostos.consumirRecursos(jugador);
 	}
 	
 	@Override
@@ -46,7 +53,10 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		}
 	}
 	
-	
+	@Override
+	public boolean entrenamientoFinalizado() {
+		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
+	}
 	
 	@Override
 	public boolean ocupanMismoEspacio(Terrestre terrestre) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(terrestre); }
@@ -57,11 +67,9 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	@Override
 	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(construible); }
 	
-	
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
 		throw new RequerimientosInvalidos();
 	}
-	
 	
 	public void ubicar(Coordenada coordenada) {
 		Mapa mapa = Juego.getInstance().getMapa();
@@ -70,20 +78,16 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+		if(this.puedeMoverseHasta(coordFinal)) {
+			this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+		} else {
+			throw new UbicacionInvalida();
+		}
 	}
 	
-
-	
-	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
+	private boolean puedeMoverseHasta(Coordenada coordFinal) {		
+		int distancia = Mapa.distanciaEntreCoordenadas(this.posicion, coordFinal);
 		
-		Jugador jugador = Juego.getInstance().turnoDe();
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
-			
-		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
-		
-		bolsaDeCostos.consumirRecursos(jugador);
-		
+		return distancia <= this.rangoDeMovimiento;
 	}
-	
 }

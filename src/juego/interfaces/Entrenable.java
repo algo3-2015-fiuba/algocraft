@@ -9,6 +9,7 @@ import juego.razas.construcciones.ConstruccionMilitar;
 public interface Entrenable {
 
 	public void entrenador(ConstruccionMilitar cm) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos;
+	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion;
 	public void actualizarEntrenamiento();
 	public boolean entrenamientoFinalizado();
 	public void ubicar(Coordenada coordenada);
