@@ -83,7 +83,7 @@ public class DepositoSuministroTester {
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
 				assertTrue(jugadorActual.poblacionActual() == 0);
-				assertTrue(jugadorActual.limiteDePoblacion() == 0);
+				assertTrue(jugadorActual.poblacionMaxima() == 0);
 			}
 		
 		}
@@ -95,14 +95,14 @@ public class DepositoSuministroTester {
 		// por lo que la construccion deberia haber finalizado
 		
 		assertTrue(jugadorActual.poblacionActual() == 0);
-		assertTrue(jugadorActual.limiteDePoblacion() == 5);
+		assertTrue(jugadorActual.poblacionMaxima() == 5);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 
 		//Verifico que el jugador Protoss no haya modificado su poblacion
 		assertTrue(jugadorActual.poblacionActual() == 0);
-		assertTrue(jugadorActual.limiteDePoblacion() == 0);
+		assertTrue(jugadorActual.poblacionMaxima() == 0);
 		
 	}
 
@@ -128,7 +128,7 @@ public class DepositoSuministroTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertEquals(0, jugadorActual.limiteDePoblacion());
+				assertEquals(0, jugadorActual.poblacionMaxima());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
 		}
@@ -136,7 +136,7 @@ public class DepositoSuministroTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertEquals(200, jugadorActual.limiteDePoblacion());
+		assertEquals(200, jugadorActual.poblacionMaxima());
 		assertEquals(0, jugadorActual.poblacionActual());
 		
 	}

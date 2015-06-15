@@ -54,7 +54,7 @@ public abstract class Jugador {
 		this.recolectarRecursos();
 	}
 	
-	public int limiteDePoblacion() {
+	public int poblacionMaxima() {
 		
 		Collection<ConstruccionHabitable> hospedables = this.getHospedables();
 		int limiteDePoblacion = 0;
@@ -89,7 +89,7 @@ public abstract class Jugador {
 	}
 	
 	public boolean suministrosSuficientes(int suministro) {
-		int suministrosRestantes = this.limiteDePoblacion() - this.poblacionActual();
+		int suministrosRestantes = this.poblacionMaxima() - this.poblacionActual();
 		return (suministrosRestantes >= suministro);
 	}
 	
@@ -98,8 +98,7 @@ public abstract class Jugador {
 
 		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
 		
-		while (it.hasNext()) {
-			
+		while (it.hasNext()) {			
 			if (it.next() == construccion) {
 				entrenable.entrenador(construccion);
 			}

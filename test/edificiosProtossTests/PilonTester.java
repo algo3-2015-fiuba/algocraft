@@ -82,7 +82,7 @@ public class PilonTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
-				assertEquals(0, jugadorActual.limiteDePoblacion());
+				assertEquals(0, jugadorActual.poblacionMaxima());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
 		}
@@ -90,7 +90,7 @@ public class PilonTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertEquals(5, jugadorActual.limiteDePoblacion());
+		assertEquals(5, jugadorActual.poblacionMaxima());
 		assertEquals(0, jugadorActual.poblacionActual());
 		
 	}
@@ -117,7 +117,7 @@ public class PilonTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {
-				assertEquals(0, jugadorActual.limiteDePoblacion());
+				assertEquals(0, jugadorActual.poblacionMaxima());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
 		}
@@ -125,7 +125,7 @@ public class PilonTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 		
-		assertEquals(200, jugadorActual.limiteDePoblacion());
+		assertEquals(200, jugadorActual.poblacionMaxima());
 		assertEquals(0, jugadorActual.poblacionActual());
 		
 	}
