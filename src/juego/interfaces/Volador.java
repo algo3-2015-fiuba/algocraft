@@ -1,5 +1,5 @@
 package juego.interfaces;
 
-public interface Volador extends Controlable {
+public interface Volador {
 
 }

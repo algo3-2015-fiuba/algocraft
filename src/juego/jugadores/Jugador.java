@@ -94,7 +94,7 @@ public abstract class Jugador {
 	}
 	
 	public void entrenar(ConstruccionMilitar construccion, Entrenable entrenable) 
-			throws RecursosInsuficientes, SobrePoblacion {
+			throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
 
 		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
 		
@@ -103,7 +103,6 @@ public abstract class Jugador {
 			if (it.next() == construccion) {
 				entrenable.entrenador(construccion);
 			}
-			
 		}
 	}
 	

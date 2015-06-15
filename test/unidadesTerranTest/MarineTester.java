@@ -81,10 +81,8 @@ public class MarineTester {
 		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
 		
 		for (int i = 1; i < 7; i++) {
-		
 			jugadorActual.finalizarTurno();
 			jugadorActual = Juego.getInstance().turnoDe();
-		
 		}
 		
 		//La barraca coloca al marine, cuando su entrenamiento a finalizado, en la casilla mas cercana disponible.

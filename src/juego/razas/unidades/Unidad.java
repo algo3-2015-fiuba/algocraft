@@ -10,19 +10,20 @@ import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.razas.construcciones.ConstruccionMilitar;
 
 public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	protected int vision;
-	protected BolsaDeCostos bolsaDeCostos;
 	protected int vida;
 	protected int suministro;
-	protected int tiempoDeConstruccion;
+	protected BolsaDeCostos bolsaDeCostos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	
@@ -38,6 +39,13 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
+	@Override
+	public void actualizarEntrenamiento() {
+		if (!entrenamientoFinalizado()) {
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
+		}
+	}
+	
 	
 	
 	@Override
@@ -48,6 +56,12 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	@Override
 	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(construible); }
+	
+	
+	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
+		throw new RequerimientosInvalidos();
+	}
+	
 	
 	public void ubicar(Coordenada coordenada) {
 		Mapa mapa = Juego.getInstance().getMapa();

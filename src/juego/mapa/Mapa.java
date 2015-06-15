@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import juego.Juego;
-import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
