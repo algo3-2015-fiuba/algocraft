@@ -2,6 +2,7 @@ package juego.razas.construcciones;
 
 import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.Construible;
+import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;

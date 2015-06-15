@@ -8,6 +8,11 @@ import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
+import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.SobrePoblacion;
+import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 
@@ -17,6 +22,8 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	protected BolsaDeCostos bolsaDeCostos;
 	protected int vida;
 	protected int suministro;
+	protected int tiempoDeConstruccion;
+	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	
 	public Unidad() {
@@ -31,20 +38,37 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
-	//Por defecto no ocupan el mismo espacio, segun la unidad se especifican sus caracteristicas.
-	@Override
-	public boolean ocupanMismoEspacio(Terrestre terrestre) { return (this instanceof Terrestre); }
+	
 	
 	@Override
-	public boolean ocupanMismoEspacio(Volador volador) { return (this instanceof Volador); }
+	public boolean ocupanMismoEspacio(Terrestre terrestre) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(terrestre); }
 	
 	@Override
-	public boolean ocupanMismoEspacio(Construible construible) { return (this instanceof Terrestre); }
+	public boolean ocupanMismoEspacio(Volador volador) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(volador); }
+	
+	@Override
+	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(construible); }
 	
 	public void ubicar(Coordenada coordenada) {
-		
 		Mapa mapa = Juego.getInstance().getMapa();
 		mapa.ubicarEnCeldaDisponible(coordenada,this);	
+	}
+	
+	@Override
+	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+	}
+	
+
+	
+	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
+		
+		Jugador jugador = Juego.getInstance().turnoDe();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
+			
+		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
+		
+		bolsaDeCostos.consumirRecursos(jugador);
 		
 	}
 	

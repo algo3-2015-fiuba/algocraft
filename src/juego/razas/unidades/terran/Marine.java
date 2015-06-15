@@ -3,6 +3,7 @@ package juego.razas.unidades.terran;
 import juego.Juego;
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -23,38 +24,12 @@ public class Marine extends UnidadComun implements Terrestre {
 		this.suministro = 1;
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,3);
 		this.bolsaDeAtaque = new BolsaDeAtaque(6,6,4,4);
+		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
 
 	@Override
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
 		((Barraca)construccion).entrenar(this);
-	}
-	
-	@Override
-	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-
-		Mapa mapa = Juego.getInstance().getMapa();
-		
-		if (this.posicion == null) {
-			mapa.obtenerCelda(coordFinal).ocupar(this);
-		} else {
-			//Esta parte esta implementada la idea pero habria que verificar que puede avanzar hasta ahi segun el supuesto.
-			mapa.obtenerCelda(this.posicion).desocupar(this);
-			mapa.obtenerCelda(coordFinal).ocupar(this);
-		}
-		
-	}
-	
-	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
-		
-		Jugador jugador = Juego.getInstance().turnoDe();
-		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
-			
-		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
-		
-		bolsaDeCostos.consumirRecursos(jugador);
-		
 	}
 	
 	@Override

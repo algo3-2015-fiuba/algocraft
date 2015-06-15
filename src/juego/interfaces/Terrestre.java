@@ -1,5 +1,5 @@
 package juego.interfaces;
 
-public interface Terrestre {
+public interface Terrestre extends Controlable {
 
 }
