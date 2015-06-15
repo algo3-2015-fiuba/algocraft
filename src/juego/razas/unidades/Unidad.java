@@ -85,9 +85,13 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		}
 	}
 	
-	private boolean puedeMoverseHasta(Coordenada coordFinal) {		
-		int distancia = Mapa.distanciaEntreCoordenadas(this.posicion, coordFinal);
+	private boolean puedeMoverseHasta(Coordenada coordFinal) {
 		
-		return distancia <= this.rangoDeMovimiento;
+		if (this.posicion == null) {
+			return true;
+		} else {
+			int distancia = Mapa.distanciaEntreCoordenadas(this.posicion, coordFinal);		
+			return distancia <= this.rangoDeMovimiento;
+		}
 	}
 }
