@@ -1,5 +1,6 @@
 package juego.razas.construcciones;
 
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
@@ -12,22 +13,19 @@ import juego.mapa.Coordenada;
 public abstract class Construccion implements Construible {
 
 	protected float vida;
-	protected int tiempoDeConstruccion;
 	protected Jugador propietario;
-	protected int costoMinerales, costoGasVespeno;
+	protected BolsaDeCostos bolsaDeCostos;
 	protected Coordenada posicion;
 	
 	public Construccion() {		
 		super();
 		this.vida = 0;
 		this.propietario = null;
-		this.costoMinerales = 0;
-		this.costoGasVespeno = 0;
 	}
 	
 	@Override
 	public boolean construccionFinalizada() {
-		return (this.tiempoDeConstruccion == 0);
+		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package juego.razas.construcciones.terran;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -16,8 +17,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	
 	public CentroDeMineral() {
 		super();
-		this.tiempoDeConstruccion = 4;
-		this.costoMinerales = 50;
+		this.bolsaDeCostos = new BolsaDeCostos(50,0,4);
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Celda celda;
 		
-		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
@@ -48,8 +48,8 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-	
+		this.bolsaDeCostos.consumirRecursos(jugador);
+		
 		this.posicion = coordenada;
 		this.propietario = jugador;
 		
@@ -61,7 +61,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
 			this.vida += 125; 
-			this.tiempoDeConstruccion--;
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}
 	

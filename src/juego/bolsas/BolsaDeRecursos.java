@@ -1,4 +1,4 @@
-package juego.recursos;
+package juego.bolsas;
 
 import juego.interfaces.excepciones.RecursosInsuficientes;
 

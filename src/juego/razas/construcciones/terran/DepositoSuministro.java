@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -17,8 +18,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 	public DepositoSuministro() {
 		super();
 		this.capacidadDeHabitantes = 5;
-		this.tiempoDeConstruccion = 6;
-		this.costoMinerales = 100;
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,6);
 	}
 	
 	@Override
@@ -26,7 +26,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 1);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -45,7 +45,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 			throw new UbicacionInvalida();
 		}
 	
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
+		this.bolsaDeCostos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -57,7 +57,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 		
 		if (!this.construccionFinalizada()) {
 			this.vida += 83.33;
-			this.tiempoDeConstruccion--;
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		} 
 		
 	}

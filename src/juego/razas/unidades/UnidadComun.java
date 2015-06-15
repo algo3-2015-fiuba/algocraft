@@ -1,9 +1,10 @@
 package juego.razas.unidades;
 
+import juego.bolsas.BolsaDeAtaque;
+
 public abstract class UnidadComun extends Unidad {
 
-	protected int danioTierra, danioAire;
-	protected int rangoAtaqueTierra, rangoAtaqueAire;
+	protected BolsaDeAtaque bolsaDeAtaque;
 	protected int transporte;
 	
 }

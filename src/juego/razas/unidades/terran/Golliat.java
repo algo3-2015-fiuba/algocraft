@@ -14,20 +14,20 @@ import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.UnidadComun;
 
-public class Marine extends UnidadComun implements Terrestre {
+public class Golliat extends UnidadComun implements Terrestre {
 
-	public Marine() {
+	public Golliat() {
 		super();
-		this.transporte = 1;
-		this.vision = 7;
+		this.transporte = 2;
+		this.vision = 8;
 		this.suministro = 1;
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,3);
-		this.bolsaDeAtaque = new BolsaDeAtaque(6,6,4,4);
+		this.bolsaDeAtaque = new BolsaDeAtaque(12,10,6,5);
 	}
 
 	@Override
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
-		((Barraca)construccion).entrenar(this);
+		((Fabrica)construccion).entrenar(this);
 	}
 	
 	@Override
@@ -48,12 +48,11 @@ public class Marine extends UnidadComun implements Terrestre {
 	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
 		
 		Jugador jugador = Juego.getInstance().turnoDe();
-		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) { throw new RecursosInsuficientes(); }
 			
-		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
+		if (!jugador.suministrosSuficientes(this.suministro)) { throw new SobrePoblacion();	}
 		
-		bolsaDeCostos.consumirRecursos(jugador);
+		this.bolsaDeCostos.consumirRecursos(jugador);
 		
 	}
 	

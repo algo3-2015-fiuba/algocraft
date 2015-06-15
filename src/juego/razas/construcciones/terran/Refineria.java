@@ -1,6 +1,7 @@
 package juego.razas.construcciones.terran;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -16,8 +17,7 @@ public class Refineria extends ConstruccionRecolectora {
 
 	public Refineria() {
 		super();
-		this.tiempoDeConstruccion = 6;
-		this.costoMinerales = 100;
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,6);
 	}
 	
 	@Override
@@ -40,14 +40,16 @@ public class Refineria extends ConstruccionRecolectora {
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		
 		if (!celda.poseeRecursos()) throw new UbicacionInvalida();
 		
 		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
 		
 		celda.ocupar(this);
 		
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-	
+		this.bolsaDeCostos.consumirRecursos(jugador);
+		
 		this.posicion = coordenada;
 		this.propietario = jugador;
 		
@@ -59,7 +61,7 @@ public class Refineria extends ConstruccionRecolectora {
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
 			this.vida += 125; 
-			this.tiempoDeConstruccion--;
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}
 

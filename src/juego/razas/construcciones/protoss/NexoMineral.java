@@ -1,6 +1,7 @@
 package juego.razas.construcciones.protoss;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -16,8 +17,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	
 	public NexoMineral() {
 		super();
-		this.tiempoDeConstruccion = 4;
-		this.costoMinerales = 50;
+		this.bolsaDeCostos = new BolsaDeCostos(50,0,4);
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Celda celda;
 		
-		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
@@ -48,7 +48,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
+		this.bolsaDeCostos.consumirRecursos(jugador);
 	
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -61,7 +61,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
 			this.vida += 62.5; 
-			this.tiempoDeConstruccion--;
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}
 	

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -16,15 +17,14 @@ public class Acceso extends ConstruccionMilitar {
 
 	public Acceso() {
 		super();
-		this.tiempoDeConstruccion = 8;
-		this.costoMinerales = 150;
+		this.bolsaDeCostos = new BolsaDeCostos(150,0,8);
 	}
 
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada()) {
 			this.vida += 62.5;
-			this.tiempoDeConstruccion--;
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 			if (this.construccionFinalizada()) ((JugadorProtoss)this.propietario).activarPuertoEstelar(true);
 		}
 		
@@ -36,7 +36,7 @@ public class Acceso extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -55,7 +55,7 @@ public class Acceso extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
+		this.bolsaDeCostos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;

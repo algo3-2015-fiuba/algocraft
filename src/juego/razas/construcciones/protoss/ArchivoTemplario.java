@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequierePuertoEstelar;
@@ -18,9 +19,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 
 	public ArchivoTemplario() {
 		super();
-		this.tiempoDeConstruccion = 9;
-		this.costoMinerales = 150;
-		this.costoGasVespeno = 200;
+		this.bolsaDeCostos = new BolsaDeCostos(150,200,9);
 	}
 	
 	@Override
@@ -29,8 +28,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 				
-		if (!jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) throw new RecursosInsuficientes();
-		if (!jugador.bolsaDeRecursos().gasVespenoSuficiente(this.costoGasVespeno)) throw new RecursosInsuficientes();
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if (!jugador.archivoTemplarioHabilitado()) throw new RequierePuertoEstelar();
 		
@@ -51,8 +49,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-		jugador.bolsaDeRecursos().consumirGasVespeno(this.costoGasVespeno);
+		this.bolsaDeCostos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -63,7 +60,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
 			this.vida += 55.55;	
-			this.tiempoDeConstruccion--;		
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
 		}	
 	}
 	

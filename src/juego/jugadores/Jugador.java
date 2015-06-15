@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeRecursos;
 import juego.interfaces.Construible;
 import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -17,7 +18,6 @@ import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
-import juego.recursos.BolsaDeRecursos;
 
 public abstract class Jugador {
 

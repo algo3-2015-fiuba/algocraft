@@ -49,6 +49,8 @@ public class Mapa {
 
 	public void ubicarEnCeldaDisponible(Coordenada coordenadaDeterminante, Unidad unidad) {
 		
+		//Ubica a una unidad en un rango cercano a la coordenada determinante
+		
 		int x = coordenadaDeterminante.getX();
 		int y = coordenadaDeterminante.getY();
 		int i = 0, j = 0;

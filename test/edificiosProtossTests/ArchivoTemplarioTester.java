@@ -147,7 +147,7 @@ public class ArchivoTemplarioTester {
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
 		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(150);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(200);
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(100);
 
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		
@@ -155,14 +155,14 @@ public class ArchivoTemplarioTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
-		
+
 		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
-		
+
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
