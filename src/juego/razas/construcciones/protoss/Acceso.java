@@ -17,7 +17,7 @@ public class Acceso extends ConstruccionMilitar {
 
 	public Acceso() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(150,0,8);
+		this.bolsaDeCostos = new BolsaDeCostos(150,0,8,0);
 	}
 
 	@Override

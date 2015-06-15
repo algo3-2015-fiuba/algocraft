@@ -18,7 +18,7 @@ public class Pilon extends ConstruccionHabitable {
 	public Pilon() {
 		super();
 		this.capacidadDeHabitantes = 5;
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,5);
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,5,0);
 	}
 	
 	@Override

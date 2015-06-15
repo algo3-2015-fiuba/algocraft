@@ -22,7 +22,6 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	protected int vision;
 	protected int vida;
-	protected int suministro;
 	protected int rangoDeMovimiento;
 	protected BolsaDeCostos bolsaDeCostos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
@@ -33,15 +32,16 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		this.vida = 0;
 	}
 	
-	public int getSuministro() { return this.suministro; }
-	
+	public int suministroUsado() {
+		return this.bolsaDeCostos.suministroUsado();
+	}
 
 	@Override
 	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
 		Jugador jugador = Juego.getInstance().turnoDe();
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }			
-		if (!jugador.suministrosSuficientes(this.suministro)) {	throw new SobrePoblacion();	}
+		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
+		if (!jugador.suministrosSuficientes(this.bolsaDeCostos.suministroUsado())) { throw new SobrePoblacion(); }
 		
 		bolsaDeCostos.consumirRecursos(jugador);
 	}

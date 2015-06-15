@@ -19,7 +19,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 
 	public PuertoEstelar() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(150,100,10);
+		this.bolsaDeCostos = new BolsaDeCostos(150,100,10,0);
 	}
 	
 	@Override

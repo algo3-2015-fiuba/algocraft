@@ -4,7 +4,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 
 public class BolsaDeRecursos {
 
-	private int mineralesRecolectados, gasVespenoRecolectado;
+	private int mineralesRecolectados;
+	private int gasVespenoRecolectado;
+	private int suministroMaximo;
 	
 	public BolsaDeRecursos() {
 		super();
@@ -13,17 +15,18 @@ public class BolsaDeRecursos {
 	}
 	
 	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes {	
-		if (this.mineralesRecolectados < costoMinerales) throw new RecursosInsuficientes();		
+		if (!this.mineralesSuficientes(costoMinerales)) throw new RecursosInsuficientes();		
 		this.mineralesRecolectados -= costoMinerales;
 	}
 	
 	public void consumirGasVespeno(int costoGas) throws RecursosInsuficientes {	
-		if (this.gasVespenoRecolectado < costoGas) throw new RecursosInsuficientes();		
+		if (!this.gasVespenoSuficiente(costoGas)) throw new RecursosInsuficientes();		
 		this.gasVespenoRecolectado -= costoGas;
 	}
 	
 	public boolean mineralesSuficientes(int cantidad) { return (cantidad <= this.mineralesRecolectados); }
 	public boolean gasVespenoSuficiente(int cantidad) { return (cantidad <= this.gasVespenoRecolectado); }
+	public boolean suministrosSuficiente(int cantidad) { return (cantidad <= this.suministroMaximo); }
 
 	public void recolectarMinerales(int cantidad) { this.mineralesRecolectados += cantidad; }
 	public void recolectarGasVespeno(int cantidad) { this.gasVespenoRecolectado += cantidad; }

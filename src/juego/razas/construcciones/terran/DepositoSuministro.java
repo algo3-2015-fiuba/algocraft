@@ -18,7 +18,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 	public DepositoSuministro() {
 		super();
 		this.capacidadDeHabitantes = 5;
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,6);
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,6,0);
 	}
 	
 	@Override

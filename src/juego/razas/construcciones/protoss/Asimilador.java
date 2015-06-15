@@ -17,7 +17,7 @@ public class Asimilador extends ConstruccionRecolectora {
 
 	public Asimilador() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,6);
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,6,0);
 	}
 	
 	@Override

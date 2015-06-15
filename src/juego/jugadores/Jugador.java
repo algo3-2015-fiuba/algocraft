@@ -75,7 +75,7 @@ public abstract class Jugador {
 		Iterator<Unidad> itU = this.unidades.iterator();
 		
 		while (itU.hasNext()) {
-			poblacionActual += itU.next().getSuministro();
+			poblacionActual += itU.next().suministroUsado();
 		}
 		
 		Iterator<ConstruccionMilitar> itC = this.getMilitables().iterator();

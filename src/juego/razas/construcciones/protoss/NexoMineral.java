@@ -17,7 +17,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	
 	public NexoMineral() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(50,0,4);
+		this.bolsaDeCostos = new BolsaDeCostos(50,0,4,0);
 	}
 	
 	@Override

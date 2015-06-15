@@ -19,7 +19,7 @@ public class Fabrica extends ConstruccionMilitar {
 
 	public Fabrica() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(200,100,12);
+		this.bolsaDeCostos = new BolsaDeCostos(200,100,12,0);
 	}
 	
 	@Override

@@ -17,7 +17,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	
 	public CentroDeMineral() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(50,0,4);
+		this.bolsaDeCostos = new BolsaDeCostos(50,0,4,0);
 	}
 	
 	@Override

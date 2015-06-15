@@ -47,7 +47,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 		Iterator<Entrenable> it = this.entrenamientos.iterator();
 		
 		while (it.hasNext()) {
-			suministrosEnEntrenamiento += ((Unidad)(it.next())).getSuministro();
+			suministrosEnEntrenamiento += ((Unidad)(it.next())).suministroUsado();
 		}
 		
 		return suministrosEnEntrenamiento;

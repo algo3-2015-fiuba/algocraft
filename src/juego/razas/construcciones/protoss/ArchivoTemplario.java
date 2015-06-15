@@ -19,7 +19,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 
 	public ArchivoTemplario() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(150,200,9);
+		this.bolsaDeCostos = new BolsaDeCostos(150,200,9,0);
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public class Barraca extends ConstruccionMilitar {
 
 	public Barraca() {
 		super();
-		this.bolsaDeCostos = new BolsaDeCostos(150,0,12);
+		this.bolsaDeCostos = new BolsaDeCostos(150,0,12,0);
 	}
 
 	@Override
