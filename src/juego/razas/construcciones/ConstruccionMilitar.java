@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Entrenable;
+import juego.razas.unidades.Unidad;
 
 public abstract class ConstruccionMilitar extends Construccion {
 	
@@ -18,8 +19,9 @@ public abstract class ConstruccionMilitar extends Construccion {
 	@Override
 	public boolean puedeEntrenarUnidades() { return true; }
 	
-	public void actualizarEntrenamientos() {
+	public Collection<Unidad> actualizarEntrenamientos() {
 		
+		Collection<Unidad> nuevasUnidades = new ArrayList<Unidad>();
 		Collection<Entrenable> entrenamientosFinalizados = new ArrayList<Entrenable>();
 		
 		Iterator<Entrenable> it = this.entrenamientos.iterator();
@@ -28,10 +30,27 @@ public abstract class ConstruccionMilitar extends Construccion {
 			entrenable.actualizarEntrenamiento();
 			if (entrenable.entrenamientoFinalizado()) {
 				entrenamientosFinalizados.add(entrenable);
+				nuevasUnidades.add((Unidad)entrenable);
+				entrenable.ubicar(this.posicion);
 			}
 		}
-		
+
 		this.entrenamientos.removeAll(entrenamientosFinalizados);
+		return nuevasUnidades;
+		
+	}
+
+	public int suministrosEnEntrenamiento() {
+		
+		int suministrosEnEntrenamiento = 0;
+		
+		Iterator<Entrenable> it = this.entrenamientos.iterator();
+		
+		while (it.hasNext()) {
+			suministrosEnEntrenamiento += ((Unidad)(it.next())).getSuministro();
+		}
+		
+		return suministrosEnEntrenamiento;
 		
 	}
 

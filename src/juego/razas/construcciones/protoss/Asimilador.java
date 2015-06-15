@@ -48,6 +48,7 @@ public class Asimilador extends ConstruccionRecolectora {
 		
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 	
+		this.posicion = coordenada;
 		this.propietario = jugador;
 	
 		this.nodoGasVespeno = (GasVespeno) celda.getRecurso();

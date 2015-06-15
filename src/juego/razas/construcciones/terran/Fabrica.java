@@ -65,6 +65,7 @@ public class Fabrica extends ConstruccionMilitar {
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 		jugador.bolsaDeRecursos().consumirGasVespeno(this.costoGasVespeno);
 		
+		this.posicion = coordenada;
 		this.propietario = jugador;
 			
 	}

@@ -1,11 +1,14 @@
 package juego.razas.unidades;
 
+import juego.Juego;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
+import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 
 public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
@@ -15,6 +18,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	protected int vida;
 	protected int tiempoDeConstruccion;
 	protected boolean esVolador, esTerrestre;
+	protected Coordenada posicion;
 	
 	public Unidad() {
 		super();
@@ -23,6 +27,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		this.costoGasVespeno = 0;
 		this.esVolador = false;
 		this.esTerrestre = false;
+		this.posicion = null;
 	}
 	
 	public int getSuministro() { return this.suministro; }
@@ -41,5 +46,12 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	@Override
 	public boolean ocupanMismoEspacio(Construible construible) { return esTerrestre; }
+	
+	public void ubicar(Coordenada coordenada) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		mapa.ubicarEnCeldaDisponible(coordenada,this);	
+		
+	}
 	
 }

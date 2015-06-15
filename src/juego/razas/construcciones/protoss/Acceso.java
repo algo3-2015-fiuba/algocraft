@@ -57,6 +57,7 @@ public class Acceso extends ConstruccionMilitar {
 	
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 		
+		this.posicion = coordenada;
 		this.propietario = jugador;
 			
 	}

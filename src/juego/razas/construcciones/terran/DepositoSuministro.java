@@ -47,6 +47,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 	
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 		
+		this.posicion = coordenada;
 		this.propietario = jugador;
 			
 	}

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import juego.interfaces.excepciones.CeldaOcupada;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.unidades.Unidad;
 
 public class Mapa {
 	
@@ -29,8 +30,7 @@ public class Mapa {
 	}
 	
 	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
-			throws CoordenadaFueraDeRango, CeldaOcupada {
-			
+			throws CoordenadaFueraDeRango {	
 		
 		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
 			
@@ -45,6 +45,34 @@ public class Mapa {
 			
 		return rangoDeCeldas;
 			
+	}
+
+	public void ubicarEnCeldaDisponible(Coordenada coordenadaDeterminante, Unidad unidad) {
+		
+		int x = coordenadaDeterminante.getX();
+		int y = coordenadaDeterminante.getY();
+		int i = 0, j = 0;
+		Coordenada coordenadaDisponible = null;
+		boolean ubicado = false;
+		
+		while ((j < 15) && (!ubicado)) {
+			while ((i < 15) && (!ubicado)) {
+				
+				try {
+					coordenadaDisponible = new Coordenada(x+i, y+j);
+					this.obtenerCelda(coordenadaDisponible);
+					ubicado = true;
+				} catch (UbicacionInvalida ui) {}
+				
+				i++;
+			}
+			j++;
+		}
+		
+		try {
+			unidad.moverse(coordenadaDisponible);
+		} catch (UbicacionInvalida ui) {}
+		
 	}
 	
 }

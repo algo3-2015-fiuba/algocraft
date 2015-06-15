@@ -7,6 +7,7 @@ import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.UnidadComun;
@@ -34,6 +35,16 @@ public class Marine extends UnidadComun implements Terrestre {
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		if (this.posicion == null) {
+			mapa.obtenerCelda(coordFinal).ocupar(this);
+		} else {
+			//Esta parte esta implementada la idea pero habria que verificar que puede avanzar hasta ahi segun el supuesto.
+			mapa.obtenerCelda(this.posicion).desocupar(this);
+			mapa.obtenerCelda(coordFinal).ocupar(this);
+		}
 		
 	}
 	

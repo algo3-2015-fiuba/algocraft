@@ -50,6 +50,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		
 		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
 	
+		this.posicion = coordenada;
 		this.propietario = jugador;
 		
 		this.nodoMineral = (Mineral) celda.getRecurso();

@@ -72,10 +72,16 @@ public abstract class Jugador {
 		
 		int poblacionActual = 0;
 		
-		Iterator<Unidad> it = this.unidades.iterator();
+		Iterator<Unidad> itU = this.unidades.iterator();
 		
-		while (it.hasNext()) {
-			poblacionActual += it.next().getSuministro();
+		while (itU.hasNext()) {
+			poblacionActual += itU.next().getSuministro();
+		}
+		
+		Iterator<ConstruccionMilitar> itC = this.getMilitables().iterator();
+		
+		while (itC.hasNext()) {
+			poblacionActual += itC.next().suministrosEnEntrenamiento();
 		}
 		
 		return poblacionActual;
@@ -169,8 +175,12 @@ public abstract class Jugador {
 				
 		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
 			
-		while (it.hasNext()) {			
-			it.next().actualizarEntrenamientos();		
+		while (it.hasNext()) {		
+			
+			// Cuando actualizo los entrenamientos de las construcciones militares,
+			// estas devuelven una collecion de unidades finalizadas.
+			this.unidades.addAll(it.next().actualizarEntrenamientos());
+			
 		}
 
 	}

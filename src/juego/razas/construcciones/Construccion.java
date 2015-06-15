@@ -15,6 +15,7 @@ public abstract class Construccion implements Construible {
 	protected int tiempoDeConstruccion;
 	protected Jugador propietario;
 	protected int costoMinerales, costoGasVespeno;
+	protected Coordenada posicion;
 	
 	public Construccion() {		
 		super();
