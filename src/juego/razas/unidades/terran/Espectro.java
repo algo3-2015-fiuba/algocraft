@@ -16,10 +16,10 @@ public class Espectro extends UnidadComun implements Volador {
 		super();
 		
 		this.rangoDeMovimiento = 1;
-		this.vision = 8;
-		this.vida = 40;		
-		this.bolsaDeCostos = new BolsaDeCostos(100,50,6,2);
-		this.bolsaDeAtaque = new BolsaDeAtaque(12,10,6,5);
+		this.vision = 7;
+		this.vida = 120;		
+		this.bolsaDeCostos = new BolsaDeCostos(150,100,8,2);
+		this.bolsaDeAtaque = new BolsaDeAtaque(8,20,5,5);
 		this.estrategiaDePosicion = new PosicionVolador();
 	}
 
