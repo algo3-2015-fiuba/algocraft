@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Construible;
-import juego.interfaces.Terrestre;
-import juego.interfaces.Volador;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.materiales.Material;
@@ -96,6 +94,10 @@ public class Celda {
 	
 	public void desocupar(Construible construible) {
 		this.construibles.remove(construible);
+	}
+	
+	public Iterator<Unidad> unidades() {
+		return this.unidades.iterator();
 	}
 	
 }
