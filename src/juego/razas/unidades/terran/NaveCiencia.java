@@ -17,6 +17,8 @@ import juego.razas.unidades.UnidadMagica;
 
 public class NaveCiencia extends UnidadMagica implements Volador {
 	
+	public static final int ENERGIA_RECUPERADA = 10;
+	public static final int RADIO_EMP = 5;
 
 	public NaveCiencia() {
 		super();
@@ -34,7 +36,7 @@ public class NaveCiencia extends UnidadMagica implements Volador {
 	}
 	
 	public void regenerarEnergia() {
-		this.energia += 10;
+		this.energia += ENERGIA_RECUPERADA;
 		
 		if(this.energia > 200) this.energia = 200;
 	}
@@ -42,7 +44,7 @@ public class NaveCiencia extends UnidadMagica implements Volador {
 	public void hacerEMP(Coordenada coordInicio) {
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		Iterator<Unidad> unidadesEMP = mapa.unidadesACiertaDistanciaDe(coordInicio, 5).iterator();
+		Iterator<Unidad> unidadesEMP = mapa.unidadesACiertaDistanciaDe(coordInicio, RADIO_EMP).iterator();
 		
 		while(unidadesEMP.hasNext()) {
 			unidadesEMP.next().recibirEMP();

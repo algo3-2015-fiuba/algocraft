@@ -29,6 +29,8 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 	protected EstrategiaPosicion estrategiaDePosicion;
 	protected Coordenada posicion;
 	
+	public static final int DANIO_RADIACION = 5;
+	
 	public Unidad() {
 		super();
 		this.vida = 0;
@@ -96,7 +98,8 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 			
 			while(unidadesCercanas.hasNext()) {
 				Unidad victima = unidadesCercanas.next();
-				victima.recibirDanio(5);
+				
+				victima.recibirDanio(DANIO_RADIACION);
 			}
 		}
 	}

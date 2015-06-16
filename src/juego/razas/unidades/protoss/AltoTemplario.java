@@ -16,6 +16,9 @@ import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
 public class AltoTemplario extends UnidadMagica implements Terrestre {
+	
+	public static final int ENERGIA_RECUPERADA = 15;
+	public static final int RADIO_TORMENTA = 5;
 
 	public AltoTemplario() {
 		super();
@@ -34,7 +37,7 @@ public class AltoTemplario extends UnidadMagica implements Terrestre {
 
 	@Override
 	public void regenerarEnergia() {
-		this.energia += 15;
+		this.energia += ENERGIA_RECUPERADA;
 		
 		if(this.energia > 200) this.energia = 200;
 	}
@@ -42,7 +45,7 @@ public class AltoTemplario extends UnidadMagica implements Terrestre {
 	public void tormenta(Coordenada posicionCentralTormenta) {
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		Iterator<Unidad> unidadesBajoTormenta = mapa.unidadesACiertaDistanciaDe(posicionCentralTormenta, 5).iterator();
+		Iterator<Unidad> unidadesBajoTormenta = mapa.unidadesACiertaDistanciaDe(posicionCentralTormenta, RADIO_TORMENTA).iterator();
 		
 		while(unidadesBajoTormenta.hasNext()) {
 			unidadesBajoTormenta.next().recibirDanio(100);
