@@ -1,14 +1,16 @@
 package juego.razas.unidades;
 
 import juego.Juego;
+import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.Atacable;
+import juego.interfaces.Atacante;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
-import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.interfaces.estrategias.EstrategiaPosicion;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -16,6 +18,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 
 public abstract class Unidad implements Controlable, Entrenable, Atacable {
@@ -24,7 +27,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	protected int vida;
 	protected int rangoDeMovimiento;
 	protected BolsaDeCostos bolsaDeCostos;
-	protected EstrategiaMovimiento estrategiaDeMovimiento;
+	protected EstrategiaPosicion estrategiaDePosicion;
 	protected Coordenada posicion;
 	
 	public Unidad() {
@@ -35,6 +38,32 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	public int suministroUsado() {
 		return this.bolsaDeCostos.suministroUsado();
 	}
+	
+	public void recibirDanio(BolsaDeAtaque bolsaDeAtaque) {
+		int danio = this.estrategiaDePosicion.danioRecibido(bolsaDeAtaque);
+		
+		this.vida -= danio;
+		
+		if(this.estaMuerto()) {
+			this.destruir();
+		}
+	}
+	
+	private void destruir() {
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		try {
+			mapa.obtenerCelda(this.posicion).desocupar(this);
+		} catch (CoordenadaFueraDeRango e) {
+			// TODO No debería nunca una unidad estar fuera de rango
+			e.printStackTrace();
+		}
+	}
+
+	public boolean estaMuerto() {
+		return this.vida <= 0;
+	}
+	
 
 	@Override
 	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
@@ -59,13 +88,13 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	}
 	
 	@Override
-	public boolean ocupanMismoEspacio(Terrestre terrestre) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(terrestre); }
+	public boolean ocupanMismoEspacio(Terrestre terrestre) { return estrategiaDePosicion.ocupaMismoEspacioQue(terrestre); }
 	
 	@Override
-	public boolean ocupanMismoEspacio(Volador volador) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(volador); }
+	public boolean ocupanMismoEspacio(Volador volador) { return estrategiaDePosicion.ocupaMismoEspacioQue(volador); }
 	
 	@Override
-	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDeMovimiento.ocupaMismoEspacioQue(construible); }
+	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDePosicion.ocupaMismoEspacioQue(construible); }
 	
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
 		throw new RequerimientosInvalidos();
@@ -79,7 +108,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
 		if(this.puedeMoverseHasta(coordFinal)) {
-			this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+			this.estrategiaDePosicion.moverse(this, this.posicion, coordFinal);
 		} else {
 			throw new UbicacionInvalida();
 		}

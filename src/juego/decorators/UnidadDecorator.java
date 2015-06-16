@@ -9,23 +9,4 @@ import juego.razas.unidades.Unidad;
 
 public class UnidadDecorator extends Unidad {
 
-	@Override
-	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void entrenador(ConstruccionMilitar cm)
-			throws RecursosInsuficientes, SobrePoblacion {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actualizarEntrenamiento() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

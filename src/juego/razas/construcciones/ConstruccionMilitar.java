@@ -28,6 +28,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 		while (it.hasNext()) {
 			Entrenable entrenable = it.next();
 			entrenable.actualizarEntrenamiento();
+			
 			if (entrenable.entrenamientoFinalizado()) {
 				entrenamientosFinalizados.add(entrenable);
 				nuevasUnidades.add((Unidad)entrenable);
