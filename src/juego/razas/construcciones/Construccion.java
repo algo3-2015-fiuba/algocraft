@@ -8,7 +8,6 @@ import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.estrategias.EstrategiaPosicion;
-import juego.interfaces.excepciones.EdificiosNoSeMueven;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;

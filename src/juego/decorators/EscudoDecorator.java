@@ -1,5 +1,6 @@
 package juego.decorators;
 
+import juego.bolsas.BolsaDeAtaque;
 import juego.interfaces.Atacable;
 import juego.razas.unidades.Unidad;
 
@@ -9,18 +10,12 @@ public class EscudoDecorator extends Unidad {
 	int escudoMaximo;
 	int escudoActual;
 	
-	public EscudoDecorator(Atacable decorado, int escudoMaximo) {
+	public EscudoDecorator(Unidad decorado, int escudoMaximo) {
+		
 		this.decorado = decorado;
 		this.escudoMaximo = escudoMaximo;
 	}
-
-	@Override
-	public void recibirDanio(int cantidad) {
-		int nuevoDanio = this.atacarEscudo(cantidad);
-		
-		decorado.recibirDanio(nuevoDanio);
-	}
-
+	
 	private int atacarEscudo(int danioRecibido) {
 		if(escudoActual >= danioRecibido) {
 			escudoActual -= danioRecibido;
@@ -31,5 +26,26 @@ public class EscudoDecorator extends Unidad {
 		
 		return danioRecibido;
 	}
+
+	@Override
+	public void recibirDanio(int cantidad) {
+		int nuevoDanio = this.atacarEscudo(cantidad);
+		
+		decorado.recibirDanio(nuevoDanio);
+	}
+	
+	@Override
+	public void recibirAtaque(BolsaDeAtaque ataque) {
+		decorado.recibirAtaque(ataque);
+	}
+
+	@Override
+	public boolean estaMuerto() {
+		return decorado.estaMuerto();
+	}
+	
+	
+	
+	
 
 }

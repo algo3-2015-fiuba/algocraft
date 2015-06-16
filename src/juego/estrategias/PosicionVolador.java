@@ -2,9 +2,6 @@ package juego.estrategias;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeAtaque;
-import juego.interfaces.Construible;
-import juego.interfaces.Terrestre;
-import juego.interfaces.Volador;
 import juego.interfaces.estrategias.EstrategiaPosicion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;

@@ -10,7 +10,6 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
-import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -121,8 +120,7 @@ public class ataqueSimpleTest {
 		
 		assertTrue(marine2.estaMuerto()); // 0 de vida
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		
+		Mapa mapa = Juego.getInstance().getMapa();		
 		Celda celdaPreviamenteOcupadaPorMarine2 = mapa.obtenerCelda(ubicacionMarine2);
 		
 		Iterator<Unidad> unidadesEnCelda = celdaPreviamenteOcupadaPorMarine2.unidades();
@@ -130,7 +128,7 @@ public class ataqueSimpleTest {
 		while (unidadesEnCelda.hasNext()) {
 			
 			if (unidadesEnCelda.next().equals(marine2)) {
-				assertTrue(false);
+				assertTrue(false); //Si existe, algo estuvo mal
 			}
 		}
 		

@@ -6,11 +6,8 @@ import juego.estrategias.PosicionTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.Acceso;
-import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.UnidadComun;
 
 public class Zealot extends UnidadComun implements Terrestre {

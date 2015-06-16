@@ -8,12 +8,14 @@ import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequierePuertoEstelar;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.protoss.AltoTemplario;
 
 public class ArchivoTemplario extends ConstruccionMilitar {
 
@@ -62,6 +64,11 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 			this.vida += 55.55;	
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
 		}	
+	}
+
+	public void entrenar(AltoTemplario altoTemplario) throws RecursosInsuficientes, SobrePoblacion {
+		altoTemplario.iniciarEntrenamiento();
+		this.entrenamientos.add(altoTemplario);
 	}
 	
 }

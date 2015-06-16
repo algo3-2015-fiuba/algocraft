@@ -1,9 +1,11 @@
-package ataqueTest;
+package mapa;
 
 import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import juego.Juego;
 import juego.excepciones.ColorInvalido;
@@ -16,8 +18,9 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.razas.factories.UnidadProtossFactory;
+import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
@@ -25,8 +28,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ataqueConEscudoProtossTest {
-
+public class mapaTest {
+	
 	@Before 
 	public void reiniciarJuego() {
 		
@@ -55,26 +58,26 @@ public class ataqueConEscudoProtossTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	
+
 	@Test
-	public void testSiUnMarineAtacaAOtroEsteNoMuerePrematuramente() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
-		
+	public void testMapaDevuelveUnidadesCorrectamenteDentroDeUnRadio() {
 		this.reiniciarJuego();
 		
-		Coordenada ubicacionMarine = new Coordenada(0,20);
-		Coordenada ubicacionZealot = new Coordenada(0,21);
+		Coordenada ubicacionMarine = new Coordenada(5,20);
+		Coordenada ubicacionAltoTemplario = new Coordenada(5,21);
 		
 		Marine marine = new Marine();
-		Unidad zealot = UnidadProtossFactory.crearZealot();
+		
+		AltoTemplario altoTemplario = new AltoTemplario();
 		
 		marine.ubicar(ubicacionMarine);
-		zealot.ubicar(ubicacionZealot);
+		altoTemplario.ubicar(ubicacionAltoTemplario);
 		
-		//TODO: Implementar correctamente el decorator de los escudos
+		Mapa mapa = Juego.getInstance().getMapa();
 		
-		marine.atacar(zealot);
+		ArrayList<Unidad> unidades = mapa.unidadesACiertaDistanciaDe(ubicacionMarine, 1);
 		
-		assertFalse(zealot.estaMuerto());
+		assertEquals(unidades.size(), 2);
 	}
 
 }

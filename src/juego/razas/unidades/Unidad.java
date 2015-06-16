@@ -4,12 +4,8 @@ import juego.Juego;
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.Atacable;
-import juego.interfaces.Atacante;
-import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
-import juego.interfaces.Terrestre;
-import juego.interfaces.Volador;
 import juego.interfaces.estrategias.EstrategiaPosicion;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
@@ -39,6 +35,12 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 		return this.bolsaDeCostos.suministroUsado();
 	}
 	
+	/* 
+	 * ==========
+	 * Ataques
+	 * ==========
+	 */
+	
 	public void recibirAtaque(BolsaDeAtaque bolsaDeAtaque) {
 		this.recibirDanio(this.estrategiaDePosicion.danioRecibido(bolsaDeAtaque));
 	}
@@ -66,6 +68,27 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 		return this.vida <= 0;
 	}
 	
+	/* 
+	 * ==========
+	 * Magias
+	 * ==========
+	 */
+	
+	public void ataqueEMP() {
+		//No hace nada por default
+	}
+	
+	public void irradiarse() {
+		this.recibirDanio(5);
+	}
+	
+	
+	/* 
+	 * ==========
+	 * Entrenamientos
+	 * ==========
+	 */
+	
 
 	@Override
 	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
@@ -89,6 +112,16 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
+	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
+		throw new RequerimientosInvalidos();
+	}
+	
+	/* 
+	 * ==========
+	 * Posiciones
+	 * ==========
+	 */
+	
 	@Override
 	public boolean ocupanMismoEspacio(Controlable controlable) { 
 		return controlable.ocupanMismoEspacio(this.estrategiaDePosicion); 
@@ -97,10 +130,6 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 	@Override
 	public boolean ocupanMismoEspacio(EstrategiaPosicion estrategiaDeOtro) { 
 		return estrategiaDePosicion.ocupaMismoEspacioQue(estrategiaDeOtro); 
-	}
-	
-	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
-		throw new RequerimientosInvalidos();
 	}
 	
 	public void ubicar(Coordenada coordenada) {

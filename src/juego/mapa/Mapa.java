@@ -84,13 +84,13 @@ public class Mapa {
 	public static int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
 		
 		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
-		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getX());
+		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getY());
 		
 		
 		return distanciaX + distanciaY;
 	}
 	
-	public Iterator<Unidad> unidadesACiertaDistanciaDe(Coordenada inicio, int distancia) {
+	public ArrayList<Unidad> unidadesACiertaDistanciaDe(Coordenada inicio, int distancia) {
 		
 		ArrayList<Unidad> unidadesSeleccionadas = new ArrayList<Unidad>();
 		
@@ -107,7 +107,7 @@ public class Mapa {
 		
 		
 		
-		return unidadesSeleccionadas.iterator();
+		return unidadesSeleccionadas;
 	}
 	
 	private Iterator<Celda> celdasACiertaDistanciaDe(Coordenada inicio, int distancia) {

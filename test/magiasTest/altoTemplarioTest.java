@@ -1,4 +1,4 @@
-package ataqueTest;
+package magiasTest;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +18,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.razas.factories.UnidadProtossFactory;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
@@ -25,7 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ataqueConEscudoProtossTest {
+public class altoTemplarioTest {
 
 	@Before 
 	public void reiniciarJuego() {
@@ -56,25 +57,23 @@ public class ataqueConEscudoProtossTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineAtacaAOtroEsteNoMuerePrematuramente() 
+	public void testSiUnMarineEstaBajoUnaTormentaMuereInmediatamente() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
 		
 		this.reiniciarJuego();
 		
 		Coordenada ubicacionMarine = new Coordenada(0,20);
-		Coordenada ubicacionZealot = new Coordenada(0,21);
+		Coordenada ubicacionAltoTemplario = new Coordenada(5,21);
 		
 		Marine marine = new Marine();
-		Unidad zealot = UnidadProtossFactory.crearZealot();
-		
 		marine.ubicar(ubicacionMarine);
-		zealot.ubicar(ubicacionZealot);
 		
-		//TODO: Implementar correctamente el decorator de los escudos
+		AltoTemplario altoTemplario = new AltoTemplario();
+		altoTemplario.ubicar(ubicacionAltoTemplario);
 		
-		marine.atacar(zealot);
+		altoTemplario.tormenta(ubicacionMarine); //Bien en el medio del marine
 		
-		assertFalse(zealot.estaMuerto());
+		assertTrue(marine.estaMuerto());
 	}
 
 }

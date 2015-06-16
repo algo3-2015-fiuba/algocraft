@@ -26,5 +26,11 @@ public class NaveCiencia extends UnidadMagica implements Volador {
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
 		((PuertoEstelar)construccion).entrenar(this);
 	}
+	
+	public void regenerarEnergia() {
+		this.energia += 10;
+		
+		if(this.energia > 200) this.energia = 200;
+	}
 
 }

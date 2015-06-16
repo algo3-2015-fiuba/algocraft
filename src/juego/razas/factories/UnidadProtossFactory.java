@@ -1,7 +1,6 @@
 package juego.razas.factories;
 
 import juego.decorators.EscudoDecorator;
-import juego.interfaces.Atacable;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.protoss.Zealot;
 
