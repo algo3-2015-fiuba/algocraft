@@ -1,32 +1,34 @@
 package juego.razas.unidades.protoss;
 
+import juego.bolsas.BolsaDeAtaque;
+import juego.bolsas.BolsaDeCostos;
+import juego.estrategias.PosicionTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.UnidadComun;
 
 public class Zealot extends UnidadComun implements Terrestre {
 
-	@Override
-	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		// TODO Auto-generated method stub
+	public Zealot() {
+		super();
 		
+		this.rangoDeMovimiento = 1;
+		this.vision = 7;
+		this.vida = 100;		
+		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
+		this.bolsaDeAtaque = new BolsaDeAtaque(8,0,1,0);
+		this.estrategiaDePosicion = new PosicionTerrestre();
 	}
 
 	@Override
-	public void entrenador(ConstruccionMilitar cm)
-			throws RecursosInsuficientes, SobrePoblacion {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actualizarEntrenamiento() {
-		// TODO Auto-generated method stub
-		
+	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
+		((Acceso)construccion).entrenar(this);
 	}
 
 }

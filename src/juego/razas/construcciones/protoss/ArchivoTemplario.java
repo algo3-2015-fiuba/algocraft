@@ -39,7 +39,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 			while (it.hasNext()) {
 				Celda celda = it.next();
 				if (celda.poseeRecursos()) throw new UbicacionInvalida();
-				celda.ocupar(this);
+				celda.ocuparConstruccion(this);
 			}
 		} catch (UbicacionInvalida ui) {
 			it = rangoDeCeldas.iterator();

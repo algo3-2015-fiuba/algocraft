@@ -6,12 +6,15 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.protoss.Zealot;
+import juego.razas.unidades.terran.Marine;
 
 public class Acceso extends ConstruccionMilitar {
 
@@ -45,7 +48,7 @@ public class Acceso extends ConstruccionMilitar {
 			while (it.hasNext()) {
 				Celda celda = it.next();
 				if (celda.poseeRecursos()) throw new UbicacionInvalida();
-				celda.ocupar(this);
+				celda.ocuparConstruccion(this);
 			}
 		} catch (UbicacionInvalida ui) {
 			it = rangoDeCeldas.iterator();
@@ -60,6 +63,11 @@ public class Acceso extends ConstruccionMilitar {
 		this.posicion = coordenada;
 		this.propietario = jugador;
 			
+	}
+	
+	public void entrenar(Zealot zealot) throws RecursosInsuficientes, SobrePoblacion {
+		zealot.iniciarEntrenamiento();
+		this.entrenamientos.add(zealot);
 	}
 
 }

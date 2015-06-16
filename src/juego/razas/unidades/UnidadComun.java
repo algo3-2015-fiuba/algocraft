@@ -10,7 +10,7 @@ public abstract class UnidadComun extends Unidad implements Atacante {
 	
 
 	public void atacar(Atacable victima) {
-		victima.recibirDanio(bolsaDeAtaque);
+		victima.recibirAtaque(bolsaDeAtaque);
 	}
 	
 }

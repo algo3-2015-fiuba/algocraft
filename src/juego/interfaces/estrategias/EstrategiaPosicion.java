@@ -1,6 +1,8 @@
 package juego.interfaces.estrategias;
 
 import juego.bolsas.BolsaDeAtaque;
+import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.PosicionVolador;
 import juego.interfaces.Construible;
 import juego.interfaces.Terrestre;
 import juego.interfaces.Volador;
@@ -13,9 +15,9 @@ public interface EstrategiaPosicion {
 	void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal)
 			throws UbicacionInvalida;
 	
-	boolean ocupaMismoEspacioQue(Terrestre terrestre);
-	boolean ocupaMismoEspacioQue(Volador volador);
-	boolean ocupaMismoEspacioQue(Construible construible);
-	
 	int danioRecibido(BolsaDeAtaque bolsaDeAtaque);
+
+	boolean ocupaMismoEspacioQue(EstrategiaPosicion estrategiaDeOtro);
+	boolean ocupaMismoEspacioQue(PosicionVolador volador);
+	boolean ocupaMismoEspacioQue(PosicionTerrestre terrestre);
 }

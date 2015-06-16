@@ -10,6 +10,7 @@ import juego.interfaces.Volador;
 import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.materiales.Material;
+import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
@@ -31,7 +32,7 @@ public class Celda {
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
 	
-	public void ocupar(Terrestre terrestre) throws UbicacionInvalida {
+	public void ocuparTerrestre(Unidad terrestre) throws UbicacionInvalida {
 		
 		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
 		if (this.poseeRecursos()) throw new UbicacionInvalida();
@@ -53,7 +54,7 @@ public class Celda {
 		
 	}
 	
-	public void ocupar(Volador volador) throws UbicacionInvalida {
+	public void ocuparVolador(Unidad volador) throws UbicacionInvalida {
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
@@ -68,7 +69,7 @@ public class Celda {
 		
 	}
 	
-	public void ocupar(Construible construible) throws UbicacionInvalida {
+	public void ocuparConstruccion(Construccion construible) throws UbicacionInvalida {
 		
 		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
 

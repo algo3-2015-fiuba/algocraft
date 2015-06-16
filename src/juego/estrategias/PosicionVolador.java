@@ -17,36 +17,34 @@ public class PosicionVolador implements EstrategiaPosicion {
 	public void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal) throws UbicacionInvalida {
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		//Hacemos que se comporte como voladora
-		Volador unidadVoladora = (Volador) unidad;
 		
 		if (coordInicial == null) {
-			mapa.obtenerCelda(coordFinal).ocupar(unidadVoladora);
+			mapa.obtenerCelda(coordFinal).ocuparVolador(unidad);
 		} else {
 			//Esta parte esta implementada la idea pero habria que verificar que puede avanzar hasta ahi segun el supuesto.
 			mapa.obtenerCelda(coordInicial).desocupar(unidad);
-			mapa.obtenerCelda(coordFinal).ocupar(unidadVoladora);
+			mapa.obtenerCelda(coordFinal).ocuparVolador(unidad);
 		}
-	}
-	
-	@Override
-	public boolean ocupaMismoEspacioQue(Terrestre terrestre) {
-		return false;
-	}
-
-	@Override
-	public boolean ocupaMismoEspacioQue(Volador volador) {
-		return true;
-	}
-	
-	@Override
-	public boolean ocupaMismoEspacioQue(Construible construible) {
-		return false;
 	}
 	
 	@Override
 	public int danioRecibido(BolsaDeAtaque bolsaDeAtaque) {
 		return bolsaDeAtaque.getDanioAire();
+	}
+
+	@Override
+	public boolean ocupaMismoEspacioQue(EstrategiaPosicion estrategiaDeOtro) {
+		return estrategiaDeOtro.ocupaMismoEspacioQue(this);
+	}
+
+	@Override
+	public boolean ocupaMismoEspacioQue(PosicionVolador volador) {
+		return true;
+	}
+
+	@Override
+	public boolean ocupaMismoEspacioQue(PosicionTerrestre terrestre) {
+		return false;
 	}
 
 }

@@ -46,7 +46,7 @@ public class Refineria extends ConstruccionRecolectora {
 		
 		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
 		
-		celda.ocupar(this);
+		celda.ocuparConstruccion(this);
 		
 		this.bolsaDeCostos.consumirRecursos(jugador);
 		

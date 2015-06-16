@@ -21,7 +21,7 @@ import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 
-public abstract class Unidad implements Controlable, Entrenable, Atacable {
+public class Unidad implements Controlable, Entrenable, Atacable {
 	
 	protected int vision;
 	protected int vida;
@@ -39,10 +39,12 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 		return this.bolsaDeCostos.suministroUsado();
 	}
 	
-	public void recibirDanio(BolsaDeAtaque bolsaDeAtaque) {
-		int danio = this.estrategiaDePosicion.danioRecibido(bolsaDeAtaque);
-		
-		this.vida -= danio;
+	public void recibirAtaque(BolsaDeAtaque bolsaDeAtaque) {
+		this.recibirDanio(this.estrategiaDePosicion.danioRecibido(bolsaDeAtaque));
+	}
+	
+	public void recibirDanio(int cantidad) {
+		this.vida -= cantidad;
 		
 		if(this.estaMuerto()) {
 			this.destruir();
@@ -88,13 +90,14 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	}
 	
 	@Override
-	public boolean ocupanMismoEspacio(Terrestre terrestre) { return estrategiaDePosicion.ocupaMismoEspacioQue(terrestre); }
+	public boolean ocupanMismoEspacio(Controlable controlable) { 
+		return controlable.ocupanMismoEspacio(this.estrategiaDePosicion); 
+	}
 	
 	@Override
-	public boolean ocupanMismoEspacio(Volador volador) { return estrategiaDePosicion.ocupaMismoEspacioQue(volador); }
-	
-	@Override
-	public boolean ocupanMismoEspacio(Construible construible) { return estrategiaDePosicion.ocupaMismoEspacioQue(construible); }
+	public boolean ocupanMismoEspacio(EstrategiaPosicion estrategiaDeOtro) { 
+		return estrategiaDePosicion.ocupaMismoEspacioQue(estrategiaDeOtro); 
+	}
 	
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
 		throw new RequerimientosInvalidos();
@@ -102,6 +105,7 @@ public abstract class Unidad implements Controlable, Entrenable, Atacable {
 	
 	public void ubicar(Coordenada coordenada) {
 		Mapa mapa = Juego.getInstance().getMapa();
+		this.posicion = coordenada;
 		mapa.ubicarEnCeldaDisponible(coordenada,this);	
 	}
 	

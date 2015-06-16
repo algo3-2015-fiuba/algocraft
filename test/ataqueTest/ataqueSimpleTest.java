@@ -16,7 +16,9 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.terran.Marine;
 
@@ -73,7 +75,6 @@ public class ataqueSimpleTest {
 		marine1.atacar(marine2);
 		
 		assertFalse(marine2.estaMuerto()); // 34 de vida
-		
 	}
 	
 	@Test
@@ -96,6 +97,33 @@ public class ataqueSimpleTest {
 		}
 		
 		assertTrue(marine2.estaMuerto()); // 0 de vida
+	}
+	
+	@Test
+	public void testSiUnMarineMuereDesapareceDelMapa() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+		
+		this.reiniciarJuego();
+		
+		Coordenada ubicacionMarine1 = new Coordenada(0,20);
+		Coordenada ubicacionMarine2 = new Coordenada(0,21);
+		
+		Marine marine1 = new Marine();
+		Marine marine2 = new Marine();
+		
+		marine1.ubicar(ubicacionMarine1);
+		marine2.ubicar(ubicacionMarine2);
+		
+		for(int i = 0; i < 7; i++) {
+			marine1.atacar(marine2);
+		}
+		
+		assertTrue(marine2.estaMuerto()); // 0 de vida
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		Celda celdaPreviamenteOcupadaPorMarine2 = mapa.obtenerCelda(ubicacionMarine2);
+		
 	}
 	
 
