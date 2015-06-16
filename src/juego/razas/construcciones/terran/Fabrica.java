@@ -8,12 +8,14 @@ import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequiereBarraca;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.terran.Golliat;
 
 public class Fabrica extends ConstruccionMilitar {
 
@@ -65,6 +67,11 @@ public class Fabrica extends ConstruccionMilitar {
 		this.posicion = coordenada;
 		this.propietario = jugador;
 			
+	}
+	
+	public void entrenar(Golliat golliat) throws RecursosInsuficientes, SobrePoblacion {
+		golliat.iniciarEntrenamiento();
+		this.entrenamientos.add(golliat);
 	}
 	
 }

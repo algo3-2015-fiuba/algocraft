@@ -1,6 +1,6 @@
 package juego.razas.unidades;
 
-public abstract class UnidadDeTransporte extends Unidad {
+public abstract class UnidadTransporte extends Unidad {
 
 	protected int capacidad;
 	

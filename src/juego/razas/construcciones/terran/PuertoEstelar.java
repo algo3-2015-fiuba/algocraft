@@ -8,12 +8,16 @@ import juego.bolsas.BolsaDeCostos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequiereFabrica;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.terran.Espectro;
+import juego.razas.unidades.terran.NaveCiencia;
+import juego.razas.unidades.terran.NaveTransporte;
 
 public class PuertoEstelar extends ConstruccionMilitar {
 
@@ -62,6 +66,22 @@ public class PuertoEstelar extends ConstruccionMilitar {
 			this.vida += 130;	
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
 		}	
+	}
+
+	public void entrenar(Espectro espectro) throws RecursosInsuficientes, SobrePoblacion {
+		espectro.iniciarEntrenamiento();
+		this.entrenamientos.add(espectro);
+	}
+	
+	public void entrenar(NaveCiencia naveCiencia) throws RecursosInsuficientes, SobrePoblacion {
+		naveCiencia.iniciarEntrenamiento();
+		this.entrenamientos.add(naveCiencia);
+	}
+
+	public void entrenar(NaveTransporte naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
+		naveTransporte.iniciarEntrenamiento();
+		this.entrenamientos.add(naveTransporte);
+		
 	}
 	
 }
