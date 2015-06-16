@@ -1,5 +1,7 @@
 package juego.razas.unidades;
 
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
@@ -22,6 +24,7 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 	protected int vision;
 	protected int vida;
 	protected int rangoDeMovimiento;
+	protected boolean irradiado = false;
 	protected BolsaDeCostos bolsaDeCostos;
 	protected EstrategiaPosicion estrategiaDePosicion;
 	protected Coordenada posicion;
@@ -29,6 +32,10 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 	public Unidad() {
 		super();
 		this.vida = 0;
+	}
+	
+	public int vida() {
+		return this.vida;
 	}
 	
 	public int suministroUsado() {
@@ -74,12 +81,24 @@ public class Unidad implements Controlable, Entrenable, Atacable {
 	 * ==========
 	 */
 	
-	public void ataqueEMP() {
+	public void recibirEMP() {
 		//No hace nada por default
 	}
 	
 	public void irradiarse() {
-		this.recibirDanio(5);
+		this.irradiado = true;
+	}
+	
+	public void sufrirRadiacion() {
+		if(this.irradiado) {
+			Mapa mapa = Juego.getInstance().getMapa();
+			Iterator<Unidad> unidadesCercanas = mapa.unidadesACiertaDistanciaDe(this.posicion, 1).iterator();
+			
+			while(unidadesCercanas.hasNext()) {
+				Unidad victima = unidadesCercanas.next();
+				victima.recibirDanio(5);
+			}
+		}
 	}
 	
 	

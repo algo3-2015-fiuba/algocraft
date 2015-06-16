@@ -11,7 +11,7 @@ public abstract class UnidadMagica extends Unidad {
 	 * por un EMP
 	 */
 	@Override
-	public void ataqueEMP() {
+	public void recibirEMP() {
 		this.energia = 0;
 	}
 }

@@ -48,12 +48,30 @@ public abstract class Jugador {
 	
 	public abstract void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
 	
+	public void asignarUnidad(Unidad unidad) {
+		this.unidades.add(unidad);
+	}
+	
 	public void actualizarObservadores() {
 		this.actualizarConstrucciones();
 		this.actualizarEntrenamientos();
 		this.recolectarRecursos();
+		this.efectuarMagias();
 	}
 	
+	private void efectuarMagias() {
+		this.irradiarUnidades();
+	}
+
+	private void irradiarUnidades() {
+		Iterator<Unidad> unidades = this.unidades.iterator();
+		while(unidades.hasNext()) {
+			Unidad victima = unidades.next();
+			
+			victima.sufrirRadiacion();
+		}
+	}
+
 	public int poblacionMaxima() {
 		
 		Collection<ConstruccionHabitable> hospedables = this.getHospedables();
