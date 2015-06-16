@@ -54,7 +54,7 @@ public class ataqueConEscudoProtossTest {
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
-	
+	/*
 	@Test
 	public void testSiUnMarineAtacaAOtroEsteNoMuerePrematuramente() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
@@ -75,6 +75,6 @@ public class ataqueConEscudoProtossTest {
 		marine.atacar(zealot);
 		
 		assertFalse(zealot.estaMuerto());
-	}
+	}*/
 
 }
