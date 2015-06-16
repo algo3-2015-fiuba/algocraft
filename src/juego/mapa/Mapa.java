@@ -3,7 +3,9 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
@@ -86,6 +88,51 @@ public class Mapa {
 		
 		
 		return distanciaX + distanciaY;
+	}
+	
+	public Iterator<Unidad> unidadesACiertaDistanciaDe(Coordenada inicio, int distancia) {
+		
+		ArrayList<Unidad> unidadesSeleccionadas = new ArrayList<Unidad>();
+		
+		Iterator<Celda> celdas = this.celdasACiertaDistanciaDe(inicio, distancia);
+		
+		while (celdas.hasNext()) {
+			Iterator<Unidad> unidadesDeCelda = celdas.next().unidades();
+			
+			while (unidadesDeCelda.hasNext()) {
+				Unidad unidad = unidadesDeCelda.next();
+				unidadesSeleccionadas.add(unidad);
+			}
+		}
+		
+		
+		
+		return unidadesSeleccionadas.iterator();
+	}
+	
+	private Iterator<Celda> celdasACiertaDistanciaDe(Coordenada inicio, int distancia) {
+		ArrayList<Celda> celdasSeleccionadas = new ArrayList<Celda>();
+		
+		//Seleccionamos un cuadrado y despues sacamos todos los que no cumplen la distancia
+		int x = inicio.getX();
+		int y = inicio.getY();
+		
+		for (int i = x - distancia; i <= x + distancia; i++) {
+			for (int j = y - distancia; j <= y + distancia; j++) {
+				Coordenada coordActual = new Coordenada(i, j);
+				
+				if(Mapa.distanciaEntreCoordenadas(inicio, coordActual) <= distancia) {
+					try {
+						Celda celdaActual = this.obtenerCelda(coordActual);
+						celdasSeleccionadas.add(celdaActual);						
+					} catch (CoordenadaFueraDeRango e) { }
+				}
+				
+			}
+		}
+		
+		
+		return celdasSeleccionadas.iterator();
 	}
 	
 }
