@@ -111,4 +111,13 @@ public abstract class Unidad implements Controlable, Entrenable {
 		
 	}
 	
+	
+	/* * * * * * * 
+	 *           *
+	 *  Ataques  *
+	 *           *
+	 * * * * * * */
+	
+	
+	
 }

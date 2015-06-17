@@ -4,7 +4,6 @@ import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -13,7 +12,7 @@ import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.unidades.UnidadComun;
 
-public class Marine extends UnidadComun implements Terrestre {
+public class Marine extends UnidadComun {
 
 	public Marine() {
 		super();
