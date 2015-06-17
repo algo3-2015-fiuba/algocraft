@@ -62,13 +62,6 @@ public class PuertoEstelar extends ConstruccionMilitar {
 			
 	}
 
-	@Override
-	public void actualizarConstruccion() {
-		if (!this.construccionFinalizada())	{	
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
-		}	
-	}
-
 	public void entrenar(Espectro espectro) throws RecursosInsuficientes, SobrePoblacion {
 		espectro.iniciarEntrenamiento();
 		this.entrenamientos.add(espectro);

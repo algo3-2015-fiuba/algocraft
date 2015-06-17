@@ -88,6 +88,13 @@ public abstract class Construccion implements Construible, Controlable {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
+	@Override
+	public void actualizarConstruccion() {
+		if (!this.construccionFinalizada())	{
+			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
+		}	
+	}
+	
 	//La construccion redefine este metodo segun el jugador que tiene permitido construirla.
 	@Override
 	public void construir(JugadorTerran jt, Coordenada coordenada)

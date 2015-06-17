@@ -60,11 +60,4 @@ public class NexoMineral extends ConstruccionRecolectora {
 		
 	}
 	
-	@Override
-	public void actualizarConstruccion() { 
-		if (!this.construccionFinalizada()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
-		}
-	}
-	
 }

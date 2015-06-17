@@ -61,13 +61,6 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 			
 	}
 
-	@Override
-	public void actualizarConstruccion() {
-		if (!this.construccionFinalizada())	{
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
-		}	
-	}
-
 	public void entrenar(AltoTemplario altoTemplario) throws RecursosInsuficientes, SobrePoblacion {
 		altoTemplario.iniciarEntrenamiento();
 		this.entrenamientos.add(altoTemplario);

@@ -58,12 +58,5 @@ public class Refineria extends ConstruccionRecolectora {
 		this.nodoGasVespeno = (GasVespeno) celda.getRecurso();
 			
 	}
-	
-	@Override
-	public void actualizarConstruccion() { 
-		if (!this.construccionFinalizada()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
-		}
-	}
 
 }

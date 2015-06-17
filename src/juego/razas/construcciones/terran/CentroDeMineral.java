@@ -58,12 +58,5 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		this.nodoMineral = (Mineral) celda.getRecurso();
 			
 	}
-	
-	@Override
-	public void actualizarConstruccion() { 
-		if (!this.construccionFinalizada()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
-		}
-	}
-	
+		
 }

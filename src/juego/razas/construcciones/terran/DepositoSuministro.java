@@ -52,14 +52,5 @@ public class DepositoSuministro extends ConstruccionHabitable {
 		this.propietario = jugador;
 			
 	}
-
-	@Override
-	public void actualizarConstruccion() {
-		
-		if (!this.construccionFinalizada()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
-		} 
-		
-	}
 	
 }
