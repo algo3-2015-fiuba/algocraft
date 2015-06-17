@@ -26,7 +26,6 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	protected Jugador propietario;
-	protected Radiacion infectado;
 	
 	public Unidad() {
 		super();
@@ -59,10 +58,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public abstract void afectadaPorMagia(MisilEMP emp);
 	
 	public void afectadaPorMagia(Radiacion radiacion) {
-		infectado = radiacion;
 		this.vida.consumir();
 		if (this.vida.vidaAgotada()) {
 			this.morir();
+			radiacion.fallecido(this);
 		}
 	}
 	
@@ -84,14 +83,6 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public void actualizar() { 
 		this.vida.regenerar();
-		if (this.estaInfectado()) { 
-			this.infectado.irradiar(this.posicion);
-		}
-	}
-	
-	
-	protected boolean estaInfectado() {
-		return (this.infectado != null);
 	}
 
 

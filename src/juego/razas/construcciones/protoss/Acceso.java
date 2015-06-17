@@ -13,6 +13,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.Zealot;
 import juego.decoradores.*;
 
@@ -68,6 +69,11 @@ public class Acceso extends ConstruccionMilitar {
 	public void entrenar(Zealot zealot) throws RecursosInsuficientes, SobrePoblacion {
 		zealot.iniciarEntrenamiento();
 		this.entrenamientos.add(zealot);
+	}
+
+	public void entrenar(Dragon dragon) throws RecursosInsuficientes, SobrePoblacion {
+		dragon.iniciarEntrenamiento();
+		this.entrenamientos.add(dragon);		
 	}
 
 }

@@ -7,11 +7,14 @@ import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
 
 public class Radiacion extends Magia {
-
+	
+	private Unidad infectado;
+	
 	public Radiacion() {
 		
 		super();
 		this.costoEnergia = 75;
+		infectado = null;
 		
 	}
 
@@ -22,9 +25,15 @@ public class Radiacion extends Magia {
 	}	
 
 	@Override
+	public void activar() {
+		this.infectado.afectadaPorMagia(this);
+	}
+	
+	@Override
 	public void afectar(Unidad unidad) {
 		
 		unidad.afectadaPorMagia(this);
+		if (infectado == null) infectado = unidad;
 		
 	}
 	
@@ -36,6 +45,10 @@ public class Radiacion extends Magia {
 			it.next().afectadaPorMagia(this);
 		}
 		
+	}
+
+	public void fallecido(Unidad unidad) {
+		if (this.infectado == unidad) this.infectado = null;		
 	}
 
 }

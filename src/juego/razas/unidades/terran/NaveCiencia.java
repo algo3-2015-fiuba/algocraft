@@ -1,10 +1,15 @@
 package juego.razas.unidades.terran;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
+import juego.magias.Magia;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
 import juego.mapa.Coordenada;
@@ -23,6 +28,7 @@ public class NaveCiencia extends UnidadMagica {
 		this.vida = new Vida(200);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
+		Collection<Magia> magiasActivas = new ArrayList<Magia>();
 		
 	}
 	
@@ -50,10 +56,17 @@ public class NaveCiencia extends UnidadMagica {
 	@Override
 	public void actualizar() {
 		this.vida.regenerar();
-		if (this.estaInfectado()) { 
-			this.infectado.irradiar(this.posicion);
+		this.energia.cargar(15);
+		this.activarMagias();
+	}
+	
+	public void activarMagias() {
+		
+		Iterator<Magia> it = this.magiasActivas.iterator();
+		
+		while (it.hasNext()) {
+			it.next().activar();
 		}
-		this.energia.cargar(10);
 	}
 	
 }
