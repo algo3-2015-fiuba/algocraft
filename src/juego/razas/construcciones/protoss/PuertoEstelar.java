@@ -10,12 +10,14 @@ import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
+import juego.razas.unidades.protoss.NaveTransporte;
 
 public class PuertoEstelar extends ConstruccionMilitar {
 	
@@ -67,6 +69,11 @@ public class PuertoEstelar extends ConstruccionMilitar {
 				((JugadorProtoss)this.propietario).activarArchivoTemplario(true);
 			}
 		}	
+	}
+
+	public void entrenar(NaveTransporte naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
+		naveTransporte.iniciarEntrenamiento();
+		this.entrenamientos.add(naveTransporte);
 	}
 	
 }
