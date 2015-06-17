@@ -27,7 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class MarineTester {
+public class CreacionTerranTester {
 
 	@Before 
 	public void reiniciarJuego() {

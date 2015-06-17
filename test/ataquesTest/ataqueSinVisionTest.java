@@ -19,18 +19,14 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.razas.construcciones.terran.Barraca;
-import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
-import juego.razas.unidades.terran.NaveCiencia;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ataqueConVisionTest {
+public class ataqueSinVisionTest {
 
 	@Before 
 	public void reiniciarJuego() {

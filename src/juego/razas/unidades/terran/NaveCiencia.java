@@ -30,6 +30,7 @@ public class NaveCiencia extends UnidadMagica {
 		this.vida = new Vida(200);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
+		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();
 		
 	}

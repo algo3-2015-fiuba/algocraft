@@ -29,6 +29,7 @@ public class AltoTemplario extends UnidadMagica {
 		this.vida = new Escudo(new Vida(40), 40);		
 		this.bolsaDeCostos = new BolsaDeCostos(150,50,7,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
+		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();
 		this.energia = new Energia();
 		

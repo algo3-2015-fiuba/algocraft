@@ -4,7 +4,7 @@ import juego.interfaces.Atacable;
 
 public class Alucinado implements Atacable {
 	
-	private Atacable proteger;
+	private Atacable escudoOriginal;
 	
 	
 

@@ -1,4 +1,4 @@
-package ataquesTest;
+package movimientosTest;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ataqueSimpleTest {
+public class movimientoSimpleTest {
 
 	@Before 
 	public void reiniciarJuego() {
@@ -60,64 +60,56 @@ public class ataqueSimpleTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotAtaca5VecesAUnMarineMuere() 
+	public void testSiUnZealotSeMueveSusCeldasSeDesocupanYSeOcupan() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
 		
 		this.reiniciarJuego();
 		
 		Mapa mapa = Juego.getInstance().getMapa();
+			
+		Juego.getInstance().turnoDe().finalizarTurno();		
+		Jugador jugadorZealot = Juego.getInstance().turnoDe();
 		
-		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
-		jugadorReceptor.finalizarTurno();		
-		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		Coordenada ubicacionViejaZealot = new Coordenada(1,20);
+		Coordenada ubicacionNuevaZealot = new Coordenada(1,21);
 		
-		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
-		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
-		
-		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
 		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
+		jugadorZealot.asignarUnidad(zealot);		
+		zealot.moverse(ubicacionViejaZealot);
 		
-		jugadorReceptor.asignarUnidad(marine);	
-		jugadorAtacante.asignarUnidad(zealot);
 		
-		for(int i = 0; i < 5; i++)
-			zealot.atacarA(marine);
+		zealot.moverse(ubicacionNuevaZealot);
 		
-		assertFalse(mapa.obtenerCelda(ubicacionMarineEnemigo).contiene(marine));
+		assertFalse(mapa.obtenerCelda(ubicacionViejaZealot).contiene(zealot));
+		
+		assertTrue(mapa.obtenerCelda(ubicacionNuevaZealot).contiene(zealot));
 		
 	}	
 	
 	@Test
-	public void testSiUnZealotAtaca5VecesAUnMarineSinRangoEsteNoMuere() 
+	public void testSiUnZealotSeMueveMuyLejosSaltaExcepcion() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
 		
 		this.reiniciarJuego();
 		
 		Mapa mapa = Juego.getInstance().getMapa();
+			
+		Juego.getInstance().turnoDe().finalizarTurno();		
+		Jugador jugadorZealot = Juego.getInstance().turnoDe();
 		
-		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
-		jugadorReceptor.finalizarTurno();		
-		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
-		
-		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
-		Coordenada ubicacionZealotAtacante = new Coordenada(2,20);
-		
-		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
+		Coordenada ubicacionViejaZealot = new Coordenada(1,20);
+		Coordenada ubicacionNuevaMuylejosZealot = new Coordenada(1,25); //Mas que el rango de un Zealot	
 		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
+		jugadorZealot.asignarUnidad(zealot);
 		
-		jugadorReceptor.asignarUnidad(marine);	
-		jugadorAtacante.asignarUnidad(zealot);
+		zealot.moverse(ubicacionViejaZealot);
 		
-		for(int i = 0; i < 5; i++)
-			zealot.atacarA(marine);
+		exception.expect(UbicacionInvalida.class);
+		zealot.moverse(ubicacionNuevaMuylejosZealot);
 		
-		assertTrue(mapa.obtenerCelda(ubicacionMarineEnemigo).contiene(marine));
+		assertFalse(mapa.obtenerCelda(ubicacionViejaZealot).contiene(zealot));
 	}
 	
 	@Test

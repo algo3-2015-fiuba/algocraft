@@ -147,8 +147,21 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
-		this.posicion = coordFinal;
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		int distanciaAMover = 0;
+		
+		if(this.posicion != null) {
+			distanciaAMover = mapa.distanciaEntreCoordenadas(this.posicion, coordFinal);
+		}
+		
+		if(distanciaAMover <= this.rangoDeMovimiento) {
+			this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+			this.posicion = coordFinal;
+		} else {
+			throw new UbicacionInvalida();
+		}
 	}
 	
 	@Override
