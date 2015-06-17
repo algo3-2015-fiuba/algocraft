@@ -13,10 +13,10 @@ public abstract class Magia {
 
 	protected int costoEnergia;
 	
-	protected Collection<Celda> obtenerRadioDeImpacto(Coordenada coordenadaDeterminante, int rangoX, int rangoY) {
+	protected Collection<Celda> obtenerRadioDeImpacto(Coordenada coordenadaDeterminante, int rango) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldasDisponibles(coordenadaDeterminante, rangoX, rangoY);
+		return mapa.obtenerRadialmenteRangoDeCeldasDisponibles(coordenadaDeterminante, rango);
 		
 	}
 	

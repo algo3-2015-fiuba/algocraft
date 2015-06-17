@@ -1,5 +1,6 @@
 package juego.razas.unidades;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import juego.energia.Energia;
@@ -10,6 +11,10 @@ public abstract class UnidadMagica extends Unidad {
 	
 	protected Collection<Magia> magiasActivas;
 	protected Energia energia;
+	
+	public UnidadMagica() {
+		this.magiasActivas = new ArrayList<Magia>();
+	}
 	
 	public void afectadaPorMagia(MisilEMP emp) {
 		this.energia.deshabilitada();

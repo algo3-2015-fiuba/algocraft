@@ -33,7 +33,7 @@ public class Radiacion extends Magia {
 	
 	public void irradiar(Coordenada ubicacionInfectado) {
 		
-		Iterator<Celda> it = this.obtenerRadioDeImpacto(ubicacionInfectado, 3, 3).iterator();
+		Iterator<Celda> it = this.obtenerRadioDeImpacto(ubicacionInfectado, 1).iterator();
 		
 		while (it.hasNext()) {
 			it.next().afectadaPorMagia(this);

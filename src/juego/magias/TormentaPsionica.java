@@ -33,7 +33,7 @@ public class TormentaPsionica extends Magia {
 	@Override
 	public void lanzar(Coordenada coordImpacto) {
 		
-		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5, 5);
+		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5);
 		
 		Iterator<Celda> it = celdasEnRango.iterator();
 		

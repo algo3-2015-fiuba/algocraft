@@ -7,4 +7,5 @@ public interface Atacable {
 	public boolean vidaAgotada();
 	public void deshabilitar();
 	public void consumir();
+	public float vidaActual();
 }

@@ -50,6 +50,7 @@ public abstract class Jugador {
 	
 	public void asignarUnidad(Unidad unidad) {
 		this.unidades.add(unidad);
+		unidad.asignarPropietario(this);
 	}
 	
 	public void actualizarObservadores() {

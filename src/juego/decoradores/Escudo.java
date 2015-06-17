@@ -42,6 +42,11 @@ public class Escudo implements Atacable {
 	public boolean vidaAgotada() {
 		return this.proteger.vidaAgotada();
 	}
+	
+	@Override
+	public float vidaActual() {
+		return this.proteger.vidaActual() + this.escudoActual;
+	}
 
 	@Override
 	public void deshabilitar() {
@@ -50,7 +55,7 @@ public class Escudo implements Atacable {
 	
 	@Override
 	public void consumir() {
-		this.daniar((int)(this.escudoMaximo * 0.20));
+		this.daniar((int)Math.round(this.vidaActual() * 0.20));
 	}
 	
 }

@@ -3,6 +3,7 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
@@ -66,6 +67,31 @@ public class Mapa {
 			
 		return rangoDeCeldas;
 		
+	}
+	
+	public Collection<Celda> obtenerRadialmenteRangoDeCeldasDisponibles(Coordenada centro, int distancia) {
+		ArrayList<Celda> celdasSeleccionadas = new ArrayList<Celda>();
+		
+		//Seleccionamos un cuadrado y despues sacamos todos los que no cumplen la distancia
+		int x = centro.getX();
+		int y = centro.getY();
+		
+		for (int i = x - distancia; i <= x + distancia; i++) {
+			for (int j = y - distancia; j <= y + distancia; j++) {
+				Coordenada coordActual = new Coordenada(i, j);
+				
+				if(this.distanciaEntreCoordenadas(centro, coordActual) <= distancia) {
+					try {
+						Celda celdaActual = this.obtenerCelda(coordActual);
+						celdasSeleccionadas.add(celdaActual);						
+					} catch (CoordenadaFueraDeRango e) { }
+				}
+				
+			}
+		}
+		
+		
+		return celdasSeleccionadas;
 	}
 	
 	public int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {

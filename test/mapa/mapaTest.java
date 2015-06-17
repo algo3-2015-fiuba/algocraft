@@ -3,15 +3,13 @@ package mapa;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
-import java.io.IOException;
-
+import java.io.IOException; 
 import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -45,5 +43,4 @@ public class mapaTest {
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
-	
 }

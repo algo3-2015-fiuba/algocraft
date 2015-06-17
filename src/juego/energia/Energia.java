@@ -5,7 +5,7 @@ public class Energia {
 	private int energiaActual;
 	private int energiaMaxima;
 
-	public Energia() {
+	public Energia() {	
 		
 		super();
 		this.energiaMaxima = 200;

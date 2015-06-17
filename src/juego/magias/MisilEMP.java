@@ -18,7 +18,7 @@ public class MisilEMP extends Magia {
 
 	public void lanzar(Coordenada coordenadaImpacto) {
 		
-		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordenadaImpacto, 5, 5);
+		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordenadaImpacto, 5);
 		
 		Iterator<Celda> it = celdasEnRango.iterator();
 		

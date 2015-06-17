@@ -48,6 +48,9 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.pesoTransporte;
 	}
 	
+	public float vidaActual() {
+		return this.vida.vidaActual();
+	}
 	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
@@ -59,10 +62,11 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public void afectadaPorMagia(Radiacion radiacion) {
 		this.vida.consumir();
+		
 		if (this.vida.vidaAgotada()) {
 			this.morir();
 			radiacion.fallecido(this);
-		}
+		}	
 	}
 	
 	public void recibirAtaque(int danio) {
@@ -96,7 +100,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
 		
 		Jugador jugador = Juego.getInstance().turnoDe();
-		this.propietario = jugador;
+		this.asignarPropietario(jugador);
 		
 		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
 		if (!jugador.suministrosSuficientes(this.bolsaDeCostos.suministrosNecesarios())) { throw new SobrePoblacion(); }
@@ -114,6 +118,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	@Override
 	public boolean entrenamientoFinalizado() {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
+	}
+	
+	public void asignarPropietario(Jugador jugador) {
+		this.propietario = jugador;
 	}
 	
 	

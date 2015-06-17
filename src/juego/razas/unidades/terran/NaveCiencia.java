@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
+import juego.energia.Energia;
 import juego.estrategias.MovimientoVolador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -25,6 +26,7 @@ public class NaveCiencia extends UnidadMagica {
 		super();
 		this.rangoDeMovimiento = 3;
 		this.vision = 10;
+		this.energia = new Energia();
 		this.vida = new Vida(200);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
@@ -45,11 +47,15 @@ public class NaveCiencia extends UnidadMagica {
 		
 	}
 	
-	public void lanzarRadiacion(Unidad unidad) {
+	public void lanzarRadiacion(Unidad unidad) throws RecursosInsuficientes {
 		
 		Radiacion rad = new Radiacion();
 		
-		if (rad.esPosibleLanzarla(this.energia)) rad.afectar(unidad);
+		if (rad.esPosibleLanzarla(this.energia)) {
+			rad.afectar(unidad);
+		} else {
+			throw new RecursosInsuficientes();
+		}
 		
 	}
 	

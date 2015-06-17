@@ -9,11 +9,19 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.SobrePoblacion;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.mapa.Coordenada;
+import juego.razas.unidades.protoss.AltoTemplario;
+import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class altoTemplarioTest {
@@ -45,5 +53,24 @@ public class altoTemplarioTest {
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
+	
+	@Test
+	public void testSiUnMarineEstaBajoUnaTormentaMuereInmediatamente() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+		
+		this.reiniciarJuego();
+		
+		Coordenada ubicacionMarine = new Coordenada(0,20);
+		Coordenada ubicacionAltoTemplario = new Coordenada(5,21);
+		
+		Marine marine = new Marine();
+		marine.moverse(ubicacionMarine);
+		
+		AltoTemplario altoTemplario = new AltoTemplario();
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		
+				
+		assertTrue(Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine).contiene(marine));
+	}
 
 }
