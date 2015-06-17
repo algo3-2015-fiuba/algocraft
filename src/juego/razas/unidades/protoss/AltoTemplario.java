@@ -12,6 +12,7 @@ import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
+import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 import juego.decoradores.*;
 import juego.magias.*;
@@ -65,6 +66,17 @@ public class AltoTemplario extends UnidadMagica {
 		if (tp.esPosibleLanzarla(this.energia)) {
 			tp.lanzar(coordImpacto);
 			this.magiasActivas.add(tp);
+		}
+		
+	}
+	
+	public void lanzarAlucinacion(Unidad UnidadACopiar) {
+		
+		Alucinacion alucinacion = new Alucinacion();
+		
+		if (alucinacion.esPosibleLanzarla(this.energia)) {
+			alucinacion.afectar(UnidadACopiar);
+			this.magiasActivas.add(alucinacion);
 		}
 		
 	}

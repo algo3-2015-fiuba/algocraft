@@ -9,21 +9,11 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
-import juego.mapa.Coordenada;
-import juego.razas.factories.UnidadProtossFactory;
-import juego.razas.unidades.Unidad;
-import juego.razas.unidades.protoss.AltoTemplario;
-import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class altoTemplarioTest {
@@ -55,25 +45,5 @@ public class altoTemplarioTest {
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
-	
-	@Test
-	public void testSiUnMarineEstaBajoUnaTormentaMuereInmediatamente() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
-		
-		this.reiniciarJuego();
-		
-		Coordenada ubicacionMarine = new Coordenada(0,20);
-		Coordenada ubicacionAltoTemplario = new Coordenada(5,21);
-		
-		Marine marine = new Marine();
-		marine.ubicar(ubicacionMarine);
-		
-		AltoTemplario altoTemplario = new AltoTemplario();
-		altoTemplario.ubicar(ubicacionAltoTemplario);
-		
-		altoTemplario.tormenta(ubicacionMarine); //Bien en el medio del marine
-		
-		assertTrue(marine.estaMuerto());
-	}
 
 }

@@ -31,8 +31,6 @@ public class MisilEMP extends Magia {
 	@Override
 	public void afectar(Unidad unidad) {
 		unidad.afectadaPorMagia(this);		
-	}
-	
-	
+	}	
 	
 }

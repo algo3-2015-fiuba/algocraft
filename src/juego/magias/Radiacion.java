@@ -19,12 +19,6 @@ public class Radiacion extends Magia {
 	}
 
 	@Override
-	public void lanzar(Coordenada coordImpacto) {
-		// La radiacion afecta a una unidad y la unidad irradiada afecta a las demas unidades.
-		// Es decir no puede ser lanzada.
-	}	
-
-	@Override
 	public void activar() {
 		this.infectado.afectadaPorMagia(this);
 	}

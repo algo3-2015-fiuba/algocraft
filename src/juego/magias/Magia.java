@@ -32,7 +32,7 @@ public abstract class Magia {
 
 	public void activar() {}
 	
-	public abstract void lanzar(Coordenada coordImpacto);
+	public void lanzar(Coordenada coordImpacto) {}
 	
 	public abstract void afectar(Unidad unidad);
 
