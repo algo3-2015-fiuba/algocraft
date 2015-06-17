@@ -9,6 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.NoTieneVision;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -17,8 +18,10 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
@@ -100,5 +103,46 @@ public class UnidadesTest {
 		marine.moverse(ubicacionConRecursos);
 		
 	}
+	
+	@Test
+	public void testUnJugadorPierdeVisionDeOtraUnidadSiSeQuedaSinRango() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+		
+		this.reiniciarJuego();
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
+		jugadorReceptor.finalizarTurno();		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarineEnemigo = new Coordenada(2,20);
+		Coordenada ubicacionZealot = new Coordenada(1,20);
+		
+		
+		
+		Marine marine = new Marine();
+		marine.moverse(ubicacionMarineEnemigo);
+		
+		Zealot zealot = new Zealot();
+		zealot.moverse(ubicacionZealot);
+		
+		jugadorReceptor.asignarUnidad(marine);	
+		jugadorAtacante.asignarUnidad(zealot);
+		
+		zealot.atacarA(marine); //Puede atacarlo porque tiene vision
+		
+		/*
+		 * Se mueve 12 veces
+		 */
+		
+		for(int i = 0; i < 12; i++) {
+			marine.moverse(new Coordenada(3 + i, 20));
+		}
+		
+		exception.expect(NoTieneVision.class);
+		zealot.atacarA(marine);
+		
+	}	
 	
 }

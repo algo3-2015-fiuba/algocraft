@@ -127,6 +127,7 @@ public class ConstruccionesTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		jugadorActual.finalizarTurno();
+		
 		jugadorActual = juego.turnoDe();
 		int x = 0;
 		int y = 20;
@@ -138,6 +139,10 @@ public class ConstruccionesTester {
 				jugadorActual.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
 			}
 		}
+		
+		/*
+		 * Mientras se construyen, no aumenta la poblacion
+		 */
 			
 		for (int i = 0; i < 5; i++) {
 			jugadorActual.finalizarTurno();
