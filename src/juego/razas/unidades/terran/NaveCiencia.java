@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
 import juego.interfaces.Volador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -25,7 +26,7 @@ public class NaveCiencia extends UnidadMagica implements Volador {
 		
 		this.rangoDeMovimiento = 1;
 		this.vision = 10;
-		this.vida = 200;		
+		this.vida = new Vida(200);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
 	}

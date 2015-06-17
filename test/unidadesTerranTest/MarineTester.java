@@ -17,6 +17,7 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.terran.Marine;
@@ -64,8 +65,10 @@ public class MarineTester {
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
 		Barraca barraca = new Barraca();
 		Marine marine = new Marine();
+		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
-		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(4,20);
+		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,1);
+		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(4,20);
 		
 		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
 		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
@@ -100,6 +103,13 @@ public class MarineTester {
 		jugadorActual = Juego.getInstance().turnoDe();
 		
 		assertTrue(marine.entrenamientoFinalizado());
+		assertTrue(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).puedeOcuparTierra(marine));
+		
+		//La unidad aun se encuentra en la barraca por lo que no posee una ubicacion fisica en el mapa.
+		jugadorActual.activarUnidad(barraca, marine, ubicacionPosibleMovimientoMarine);
+		
+		assertFalse(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).puedeOcuparTierra(marine));
+		
 		
 	}
 	

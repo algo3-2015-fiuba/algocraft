@@ -38,7 +38,7 @@ public abstract class Construccion implements Construible, Controlable {
 	 * * * * * * * * * * * * * * * * * * * */ 
 	
 	@Override
-	public void moverse(Coordenada coordInicial, Coordenada coordFinal) {
+	public void moverse(Coordenada coordFinal) {
 		//Las construcciones no pueden moverse
 	}
 	

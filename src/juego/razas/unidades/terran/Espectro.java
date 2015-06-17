@@ -2,6 +2,7 @@ package juego.razas.unidades.terran;
 
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
 import juego.interfaces.Volador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -17,7 +18,7 @@ public class Espectro extends UnidadComun implements Volador {
 		
 		this.rangoDeMovimiento = 1;
 		this.vision = 7;
-		this.vida = 120;		
+		this.vida = new Vida(120);		
 		this.bolsaDeCostos = new BolsaDeCostos(150,100,8,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,20,5,5);
 		this.estrategiaDeMovimiento = new MovimientoVolador();

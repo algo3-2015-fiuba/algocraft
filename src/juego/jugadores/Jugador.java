@@ -220,5 +220,17 @@ public abstract class Jugador {
 		}
 		
 	}
+
+	public void activarUnidad(ConstruccionMilitar construccion, Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
+		
+		// Cuando un entrenamiento finaliza, la unidad esta inactiva en la construccion creadora, con este metodo
+		// puede activarse la unidad moviendola a otra ubicacion cercana.
+		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
+		
+		while (it.hasNext()) {
+			if (it.next() == construccion) construccion.ubicar(unidad, coordFinal);
+		}
+		
+	}
 	
 }

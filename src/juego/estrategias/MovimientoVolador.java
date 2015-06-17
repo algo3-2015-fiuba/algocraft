@@ -17,8 +17,10 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 			Mapa mapa = Juego.getInstance().getMapa();
 			
 			if (mapa.obtenerCelda(coordFinal).puedeOcuparAire(unidad)) {
-				mapa.obtenerCelda(coordInicial).desocupar(unidad);
+				if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
 				mapa.obtenerCelda(coordFinal).ocupar(unidad);
+			} else {
+				throw new UbicacionInvalida();
 			}
 			
 		}

@@ -8,6 +8,7 @@ import juego.interfaces.Entrenable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
@@ -44,7 +45,9 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 *                             *
 	 * * * * * * * * * * * * * * * */
 	
-	public abstract void actualizar();
+	public void actualizar() { 
+		//Por default no se actualiza al finalizar un turno, varia segun la unidad
+	}
 	
 	
 	/* * * * * * * * * *
@@ -81,6 +84,11 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * Movimientos   *
  	 *               *
 	 * * * * * * * * */
+	
+	@Override
+	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+	}
 	
 	@Override
 	public boolean colisionaCon(Controlable controlable) { 
