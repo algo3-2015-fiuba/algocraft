@@ -4,14 +4,13 @@ import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
-import juego.interfaces.Volador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.PuertoEstelar;
 import juego.razas.unidades.UnidadComun;
 
-public class Espectro extends UnidadComun implements Volador {
+public class Espectro extends UnidadComun {
 
 	public Espectro() {
 		super();

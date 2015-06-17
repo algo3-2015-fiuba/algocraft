@@ -5,7 +5,6 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.estrategias.MovimientoTerrestre;
-import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.mapa.Coordenada;
@@ -15,7 +14,7 @@ import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
-public class AltoTemplario extends UnidadMagica implements Terrestre {
+public class AltoTemplario extends UnidadMagica {
 	
 	public static final int ENERGIA_RECUPERADA = 15;
 	public static final int RADIO_TORMENTA = 5;

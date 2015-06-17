@@ -3,14 +3,13 @@ package juego.razas.unidades.protoss;
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
 import juego.estrategias.MovimientoTerrestre;
-import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.unidades.UnidadComun;
 
-public class Zealot extends UnidadComun implements Terrestre {
+public class Zealot extends UnidadComun {
 
 	public Zealot() {
 		super();
