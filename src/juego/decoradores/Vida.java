@@ -28,7 +28,8 @@ public class Vida implements Atacable {
 	
 	@Override
 	public boolean vidaAgotada() {
-		return (this.vida > 0);
+		return (this.vida <= 0);
+	}
 	}
 	
 	@Override
