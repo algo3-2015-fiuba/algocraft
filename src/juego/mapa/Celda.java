@@ -98,5 +98,13 @@ public class Celda {
 	public void desocupar(Construible construible) {
 		this.construibles.remove(construible);
 	}
+
+	public boolean contiene(Unidad unidad) {
+		return (this.unidades.contains(unidad));
+	}
+
+	public boolean contiene(Construible construible) {
+		return (this.construibles.contains(construible));
+	}
 	
 }

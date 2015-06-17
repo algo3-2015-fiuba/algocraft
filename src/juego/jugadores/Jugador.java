@@ -118,6 +118,34 @@ public abstract class Jugador {
 		
 	}
 	
+	public boolean esAliado(Unidad unidad) {
+		return (this.unidades.contains(unidad));
+	}
+	
+	public boolean esAliado(Construible construible) {
+		return (this.construcciones.contains(construible));
+	}
+	
+	public void activarUnidad(ConstruccionMilitar construccion, Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
+		
+		// Cuando un entrenamiento finaliza, la unidad esta inactiva en la construccion creadora, con este metodo
+		// puede activarse la unidad moviendola a otra ubicacion cercana.
+		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
+		
+		while (it.hasNext()) {
+			if (it.next() == construccion) construccion.ubicar(unidad, coordFinal);
+		}
+		
+	}
+
+	public void fallecida(Unidad unidad) {
+		this.unidades.remove(unidad);		
+	}
+	
+	public void fallecida(Construible construible) {
+		this.construcciones.remove(construible);
+	}
+	
 	protected Collection<ConstruccionRecolectora> getRecolectores() {
 		
 		Collection<ConstruccionRecolectora> recolectores = new ArrayList<ConstruccionRecolectora>();
@@ -217,18 +245,6 @@ public abstract class Jugador {
 		
 		while (it.hasNext()) {
 			it.next().recolectar();
-		}
-		
-	}
-
-	public void activarUnidad(ConstruccionMilitar construccion, Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
-		
-		// Cuando un entrenamiento finaliza, la unidad esta inactiva en la construccion creadora, con este metodo
-		// puede activarse la unidad moviendola a otra ubicacion cercana.
-		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
-		
-		while (it.hasNext()) {
-			if (it.next() == construccion) construccion.ubicar(unidad, coordFinal);
 		}
 		
 	}

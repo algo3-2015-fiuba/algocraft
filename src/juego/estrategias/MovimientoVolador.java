@@ -5,6 +5,8 @@ import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 
 public class MovimientoVolador implements EstrategiaMovimiento {
@@ -40,6 +42,18 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	@Override
 	public boolean colisionaCon(MovimientoTerrestre terrestre) {
 		return false;
+	}
+	
+	@Override
+	public void desocupar(Coordenada coordenada, Unidad unidad) throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		mapa.obtenerCelda(coordenada).desocupar(unidad);
+	}
+	
+	@Override
+	public void desocupar(Coordenada coordenada, Construccion construccion) throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		mapa.obtenerCelda(coordenada).desocupar(construccion);
 	}
 
 }

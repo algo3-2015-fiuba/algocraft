@@ -6,7 +6,6 @@ import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
-import juego.interfaces.Volador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.mapa.Coordenada;
@@ -16,7 +15,7 @@ import juego.razas.construcciones.terran.PuertoEstelar;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
-public class NaveCiencia extends UnidadMagica implements Volador {
+public class NaveCiencia extends UnidadMagica {
 	
 	public static final int ENERGIA_RECUPERADA = 10;
 	public static final int RADIO_EMP = 5;

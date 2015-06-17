@@ -13,6 +13,7 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 
 public abstract class Construccion implements Construible, Controlable {
@@ -30,6 +31,29 @@ public abstract class Construccion implements Construible, Controlable {
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		
 	}
+	
+	/* * * * * * * * * * * * * * * *
+	 *                             *
+	 *  Modificaciones de estado   *
+	 *                             *
+	 * * * * * * * * * * * * * * * */
+	
+	public void recibirAtaque(int danio) {
+		this.vida.daniar(danio);
+		if (this.vida.vidaAgotada()) {
+			this.morir();
+		}
+	}
+	
+	private void morir() {
+		this.propietario.fallecida(this);
+		try {
+			this.estrategiaDeMovimiento.desocupar(this.posicion, this);
+		} catch (CoordenadaFueraDeRango cfdr) {
+			//No deberia suceder nunca esto.
+		}
+	}
+	
 	
 	/* * * * * * * * * * * * * * * * * * * * 
 	 *                                     *

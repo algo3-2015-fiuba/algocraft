@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.construcciones.Construccion;
+import juego.razas.unidades.Unidad;
 
 public class Mapa {
 	
@@ -52,8 +54,39 @@ public class Mapa {
 		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
 		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getY());
 		
-		
 		return (distanciaX + distanciaY);
+	}
+
+
+
+	public Coordenada obtenerUbicacion(Unidad unidad) {
+
+		for (Coordenada coordenada : this.celdas.keySet()) {
+			
+			Celda celda = this.celdas.get(coordenada);
+			
+			if (celda.contiene(unidad)) {
+				return coordenada;
+			}
+		}
+		
+		return null;
+	}
+
+
+
+	public Coordenada obtenerUbicacion(Construccion construccion) {
+		
+		for (Coordenada coordenada : this.celdas.keySet()) {
+			
+			Celda celda = this.celdas.get(coordenada);
+			
+			if (celda.contiene(construccion)) {
+				return coordenada;
+			}
+		}
+		
+		return null;
 	}
 	
 }
