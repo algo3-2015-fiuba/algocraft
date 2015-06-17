@@ -49,25 +49,6 @@ public class Mapa {
 			
 	}
 	
-	public Collection<Celda> obtenerRangoDeCeldasDisponibles(Coordenada coordenadaDeterminante, int rangoX, int rangoY) {
-		
-		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
-		
-		int x = coordenadaDeterminante.getX();
-		int y = coordenadaDeterminante.getY();
-		
-		for (int i = 0; i < rangoY; i++) {
-			for (int j = 0; j < rangoX; j++) {
-				try {
-					rangoDeCeldas.add(this.obtenerCelda(new Coordenada(x+j, y+i)));
-				} catch (CoordenadaFueraDeRango cfdr) {}
-			} 
-		}
-			
-		return rangoDeCeldas;
-		
-	}
-	
 	public Collection<Celda> obtenerRadialmenteRangoDeCeldasDisponibles(Coordenada centro, int distancia) {
 		ArrayList<Celda> celdasSeleccionadas = new ArrayList<Celda>();
 		
