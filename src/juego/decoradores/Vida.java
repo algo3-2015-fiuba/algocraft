@@ -31,4 +31,9 @@ public class Vida implements Atacable {
 		return (this.vida > 0);
 	}
 	
+	@Override
+	public void consumir() {
+		this.daniar((int)(this.vida * 0.15));
+	}
+	
 }

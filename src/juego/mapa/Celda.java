@@ -8,6 +8,7 @@ import juego.Juego;
 import juego.interfaces.Construible;
 import juego.jugadores.Jugador;
 import juego.magias.Magia;
+import juego.magias.Radiacion;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
@@ -124,6 +125,16 @@ public class Celda {
 				magia.afectar(unidad);
 			}
 			
+		}
+		
+	}
+	
+	public void afectadaPorMagia(Radiacion rad) {
+		
+		Iterator<Unidad> it = this.unidades.iterator();
+		
+		while (it.hasNext()) {	
+			rad.afectar(it.next());		
 		}
 		
 	}

@@ -6,4 +6,5 @@ public interface Atacable {
 	public void daniar(int danio);
 	public boolean vidaAgotada();
 	public void deshabilitar();
+	public void consumir();
 }

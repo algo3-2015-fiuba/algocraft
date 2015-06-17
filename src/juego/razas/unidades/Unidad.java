@@ -11,6 +11,7 @@ import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
+import juego.magias.Radiacion;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -24,6 +25,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	protected Jugador propietario;
+	protected Radiacion infectado;
 	
 	public Unidad() {
 		super();
@@ -50,6 +52,14 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public abstract void afectadaPorMagia(MisilEMP emp);
 	
+	public void afectadaPorMagia(Radiacion radiacion) {
+		infectado = radiacion;
+		this.vida.consumir();
+		if (this.vida.vidaAgotada()) {
+			this.morir();
+		}
+	}
+	
 	public void recibirAtaque(int danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
@@ -68,9 +78,17 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public void actualizar() { 
 		this.vida.regenerar();
+		if (this.estaInfectado()) { 
+			this.infectado.irradiar(this.posicion);
+		}
 	}
 	
 	
+	private boolean estaInfectado() {
+		return (this.infectado != null);
+	}
+
+
 	/* * * * * * * * * *
 	 *                 *
 	 * Entrenamiento   *

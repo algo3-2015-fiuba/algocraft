@@ -3,14 +3,11 @@ package juego.magias;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.energia.Energia;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
 
 public class MisilEMP extends Magia {
-	
-	private int costoEnergia;
 	
 	public MisilEMP() {
 		
@@ -29,16 +26,6 @@ public class MisilEMP extends Magia {
 			it.next().afectadaPorMagia(this);
 		}			
 		
-	}
-
-	public boolean esPosibleLanzarlo(Energia energia) {
-		
-		if (energia.energiaSuficiente(this.costoEnergia)) {
-			energia.usar(this.costoEnergia);
-			return true;
-		}
-		
-		return false;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class Energia {
 		if (this.energiaActual > this.energiaMaxima) this.energiaActual = this.energiaMaxima;
 	}
 	
-	public void usar(int cantidad) {
+	public void consumir(int cantidad) {
 		if (cantidad <= this.energiaActual) this.energiaActual -= cantidad;
 	}
 	

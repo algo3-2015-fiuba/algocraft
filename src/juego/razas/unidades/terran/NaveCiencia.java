@@ -6,9 +6,11 @@ import juego.estrategias.MovimientoVolador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.magias.MisilEMP;
+import juego.magias.Radiacion;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.PuertoEstelar;
+import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
 public class NaveCiencia extends UnidadMagica {
@@ -29,18 +31,26 @@ public class NaveCiencia extends UnidadMagica {
 		((PuertoEstelar)construccion).entrenar(this);
 	}
 	
-	@Override
-	public void actualizar() {
-		this.vida.regenerar();
-		this.energia.cargar(10);
-	}
-	
 	public void lanzarEMP(Coordenada coordImpacto) {
 		
 		MisilEMP emp = new MisilEMP();
 		
-		if (emp.esPosibleLanzarlo(this.energia)) emp.lanzar(coordImpacto);
+		if (emp.esPosibleLanzarla(this.energia)) emp.lanzar(coordImpacto);
 		
+	}
+	
+	public void lanzarRadiacion(Unidad unidad) {
+		
+		Radiacion rad = new Radiacion();
+		
+		if (rad.esPosibleLanzarla(this.energia)) rad.afectar(unidad);
+		
+	}
+	
+	@Override
+	public void actualizar() {
+		this.vida.regenerar();
+		this.energia.cargar(10);
 	}
 	
 }

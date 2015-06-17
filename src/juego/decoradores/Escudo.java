@@ -48,4 +48,9 @@ public class Escudo implements Atacable {
 		this.escudoActual = 0;		
 	}
 	
+	@Override
+	public void consumir() {
+		this.daniar((int)(this.escudoMaximo * 0.20));
+	}
+	
 }
