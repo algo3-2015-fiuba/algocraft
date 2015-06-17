@@ -5,6 +5,7 @@ import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.PuertoEstelar;
@@ -37,7 +38,7 @@ public class NaveTransporte extends UnidadTransporte {
 		
 	}
 	
-	public void bajar(Unidad unidad, Coordenada coordBajar) {
+	public void bajar(Unidad unidad, Coordenada coordBajar) throws UbicacionInvalida {
 		
 		this.cargaTransporte.bajar(unidad, this.posicion, coordBajar);
 		

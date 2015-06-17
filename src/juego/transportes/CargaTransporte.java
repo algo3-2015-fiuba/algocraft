@@ -3,6 +3,7 @@ package juego.transportes;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
 
@@ -48,7 +49,7 @@ public class CargaTransporte {
 		this.unidadesEnCarro.add(unidad);		
 	}
 
-	public void bajar(Unidad unidad, Coordenada coordActual, Coordenada coordBajar) {
+	public void bajar(Unidad unidad, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
 		if (this.unidadesEnCarro.contains(unidad)) {
 			unidad.bajarDeCarro(coordActual, coordBajar);
 			this.unidadesEnCarro.remove(unidad);
