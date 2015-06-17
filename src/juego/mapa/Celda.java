@@ -131,10 +131,13 @@ public class Celda {
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		
-		while (it.hasNext()) {	
-			rad.afectar(it.next());
-		}
+		Unidad unidades[] = new Unidad[this.unidades.size()];
+		unidades = this.unidades.toArray(unidades);
 		
+		for(Unidad unidad : unidades)
+		{
+			rad.afectar(unidad);
+		}
 	}
 	
 }
