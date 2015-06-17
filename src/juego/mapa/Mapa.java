@@ -3,11 +3,8 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.unidades.Unidad;
 
 public class Mapa {
 	
@@ -49,89 +46,14 @@ public class Mapa {
 		return rangoDeCeldas;
 			
 	}
-
-	public void ubicarEnCeldaDisponible(Coordenada coordenadaDeterminante, Unidad unidad) {
-		
-		//Ubica a una unidad en un rango cercano a la coordenada determinante
-		
-		int x = coordenadaDeterminante.getX();
-		int y = coordenadaDeterminante.getY();
-		int i = 0, j = 0;
-		Coordenada coordenadaDisponible = null;
-		boolean ubicado = false;
-		
-		while ((j < 15) && (!ubicado)) {
-			while ((i < 15) && (!ubicado)) {
-				
-				try {
-					coordenadaDisponible = new Coordenada(x+i, y+j);
-					this.obtenerCelda(coordenadaDisponible);
-					ubicado = true;
-				} catch (UbicacionInvalida ui) {}
-				
-				i++;
-			}
-			j++;
-		}
-		
-		try {
-			unidad.moverse(coordenadaDisponible);
-		} catch (UbicacionInvalida ui) {}
-		
-	}
 	
-	public static int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
+	public int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
 		
 		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
 		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getY());
 		
 		
-		return distanciaX + distanciaY;
-	}
-	
-	public ArrayList<Unidad> unidadesACiertaDistanciaDe(Coordenada inicio, int distancia) {
-		
-		ArrayList<Unidad> unidadesSeleccionadas = new ArrayList<Unidad>();
-		
-		Iterator<Celda> celdas = this.celdasACiertaDistanciaDe(inicio, distancia);
-		
-		while (celdas.hasNext()) {
-			Iterator<Unidad> unidadesDeCelda = celdas.next().unidades();
-			
-			while (unidadesDeCelda.hasNext()) {
-				Unidad unidad = unidadesDeCelda.next();
-				unidadesSeleccionadas.add(unidad);
-			}
-		}
-		
-		
-		
-		return unidadesSeleccionadas;
-	}
-	
-	private Iterator<Celda> celdasACiertaDistanciaDe(Coordenada inicio, int distancia) {
-		ArrayList<Celda> celdasSeleccionadas = new ArrayList<Celda>();
-		
-		//Seleccionamos un cuadrado y despues sacamos todos los que no cumplen la distancia
-		int x = inicio.getX();
-		int y = inicio.getY();
-		
-		for (int i = x - distancia; i <= x + distancia; i++) {
-			for (int j = y - distancia; j <= y + distancia; j++) {
-				Coordenada coordActual = new Coordenada(i, j);
-				
-				if(Mapa.distanciaEntreCoordenadas(inicio, coordActual) <= distancia) {
-					try {
-						Celda celdaActual = this.obtenerCelda(coordActual);
-						celdasSeleccionadas.add(celdaActual);						
-					} catch (CoordenadaFueraDeRango e) { }
-				}
-				
-			}
-		}
-		
-		
-		return celdasSeleccionadas.iterator();
+		return (distanciaX + distanciaY);
 	}
 	
 }

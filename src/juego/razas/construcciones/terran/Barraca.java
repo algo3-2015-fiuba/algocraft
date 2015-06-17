@@ -48,8 +48,8 @@ public class Barraca extends ConstruccionMilitar {
 		try {
 			while (it.hasNext()) {
 				Celda celda = it.next();
-				if (celda.poseeRecursos()) throw new UbicacionInvalida();
-				celda.ocuparConstruccion(this);
+				if ((celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
+				celda.ocupar(this);
 			}
 		} catch (UbicacionInvalida ui) {
 			it = rangoDeCeldas.iterator();

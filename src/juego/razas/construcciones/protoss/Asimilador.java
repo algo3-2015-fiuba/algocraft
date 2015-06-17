@@ -45,11 +45,11 @@ public class Asimilador extends ConstruccionRecolectora {
 		
 		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
-		if (!celda.poseeRecursos()) throw new UbicacionInvalida();
+		if ((!celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
 		
 		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
 		
-		celda.ocuparConstruccion(this);
+		celda.ocupar(this);
 		
 		this.bolsaDeCostos.consumirRecursos(jugador);
 	

@@ -20,7 +20,7 @@ public class Espectro extends UnidadComun implements Volador {
 		this.vida = 120;		
 		this.bolsaDeCostos = new BolsaDeCostos(150,100,8,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,20,5,5);
-		this.estrategiaDePosicion = new MovimientoVolador();
+		this.estrategiaDeMovimiento = new MovimientoVolador();
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class NaveCiencia extends UnidadMagica implements Volador {
 		this.vision = 10;
 		this.vida = 200;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
-		this.estrategiaDePosicion = new MovimientoVolador();
+		this.estrategiaDeMovimiento = new MovimientoVolador();
 	}
 	
 	@Override

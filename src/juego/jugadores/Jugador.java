@@ -55,17 +55,8 @@ public abstract class Jugador {
 	public void actualizarObservadores() {
 		this.actualizarConstrucciones();
 		this.actualizarEntrenamientos();
+		this.actualizarUnidades();
 		this.recolectarRecursos();
-		this.efectuarMagias();
-	}
-	
-	private void efectuarMagias() {
-		Iterator<Unidad> unidades = this.unidades.iterator();
-		while(unidades.hasNext()) {
-			Unidad victima = unidades.next();
-			
-			victima.sufrirRadiacion();
-		}
 	}
 
 	public int poblacionMaxima() {
@@ -181,32 +172,8 @@ public abstract class Jugador {
 		
 	}
 	
-	private void recolectarRecursos() {
-		
-		Iterator<ConstruccionRecolectora> it = this.getRecolectores().iterator();
-		
-		while (it.hasNext()) {
-			it.next().recolectar();
-		}
-		
-	}
-	
-	private void actualizarEntrenamientos() {
-				
-		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
-			
-		while (it.hasNext()) {		
-			
-			// Cuando actualizo los entrenamientos de las construcciones militares,
-			// estas devuelven una collecion de unidades finalizadas.
-			it.next().actualizarEntrenamientos();
-			
-		}
-
-	}
-	
 	private void actualizarConstrucciones() {
-			
+		
 		Collection<Construible> construccionesFinalizadas = new ArrayList<Construible>();
 			
 		Iterator<Construible> it = this.enConstruccion.iterator();
@@ -221,6 +188,36 @@ public abstract class Jugador {
 		}
 			
 		this.enConstruccion.removeAll(construccionesFinalizadas);
+		
+	}
+	
+	private void actualizarEntrenamientos() {
+				
+		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
+			
+		while (it.hasNext()) {		
+			it.next().actualizarEntrenamientos();
+		}
+
+	}
+	
+	private void actualizarUnidades() {
+		
+		Iterator<Unidad> it = this.unidades.iterator();
+		
+		while(it.hasNext()) {
+			it.next().actualizar();	
+		}
+		
+	}
+	
+	private void recolectarRecursos() {
+		
+		Iterator<ConstruccionRecolectora> it = this.getRecolectores().iterator();
+		
+		while (it.hasNext()) {
+			it.next().recolectar();
+		}
 		
 	}
 	

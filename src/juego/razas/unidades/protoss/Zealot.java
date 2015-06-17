@@ -20,7 +20,7 @@ public class Zealot extends UnidadComun implements Terrestre {
 		this.vida = 100;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,0,1,0);
-		this.estrategiaDePosicion = new MovimientoTerrestre();
+		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
 
 	@Override

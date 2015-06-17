@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Construible;
-import juego.interfaces.excepciones.CeldaOcupada;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
@@ -33,62 +31,64 @@ public class Celda {
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
 	
-	public void ocuparTierra(Unidad terrestre) throws UbicacionInvalida {
+	public boolean puedeOcuparTierra(Unidad terrestre) {
 		
-		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
-		if (this.poseeRecursos()) throw new UbicacionInvalida();
+		if (!this.material.equals(Material.tierra)) return false;
+		if (this.poseeRecursos()) return false;
 		
-		if (!this.construibles.isEmpty()) {
-			throw new CeldaOcupada();
-		}
+		if (!this.construibles.isEmpty()) return false;
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
 				
 			if (it.next().colisionaCon(terrestre)) {
-				throw new CeldaOcupada();
+				return false;
 			}
 				
 		}
 		
-		this.unidades.add(terrestre);
+		return true;
 		
 	}
 	
-	public void ocuparAire(Unidad volador) throws UbicacionInvalida {
+	public boolean puedeOcuparAire(Unidad voladora) {
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
 				
-			if (it.next().colisionaCon(volador)) {
-				throw new CeldaOcupada();
+			if (it.next().colisionaCon(voladora)) {
+				return false;
 			}
 				
 		}
-			
-		this.unidades.add(volador);	
+		
+		return true;
 		
 	}
 	
-	public void ocuparConstruccion(Construccion construible) throws UbicacionInvalida {
+	public boolean puedeConstruir(Construccion construccion) {
 		
-		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
+		if (!this.material.equals(Material.tierra)) return false;
 
 		Iterator<Unidad> itU = this.unidades.iterator();
 		while (itU.hasNext()) {
 				
-			if (itU.next().colisionaCon(construible)) {
-				throw new CeldaOcupada();
+			if (itU.next().colisionaCon(construccion)) {
+				return false;
 			}
 				
 		}
 		
-		if (this.construibles.isEmpty()) {
-			this.construibles.add(construible);
-		} else {
-			throw new CeldaOcupada();
-		}
+		return (this.construibles.isEmpty());
 		
+	}
+	
+	public void ocupar(Unidad unidad){		
+		this.unidades.add(unidad);		
+	}
+	
+	public void ocupar(Construccion construible) {	
+		this.construibles.add(construible);
 	}
 	
 	public void desocupar(Unidad unidad) {
@@ -97,10 +97,6 @@ public class Celda {
 	
 	public void desocupar(Construible construible) {
 		this.construibles.remove(construible);
-	}
-	
-	public Iterator<Unidad> unidades() {
-		return this.unidades.iterator();
 	}
 	
 }

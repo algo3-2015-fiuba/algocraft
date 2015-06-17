@@ -11,16 +11,18 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 
 	@Override
 	public void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal) throws UbicacionInvalida {
-		Mapa mapa = Juego.getInstance().getMapa();
 		
+		if (unidad.puedeMoverse(coordFinal)) {
 		
-		if (coordInicial == null) {
-			mapa.obtenerCelda(coordFinal).ocuparAire(unidad);
-		} else {
-			//Esta parte esta implementada la idea pero habria que verificar que puede avanzar hasta ahi segun el supuesto.
-			mapa.obtenerCelda(coordInicial).desocupar(unidad);
-			mapa.obtenerCelda(coordFinal).ocuparAire(unidad);
+			Mapa mapa = Juego.getInstance().getMapa();
+			
+			if (mapa.obtenerCelda(coordFinal).puedeOcuparAire(unidad)) {
+				mapa.obtenerCelda(coordInicial).desocupar(unidad);
+				mapa.obtenerCelda(coordFinal).ocupar(unidad);
+			}
+			
 		}
+
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class NaveTransporte extends UnidadTransporte implements Terrestre {
 		this.vision = 8;
 		this.vida = 150;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,100,7,2);
-		this.estrategiaDePosicion = new MovimientoTerrestre();
+		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
 	
 	@Override

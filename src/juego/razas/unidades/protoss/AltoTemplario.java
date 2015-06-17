@@ -27,7 +27,7 @@ public class AltoTemplario extends UnidadMagica implements Terrestre {
 		this.vision = 7;
 		this.vida = 100;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
-		this.estrategiaDePosicion = new MovimientoTerrestre();
+		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
 
 	@Override

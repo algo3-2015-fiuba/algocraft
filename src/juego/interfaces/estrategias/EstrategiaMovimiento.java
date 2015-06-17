@@ -8,11 +8,11 @@ import juego.razas.unidades.Unidad;
 
 public interface EstrategiaMovimiento {
 
-	void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal)
+	public void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal)
 			throws UbicacionInvalida;
 	
-	boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido);
-	boolean colisionaCon(MovimientoVolador volador);
-	boolean colisionaCon(MovimientoTerrestre terrestre);
+	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido);
+	public boolean colisionaCon(MovimientoVolador volador);
+	public boolean colisionaCon(MovimientoTerrestre terrestre);
 	
 }
