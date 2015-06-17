@@ -119,5 +119,42 @@ public class ConstruccionesTester {
 		
 	}
 	
+	@Test
+	public void testNoTengoLimitesParaCrearDepositosDeSuministrosPeroElLimiteDePoblacionNoSuperaraLos200() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
+			
+		this.reiniciarJuego();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		int x = 0;
+		int y = 20;
+			
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000000);
+			
+		for(int i = 0; i < 4; i++) {
+			for (int j = 0; j < 30; j += 2) {
+				jugadorActual.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
+			}
+		}
+			
+		for (int i = 0; i < 5; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+			if (jugadorActual.getNombre().equals("jugadorTerran")) {
+				assertEquals(0, jugadorActual.poblacionMaxima());
+				assertEquals(0, jugadorActual.poblacionActual());
+			}
+		}
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+			
+		assertEquals(200, jugadorActual.poblacionMaxima());
+		assertEquals(0, jugadorActual.poblacionActual());
+		
+	}
+	
 	
 }
