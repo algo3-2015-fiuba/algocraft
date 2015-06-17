@@ -91,7 +91,7 @@ public class naveCienciaTest {
 		
 		jugadorAtacante.finalizarTurno();
 		
-		//Debería perder un 20% de su vida, 32
+		//Deberia perder un 20% de su vida, 32
 		
 		assertEquals(marine.vidaActual(), 32, 0.001);
 	}
@@ -142,7 +142,7 @@ public class naveCienciaTest {
 		
 		jugadorAtacante.finalizarTurno();
 		
-		//Debería perder un 20% de su vida, 32		
+		//Deberia perder un 20% de su vida, 32		
 		assertEquals(marine.vidaActual(), 32, 0.001);
 		
 		//Tambien el segundo	
@@ -197,7 +197,7 @@ public class naveCienciaTest {
 		
 		jugadorAtacante.finalizarTurno();
 		
-		//Debería perder un 20% de su vida, dos veces: 26		
+		//Deberia perder un 20% de su vida, dos veces: 26		
 		assertEquals(marine.vidaActual(), 26, 0.001);
 		
 		//Tambien el segundo	
