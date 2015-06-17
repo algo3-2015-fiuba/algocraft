@@ -19,11 +19,8 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.razas.construcciones.terran.Barraca;
-import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.protoss.Scout;
 import juego.razas.unidades.protoss.Zealot;
-import juego.razas.unidades.terran.Marine;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -84,5 +81,30 @@ public class movimientoVoladorTest {
 		assertFalse(mapa.obtenerCelda(ubicacionAire).contiene(zealot));
 		
 	}
+	
+	@Test
+	public void testSiUnScoutSeMueveAUnLugarDeAireEstaBien() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+		
+		this.reiniciarJuego();
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+			
+		Juego.getInstance().turnoDe().finalizarTurno();		
+		Jugador jugadorZealot = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionTierra = new Coordenada(30,3);
+		Coordenada ubicacionAire = new Coordenada(31,3);
+		
+		
+		Scout scout = new Scout();
+		jugadorZealot.asignarUnidad(scout);		
+		scout.moverse(ubicacionTierra);
+		
+		scout.moverse(ubicacionAire);
+		
+		assertTrue(mapa.obtenerCelda(ubicacionAire).contiene(scout));
+		
+	}	
 
 }
