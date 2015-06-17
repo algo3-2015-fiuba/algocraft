@@ -15,6 +15,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.terran.Espectro;
 import juego.razas.unidades.terran.NaveCiencia;
@@ -76,6 +77,12 @@ public class PuertoEstelar extends ConstruccionMilitar {
 		naveTransporte.iniciarEntrenamiento();
 		this.entrenamientos.add(naveTransporte);
 		
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 3);
 	}
 	
 }

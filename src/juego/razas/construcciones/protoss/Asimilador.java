@@ -1,5 +1,7 @@
 package juego.razas.construcciones.protoss;
 
+import java.util.Collection;
+
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Escudo;
@@ -10,6 +12,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.GasVespeno;
 
@@ -58,6 +61,12 @@ public class Asimilador extends ConstruccionRecolectora {
 	
 		this.nodoGasVespeno = (GasVespeno) celda.getRecurso();
 			
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
 	}
 
 }

@@ -1,0 +1,123 @@
+package supuestosTests;
+
+import static org.junit.Assert.*;
+
+import java.awt.Color;
+import java.io.IOException;
+
+import juego.Juego;
+import juego.excepciones.ColorInvalido;
+import juego.excepciones.FaltanJugadores;
+import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.SobrePoblacion;
+import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
+import juego.jugadores.JugadorProtoss;
+import juego.jugadores.JugadorTerran;
+import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
+import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.protoss.Pilon;
+import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.protoss.Zealot;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+public class ConstruccionesTester {
+
+	@Before 
+	public void reiniciarJuego() {
+		
+		Juego.getInstance().reiniciar();
+		Juego juego = Juego.getInstance(); 
+		
+		try {
+			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
+			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
+		} catch (ColorInvalido ci) {
+			assertTrue(false);
+		} catch (NombreInvalido ni) {
+			assertTrue(false);
+		}
+		
+		try {
+			juego.iniciarJuego("mapas/test.map");
+		} catch (FaltanJugadores fj) {
+			assertTrue(false);
+		} catch (IOException ioe) {
+			assertTrue(false);
+		}
+		
+	}
+	
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+	
+	@Test
+	public void testZealotAtacaDepositoSuministroTerranAunEnConstruccionYLoDestruye() 
+			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
+		
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		Juego juego = Juego.getInstance();
+		Jugador jugadorActual = juego.turnoDe();
+		Coordenada ubicacionValidaPilon = new Coordenada(0,20);
+		Coordenada ubicacionValidaAcceso = new Coordenada(4,20);
+		Coordenada ubicacionValidaZealot = new Coordenada(8,20);
+		Pilon pilon = new Pilon();
+		Acceso acceso = new Acceso();
+		Zealot zealot = new Zealot();
+		
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.construir(pilon, ubicacionValidaPilon);
+		jugadorActual.construir(acceso, ubicacionValidaAcceso);
+		
+		for (int i = 1; i < 9; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		jugadorActual.entrenar(acceso, zealot);
+		
+		for (int i = 1; i < 5; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+		}
+		
+		assertFalse(mapa.obtenerCelda(ubicacionValidaZealot).contiene(zealot));
+		
+		acceso.ubicar(zealot, ubicacionValidaZealot);
+		
+		assertTrue(mapa.obtenerCelda(ubicacionValidaZealot).contiene(zealot));
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(9,20);
+		DepositoSuministro depositoSuministro = new DepositoSuministro();
+		
+		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.construir(depositoSuministro, ubicacionValidaDepositoSuministro);
+		
+		jugadorActual.finalizarTurno();
+		jugadorActual = juego.turnoDe();
+		
+		assertTrue(mapa.obtenerCelda(ubicacionValidaDepositoSuministro).contiene(depositoSuministro));
+		
+		for (int i = 1; i < 20; i++) {
+			zealot.atacarA(depositoSuministro);
+		}
+		
+		assertFalse(mapa.obtenerCelda(ubicacionValidaDepositoSuministro).contiene(depositoSuministro));
+		
+	}
+	
+	
+}

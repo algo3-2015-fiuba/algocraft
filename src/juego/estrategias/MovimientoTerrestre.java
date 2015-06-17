@@ -28,6 +28,11 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 		}
 
 	}
+	
+	@Override
+	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
+		return movimientoDesconocido.colisionaCon(this);
+	}
 
 	@Override
 	public boolean colisionaCon(MovimientoTerrestre terrestre) {
@@ -39,10 +44,10 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 		return false;
 	}
 	
-
-	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
-		return movimientoDesconocido.colisionaCon(this);
-	}
+	@Override
+	public boolean colisionaCon(MovimientoConstruccion construccion) {
+		return true;
+	}	
 
 	@Override
 	public void desocupar(Coordenada coordenada, Unidad unidad) throws CoordenadaFueraDeRango {
@@ -54,6 +59,6 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 	public void desocupar(Coordenada coordenada, Construccion construccion) throws CoordenadaFueraDeRango {
 		Mapa mapa = Juego.getInstance().getMapa();
 		mapa.obtenerCelda(coordenada).desocupar(construccion);
-	}	
+	}
 
 }

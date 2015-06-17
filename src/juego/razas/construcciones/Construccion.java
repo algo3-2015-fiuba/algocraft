@@ -1,7 +1,9 @@
 package juego.razas.construcciones;
 
+import java.util.Collection;
+
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.MovimientoTerrestre;
+import juego.estrategias.MovimientoConstruccion;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
@@ -12,6 +14,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
@@ -28,7 +31,7 @@ public abstract class Construccion implements Construible, Controlable {
 		
 		super();
 		this.propietario = null;
-		this.estrategiaDeMovimiento = new MovimientoTerrestre();
+		this.estrategiaDeMovimiento = new MovimientoConstruccion();
 		
 	}
 	
@@ -60,6 +63,8 @@ public abstract class Construccion implements Construible, Controlable {
 	 *  Espacio que ocupa una construccion * 
 	 *                                     *
 	 * * * * * * * * * * * * * * * * * * * */ 
+	
+	public abstract Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
 	@Override
 	public void moverse(Coordenada coordFinal) {

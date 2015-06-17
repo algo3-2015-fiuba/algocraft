@@ -33,6 +33,11 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
 		return movimientoDesconocido.colisionaCon(this);
 	}
+	
+	@Override
+	public boolean colisionaCon(MovimientoTerrestre terrestre) {
+		return false;
+	}
 
 	@Override
 	public boolean colisionaCon(MovimientoVolador volador) {
@@ -40,7 +45,7 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	}
 
 	@Override
-	public boolean colisionaCon(MovimientoTerrestre terrestre) {
+	public boolean colisionaCon(MovimientoConstruccion construccion) {
 		return false;
 	}
 	

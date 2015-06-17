@@ -78,7 +78,7 @@ public class PilonTester {
 		//En el caso del mapa 'test', la coordenada (0,1) cumple este requisito.
 		jugadorActual.construir(new Pilon(), ubicacionValida);
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 1; i < 6; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorProtoss")) {

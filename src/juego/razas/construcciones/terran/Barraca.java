@@ -13,6 +13,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.terran.Marine;
 
@@ -69,6 +70,12 @@ public class Barraca extends ConstruccionMilitar {
 	public void entrenar(Marine marine) throws RecursosInsuficientes, SobrePoblacion {
 		marine.iniciarEntrenamiento();
 		this.entrenamientos.add(marine);
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 2);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package mapa;
+package mapaTests;
 
 import static org.junit.Assert.*;
 

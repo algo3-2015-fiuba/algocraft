@@ -16,6 +16,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.NaveTransporte;
 import juego.razas.unidades.protoss.Scout;
@@ -80,6 +81,12 @@ public class PuertoEstelar extends ConstruccionMilitar {
 	public void entrenar(Scout scout) throws RecursosInsuficientes, SobrePoblacion {
 		scout.iniciarEntrenamiento();
 		this.entrenamientos.add(scout);		
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 3);
 	}
 	
 }

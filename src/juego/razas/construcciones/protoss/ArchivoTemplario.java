@@ -16,6 +16,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.AltoTemplario;
 
@@ -64,6 +65,12 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 	public void entrenar(AltoTemplario altoTemplario) throws RecursosInsuficientes, SobrePoblacion {
 		altoTemplario.iniciarEntrenamiento();
 		this.entrenamientos.add(altoTemplario);
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 3);
 	}
 	
 }

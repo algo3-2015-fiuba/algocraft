@@ -13,6 +13,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionHabitable;
 
 public class Pilon extends ConstruccionHabitable {
@@ -52,6 +53,12 @@ public class Pilon extends ConstruccionHabitable {
 		this.posicion = coordenada;
 		this.propietario = jugador;
 			
+	}
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 1);
 	}
 	
 }

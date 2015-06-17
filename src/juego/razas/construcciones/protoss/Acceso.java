@@ -12,6 +12,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.Zealot;
@@ -74,6 +75,12 @@ public class Acceso extends ConstruccionMilitar {
 	public void entrenar(Dragon dragon) throws RecursosInsuficientes, SobrePoblacion {
 		dragon.iniciarEntrenamiento();
 		this.entrenamientos.add(dragon);		
+	}
+
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 2);
 	}
 
 }
