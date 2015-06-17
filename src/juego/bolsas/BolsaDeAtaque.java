@@ -1,9 +1,13 @@
 package juego.bolsas;
 
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 
@@ -37,12 +41,19 @@ public class BolsaDeAtaque {
 		
 	}
 	
-	public boolean estaEnRango(EstrategiaMovimiento estrategiaDeMovimiento, Coordenada ubicacionAgresor, Construccion victima) {
+	public boolean estaEnRango(EstrategiaMovimiento estrategiaDeMovimiento, Coordenada ubicacionAgresor, Construccion victima) 
+			throws CoordenadaFueraDeRango {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		int distancia = 0;
-		Coordenada ubicacionVictima = mapa.obtenerUbicacion(victima);
-		distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, ubicacionVictima);
+		int distancia = -1;
+		
+		Iterator<Celda> it = victima.obtenerRangoDeOcupacion().iterator();
+		while (it.hasNext()) {
+			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
+			if ((distancia == -1) || (distancia > distanciaEntreCoordenadas)) {
+				distancia = distanciaEntreCoordenadas;
+			}
+		}
 		
 		if (victima.colisionaCon(estrategiaDeMovimiento)) {
 			return (distancia <= this.rangoTierra);

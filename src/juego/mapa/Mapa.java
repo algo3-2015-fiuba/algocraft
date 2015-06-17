@@ -113,5 +113,22 @@ public class Mapa {
 		
 		return null;
 	}
+
+
+
+	public Coordenada obtenerCoordenada(Celda celdaAEncontrara) {
+		
+		for (Coordenada coordenada : this.celdas.keySet()) {
+			
+			Celda celda = this.celdas.get(coordenada);
+			
+			if (celda == celdaAEncontrara) {
+				return coordenada;
+			}
+		}
+		
+		return null;
+		
+	}
 	
 }

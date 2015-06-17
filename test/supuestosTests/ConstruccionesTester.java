@@ -111,7 +111,7 @@ public class ConstruccionesTester {
 		
 		assertTrue(mapa.obtenerCelda(ubicacionValidaDepositoSuministro).contiene(depositoSuministro));
 		
-		for (int i = 1; i < 20; i++) {
+		for (int i = 1; i < 64; i++) {
 			zealot.atacarA(depositoSuministro);
 		}
 		

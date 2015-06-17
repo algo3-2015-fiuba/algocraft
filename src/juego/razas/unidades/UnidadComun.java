@@ -5,6 +5,7 @@ import juego.bolsas.BolsaDeAtaque;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 
 public abstract class UnidadComun extends Unidad {
@@ -33,7 +34,7 @@ public abstract class UnidadComun extends Unidad {
 		
 	}
 	
-	public void atacarA(Construccion construccion) {
+	public void atacarA(Construccion construccion) throws CoordenadaFueraDeRango {
 		
 		Jugador propietario = Juego.getInstance().turnoDe();
 		
