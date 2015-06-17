@@ -113,69 +113,6 @@ public class CreacionTerranTester {
 		
 	}
 	
-	@Test
-	public void testSiJugadorNoCreaDepositoSuministroEIntentaCrearMarineErrorSobrePoblacion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
-		
-		this.reiniciarJuego();
-		Jugador jugadorActual = Juego.getInstance().turnoDe();
-		Barraca barraca = new Barraca();
-		Marine marine = new Marine();
-		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
-		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
-		
-		for (int i = 1; i < 13; i++) {
-			
-			jugadorActual.finalizarTurno();
-			jugadorActual = Juego.getInstance().turnoDe();
-			
-		}
-		
-		exception.expect(SobrePoblacion.class);
-		jugadorActual.entrenar(barraca, marine);
-		
-	}
 	
-	@Test
-	public void testSiJugadorAlcanzaLimiteDePoblacionNoPuedeCrearMasMarines() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
-		
-		this.reiniciarJuego();
-		Jugador jugadorActual = Juego.getInstance().turnoDe();
-		Barraca barraca = new Barraca();
-		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
-		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(4,20);
-		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(2000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(2000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
-		
-		for (int i = 1; i < 13; i++) {
-			
-			jugadorActual.finalizarTurno();
-			jugadorActual = Juego.getInstance().turnoDe();
-			
-		}
-		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
-		
-		for (int i = 1; i < 7; i++) {
-		
-			jugadorActual.finalizarTurno();
-			jugadorActual = Juego.getInstance().turnoDe();
-		
-		}
-		
-		for (int i = 1; i < 6; i++) {
-			jugadorActual.entrenar(barraca, new Marine());
-		}
-		
-		exception.expect(SobrePoblacion.class);
-		jugadorActual.entrenar(barraca, new Marine());
-		
-	}
 	
 }
