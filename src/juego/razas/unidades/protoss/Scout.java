@@ -27,7 +27,7 @@ public class Scout extends UnidadComun {
 
 	@Override
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
-		((Acceso)construccion).entrenar(this);
+		((PuertoEstelar)construccion).entrenar(this);
 	}
 	
 }
