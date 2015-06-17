@@ -12,6 +12,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
+import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -72,6 +73,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 			this.morir();
 			radiacion.fallecido(this);
 		}	
+	}
+	
+	public void afectadaPorMagia(TormentaPsionica tormenta) {
+		this.recibirAtaque(100);
 	}
 	
 	public void recibirAtaque(int danio) {

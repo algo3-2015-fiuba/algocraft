@@ -115,16 +115,14 @@ public class Celda {
 		
 		Jugador agresor = Juego.getInstance().turnoDe();
 		
-		Iterator<Unidad> it = this.unidades.iterator();
+		Unidad unidades[] = new Unidad[this.unidades.size()];
+		unidades = this.unidades.toArray(unidades);
 		
-		while (it.hasNext()) {
-			
-			Unidad unidad = it.next();
-			
+		for(Unidad unidad : unidades)
+		{
 			if (!agresor.esAliado(unidad)) {
 				magia.afectar(unidad);
 			}
-			
 		}
 		
 	}
@@ -134,7 +132,7 @@ public class Celda {
 		Iterator<Unidad> it = this.unidades.iterator();
 		
 		while (it.hasNext()) {	
-			rad.afectar(it.next());		
+			rad.afectar(it.next());
 		}
 		
 	}

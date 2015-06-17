@@ -32,8 +32,6 @@ public abstract class Magia {
 
 	public void activar() {}
 	
-	public void lanzar(Coordenada coordImpacto) {}
-	
 	public abstract void afectar(Unidad unidad);
 
 	public boolean activa() { return false; }

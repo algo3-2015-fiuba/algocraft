@@ -13,8 +13,10 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.terran.Marine;
@@ -55,13 +57,19 @@ public class altoTemplarioTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineEstaBajoUnaTormentaMuereInmediatamente() 
+	public void testSiUnMarineEstaBajoUnaTormentaMuereALosDosTurnos() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
 		
 		this.reiniciarJuego();
 		
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
+		
+		jugadorReceptor.finalizarTurno();
+		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
 		Coordenada ubicacionMarine = new Coordenada(0,20);
-		Coordenada ubicacionAltoTemplario = new Coordenada(5,21);
+		Coordenada ubicacionAltoTemplario = new Coordenada(8,21);
 		
 		Marine marine = new Marine();
 		marine.moverse(ubicacionMarine);
@@ -69,8 +77,36 @@ public class altoTemplarioTest {
 		AltoTemplario altoTemplario = new AltoTemplario();
 		altoTemplario.moverse(ubicacionAltoTemplario);
 		
-				
-		assertTrue(Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine).contiene(marine));
+		
+		jugadorAtacante.asignarUnidad(altoTemplario);
+		jugadorReceptor.asignarUnidad(marine);
+		
+		
+		for (int i = 0; i < 5; i++) {
+			Juego.getInstance().turnoDe().finalizarTurno();
+		}
+		
+		altoTemplario.lanzarTormentaPsionica(ubicacionMarine);
+		
+		Celda celdaMarine = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine);
+		assertTrue(celdaMarine.contiene(marine));
+		
+		/*
+		 * Pasan dos turnos
+		 */
+		
+		Juego.getInstance().turnoDe().finalizarTurno();
+		assertTrue(celdaMarine.contiene(marine));
+		
+		Juego.getInstance().turnoDe().finalizarTurno();
+		assertTrue(celdaMarine.contiene(marine));
+		
+		/*
+		 * Y debería morir el Marine
+		 */
+		
+		Juego.getInstance().turnoDe().finalizarTurno();
+		assertFalse(celdaMarine.contiene(marine));
 	}
 
 }

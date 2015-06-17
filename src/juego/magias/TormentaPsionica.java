@@ -11,27 +11,33 @@ public class TormentaPsionica extends Magia {
 
 	protected Coordenada coordImpacto;
 	protected boolean activa;
+	protected int turnosRestantes;
 	
-	public TormentaPsionica() {
+	public TormentaPsionica(Coordenada coordImpacto) {
 		
 		super();
 		this.costoEnergia = 100;
 		this.coordImpacto = null;
 		this.activa = true;
+		this.turnosRestantes = 2;
+		this.coordImpacto = coordImpacto;
 		
 	}
 	
 	@Override
 	public void activar() {
-		this.lanzar(coordImpacto);
-		this.activa = false;
+		if(this.turnosRestantes <= 0) {
+			this.lanzar();
+		} else {
+			this.turnosRestantes--;
+		}
 	}
 	
 	@Override
 	public boolean activa() { return this.activa; }
 
-	@Override
-	public void lanzar(Coordenada coordImpacto) {
+	
+	public void lanzar() {
 		
 		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5);
 		
@@ -41,13 +47,11 @@ public class TormentaPsionica extends Magia {
 			it.next().afectadaPorMagia(this);
 		}	
 		
-		this.coordImpacto = coordImpacto;
-		
 	}
 
 	@Override
 	public void afectar(Unidad unidad) {
-		unidad.recibirAtaque(100);
+		unidad.afectadaPorMagia(this);
 	}
 	
 }

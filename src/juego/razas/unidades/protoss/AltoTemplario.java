@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.bolsas.BolsaDeCostos;
+import juego.energia.Energia;
 import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -29,6 +30,7 @@ public class AltoTemplario extends UnidadMagica {
 		this.bolsaDeCostos = new BolsaDeCostos(150,50,7,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();
+		this.energia = new Energia();
 		
 	}
 
@@ -59,13 +61,15 @@ public class AltoTemplario extends UnidadMagica {
 		this.magiasActivas.removeAll(magiasInactivas);
 	}
 	
-	public void lanzarTormentaPsionica(Coordenada coordImpacto) {
+	public void lanzarTormentaPsionica(Coordenada coordImpacto) throws RecursosInsuficientes {
 		
-		TormentaPsionica tp = new TormentaPsionica();
+		TormentaPsionica tp = new TormentaPsionica(coordImpacto);
 		
 		if (tp.esPosibleLanzarla(this.energia)) {
-			tp.lanzar(coordImpacto);
+			tp.activar();
 			this.magiasActivas.add(tp);
+		} else {
+			throw new RecursosInsuficientes();
 		}
 		
 	}
