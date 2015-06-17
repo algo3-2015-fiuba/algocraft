@@ -20,5 +20,6 @@ TEST-*
 
 build/
 pmd_report.html
+bin/
 
 .settings/
