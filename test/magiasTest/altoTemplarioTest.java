@@ -91,6 +91,7 @@ public class altoTemplarioTest {
 		Celda celdaMarine = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine);
 		assertTrue(celdaMarine.contiene(marine));
 		
+		
 		/*
 		 * Pasan dos turnos
 		 */

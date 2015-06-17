@@ -29,9 +29,9 @@ public abstract class Jugador {
 	protected Collection<Unidad> unidades;
 	protected Collection<Magia> magias;
 	protected BolsaDeRecursos bolsaDeRecursos;
+	protected Vision vision;
 	
 	public Jugador(String nombre, Color color) {
-		super();
 		this.nombre = nombre;
 		this.color = color;
 		this.construcciones = new ArrayList<Construible>();
@@ -39,6 +39,7 @@ public abstract class Jugador {
 		this.unidades = new ArrayList<Unidad>();
 		this.magias = new ArrayList<Magia>();
 		this.bolsaDeRecursos = new BolsaDeRecursos();
+		this.vision = new Vision(this.unidades);
 	}
 		
 	public Color getColor() { return this.color; }
@@ -117,7 +118,7 @@ public abstract class Jugador {
 	
 	public void unidadActiva(Unidad unidadActiva) {
 		if (!this.unidades.contains(unidadActiva)) {
-			this.unidades.add(unidadActiva);
+			this.asignarUnidad(unidadActiva);
 		}
 	}
 	
@@ -147,7 +148,7 @@ public abstract class Jugador {
 	}
 
 	public void fallecida(Unidad unidad) {
-		this.unidades.remove(unidad);		
+		this.unidades.remove(unidad);
 	}
 	
 	public void fallecida(Construible construible) {
@@ -265,6 +266,10 @@ public abstract class Jugador {
 			it.next().activar();
 		}
 		
+	}
+
+	public boolean tieneVisionDe(Unidad unidad) {
+		return this.vision.tieneVisionDe(unidad);
 	}
 	
 }

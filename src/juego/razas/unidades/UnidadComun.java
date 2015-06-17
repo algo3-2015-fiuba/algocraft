@@ -2,6 +2,7 @@ package juego.razas.unidades;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeAtaque;
+import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
 import juego.razas.construcciones.Construccion;
@@ -16,13 +17,17 @@ public abstract class UnidadComun extends Unidad {
 	 *           *
 	 * * * * * * */
 	
-	public void atacarA(Unidad unidad) {
+	public void atacarA(Unidad unidad) throws NoTieneVision {
 		
 		Jugador propietario = Juego.getInstance().turnoDe();
 		
 		if (!propietario.esAliado(unidad)) {
-			if (bolsaDeAtaque.estaEnRango(this.estrategiaDeMovimiento, this.posicion, unidad)) {
-				bolsaDeAtaque.atacar(this.estrategiaDeMovimiento, unidad);
+			if(propietario.tieneVisionDe(unidad)) {
+				if (bolsaDeAtaque.estaEnRango(this.estrategiaDeMovimiento, this.posicion, unidad)) {
+					bolsaDeAtaque.atacar(this.estrategiaDeMovimiento, unidad);
+				}
+			} else {
+				throw new NoTieneVision();
 			}
 		}
 		
