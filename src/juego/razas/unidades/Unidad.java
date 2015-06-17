@@ -108,6 +108,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
 		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordFinal);
+		this.posicion = coordFinal;
 	}
 	
 	@Override
