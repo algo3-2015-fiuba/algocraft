@@ -14,21 +14,22 @@ public class Radiacion extends Magia {
 		
 		super();
 		this.costoEnergia = 75;
-		infectado = null;
+		this.infectado = null;
 		
 	}
 
 	@Override
 	public void activar() {
-		this.infectado.afectadaPorMagia(this);
+		this.irradiar(this.infectado.coordenadas());
+	}
+	
+	public void irradiarUnidad(Unidad unidad) {
+		this.infectado = unidad;
 	}
 	
 	@Override
 	public void afectar(Unidad unidad) {
-		
 		unidad.afectadaPorMagia(this);
-		if (infectado == null) infectado = unidad;
-		
 	}
 	
 	public void irradiar(Coordenada ubicacionInfectado) {

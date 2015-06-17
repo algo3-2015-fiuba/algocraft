@@ -13,6 +13,7 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.magias.Magia;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
@@ -26,6 +27,7 @@ public abstract class Jugador {
 	protected Collection<Construible> enConstruccion;
 	protected Collection<Construible> construcciones;
 	protected Collection<Unidad> unidades;
+	protected Collection<Magia> magias;
 	protected BolsaDeRecursos bolsaDeRecursos;
 	
 	public Jugador(String nombre, Color color) {
@@ -35,6 +37,7 @@ public abstract class Jugador {
 		this.construcciones = new ArrayList<Construible>();
 		this.enConstruccion = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
+		this.magias = new ArrayList<Magia>();
 		this.bolsaDeRecursos = new BolsaDeRecursos();
 	}
 		
@@ -58,6 +61,7 @@ public abstract class Jugador {
 		this.actualizarEntrenamientos();
 		this.actualizarUnidades();
 		this.recolectarRecursos();
+		this.actualizarMagias();
 	}
 
 	public int poblacionMaxima() {
@@ -112,11 +116,15 @@ public abstract class Jugador {
 	}
 	
 	public void unidadActiva(Unidad unidadActiva) {
-		
 		if (!this.unidades.contains(unidadActiva)) {
 			this.unidades.add(unidadActiva);
 		}
-		
+	}
+	
+	public void activarMagia(Magia magia) {
+		if (!this.magias.contains(magia)) {
+			this.magias.add(magia);
+		}
 	}
 	
 	public boolean esAliado(Unidad unidad) {
@@ -136,7 +144,6 @@ public abstract class Jugador {
 		while (it.hasNext()) {
 			if (it.next() == construccion) construccion.ubicar(unidad, coordFinal);
 		}
-		
 	}
 
 	public void fallecida(Unidad unidad) {
@@ -246,6 +253,16 @@ public abstract class Jugador {
 		
 		while (it.hasNext()) {
 			it.next().recolectar();
+		}
+		
+	}
+	
+	private void actualizarMagias() {
+		
+		Iterator<Magia> it = this.magias.iterator();
+		
+		while (it.hasNext()) {
+			it.next().activar();
 		}
 		
 	}

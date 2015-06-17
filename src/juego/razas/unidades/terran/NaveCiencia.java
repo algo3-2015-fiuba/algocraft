@@ -51,8 +51,10 @@ public class NaveCiencia extends UnidadMagica {
 		
 		Radiacion rad = new Radiacion();
 		
+		this.propietario.activarMagia(rad);
+		
 		if (rad.esPosibleLanzarla(this.energia)) {
-			rad.afectar(unidad);
+			rad.irradiarUnidad(unidad);
 		} else {
 			throw new RecursosInsuficientes();
 		}

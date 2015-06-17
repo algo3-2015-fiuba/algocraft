@@ -52,6 +52,11 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.vida.vidaActual();
 	}
 	
+	//Para que radiacion pueda saber donde atacar
+	public Coordenada coordenadas() {
+		return this.posicion;
+	}
+	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
