@@ -10,6 +10,7 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.magias.MisilEMP;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -47,6 +48,8 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 *                             *
 	 * * * * * * * * * * * * * * * */
 	
+	public abstract void afectadaPorMagia(MisilEMP emp);
+	
 	public void recibirAtaque(int danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
@@ -64,7 +67,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}
 	
 	public void actualizar() { 
-		//Por default no se actualiza al finalizar un turno, varia segun la unidad
+		this.vida.regenerar();
 	}
 	
 	

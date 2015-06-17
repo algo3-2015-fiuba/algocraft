@@ -13,14 +13,15 @@ import juego.razas.unidades.UnidadComun;
 public class Espectro extends UnidadComun {
 
 	public Espectro() {
-		super();
 		
-		this.rangoDeMovimiento = 1;
+		super();
+		this.rangoDeMovimiento = 3;
 		this.vision = 7;
 		this.vida = new Vida(120);		
 		this.bolsaDeCostos = new BolsaDeCostos(150,100,8,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,20,5,5);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
+		
 	}
 
 	@Override

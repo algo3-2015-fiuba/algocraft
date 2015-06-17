@@ -8,6 +8,7 @@ import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.unidades.UnidadComun;
+import juego.decoradores.*;
 
 public class Zealot extends UnidadComun {
 
@@ -16,7 +17,7 @@ public class Zealot extends UnidadComun {
 		
 		this.rangoDeMovimiento = 1;
 		this.vision = 7;
-		this.vida = 100;		
+		this.vida = new Escudo(new Vida(100), 60);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,0,1,0);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();

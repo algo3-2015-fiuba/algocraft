@@ -13,8 +13,8 @@ import juego.razas.unidades.UnidadComun;
 public class Golliat extends UnidadComun {
 	
 	public Golliat() {
-		super();
 		
+		super();
 		this.rangoDeMovimiento = 1;
 		this.vision = 8;
 		this.vida = new Vida(125);		

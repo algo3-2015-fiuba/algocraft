@@ -1,9 +1,13 @@
 package juego.razas.unidades;
 
+import juego.energia.Energia;
+import juego.magias.MisilEMP;
+
 public abstract class UnidadMagica extends Unidad {
 	
-	protected int energia;
+	protected Energia energia;
 	
-	public abstract void regenerarEnergia();
-	
+	public void afectadaPorMagia(MisilEMP emp) {
+		this.energia.deshabilitada();
+	}
 }

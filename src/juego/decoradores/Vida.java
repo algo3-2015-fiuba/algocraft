@@ -15,6 +15,11 @@ public class Vida implements Atacable {
 	public void regenerar() {
 		//La vida no puede regenerar		
 	}
+	
+	@Override
+	public void deshabilitar() {
+		// La vida no puede deshabilitarse
+	}
 
 	@Override
 	public void daniar(int danio) {

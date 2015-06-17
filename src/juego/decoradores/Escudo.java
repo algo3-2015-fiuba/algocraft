@@ -7,6 +7,13 @@ public class Escudo implements Atacable {
 	private Atacable proteger;
 	private int escudoActual, escudoMaximo;
 	
+	public Escudo(int escudoMaximo) {
+		super();
+		this.proteger = null;
+		this.escudoMaximo = escudoMaximo;
+		this.escudoActual = escudoMaximo;
+	}
+	
 	public Escudo(Atacable aProteger, int escudoMaximo) {
 		super();
 		this.proteger = aProteger;
@@ -34,6 +41,11 @@ public class Escudo implements Atacable {
 	@Override
 	public boolean vidaAgotada() {
 		return this.proteger.vidaAgotada();
+	}
+
+	@Override
+	public void deshabilitar() {
+		this.escudoActual = 0;		
 	}
 	
 }

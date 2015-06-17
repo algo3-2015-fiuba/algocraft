@@ -1,33 +1,27 @@
 package juego.razas.unidades.terran;
 
-import java.util.Iterator;
-
-import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
+import juego.magias.MisilEMP;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.PuertoEstelar;
-import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
 public class NaveCiencia extends UnidadMagica {
 	
-	public static final int ENERGIA_RECUPERADA = 10;
-	public static final int RADIO_EMP = 5;
-
 	public NaveCiencia() {
-		super();
 		
-		this.rangoDeMovimiento = 1;
+		super();
+		this.rangoDeMovimiento = 3;
 		this.vision = 10;
 		this.vida = new Vida(200);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
+		
 	}
 	
 	@Override
@@ -35,24 +29,18 @@ public class NaveCiencia extends UnidadMagica {
 		((PuertoEstelar)construccion).entrenar(this);
 	}
 	
-	public void regenerarEnergia() {
-		this.energia += ENERGIA_RECUPERADA;
-		
-		if(this.energia > 200) this.energia = 200;
+	@Override
+	public void actualizar() {
+		this.vida.regenerar();
+		this.energia.cargar(10);
 	}
 	
-	public void hacerEMP(Coordenada coordInicio) {
-		Mapa mapa = Juego.getInstance().getMapa();
+	public void lanzarEMP(Coordenada coordImpacto) {
 		
-		Iterator<Unidad> unidadesEMP = mapa.unidadesACiertaDistanciaDe(coordInicio, RADIO_EMP).iterator();
+		MisilEMP emp = new MisilEMP();
 		
-		while(unidadesEMP.hasNext()) {
-			unidadesEMP.next().recibirEMP();
-		}
+		if (emp.esPosibleLanzarlo(this.energia)) emp.lanzar(coordImpacto);
+		
 	}
 	
-	public void irradiar(Unidad victima) {
-		victima.irradiarse();
-	}
-
 }

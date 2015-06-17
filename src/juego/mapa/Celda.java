@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.interfaces.Construible;
+import juego.jugadores.Jugador;
+import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
@@ -105,6 +108,24 @@ public class Celda {
 
 	public boolean contiene(Construible construible) {
 		return (this.construibles.contains(construible));
+	}
+
+	public void afectadaPorMagia(Magia magia) {
+		
+		Jugador agresor = Juego.getInstance().turnoDe();
+		
+		Iterator<Unidad> it = this.unidades.iterator();
+		
+		while (it.hasNext()) {
+			
+			Unidad unidad = it.next();
+			
+			if (!agresor.esAliado(unidad)) {
+				magia.afectar(unidad);
+			}
+			
+		}
+		
 	}
 	
 }

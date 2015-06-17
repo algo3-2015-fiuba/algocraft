@@ -1,18 +1,13 @@
 package juego.razas.unidades.protoss;
 
-import java.util.Iterator;
-
-import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
 import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
-import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
-import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
+import juego.decoradores.*;
 
 public class AltoTemplario extends UnidadMagica {
 	
@@ -24,7 +19,7 @@ public class AltoTemplario extends UnidadMagica {
 		
 		this.rangoDeMovimiento = 1;
 		this.vision = 7;
-		this.vida = 100;		
+		this.vida = new Escudo(new Vida(40), 40);		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
@@ -33,22 +28,11 @@ public class AltoTemplario extends UnidadMagica {
 	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
 		((ArchivoTemplario)construccion).entrenar(this);
 	}
-
-	@Override
-	public void regenerarEnergia() {
-		this.energia += ENERGIA_RECUPERADA;
-		
-		if(this.energia > 200) this.energia = 200;
-	}
 	
-	public void tormenta(Coordenada posicionCentralTormenta) {
-		Mapa mapa = Juego.getInstance().getMapa();
-		
-		Iterator<Unidad> unidadesBajoTormenta = mapa.unidadesACiertaDistanciaDe(posicionCentralTormenta, RADIO_TORMENTA).iterator();
-		
-		while(unidadesBajoTormenta.hasNext()) {
-			unidadesBajoTormenta.next().recibirDanio(100);
-		}
+	@Override
+	public void actualizar() {
+		this.vida.regenerar();
+		this.energia.cargar(15);
 	}
 
 }
