@@ -18,6 +18,7 @@ public class Marine extends UnidadComun {
 		this.rangoDeMovimiento = 2;
 		this.vision = 7;
 		this.vida = new Vida(40);		
+		this.pesoTransporte = 1;
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,3,1);
 		this.bolsaDeAtaque = new BolsaDeAtaque(6,6,4,4);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();

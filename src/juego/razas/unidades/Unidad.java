@@ -21,6 +21,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected int vision;
 	protected Atacable vida;
 	protected int rangoDeMovimiento;
+	protected int pesoTransporte;
 	protected BolsaDeCostos bolsaDeCostos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
@@ -30,6 +31,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public Unidad() {
 		super();
 		this.posicion = null;
+		this.pesoTransporte = 0;
 	}
 	
 	
@@ -41,6 +43,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public int suministrosNecesarios() {
 		return this.bolsaDeCostos.suministrosNecesarios();
+	}
+	
+	public int pesoTransporte() {
+		return this.pesoTransporte;
 	}
 	
 	
@@ -152,5 +158,17 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return (distancia <= this.rangoDeMovimiento);
 		
 	}
+
+	public void subirACarro() {
+		try {
+			this.estrategiaDeMovimiento.desocupar(this.posicion, this);
+		} catch (CoordenadaFueraDeRango cfdr) {}
+	}
+
+
+	public void bajarDeCarro(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
+		this.posicion = coordActual;
+		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordBajar);
+	}	
 	
 }
