@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import juego.interfaces.excepciones.CeldaOcupada;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;

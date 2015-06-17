@@ -2,7 +2,7 @@ package juego.razas.unidades.terran;
 
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -20,7 +20,7 @@ public class Marine extends UnidadComun implements Terrestre {
 		this.vida = 40;		
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,3,1);
 		this.bolsaDeAtaque = new BolsaDeAtaque(6,6,4,4);
-		this.estrategiaDePosicion = new PosicionTerrestre();
+		this.estrategiaDePosicion = new MovimientoTerrestre();
 	}
 
 	@Override

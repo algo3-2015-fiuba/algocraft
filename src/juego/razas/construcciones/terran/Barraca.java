@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -19,13 +20,13 @@ public class Barraca extends ConstruccionMilitar {
 
 	public Barraca() {
 		super();
+		this.vida = new Vida(1000);
 		this.bolsaDeCostos = new BolsaDeCostos(150,0,12,0);
 	}
 
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
-			this.vida += 83.33;	
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 			if (this.construccionFinalizada()) {
 				((JugadorTerran)this.propietario).activarFabrica(true);

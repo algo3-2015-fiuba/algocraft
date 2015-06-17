@@ -35,6 +35,6 @@ public class BolsaDeCostos {
 	
 	public void disminuirTiempoDeConstruccion() { this.tiempoDeConstruccion--; }
 	
-	public int suministroUsado() { return this.costoSuministros; }
+	public int suministrosNecesarios() { return this.costoSuministros; }
 
 }

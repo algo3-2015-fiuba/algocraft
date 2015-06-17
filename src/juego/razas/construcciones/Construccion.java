@@ -1,13 +1,11 @@
 package juego.razas.construcciones;
 
-import juego.Juego;
-import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
-import juego.interfaces.estrategias.EstrategiaPosicion;
+import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -15,74 +13,58 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
-public abstract class Construccion implements Construible, Atacable, Controlable {
 
-	protected float vida;
+public abstract class Construccion implements Construible, Controlable {
+
+	protected Atacable vida;
 	protected Jugador propietario;
 	protected BolsaDeCostos bolsaDeCostos;
 	protected Coordenada posicion;
-	protected EstrategiaPosicion estrategiaDePosicion;
+	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	
 	public Construccion() {
+		
 		super();
-		this.vida = 0;
 		this.propietario = null;
-		this.estrategiaDePosicion = new PosicionTerrestre();
+		this.estrategiaDeMovimiento = new MovimientoTerrestre();
+		
 	}
 	
-	public void recibirAtaque(BolsaDeAtaque bolsaDeAtaque) {
-		//TODO 
-	}
+	/* * * * * * * * * * * * * * * * * * * * 
+	 *                                     *
+	 *  Espacio que ocupa una construccion * 
+	 *                                     *
+	 * * * * * * * * * * * * * * * * * * * */ 
 	
-	public void recibirDanio(int cantidad) {
-		this.vida -= cantidad;
-		
-		if(this.estaMuerto()) {
-			this.destruir();
-		}
-	}
-	
-	private void destruir() {
-		
-		//TODO que borre todas las celdas
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		
-		try {
-			mapa.obtenerCelda(this.posicion).desocupar(this);
-		} catch (CoordenadaFueraDeRango e) {
-			// TODO No debería nunca una unidad estar fuera de rango
-			e.printStackTrace();
-		}
-	}
-	
-	public boolean estaMuerto() {
-		return this.vida <= 0;
+	@Override
+	public void moverse(Coordenada coordInicial, Coordenada coordFinal) {
+		//Las construcciones no pueden moverse
 	}
 	
 	@Override
-	public void moverse(Coordenada coordenada) {
-		
+	public boolean colisionaCon(Controlable controlable) { 
+		return controlable.colisionaCon(this.estrategiaDeMovimiento); 
 	}
 	
 	@Override
-	public boolean ocupanMismoEspacio(Controlable controlable) { 
-		return controlable.ocupanMismoEspacio(this.estrategiaDePosicion); 
+	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) { 
+		return estrategiaDeMovimiento.colisionaCon(movimientoDesconocido); 
 	}
 	
-	@Override
-	public boolean ocupanMismoEspacio(EstrategiaPosicion estrategiaDeOtro) { 
-		return estrategiaDePosicion.ocupaMismoEspacioQue(estrategiaDeOtro); 
-	}
+	
+	/* * * * * * * * * * * * * * * * * 
+	 *                               *
+	 *  Estados de una construccion *
+	 *                               *
+	 * * * * * * * * * * * * * * * * */
 	
 	@Override
 	public boolean construccionFinalizada() {
 		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
 	}
 	
+	//La construccion redefine este metodo segun el jugador que tiene permitido construirla.
 	@Override
 	public void construir(JugadorTerran jt, Coordenada coordenada)
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
@@ -90,6 +72,13 @@ public abstract class Construccion implements Construible, Atacable, Controlable
 	@Override
 	public void construir(JugadorProtoss jp, Coordenada coordenada)
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
+	
+	
+	/* * * * * * * * * * * * * * * * * * * * *
+	 *                                       * 
+	 * Caracteristicas de las construcciones *
+	 *                                       * 
+	 * * * * * * * * * * * * * * * * * * * * */
 	
 	//Por defecto todos son falsos, segun la construccion se activan las propiedades.
 	@Override

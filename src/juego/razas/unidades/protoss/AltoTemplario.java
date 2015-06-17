@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -27,7 +27,7 @@ public class AltoTemplario extends UnidadMagica implements Terrestre {
 		this.vision = 7;
 		this.vida = 100;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
-		this.estrategiaDePosicion = new PosicionTerrestre();
+		this.estrategiaDePosicion = new MovimientoTerrestre();
 	}
 
 	@Override

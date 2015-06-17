@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Escudo;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -17,7 +19,7 @@ public class Pilon extends ConstruccionHabitable {
 
 	public Pilon() {
 		super();
-		this.capacidadDeHabitantes = 5;
+		this.vida = new Escudo(new Vida(300), 300);
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,5,0);
 	}
 	
@@ -56,7 +58,6 @@ public class Pilon extends ConstruccionHabitable {
 	public void actualizarConstruccion() {
 		
 		if (!this.construccionFinalizada()) {
-			this.vida += 60;
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		} 
 		

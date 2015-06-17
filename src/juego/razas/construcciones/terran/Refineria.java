@@ -2,6 +2,7 @@ package juego.razas.construcciones.terran;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -17,6 +18,7 @@ public class Refineria extends ConstruccionRecolectora {
 
 	public Refineria() {
 		super();
+		this.vida = new Vida(750);
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,6,0);
 	}
 	
@@ -60,7 +62,6 @@ public class Refineria extends ConstruccionRecolectora {
 	@Override
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
-			this.vida += 125; 
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}

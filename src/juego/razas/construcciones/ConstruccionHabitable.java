@@ -6,6 +6,7 @@ public abstract class ConstruccionHabitable extends Construccion {
 
 	public ConstruccionHabitable() {
 		super();
+		this.capacidadDeHabitantes = 5;
 	}
 	
 	public int capacidadDeHabitantes() {

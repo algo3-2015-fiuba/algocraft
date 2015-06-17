@@ -1,14 +1,13 @@
 package juego.estrategias;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeAtaque;
-import juego.interfaces.estrategias.EstrategiaPosicion;
+import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
 
-public class PosicionVolador implements EstrategiaPosicion {
+public class MovimientoVolador implements EstrategiaMovimiento {
 
 	@Override
 	public void moverse(Unidad unidad, Coordenada coordInicial, Coordenada coordFinal) throws UbicacionInvalida {
@@ -16,31 +15,26 @@ public class PosicionVolador implements EstrategiaPosicion {
 		
 		
 		if (coordInicial == null) {
-			mapa.obtenerCelda(coordFinal).ocuparVolador(unidad);
+			mapa.obtenerCelda(coordFinal).ocuparAire(unidad);
 		} else {
 			//Esta parte esta implementada la idea pero habria que verificar que puede avanzar hasta ahi segun el supuesto.
 			mapa.obtenerCelda(coordInicial).desocupar(unidad);
-			mapa.obtenerCelda(coordFinal).ocuparVolador(unidad);
+			mapa.obtenerCelda(coordFinal).ocuparAire(unidad);
 		}
 	}
-	
+
 	@Override
-	public int danioRecibido(BolsaDeAtaque bolsaDeAtaque) {
-		return bolsaDeAtaque.getDanioAire();
+	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
+		return movimientoDesconocido.colisionaCon(this);
 	}
 
 	@Override
-	public boolean ocupaMismoEspacioQue(EstrategiaPosicion estrategiaDeOtro) {
-		return estrategiaDeOtro.ocupaMismoEspacioQue(this);
-	}
-
-	@Override
-	public boolean ocupaMismoEspacioQue(PosicionVolador volador) {
+	public boolean colisionaCon(MovimientoVolador volador) {
 		return true;
 	}
 
 	@Override
-	public boolean ocupaMismoEspacioQue(PosicionTerrestre terrestre) {
+	public boolean colisionaCon(MovimientoTerrestre terrestre) {
 		return false;
 	}
 

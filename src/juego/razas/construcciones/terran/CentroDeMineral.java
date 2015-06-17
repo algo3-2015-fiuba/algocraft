@@ -2,6 +2,7 @@ package juego.razas.construcciones.terran;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -17,6 +18,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	
 	public CentroDeMineral() {
 		super();
+		this.vida = new Vida(500);
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,4,0);
 	}
 	
@@ -60,7 +62,6 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	@Override
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
-			this.vida += 125; 
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}

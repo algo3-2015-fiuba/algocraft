@@ -2,6 +2,8 @@ package juego.razas.construcciones.protoss;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Escudo;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -17,6 +19,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	
 	public NexoMineral() {
 		super();
+		this.vida = new Escudo(new Vida(250), 250);
 		this.bolsaDeCostos = new BolsaDeCostos(50,0,4,0);
 	}
 	
@@ -60,7 +63,6 @@ public class NexoMineral extends ConstruccionRecolectora {
 	@Override
 	public void actualizarConstruccion() { 
 		if (!this.construccionFinalizada()) {
-			this.vida += 62.5; 
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 		}
 	}

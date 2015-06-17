@@ -14,18 +14,19 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.Zealot;
+import juego.decoradores.*;
 
 public class Acceso extends ConstruccionMilitar {
 
 	public Acceso() {
 		super();
+		this.vida = new Escudo(new Vida(500), 500);
 		this.bolsaDeCostos = new BolsaDeCostos(150,0,8,0);
 	}
 
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada()) {
-			this.vida += 62.5;
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
 			if (this.construccionFinalizada()) ((JugadorProtoss)this.propietario).activarPuertoEstelar(true);
 		}

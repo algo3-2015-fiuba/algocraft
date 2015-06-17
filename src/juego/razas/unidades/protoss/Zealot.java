@@ -2,7 +2,7 @@ package juego.razas.unidades.protoss;
 
 import juego.bolsas.BolsaDeAtaque;
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -20,7 +20,7 @@ public class Zealot extends UnidadComun implements Terrestre {
 		this.vida = 100;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
 		this.bolsaDeAtaque = new BolsaDeAtaque(8,0,1,0);
-		this.estrategiaDePosicion = new PosicionTerrestre();
+		this.estrategiaDePosicion = new MovimientoTerrestre();
 	}
 
 	@Override

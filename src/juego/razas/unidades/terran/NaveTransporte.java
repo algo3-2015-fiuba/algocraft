@@ -1,7 +1,7 @@
 package juego.razas.unidades.terran;
 
 import juego.bolsas.BolsaDeCostos;
-import juego.estrategias.PosicionTerrestre;
+import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.Terrestre;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -18,7 +18,7 @@ public class NaveTransporte extends UnidadTransporte implements Terrestre {
 		this.vision = 8;
 		this.vida = 150;		
 		this.bolsaDeCostos = new BolsaDeCostos(100,100,7,2);
-		this.estrategiaDePosicion = new PosicionTerrestre();
+		this.estrategiaDePosicion = new MovimientoTerrestre();
 	}
 	
 	@Override

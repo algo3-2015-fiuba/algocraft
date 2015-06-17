@@ -60,10 +60,6 @@ public abstract class Jugador {
 	}
 	
 	private void efectuarMagias() {
-		this.irradiarUnidades();
-	}
-
-	private void irradiarUnidades() {
 		Iterator<Unidad> unidades = this.unidades.iterator();
 		while(unidades.hasNext()) {
 			Unidad victima = unidades.next();
@@ -93,7 +89,7 @@ public abstract class Jugador {
 		Iterator<Unidad> itU = this.unidades.iterator();
 		
 		while (itU.hasNext()) {
-			poblacionActual += itU.next().suministroUsado();
+			poblacionActual += itU.next().suministrosNecesarios();
 		}
 		
 		Iterator<ConstruccionMilitar> itC = this.getMilitables().iterator();
@@ -106,9 +102,9 @@ public abstract class Jugador {
 		
 	}
 	
-	public boolean suministrosSuficientes(int suministro) {
+	public boolean suministrosSuficientes(int costoSuministros) {
 		int suministrosRestantes = this.poblacionMaxima() - this.poblacionActual();
-		return (suministrosRestantes >= suministro);
+		return (suministrosRestantes >= costoSuministros);
 	}
 	
 	public void entrenar(ConstruccionMilitar construccion, Entrenable entrenable) 
@@ -121,6 +117,14 @@ public abstract class Jugador {
 				entrenable.entrenador(construccion);
 			}
 		}
+	}
+	
+	public void unidadActiva(Unidad unidadActiva) {
+		
+		if (!this.unidades.contains(unidadActiva)) {
+			this.unidades.add(unidadActiva);
+		}
+		
 	}
 	
 	protected Collection<ConstruccionRecolectora> getRecolectores() {
@@ -195,7 +199,7 @@ public abstract class Jugador {
 			
 			// Cuando actualizo los entrenamientos de las construcciones militares,
 			// estas devuelven una collecion de unidades finalizadas.
-			this.unidades.addAll(it.next().actualizarEntrenamientos());
+			it.next().actualizarEntrenamientos();
 			
 		}
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.bolsas.BolsaDeCostos;
+import juego.decoradores.Vida;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequiereFabrica;
@@ -23,6 +24,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 
 	public PuertoEstelar() {
 		super();
+		this.vida = new Vida(1300);
 		this.bolsaDeCostos = new BolsaDeCostos(150,100,10,0);
 	}
 	
@@ -62,8 +64,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 
 	@Override
 	public void actualizarConstruccion() {
-		if (!this.construccionFinalizada())	{
-			this.vida += 130;	
+		if (!this.construccionFinalizada())	{	
 			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
 		}	
 	}

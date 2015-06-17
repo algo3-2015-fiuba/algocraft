@@ -20,17 +20,20 @@ public class Celda {
 	private Collection<Unidad> unidades;
 	
 	public Celda(Material material, Recurso recurso, Coordenada posicion) {
+		
+		super();
 		this.material = material;
 		this.recurso = recurso;
 		this.construibles = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
 		
 	}
+	
 	public boolean poseeRecursos() { return (this.recurso != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
 	
-	public void ocuparTerrestre(Unidad terrestre) throws UbicacionInvalida {
+	public void ocuparTierra(Unidad terrestre) throws UbicacionInvalida {
 		
 		if (!this.material.equals(Material.tierra)) throw new UbicacionInvalida();
 		if (this.poseeRecursos()) throw new UbicacionInvalida();
@@ -42,28 +45,28 @@ public class Celda {
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
 				
-			if (it.next().ocupanMismoEspacio(terrestre)) {
+			if (it.next().colisionaCon(terrestre)) {
 				throw new CeldaOcupada();
 			}
 				
 		}
 		
-		this.unidades.add((Unidad)terrestre);
+		this.unidades.add(terrestre);
 		
 	}
 	
-	public void ocuparVolador(Unidad volador) throws UbicacionInvalida {
+	public void ocuparAire(Unidad volador) throws UbicacionInvalida {
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
 				
-			if (it.next().ocupanMismoEspacio(volador)) {
+			if (it.next().colisionaCon(volador)) {
 				throw new CeldaOcupada();
 			}
 				
 		}
 			
-		this.unidades.add((Unidad)volador);	
+		this.unidades.add(volador);	
 		
 	}
 	
@@ -74,7 +77,7 @@ public class Celda {
 		Iterator<Unidad> itU = this.unidades.iterator();
 		while (itU.hasNext()) {
 				
-			if (itU.next().ocupanMismoEspacio(construible)) {
+			if (itU.next().colisionaCon(construible)) {
 				throw new CeldaOcupada();
 			}
 				
