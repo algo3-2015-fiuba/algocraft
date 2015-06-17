@@ -50,6 +50,9 @@ public class NaveCiencia extends UnidadMagica {
 	@Override
 	public void actualizar() {
 		this.vida.regenerar();
+		if (this.estaInfectado()) { 
+			this.infectado.irradiar(this.posicion);
+		}
 		this.energia.cargar(10);
 	}
 	

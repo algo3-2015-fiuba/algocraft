@@ -84,7 +84,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}
 	
 	
-	private boolean estaInfectado() {
+	protected boolean estaInfectado() {
 		return (this.infectado != null);
 	}
 
