@@ -18,6 +18,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.NaveTransporte;
+import juego.razas.unidades.protoss.Scout;
 
 public class PuertoEstelar extends ConstruccionMilitar {
 	
@@ -74,6 +75,11 @@ public class PuertoEstelar extends ConstruccionMilitar {
 	public void entrenar(NaveTransporte naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
 		naveTransporte.iniciarEntrenamiento();
 		this.entrenamientos.add(naveTransporte);
+	}
+
+	public void entrenar(Scout scout) throws RecursosInsuficientes, SobrePoblacion {
+		scout.iniciarEntrenamiento();
+		this.entrenamientos.add(scout);		
 	}
 	
 }
