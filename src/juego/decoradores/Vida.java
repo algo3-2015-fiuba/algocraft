@@ -5,12 +5,10 @@ import juego.interfaces.Atacable;
 public class Vida implements Atacable {
 
 	private float vida;
-	private float vidaMaxima;
 	
 	public Vida(int vidaMaxima) {
 		super();
 		this.vida = vidaMaxima;
-		this.vidaMaxima = vidaMaxima;
 	}
 
 	@Override

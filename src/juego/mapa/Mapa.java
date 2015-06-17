@@ -3,7 +3,6 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;

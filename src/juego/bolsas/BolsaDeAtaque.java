@@ -19,11 +19,6 @@ public class BolsaDeAtaque {
 		this.rangoTierra = rangoTierra;
 		this.rangoAire = rangoAire;
 	}
-	
-	public int getDanioTierra() { return this.danioTierra; }
-	public int getDanioAire() { return this.danioAire; }
-	public int getRangoTierra() { return this.rangoTierra; }
-	public int getRangoAire() { return this.rangoAire; }
 
 	//Estos metodos son practicamente iguales, habria que hacer un refactoring en el futuro
 	
