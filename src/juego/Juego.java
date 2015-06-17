@@ -57,7 +57,7 @@ public class Juego {
 			this.turnoDe = jugadorNuevo;
 			this.listaDeJugadores.add(turnoDe);
 			
-		} else {
+		} else if (this.listaDeJugadores.size() < 6){
 		
 			Iterator<Jugador> it  = this.listaDeJugadores.iterator();
 		
