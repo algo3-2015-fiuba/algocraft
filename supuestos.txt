@@ -1,0 +1,31 @@
+Supuestos:
+
+- El jugador en iniciar será el primero que fue agregado al juego.
+
+- Un enemigo puede atacar una edificacion aún en construcción.
+
+- Si un enemigo ataca a la construcción y la destruye, está no continuirá construyendose y 
+el jugador que gasto recursos en esa construcción no recuperará los mismos.
+
+- recursos ocupan una celda y centros de minerales tambien (no es un supuesto, es implementacion)
+
+- una unidad no puede caminar por una zona de recursos.
+
+- los recursos recolectados se contabilizan al finalizar el turno del jugador que posee los edificios recolectores.
+
+- el maximo de jugadores es de 6 y el minimo de 2
+
+- la construccion se actualiza siempre al final del turno del jugador que la esta construyendo (el tiempo de construccion se incrementa al finalizar el turno del jugador
+que dio la orden de la construccion, no siempre que pasa un turno). Esto podriamos reverlo tambien.
+
+- el limite maximo de poblacion de un jugador es 200, pero esto no evita que pueda seguir creando depositos de suministro (para el caso del terran) o pilons (para el caso del protoss).
+Esto puede ser util en caso de que el enemigo ataque y destruya hospedables, si tiene cierta cantidad de mas puede mantener su nivel de poblacion elevado por mas tiempo.
+
+- si hay una unidad terrestre sobre una celda, no se pueden construir edificios.
+
+- El escudo regenera por turno el 10% de su valor maximo, si está dañado.
+
+- Si una unidad finaliza su entrenamiento permanece en el edificio hasta que el jugador la mueva de su ubicacion (la "active")
+
+- Si una celda esta ocupada por otra unidad o construible la unidad no se movera.
+

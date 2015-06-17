@@ -22,6 +22,8 @@ Protoss:
 
 Unidades
 
+*todas las unidades ocupan 1 celda (por ahora al menos)
+
 Terran:
 
 - Marine: su velocidad es de 2 celdas por turno
