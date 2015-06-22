@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 import vistas2.panelesPrincipales.PanelInicio;
 import vistas2.panelesPrincipales.PanelJugadores;
@@ -33,7 +35,7 @@ public class Aplicacion {
 			@Override
 			public void run() {
 				try {
-
+					estilos();
 					inciarInterfaz();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -102,5 +104,12 @@ public class Aplicacion {
 		boton.setFocusable(false);
 
 		return boton;
+	}
+	
+	private static void estilos() {
+		UIManager.put("ComboBox.background", new ColorUIResource(UIManager.getColor("TextField.background")));
+		UIManager.put("ComboBox.foreground", new ColorUIResource(UIManager.getColor("TextField.foreground")));
+		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.decode("#639AD1")));
+		UIManager.put("ComboBox.selectionForeground", new ColorUIResource(Color.WHITE));
 	}
 }
