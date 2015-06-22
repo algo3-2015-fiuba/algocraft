@@ -14,6 +14,11 @@ import vistas2.acciones.CerrarVentana;
 import vistas2.acciones.SiguientePanel;
 
 public class PanelInicio extends MenuPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9124649702460822042L;
+
 	public PanelInicio(JPanel panelBase) {
 		super(panelBase);
 		
