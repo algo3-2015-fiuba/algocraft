@@ -1,5 +1,6 @@
-package vistas2;
+package vistas2.ventanas;
 
+import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +8,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import vistas2.ScalablePane;
 
 public class VentanaMenu extends JFrame {
 	/**
@@ -19,16 +22,24 @@ public class VentanaMenu extends JFrame {
 		
 
 		URL url = this.getClass().getResource("/assets/background.png");
-		BufferedImage image;
+		BufferedImage image = new BufferedImage(WIDTH, HEIGHT,BufferedImage.TYPE_INT_RGB);;
 		try {
 			image = ImageIO.read(url);
-			this.add(new ScalablePane(image,false));
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+
+		ScalablePane fondo = new ScalablePane(image,false);
+		
+		fondo.setLayout(new BorderLayout());
+		this.add(fondo);
+		
+		this.setContentPane(fondo);
+		
 		this.setSize(800, 600);
+		this.setLocationRelativeTo( null );
 		this.setTitle("AlgoCraft");
 		this.setVisible(true);
 	}
