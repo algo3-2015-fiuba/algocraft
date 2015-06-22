@@ -1,4 +1,4 @@
-package vistas2;
+package vistas2.utilidades;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

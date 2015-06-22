@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import vistas2.ScalablePane;
+import vistas2.utilidades.ScalablePane;
 
 public class VentanaMenu extends JFrame {
 	/**

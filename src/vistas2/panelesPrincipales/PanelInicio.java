@@ -1,11 +1,8 @@
-package vistas2.paneles;
+package vistas2.panelesPrincipales;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,23 +10,20 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import vistas2.Aplicacion;
+import vistas2.acciones.CerrarVentana;
+import vistas2.acciones.SiguientePanel;
 
-public class PanelInicio extends JPanel {
-	public PanelInicio() {
-		this.setLayout(new BorderLayout());
-		this.setBackground(new Color(0, 0, 0, 0));
-		this.setBorder(BorderFactory.createEmptyBorder());
+public class PanelInicio extends MenuPanel {
+	public PanelInicio(JPanel panelBase) {
+		super(panelBase);
 		
 		this.add(Aplicacion.logo(), BorderLayout.PAGE_START);
 
 		JButton botonInicio = Aplicacion.boton("/assets/botones/iniciar.png");
 		JButton botonSalir = Aplicacion.boton("/assets/botones/salir.png");
 
-		botonSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		botonSalir.addActionListener(new CerrarVentana());		
+		botonInicio.addActionListener(new SiguientePanel(this));
 
 		JPanel listPane = new JPanel();
 
