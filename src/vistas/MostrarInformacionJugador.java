@@ -3,34 +3,27 @@ package vistas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class MostrarInformacionJugador implements ActionListener {
 	
-	private JPanel panelDeInfo;
-	private boolean sePuedeMostrar;
+	private VentanaDeJuego ventanaPrincipal; 
 
-	public MostrarInformacionJugador(JPanel unPanel) {
-		
-		this.panelDeInfo = unPanel;
-		this.sePuedeMostrar = false;
-	}
 
-	public MostrarInformacionJugador(JPanel unPanel, boolean mostrarPanel) {
+	public MostrarInformacionJugador(VentanaDeJuego ventanaDeJuego) {
 		
-		this.panelDeInfo = unPanel;
-		this.sePuedeMostrar = mostrarPanel;
-	}
-
-	public MostrarInformacionJugador(JPanel panelCargaDeJugadores, JButton atacar, JButton construir, boolean b) {
-		
+		this.ventanaPrincipal = ventanaDeJuego;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		this.panelDeInfo.setVisible(this.sePuedeMostrar);
+		ImageIcon algocroft = new ImageIcon(getClass().getResource("/bichoSegundaImagen.jpg"));
+	    this.ventanaPrincipal.cambiarFondo(algocroft);
+		this.ventanaPrincipal.anularBotonesIniciales(false);
+		this.ventanaPrincipal.panelesVisibles(true);
+		
+		
 
 	}
 
