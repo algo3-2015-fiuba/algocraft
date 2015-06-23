@@ -3,7 +3,7 @@ package juego.razas.unidades.protoss;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;

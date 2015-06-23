@@ -1,4 +1,4 @@
-package juego.informacion;
+package juego.informadores;
 
 import java.util.Iterator;
 

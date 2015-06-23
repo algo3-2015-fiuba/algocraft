@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import juego.energia.Energia;
 import juego.estrategias.MovimientoTerrestre;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;

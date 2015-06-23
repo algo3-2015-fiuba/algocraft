@@ -1,7 +1,7 @@
 package juego.razas.unidades;
 
 import juego.Juego;
-import juego.informacion.AtaqueUnidad;
+import juego.informadores.AtaqueUnidad;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;

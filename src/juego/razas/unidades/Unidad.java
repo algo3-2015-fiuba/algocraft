@@ -1,7 +1,7 @@
 package juego.razas.unidades;
 
 import juego.Juego;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;

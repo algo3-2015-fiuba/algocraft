@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.informacion.RecursosJugador;
-import juego.informacion.VisionJugador;
+import juego.informadores.RecursosJugador;
+import juego.informadores.VisionJugador;
 import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;

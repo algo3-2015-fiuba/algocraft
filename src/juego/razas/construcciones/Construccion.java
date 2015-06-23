@@ -3,7 +3,7 @@ package juego.razas.construcciones;
 import java.util.Collection;
 
 import juego.estrategias.MovimientoConstruccion;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;

@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.decoradores.Vida;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;

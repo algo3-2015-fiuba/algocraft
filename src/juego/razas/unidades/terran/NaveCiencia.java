@@ -7,7 +7,7 @@ import java.util.Iterator;
 import juego.decoradores.Vida;
 import juego.energia.Energia;
 import juego.estrategias.MovimientoVolador;
-import juego.informacion.Costos;
+import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.magias.Magia;
 import juego.magias.MisilEMP;
