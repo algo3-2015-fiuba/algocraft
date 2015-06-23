@@ -129,8 +129,6 @@ public class Celda {
 	
 	public void afectadaPorMagia(Radiacion rad) {
 		
-		Iterator<Unidad> it = this.unidades.iterator();
-		
 		Unidad unidades[] = new Unidad[this.unidades.size()];
 		unidades = this.unidades.toArray(unidades);
 		
