@@ -4,7 +4,6 @@ import juego.Juego;
 import juego.informacion.AtaquesUnidades;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
-import juego.magias.MisilEMP;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 
@@ -44,10 +43,6 @@ public abstract class UnidadAtaque extends Unidad {
 			}
 		}
 		
-	}
-	
-	public void afectadaPorMagia(MisilEMP emp) {
-		this.vida.deshabilitar();
 	}
 	
 }

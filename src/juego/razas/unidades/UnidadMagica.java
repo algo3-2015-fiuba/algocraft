@@ -16,7 +16,9 @@ public abstract class UnidadMagica extends Unidad {
 		this.magiasActivas = new ArrayList<Magia>();
 	}
 	
+	@Override
 	public void afectadaPorMagia(MisilEMP emp) {
+		this.vida.deshabilitar();
 		this.energia.deshabilitada();
 	}
 }
