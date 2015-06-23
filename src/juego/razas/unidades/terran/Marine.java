@@ -8,9 +8,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.Barraca;
-import juego.razas.unidades.UnidadComun;
+import juego.razas.unidades.UnidadAtaque;
 
-public class Marine extends UnidadComun {
+public class Marine extends UnidadAtaque {
 
 	public Marine() {
 		

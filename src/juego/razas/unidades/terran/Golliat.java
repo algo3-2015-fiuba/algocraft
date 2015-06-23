@@ -8,9 +8,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.Fabrica;
-import juego.razas.unidades.UnidadComun;
+import juego.razas.unidades.UnidadAtaque;
 
-public class Golliat extends UnidadComun {
+public class Golliat extends UnidadAtaque {
 	
 	public Golliat() {
 		

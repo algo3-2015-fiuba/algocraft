@@ -9,9 +9,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.Acceso;
-import juego.razas.unidades.UnidadComun;
+import juego.razas.unidades.UnidadAtaque;
 
-public class Dragon extends UnidadComun {
+public class Dragon extends UnidadAtaque {
 
 	public Dragon() {
 		

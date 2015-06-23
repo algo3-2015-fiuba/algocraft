@@ -8,9 +8,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.terran.PuertoEstelar;
-import juego.razas.unidades.UnidadComun;
+import juego.razas.unidades.UnidadAtaque;
 
-public class Espectro extends UnidadComun {
+public class Espectro extends UnidadAtaque {
 
 	public Espectro() {
 		

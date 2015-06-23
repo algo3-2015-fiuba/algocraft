@@ -8,7 +8,7 @@ import juego.magias.MisilEMP;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 
-public abstract class UnidadComun extends Unidad {
+public abstract class UnidadAtaque extends Unidad {
 
 	protected Ataques bolsaDeAtaque;
 	

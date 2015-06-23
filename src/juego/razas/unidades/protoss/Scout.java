@@ -9,9 +9,9 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.protoss.PuertoEstelar;
-import juego.razas.unidades.UnidadComun;
+import juego.razas.unidades.UnidadAtaque;
 
-public class Scout extends UnidadComun {
+public class Scout extends UnidadAtaque {
 
 	public Scout() {
 		
