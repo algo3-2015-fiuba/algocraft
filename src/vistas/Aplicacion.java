@@ -22,7 +22,6 @@ import javax.swing.plaf.ColorUIResource;
 
 import vistas.paneles.principales.PanelInicio;
 import vistas.paneles.principales.PanelJugadores;
-import vistas.sonido.Sonido;
 import vistas.ventanas.VentanaMenu;
 
 public class Aplicacion {
@@ -46,8 +45,8 @@ public class Aplicacion {
 			}
 
 		});
-		Sonido sonidoJuego = new Sonido();
-		sonidoJuego.reproduccir();
+		//Sonido sonidoJuego = new Sonido();
+		//sonidoJuego.reproduccir();
 	}
 
 	public static void iniciarInterfaz() throws MalformedURLException,
@@ -92,9 +91,8 @@ public class Aplicacion {
 
 		JButton boton = new JButton();
 
-		BufferedImage image;
 		try {
-			image = ImageIO.read(url);
+			BufferedImage image = ImageIO.read(url);
 			boton.setIcon(new ImageIcon(url));
 
 		} catch (IOException e) {

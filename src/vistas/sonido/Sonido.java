@@ -1,5 +1,6 @@
 package vistas.sonido;
 
+/*
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,4 +35,4 @@ public class Sonido {
 	}
 	// ejemplo de url :  \\C:\\Users\\ALE_92\\Documents\\Algos 3\\java-work\\AlgoCraft\\StarcraftSong.mp3
 
-}
+}*/
