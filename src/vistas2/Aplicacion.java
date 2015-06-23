@@ -22,6 +22,7 @@ import javax.swing.plaf.ColorUIResource;
 
 import vistas2.panelesPrincipales.PanelInicio;
 import vistas2.panelesPrincipales.PanelJugadores;
+import vistas2.sonido.Sonido;
 import vistas2.ventanas.VentanaMenu;
 
 public class Aplicacion {
@@ -36,16 +37,20 @@ public class Aplicacion {
 			public void run() {
 				try {
 					estilos();
-					inciarInterfaz();
+					iniciarInterfaz();
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
+
 		});
+		Sonido sonidoJuego = new Sonido();
+		sonidoJuego.reproduccir();
 	}
 
-	public static void inciarInterfaz() throws MalformedURLException,
+	public static void iniciarInterfaz() throws MalformedURLException,
 			IOException {
 
 		VentanaMenu v = new VentanaMenu();
@@ -60,6 +65,7 @@ public class Aplicacion {
 		principal.add(new PanelJugadores(principal), "creacionDePersonajes");
 
 		v.getContentPane().add(principal);
+
 	}
 
 	public static JLabel logo() {
@@ -112,4 +118,5 @@ public class Aplicacion {
 		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.decode("#639AD1")));
 		UIManager.put("ComboBox.selectionForeground", new ColorUIResource(Color.WHITE));
 	}
+	
 }
