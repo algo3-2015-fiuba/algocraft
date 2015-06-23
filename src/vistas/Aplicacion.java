@@ -5,8 +5,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -82,6 +87,32 @@ public class Aplicacion {
 		}
 
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		logo.setBorder(BorderFactory.createEmptyBorder(50, 30, 30, 30));
+
+		return logo;
+	}
+	
+	public static JLabel logoChiquito() {
+		URL url = Aplicacion.class.getResource("/assets/logo.png");
+
+		JLabel logo = new JLabel();
+
+		try {
+			BufferedImage image;
+			image = ImageIO.read(url);
+			
+			ImageIcon icon = new ImageIcon(image);
+			
+			Image imagenChica = icon.getImage().getScaledInstance((int)(icon.getIconWidth()*0.5), (int)(icon.getIconHeight()*0.5), Image.SCALE_SMOOTH);
+			
+			logo.setIcon(new ImageIcon(imagenChica));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		logo.setHorizontalAlignment(SwingConstants.RIGHT);		
+		logo.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
 		return logo;
 	}
@@ -108,6 +139,29 @@ public class Aplicacion {
 		boton.setFocusable(false);
 
 		return boton;
+	}
+	
+	public static JLabel titulo(String contenido) {
+		JLabel titulo = new JLabel();
+		
+		InputStream is = Aplicacion.class.getResourceAsStream("/assets/fonts/BebasNeue Bold.ttf");
+		try {
+			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(36f);
+			
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(font);
+			
+			titulo.setFont(font);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		titulo.setText(contenido);
+		titulo.setForeground(Color.WHITE);
+		
+		return titulo;
 	}
 	
 	private static void estilos() {

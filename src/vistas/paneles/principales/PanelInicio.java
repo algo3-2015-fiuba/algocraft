@@ -37,9 +37,9 @@ public class PanelInicio extends MenuPanel {
 		listPane.setBorder(BorderFactory.createEmptyBorder());
 		listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
 
-		listPane.add(Box.createRigidArea(new Dimension(0, 130)));
+		listPane.add(Box.createRigidArea(new Dimension(0, 80)));
 		listPane.add(botonInicio, BorderLayout.CENTER);
-		listPane.add(Box.createRigidArea(new Dimension(0, 30)));
+		listPane.add(Box.createRigidArea(new Dimension(0, 50)));
 		listPane.add(botonSalir, BorderLayout.CENTER);
 
 		this.add(listPane);
