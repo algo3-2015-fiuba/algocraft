@@ -3,7 +3,7 @@ package juego.razas.unidades.protoss;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.informacion.AtaquesUnidades;
+import juego.informacion.AtaqueUnidad;
 import juego.informacion.Costos;
 import juego.razas.unidades.UnidadAtaque;
 
@@ -17,7 +17,7 @@ public class Dragon extends UnidadAtaque {
 		this.pesoTransporte = 4;
 		this.vida = new Escudo(new Vida(100), 80);		
 		this.costos = new Costos(125,50,6,2);
-		this.bolsaDeAtaque = new AtaquesUnidades(20,20,4,4);
+		this.ataqueUnidad = new AtaqueUnidad(20,20,4,4);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		
 	}
