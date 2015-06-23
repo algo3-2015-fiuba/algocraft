@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -22,7 +22,7 @@ public class Barraca extends ConstruccionMilitar {
 	public Barraca() {
 		super();
 		this.vida = new Vida(1000);
-		this.bolsaDeCostos = new BolsaDeCostos(150,0,12,0);
+		this.bolsaDeCostos = new Costos(150,0,12,0);
 	}
 
 	@Override

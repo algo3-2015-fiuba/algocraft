@@ -1,14 +1,14 @@
-package juego.bolsas;
+package juego.informacion;
 
 import juego.interfaces.excepciones.RecursosInsuficientes;
 
-public class BolsaDeRecursos {
+public class RecursosJugador {
 
 	private int mineralesRecolectados;
 	private int gasVespenoRecolectado;
 	private int suministroMaximo;
 	
-	public BolsaDeRecursos() {
+	public RecursosJugador() {
 		super();
 		this.mineralesRecolectados = 200;
 		this.gasVespenoRecolectado = 0;

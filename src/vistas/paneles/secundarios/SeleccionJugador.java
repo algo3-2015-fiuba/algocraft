@@ -1,4 +1,4 @@
-package vistas2.panelesSecundarios;
+package vistas.paneles.secundarios;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -16,8 +16,8 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
-import vistas2.utilidades.CampoDeTextoPredeterminado;
-import vistas2.utilidades.Item;
+import vistas.utilidades.CampoDeTextoPredeterminado;
+import vistas.utilidades.Item;
 
 public class SeleccionJugador extends JPanel {
 	

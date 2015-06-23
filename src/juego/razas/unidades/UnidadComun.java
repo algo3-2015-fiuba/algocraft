@@ -1,7 +1,7 @@
 package juego.razas.unidades;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeAtaque;
+import juego.informacion.Ataques;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
@@ -10,7 +10,7 @@ import juego.razas.construcciones.Construccion;
 
 public abstract class UnidadComun extends Unidad {
 
-	protected BolsaDeAtaque bolsaDeAtaque;
+	protected Ataques bolsaDeAtaque;
 	
 	/* * * * * * * 
 	 *           *

@@ -1,9 +1,9 @@
 package juego.razas.unidades.terran;
 
-import juego.bolsas.BolsaDeAtaque;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
+import juego.informacion.Ataques;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
@@ -19,8 +19,8 @@ public class Golliat extends UnidadComun {
 		this.vision = 8;
 		this.vida = new Vida(125);	
 		this.pesoTransporte = 2;
-		this.bolsaDeCostos = new BolsaDeCostos(100,50,6,2);
-		this.bolsaDeAtaque = new BolsaDeAtaque(12,10,6,5);
+		this.bolsaDeCostos = new Costos(100,50,6,2);
+		this.bolsaDeAtaque = new Ataques(12,10,6,5);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 	}
 

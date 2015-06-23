@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeRecursos;
+import juego.informacion.RecursosJugador;
 import juego.interfaces.Construible;
 import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
@@ -28,7 +28,7 @@ public abstract class Jugador {
 	protected Collection<Construible> construcciones;
 	protected Collection<Unidad> unidades;
 	protected Collection<Magia> magias;
-	protected BolsaDeRecursos bolsaDeRecursos;
+	protected RecursosJugador bolsaDeRecursos;
 	protected Vision vision;
 	
 	public Jugador(String nombre, Color color) {
@@ -38,13 +38,13 @@ public abstract class Jugador {
 		this.enConstruccion = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
 		this.magias = new ArrayList<Magia>();
-		this.bolsaDeRecursos = new BolsaDeRecursos();
+		this.bolsaDeRecursos = new RecursosJugador();
 		this.vision = new Vision(this.unidades);
 	}
 		
 	public Color getColor() { return this.color; }
 	public String getNombre() { return this.nombre; }
-	public BolsaDeRecursos bolsaDeRecursos() { return this.bolsaDeRecursos; }
+	public RecursosJugador bolsaDeRecursos() { return this.bolsaDeRecursos; }
 	
 	public void finalizarTurno() {		
 		Juego.getInstance().finalizarTurno();		

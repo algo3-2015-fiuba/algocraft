@@ -1,4 +1,4 @@
-package juego.bolsas;
+package juego.informacion;
 
 import java.util.Iterator;
 
@@ -11,12 +11,12 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 
-public class BolsaDeAtaque {
+public class Ataques {
 
 	private int danioTierra, danioAire;
 	private int rangoTierra, rangoAire;
 	
-	public BolsaDeAtaque(int danioTierra, int danioAire, int rangoTierra, int rangoAire) {
+	public Ataques(int danioTierra, int danioAire, int rangoTierra, int rangoAire) {
 		super();
 		this.danioTierra = danioTierra;
 		this.danioAire = danioAire;

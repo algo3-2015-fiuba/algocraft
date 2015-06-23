@@ -1,4 +1,4 @@
-package vistas2.utilidades;
+package vistas.utilidades;
 
 import java.awt.Component;
 import java.awt.Container;

@@ -1,4 +1,4 @@
-package vistas2.panelesPrincipales;
+package vistas.paneles.principales;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

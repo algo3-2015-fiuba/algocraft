@@ -1,4 +1,4 @@
-package vistas2;
+package vistas;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,10 +20,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
-import vistas2.panelesPrincipales.PanelInicio;
-import vistas2.panelesPrincipales.PanelJugadores;
-import vistas2.sonido.Sonido;
-import vistas2.ventanas.VentanaMenu;
+import vistas.paneles.principales.PanelInicio;
+import vistas.paneles.principales.PanelJugadores;
+import vistas.sonido.Sonido;
+import vistas.ventanas.VentanaMenu;
 
 public class Aplicacion {
 

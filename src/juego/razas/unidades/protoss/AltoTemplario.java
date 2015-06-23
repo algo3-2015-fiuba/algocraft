@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.bolsas.BolsaDeCostos;
 import juego.energia.Energia;
 import juego.estrategias.MovimientoTerrestre;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.magias.TormentaPsionica;
@@ -27,7 +27,7 @@ public class AltoTemplario extends UnidadMagica {
 		this.vision = 7;
 		this.pesoTransporte = 2;
 		this.vida = new Escudo(new Vida(40), 40);		
-		this.bolsaDeCostos = new BolsaDeCostos(150,50,7,2);
+		this.bolsaDeCostos = new Costos(150,50,7,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();

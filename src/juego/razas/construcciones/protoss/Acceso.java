@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -23,7 +23,7 @@ public class Acceso extends ConstruccionMilitar {
 	public Acceso() {
 		super();
 		this.vida = new Escudo(new Vida(500), 500);
-		this.bolsaDeCostos = new BolsaDeCostos(150,0,8,0);
+		this.bolsaDeCostos = new Costos(150,0,8,0);
 	}
 
 	@Override

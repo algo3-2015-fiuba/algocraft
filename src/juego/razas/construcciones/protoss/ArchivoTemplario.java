@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequierePuertoEstelar;
@@ -25,7 +25,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 	public ArchivoTemplario() {
 		super();
 		this.vida = new Escudo(new Vida(500), 500);
-		this.bolsaDeCostos = new BolsaDeCostos(150,200,9,0);
+		this.bolsaDeCostos = new Costos(150,200,9,0);
 	}
 	
 	@Override

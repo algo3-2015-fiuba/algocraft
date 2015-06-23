@@ -1,16 +1,16 @@
-package juego.bolsas;
+package juego.informacion;
 
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.jugadores.Jugador;
 
-public class BolsaDeCostos {
+public class Costos {
 
 	private int costoMinerales;
 	private int costoGasVespeno;
 	private int tiempoDeConstruccion;
 	private int costoSuministros;
 	
-	public BolsaDeCostos(int costoMinerales, int costoGasVespeno, int tiempoDeConstruccion, int suministros) {
+	public Costos(int costoMinerales, int costoGasVespeno, int tiempoDeConstruccion, int suministros) {
 		super();
 		this.costoMinerales = costoMinerales;
 		this.costoGasVespeno = costoGasVespeno;

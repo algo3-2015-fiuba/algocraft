@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -21,7 +21,7 @@ public class Pilon extends ConstruccionHabitable {
 	public Pilon() {
 		super();
 		this.vida = new Escudo(new Vida(300), 300);
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,5,0);
+		this.bolsaDeCostos = new Costos(100,0,5,0);
 	}
 	
 	@Override

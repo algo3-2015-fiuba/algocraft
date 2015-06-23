@@ -3,9 +3,9 @@ package juego.razas.construcciones.protoss;
 import java.util.Collection;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
@@ -23,7 +23,7 @@ public class Asimilador extends ConstruccionRecolectora {
 	public Asimilador() {
 		super();
 		this.vida = new Escudo(new Vida(450), 450);
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,6,0);
+		this.bolsaDeCostos = new Costos(100,0,6,0);
 	}
 	
 	@Override

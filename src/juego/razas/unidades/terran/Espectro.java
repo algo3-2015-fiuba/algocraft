@@ -1,9 +1,9 @@
 package juego.razas.unidades.terran;
 
-import juego.bolsas.BolsaDeAtaque;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
+import juego.informacion.Ataques;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
@@ -18,8 +18,8 @@ public class Espectro extends UnidadComun {
 		this.rangoDeMovimiento = 3;
 		this.vision = 7;
 		this.vida = new Vida(120);		
-		this.bolsaDeCostos = new BolsaDeCostos(150,100,8,2);
-		this.bolsaDeAtaque = new BolsaDeAtaque(8,20,5,5);
+		this.bolsaDeCostos = new Costos(150,100,8,2);
+		this.bolsaDeAtaque = new Ataques(8,20,5,5);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
 		
 	}

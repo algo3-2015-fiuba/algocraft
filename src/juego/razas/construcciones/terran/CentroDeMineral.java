@@ -3,8 +3,8 @@ package juego.razas.construcciones.terran;
 import java.util.Collection;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -22,7 +22,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	public CentroDeMineral() {
 		super();
 		this.vida = new Vida(500);
-		this.bolsaDeCostos = new BolsaDeCostos(50,0,4,0);
+		this.bolsaDeCostos = new Costos(50,0,4,0);
 	}
 	
 	@Override

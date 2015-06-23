@@ -2,8 +2,8 @@ package juego.razas.construcciones;
 
 import java.util.Collection;
 
-import juego.bolsas.BolsaDeCostos;
 import juego.estrategias.MovimientoConstruccion;
+import juego.informacion.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
@@ -23,7 +23,7 @@ public abstract class Construccion implements Construible, Controlable {
 
 	protected Atacable vida;
 	protected Jugador propietario;
-	protected BolsaDeCostos bolsaDeCostos;
+	protected Costos bolsaDeCostos;
 	protected Coordenada posicion;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	

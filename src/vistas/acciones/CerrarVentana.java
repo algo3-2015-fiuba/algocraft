@@ -1,4 +1,4 @@
-package vistas2.acciones;
+package vistas.acciones;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

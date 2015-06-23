@@ -1,4 +1,4 @@
-package vistas2.ventanas;
+package vistas.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import vistas2.utilidades.ScalablePane;
+import vistas.utilidades.ScalablePane;
 
 public class VentanaMenu extends JFrame {
 	/**

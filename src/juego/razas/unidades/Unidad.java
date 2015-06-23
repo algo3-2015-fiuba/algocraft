@@ -1,7 +1,7 @@
 package juego.razas.unidades;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
+import juego.informacion.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
@@ -23,7 +23,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected Atacable vida;
 	protected int rangoDeMovimiento;
 	protected int pesoTransporte;
-	protected BolsaDeCostos bolsaDeCostos;
+	protected Costos bolsaDeCostos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	protected Jugador propietario;

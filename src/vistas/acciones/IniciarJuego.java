@@ -1,11 +1,11 @@
-package vistas2.acciones;
+package vistas.acciones;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import juego.jugadores.Jugador;
-import vistas2.panelesPrincipales.PanelJugadores;
+import vistas.paneles.principales.PanelJugadores;
 
 public class IniciarJuego implements ActionListener {
 	

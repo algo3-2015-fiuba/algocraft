@@ -1,17 +1,18 @@
-package vistas2.panelesPrincipales;
+package vistas.paneles.principales;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import vistas2.Aplicacion;
-import vistas2.acciones.CerrarVentana;
-import vistas2.acciones.SiguientePanel;
+import vistas.Aplicacion;
+import vistas.acciones.CerrarVentana;
+import vistas.acciones.SiguientePanel;
 
 public class PanelInicio extends MenuPanel {
 	/**

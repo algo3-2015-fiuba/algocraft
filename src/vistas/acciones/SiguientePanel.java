@@ -1,9 +1,9 @@
-package vistas2.acciones;
+package vistas.acciones;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vistas2.panelesPrincipales.MenuPanel;
+import vistas.paneles.principales.MenuPanel;
 
 public class SiguientePanel implements ActionListener {
 	

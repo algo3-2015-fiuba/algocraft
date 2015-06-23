@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorTerran;
@@ -20,7 +20,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 	public DepositoSuministro() {
 		super();
 		this.vida = new Vida(500);
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,6,0);
+		this.bolsaDeCostos = new Costos(100,0,6,0);
 	}
 	
 	@Override

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Vida;
 import juego.energia.Energia;
 import juego.estrategias.MovimientoVolador;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.magias.Magia;
@@ -28,7 +28,7 @@ public class NaveCiencia extends UnidadMagica {
 		this.vision = 10;
 		this.energia = new Energia();
 		this.vida = new Vida(200);		
-		this.bolsaDeCostos = new BolsaDeCostos(100,225,10,2);
+		this.bolsaDeCostos = new Costos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
 		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();

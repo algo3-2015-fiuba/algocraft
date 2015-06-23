@@ -1,8 +1,8 @@
 package juego.razas.unidades.protoss;
 
-import juego.bolsas.BolsaDeAtaque;
-import juego.bolsas.BolsaDeCostos;
 import juego.estrategias.MovimientoTerrestre;
+import juego.informacion.Ataques;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.razas.construcciones.ConstruccionMilitar;
@@ -19,8 +19,8 @@ public class Zealot extends UnidadComun {
 		this.vision = 7;
 		this.pesoTransporte = 2;
 		this.vida = new Escudo(new Vida(100), 60);		
-		this.bolsaDeCostos = new BolsaDeCostos(100,0,4,2);
-		this.bolsaDeAtaque = new BolsaDeAtaque(8,0,1,0);
+		this.bolsaDeCostos = new Costos(100,0,4,2);
+		this.bolsaDeAtaque = new Ataques(8,0,1,0);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		
 	}

@@ -1,4 +1,4 @@
-package vistas2.panelesPrincipales;
+package vistas.paneles.principales;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,9 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import juego.jugadores.Jugador;
-import vistas2.Aplicacion;
-import vistas2.acciones.IniciarJuego;
-import vistas2.panelesSecundarios.SeleccionJugador;
+import vistas.Aplicacion;
+import vistas.acciones.IniciarJuego;
+import vistas.paneles.secundarios.SeleccionJugador;
 
 public class PanelJugadores extends MenuPanel {
 	

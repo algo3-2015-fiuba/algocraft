@@ -1,9 +1,9 @@
 package juego.razas.unidades.protoss;
 
-import juego.bolsas.BolsaDeCostos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
+import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -21,7 +21,7 @@ public class NaveTransporte extends UnidadTransporte {
 		this.rangoDeMovimiento = 5;
 		this.vision = 8;
 		this.vida = new Escudo(new Vida(80), 60);		
-		this.bolsaDeCostos = new BolsaDeCostos(200,0,8,2);
+		this.bolsaDeCostos = new Costos(200,0,8,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		
 	}
