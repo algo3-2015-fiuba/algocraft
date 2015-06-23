@@ -73,7 +73,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public abstract void afectadaPorMagia(MisilEMP emp);
 	
 	public void afectadaPorMagia(Radiacion radiacion) {
-		this.vida.consumir();
+		this.vida.afectadoPorRadiacion();
 		
 		if (this.vida.vidaAgotada()) {
 			this.morir();

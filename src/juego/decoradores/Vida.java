@@ -37,7 +37,7 @@ public class Vida implements Atacable {
 	}
 	
 	@Override
-	public void consumir() {
+	public void afectadoPorRadiacion() {
 		this.daniar((int)Math.round(this.vidaActual() * 0.20));
 	}
 	

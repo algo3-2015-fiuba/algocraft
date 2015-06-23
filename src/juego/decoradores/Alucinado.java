@@ -31,7 +31,7 @@ public class Alucinado implements Atacable {
 	}
 
 	@Override
-	public void consumir() {
+	public void afectadoPorRadiacion() {
 		// TODO Auto-generated method stub
 
 	}
