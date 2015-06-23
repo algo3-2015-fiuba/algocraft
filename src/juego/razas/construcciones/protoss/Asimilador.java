@@ -23,7 +23,7 @@ public class Asimilador extends ConstruccionRecolectora {
 	public Asimilador() {
 		super();
 		this.vida = new Escudo(new Vida(450), 450);
-		this.bolsaDeCostos = new Costos(100,0,6,0);
+		this.costos = new Costos(100,0,6,0);
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class Asimilador extends ConstruccionRecolectora {
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if ((!celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
 		
@@ -54,7 +54,7 @@ public class Asimilador extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 	
 		this.posicion = coordenada;
 		this.propietario = jugador;

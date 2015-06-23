@@ -23,13 +23,13 @@ public class Acceso extends ConstruccionMilitar {
 	public Acceso() {
 		super();
 		this.vida = new Escudo(new Vida(500), 500);
-		this.bolsaDeCostos = new Costos(150,0,8,0);
+		this.costos = new Costos(150,0,8,0);
 	}
 
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
+			this.costos.disminuirTiempoDeConstruccion();
 			if (this.construccionFinalizada()) ((JugadorProtoss)this.propietario).activarPuertoEstelar(true);
 		}
 		
@@ -41,7 +41,7 @@ public class Acceso extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 2);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -60,7 +60,7 @@ public class Acceso extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -68,13 +68,15 @@ public class Acceso extends ConstruccionMilitar {
 	}
 	
 	public void entrenar(Zealot zealot) throws RecursosInsuficientes, SobrePoblacion {
-		zealot.iniciarEntrenamiento();
-		this.entrenamientos.add(zealot);
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(zealot);
+		}
 	}
 
 	public void entrenar(Dragon dragon) throws RecursosInsuficientes, SobrePoblacion {
-		dragon.iniciarEntrenamiento();
-		this.entrenamientos.add(dragon);		
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(dragon);
+		}
 	}
 
 	@Override

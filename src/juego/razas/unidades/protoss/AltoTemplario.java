@@ -8,11 +8,8 @@ import juego.energia.Energia;
 import juego.estrategias.MovimientoTerrestre;
 import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
-import juego.razas.construcciones.ConstruccionMilitar;
-import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 import juego.decoradores.*;
@@ -27,7 +24,7 @@ public class AltoTemplario extends UnidadMagica {
 		this.vision = 7;
 		this.pesoTransporte = 2;
 		this.vida = new Escudo(new Vida(40), 40);		
-		this.bolsaDeCostos = new Costos(150,50,7,2);
+		this.costos = new Costos(150,50,7,2);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
 		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();
@@ -35,11 +32,6 @@ public class AltoTemplario extends UnidadMagica {
 		
 	}
 
-	@Override
-	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
-		((ArchivoTemplario)construccion).entrenar(this);
-	}
-	
 	@Override
 	public void actualizar() {
 		this.vida.regenerar();

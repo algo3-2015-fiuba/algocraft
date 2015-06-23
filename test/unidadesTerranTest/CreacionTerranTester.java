@@ -89,7 +89,7 @@ public class CreacionTerranTester {
 		}
 		
 		//La barraca coloca al marine, cuando su entrenamiento a finalizado, en la casilla mas cercana disponible.
-		jugadorActual.entrenar(barraca, marine);
+		barraca.entrenar(marine);
 		
 		for (int i = 1; i < 4; i++) {
 			jugadorActual.finalizarTurno();

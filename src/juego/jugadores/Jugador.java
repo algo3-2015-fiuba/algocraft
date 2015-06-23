@@ -7,11 +7,10 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.informacion.RecursosJugador;
+import juego.informacion.VisionJugador;
 import juego.interfaces.Construible;
-import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.magias.Magia;
 import juego.mapa.Coordenada;
@@ -29,7 +28,7 @@ public abstract class Jugador {
 	protected Collection<Unidad> unidades;
 	protected Collection<Magia> magias;
 	protected RecursosJugador bolsaDeRecursos;
-	protected Vision vision;
+	protected VisionJugador vision;
 	
 	public Jugador(String nombre, Color color) {
 		this.nombre = nombre;
@@ -39,7 +38,7 @@ public abstract class Jugador {
 		this.unidades = new ArrayList<Unidad>();
 		this.magias = new ArrayList<Magia>();
 		this.bolsaDeRecursos = new RecursosJugador();
-		this.vision = new Vision(this.unidades);
+		this.vision = new VisionJugador(this.unidades);
 	}
 		
 	public Color getColor() { return this.color; }
@@ -102,18 +101,6 @@ public abstract class Jugador {
 	public boolean suministrosSuficientes(int costoSuministros) {
 		int suministrosRestantes = this.poblacionMaxima() - this.poblacionActual();
 		return (suministrosRestantes >= costoSuministros);
-	}
-	
-	public void entrenar(ConstruccionMilitar construccion, Entrenable entrenable) 
-			throws RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
-
-		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
-		
-		while (it.hasNext()) {			
-			if (it.next() == construccion) {
-				entrenable.entrenador(construccion);
-			}
-		}
 	}
 	
 	public void unidadActiva(Unidad unidadActiva) {

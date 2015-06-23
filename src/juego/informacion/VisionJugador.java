@@ -1,4 +1,4 @@
-package juego.jugadores;
+package juego.informacion;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,10 +13,10 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 
-public class Vision {
+public class VisionJugador {
 	private Collection<Unidad> unidadesConVision;
 	
-	public Vision(Collection<Unidad> unidadesJugador) {
+	public VisionJugador(Collection<Unidad> unidadesJugador) {
 		this.unidadesConVision = unidadesJugador;
 	}
 	

@@ -83,7 +83,7 @@ public class ConstruccionesTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.entrenar(acceso, zealot);
+		acceso.entrenar(zealot);
 		
 		for (int i = 1; i < 5; i++) {
 			jugadorActual.finalizarTurno();

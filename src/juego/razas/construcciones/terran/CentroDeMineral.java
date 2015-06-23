@@ -22,7 +22,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	public CentroDeMineral() {
 		super();
 		this.vida = new Vida(500);
-		this.bolsaDeCostos = new Costos(50,0,4,0);
+		this.costos = new Costos(50,0,4,0);
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Celda celda;
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
@@ -53,7 +53,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;

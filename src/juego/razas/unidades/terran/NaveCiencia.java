@@ -9,13 +9,10 @@ import juego.energia.Energia;
 import juego.estrategias.MovimientoVolador;
 import juego.informacion.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.magias.Magia;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
 import juego.mapa.Coordenada;
-import juego.razas.construcciones.ConstruccionMilitar;
-import juego.razas.construcciones.terran.PuertoEstelar;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
 
@@ -28,16 +25,11 @@ public class NaveCiencia extends UnidadMagica {
 		this.vision = 10;
 		this.energia = new Energia();
 		this.vida = new Vida(200);		
-		this.bolsaDeCostos = new Costos(100,225,10,2);
+		this.costos = new Costos(100,225,10,2);
 		this.estrategiaDeMovimiento = new MovimientoVolador();
 		@SuppressWarnings("unused")
 		Collection<Magia> magiasActivas = new ArrayList<Magia>();
 		
-	}
-	
-	@Override
-	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
-		((PuertoEstelar)construccion).entrenar(this);
 	}
 	
 	public void lanzarEMP(Coordenada coordImpacto) {

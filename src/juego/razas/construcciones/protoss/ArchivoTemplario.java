@@ -25,7 +25,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 	public ArchivoTemplario() {
 		super();
 		this.vida = new Escudo(new Vida(500), 500);
-		this.bolsaDeCostos = new Costos(150,200,9,0);
+		this.costos = new Costos(150,200,9,0);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 				
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if (!jugador.archivoTemplarioHabilitado()) throw new RequierePuertoEstelar();
 		
@@ -55,7 +55,7 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -63,8 +63,9 @@ public class ArchivoTemplario extends ConstruccionMilitar {
 	}
 
 	public void entrenar(AltoTemplario altoTemplario) throws RecursosInsuficientes, SobrePoblacion {
-		altoTemplario.iniciarEntrenamiento();
-		this.entrenamientos.add(altoTemplario);
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(altoTemplario);
+		}
 	}
 	
 	@Override

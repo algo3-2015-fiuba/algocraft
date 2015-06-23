@@ -113,7 +113,7 @@ public class PoblacionTester {
 		}
 		
 		exception.expect(SobrePoblacion.class);
-		jugadorActual.entrenar(barraca, marine);
+		barraca.entrenar(marine);
 		
 	}
 	
@@ -148,11 +148,11 @@ public class PoblacionTester {
 		}
 		
 		for (int i = 1; i < 6; i++) {
-			jugadorActual.entrenar(barraca, new Marine());
+			barraca.entrenar(new Marine());
 		}
 		
 		exception.expect(SobrePoblacion.class);
-		jugadorActual.entrenar(barraca, new Marine());
+		barraca.entrenar(new Marine());
 		
 	}
 

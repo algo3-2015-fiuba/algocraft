@@ -24,13 +24,13 @@ public class Fabrica extends ConstruccionMilitar {
 	public Fabrica() {
 		super();
 		this.vida = new Vida(1250);
-		this.bolsaDeCostos = new Costos(200,100,12,0);
+		this.costos = new Costos(200,100,12,0);
 	}
 	
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
+			this.costos.disminuirTiempoDeConstruccion();
 			if (this.construccionFinalizada()) {
 				((JugadorTerran)this.propietario).activarPuertoEstelar(true);
 			}
@@ -43,7 +43,7 @@ public class Fabrica extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 				
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if (!jugador.fabricaHabilitada()) throw new RequiereBarraca();
 		
@@ -64,7 +64,7 @@ public class Fabrica extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -72,8 +72,9 @@ public class Fabrica extends ConstruccionMilitar {
 	}
 	
 	public void entrenar(Golliat golliat) throws RecursosInsuficientes, SobrePoblacion {
-		golliat.iniciarEntrenamiento();
-		this.entrenamientos.add(golliat);
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(golliat);
+		}
 	}
 	
 	@Override

@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Entrenable;
+import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
@@ -79,6 +81,18 @@ public abstract class ConstruccionMilitar extends Construccion {
 		}
 		
 		this.unidadesEntrenadas.remove(unidadActiva);
+		
+	}
+	
+	public void iniciarEntrenamiento(Unidad unidad) throws RecursosInsuficientes, SobrePoblacion {
+		
+		unidad.asignarPropietario(this.propietario);
+
+		if (!unidad.costos().recursosSuficientes(this.propietario)) { throw new RecursosInsuficientes(); }
+		if (!this.propietario.suministrosSuficientes(unidad.costos().suministrosNecesarios())) { throw new SobrePoblacion(); }
+		
+		costos.consumirRecursos(this.propietario);
+		this.entrenamientos.add(unidad);	
 		
 	}
 

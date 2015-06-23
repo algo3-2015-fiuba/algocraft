@@ -6,8 +6,6 @@ import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.magias.MisilEMP;
@@ -23,7 +21,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected Atacable vida;
 	protected int rangoDeMovimiento;
 	protected int pesoTransporte;
-	protected Costos bolsaDeCostos;
+	protected Costos costos;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	protected Jugador propietario;
@@ -42,7 +40,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * * * * * * * * * * * * */
 	
 	public int suministrosNecesarios() {
-		return this.bolsaDeCostos.suministrosNecesarios();
+		return this.costos.suministrosNecesarios();
 	}
 	
 	public int pesoTransporte() {
@@ -60,6 +58,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	//Para que radiacion pueda saber donde atacar
 	public Coordenada coordenadas() {
 		return this.posicion;
+	}
+	
+	public Costos costos() {
+		return this.costos;
 	}
 	
 	/* * * * * * * * * * * * * * * *
@@ -111,27 +113,15 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * * * * * * * * * */
 	
 	@Override
-	public void iniciarEntrenamiento() throws RecursosInsuficientes, SobrePoblacion {
-		
-		Jugador jugador = Juego.getInstance().turnoDe();
-		this.asignarPropietario(jugador);
-		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) {	throw new RecursosInsuficientes(); }
-		if (!jugador.suministrosSuficientes(this.bolsaDeCostos.suministrosNecesarios())) { throw new SobrePoblacion(); }
-		
-		bolsaDeCostos.consumirRecursos(jugador);
-	}
-	
-	@Override
 	public void actualizarEntrenamiento() {
 		if (!entrenamientoFinalizado()) {
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();
+			this.costos.disminuirTiempoDeConstruccion();
 		}
 	}
 	
 	@Override
 	public boolean entrenamientoFinalizado() {
-		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
+		return (this.costos.tiempoDeConstruccionRestante() == 0);
 	}
 	
 	public void asignarPropietario(Jugador jugador) {

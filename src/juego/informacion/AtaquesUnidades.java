@@ -11,12 +11,12 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 
-public class Ataques {
+public class AtaquesUnidades {
 
 	private int danioTierra, danioAire;
 	private int rangoTierra, rangoAire;
 	
-	public Ataques(int danioTierra, int danioAire, int rangoTierra, int rangoAire) {
+	public AtaquesUnidades(int danioTierra, int danioAire, int rangoTierra, int rangoAire) {
 		super();
 		this.danioTierra = danioTierra;
 		this.danioAire = danioAire;

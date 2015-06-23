@@ -155,8 +155,8 @@ public class ataqueSimpleTest {
 			jugadorActual = Juego.getInstance().turnoDe();
 		}
 
-		jugadorActual.entrenar(barraca, marine1);
-		jugadorActual.entrenar(barraca, marine2);
+		barraca.entrenar(marine1);
+		barraca.entrenar(marine2);
 		
 		for (int i = 1; i < 5; i++) {
 			jugadorActual.finalizarTurno();

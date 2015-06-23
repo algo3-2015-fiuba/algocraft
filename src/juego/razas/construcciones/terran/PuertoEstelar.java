@@ -26,7 +26,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 	public PuertoEstelar() {
 		super();
 		this.vida = new Vida(1300);
-		this.bolsaDeCostos = new Costos(150,100,10,0);
+		this.costos = new Costos(150,100,10,0);
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 				
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if (!jugador.puertoEstelarHabilitado()) throw new RequiereFabrica();
 		
@@ -56,7 +56,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;
@@ -64,19 +64,21 @@ public class PuertoEstelar extends ConstruccionMilitar {
 	}
 
 	public void entrenar(Espectro espectro) throws RecursosInsuficientes, SobrePoblacion {
-		espectro.iniciarEntrenamiento();
-		this.entrenamientos.add(espectro);
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(espectro);
+		}
 	}
 	
 	public void entrenar(NaveCiencia naveCiencia) throws RecursosInsuficientes, SobrePoblacion {
-		naveCiencia.iniciarEntrenamiento();
-		this.entrenamientos.add(naveCiencia);
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(naveCiencia);
+		}
 	}
 
 	public void entrenar(NaveTransporte naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
-		naveTransporte.iniciarEntrenamiento();
-		this.entrenamientos.add(naveTransporte);
-		
+		if (this.propietario == Juego.getInstance().turnoDe()) {
+			this.iniciarEntrenamiento(naveTransporte);
+		}
 	}
 	
 	@Override

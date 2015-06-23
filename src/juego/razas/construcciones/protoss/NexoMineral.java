@@ -23,7 +23,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	public NexoMineral() {
 		super();
 		this.vida = new Escudo(new Vida(250), 250);
-		this.bolsaDeCostos = new Costos(50,0,4,0);
+		this.costos = new Costos(50,0,4,0);
 	}
 	
 	@Override
@@ -44,7 +44,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Celda celda;
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
@@ -54,7 +54,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 	
 		this.posicion = coordenada;
 		this.propietario = jugador;

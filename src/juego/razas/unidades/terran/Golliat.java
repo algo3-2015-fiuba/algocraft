@@ -2,12 +2,8 @@ package juego.razas.unidades.terran;
 
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.informacion.Ataques;
+import juego.informacion.AtaquesUnidades;
 import juego.informacion.Costos;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.razas.construcciones.ConstruccionMilitar;
-import juego.razas.construcciones.terran.Fabrica;
 import juego.razas.unidades.UnidadAtaque;
 
 public class Golliat extends UnidadAtaque {
@@ -19,14 +15,9 @@ public class Golliat extends UnidadAtaque {
 		this.vision = 8;
 		this.vida = new Vida(125);	
 		this.pesoTransporte = 2;
-		this.bolsaDeCostos = new Costos(100,50,6,2);
-		this.bolsaDeAtaque = new Ataques(12,10,6,5);
+		this.costos = new Costos(100,50,6,2);
+		this.bolsaDeAtaque = new AtaquesUnidades(12,10,6,5);
 		this.estrategiaDeMovimiento = new MovimientoTerrestre();
-	}
-
-	@Override
-	public void entrenador(ConstruccionMilitar construccion) throws RecursosInsuficientes, SobrePoblacion {
-		((Fabrica)construccion).entrenar(this);
 	}
 	
 }

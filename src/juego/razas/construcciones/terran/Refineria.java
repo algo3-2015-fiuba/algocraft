@@ -22,7 +22,7 @@ public class Refineria extends ConstruccionRecolectora {
 	public Refineria() {
 		super();
 		this.vida = new Vida(750);
-		this.bolsaDeCostos = new Costos(100,0,6,0);
+		this.costos = new Costos(100,0,6,0);
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Refineria extends ConstruccionRecolectora {
 		
 		celda = mapa.obtenerCelda(coordenada);
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		if ((!celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
 		
@@ -53,7 +53,7 @@ public class Refineria extends ConstruccionRecolectora {
 		
 		celda.ocupar(this);
 		
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;

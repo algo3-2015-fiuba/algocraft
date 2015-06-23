@@ -18,7 +18,6 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.protoss.Zealot;
@@ -90,7 +89,7 @@ public class UnidadesTest {
 			jugadorActual = Juego.getInstance().turnoDe();
 		}
 		
-		jugadorActual.entrenar(barraca, marine);
+		barraca.entrenar(marine);
 		
 		for (int i = 1; i < 5; i++) {
 			jugadorActual.finalizarTurno();
@@ -109,8 +108,6 @@ public class UnidadesTest {
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
 		
 		this.reiniciarJuego();
-		
-		Mapa mapa = Juego.getInstance().getMapa();
 		
 		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
 		jugadorReceptor.finalizarTurno();		

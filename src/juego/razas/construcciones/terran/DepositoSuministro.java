@@ -20,7 +20,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 	public DepositoSuministro() {
 		super();
 		this.vida = new Vida(500);
-		this.bolsaDeCostos = new Costos(100,0,6,0);
+		this.costos = new Costos(100,0,6,0);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 1);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -47,7 +47,7 @@ public class DepositoSuministro extends ConstruccionHabitable {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;

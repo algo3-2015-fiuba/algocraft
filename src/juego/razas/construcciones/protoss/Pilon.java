@@ -21,7 +21,7 @@ public class Pilon extends ConstruccionHabitable {
 	public Pilon() {
 		super();
 		this.vida = new Escudo(new Vida(300), 300);
-		this.bolsaDeCostos = new Costos(100,0,5,0);
+		this.costos = new Costos(100,0,5,0);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class Pilon extends ConstruccionHabitable {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!this.bolsaDeCostos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
+		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
 		
 		Collection<Celda> rangoDeCeldas = mapa.obtenerRangoDeCeldas(coordenada, 2, 1);
 		Iterator<Celda> it = rangoDeCeldas.iterator();
@@ -48,7 +48,7 @@ public class Pilon extends ConstruccionHabitable {
 			throw new UbicacionInvalida();
 		}
 	
-		this.bolsaDeCostos.consumirRecursos(jugador);
+		this.costos.consumirRecursos(jugador);
 		
 		this.posicion = coordenada;
 		this.propietario = jugador;

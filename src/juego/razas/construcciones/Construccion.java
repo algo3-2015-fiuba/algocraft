@@ -23,7 +23,7 @@ public abstract class Construccion implements Construible, Controlable {
 
 	protected Atacable vida;
 	protected Jugador propietario;
-	protected Costos bolsaDeCostos;
+	protected Costos costos;
 	protected Coordenada posicion;
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	
@@ -90,13 +90,13 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	@Override
 	public boolean construccionFinalizada() {
-		return (this.bolsaDeCostos.tiempoDeConstruccionRestante() == 0);
+		return (this.costos.tiempoDeConstruccionRestante() == 0);
 	}
 	
 	@Override
 	public void actualizarConstruccion() {
 		if (!this.construccionFinalizada())	{
-			this.bolsaDeCostos.disminuirTiempoDeConstruccion();		
+			this.costos.disminuirTiempoDeConstruccion();		
 		}	
 	}
 	
