@@ -30,7 +30,7 @@ public abstract class Magia {
 		return false;
 	}
 
-	public void activar() {}
+	public abstract void activar();
 	
 	public abstract void afectar(Unidad unidad);
 

@@ -38,5 +38,10 @@ public class MisilEMP extends Magia {
 		//Su duracion es de un turno
 		return false;
 	}
+
+	@Override
+	public void activar() {
+		//Su duracion es de un turno, por lo que se activa una sola vez al lanzarse.
+	}
 	
 }

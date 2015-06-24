@@ -8,6 +8,7 @@ import juego.interfaces.Entrenable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.magias.Alucinacion;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
 import juego.magias.TormentaPsionica;
@@ -64,6 +65,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.costos;
 	}
 	
+	public int rangoDeMovimiento() {
+		return this.rangoDeMovimiento;
+	}
+	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
@@ -87,6 +92,13 @@ public abstract class Unidad implements Controlable, Entrenable {
 		this.recibirAtaque(100);
 	}
 	
+	public void afectadaPorMagia(Alucinacion alucinacion) {
+		
+		this.propietario.asignarUnidad(new UnidadAlucinada(this));
+		this.propietario.asignarUnidad(new UnidadAlucinada(this));
+		
+	}	
+	
 	public void recibirAtaque(int danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
@@ -94,7 +106,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 		}
 	}
 	
-	private void morir() {
+	protected void morir() {
 		this.propietario.fallecida(this);
 		try {
 			this.estrategiaDeMovimiento.desocupar(this.posicion, this);
@@ -187,6 +199,6 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public void bajarDeCarro(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
 		this.posicion = coordActual;
 		this.estrategiaDeMovimiento.moverse(this, this.posicion, coordBajar);
-	}	
+	}
 	
 }

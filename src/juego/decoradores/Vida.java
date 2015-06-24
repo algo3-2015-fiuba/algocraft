@@ -22,7 +22,7 @@ public class Vida implements Atacable {
 	}
 
 	@Override
-	public void daniar(int danio) {
+	public void daniar(float danio) {
 		this.vida -= danio;
 	}
 	
@@ -38,7 +38,7 @@ public class Vida implements Atacable {
 	
 	@Override
 	public void afectadoPorRadiacion() {
-		this.daniar((int)Math.round(this.vidaActual() * 0.20));
+		this.daniar((float)Math.round(this.vidaActual() * 0.20));
 	}
 	
 }

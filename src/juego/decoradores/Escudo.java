@@ -5,16 +5,16 @@ import juego.interfaces.Atacable;
 public class Escudo implements Atacable {
 
 	private Atacable proteger;
-	private int escudoActual, escudoMaximo;
+	private float escudoActual, escudoMaximo;
 	
-	public Escudo(int escudoMaximo) {
+	public Escudo(float escudoMaximo) {
 		super();
 		this.proteger = null;
 		this.escudoMaximo = escudoMaximo;
 		this.escudoActual = escudoMaximo;
 	}
 	
-	public Escudo(Atacable aProteger, int escudoMaximo) {
+	public Escudo(Atacable aProteger, float escudoMaximo) {
 		super();
 		this.proteger = aProteger;
 		this.escudoMaximo = escudoMaximo;
@@ -28,9 +28,9 @@ public class Escudo implements Atacable {
 	}
 
 	@Override
-	public void daniar(int danio) {
+	public void daniar(float danio) {
 		if (danio > this.escudoActual) {
-			int restoDelDanio = danio - this.escudoActual;
+			float restoDelDanio = danio - this.escudoActual;
 			this.escudoActual = 0;
 			this.proteger.daniar(restoDelDanio);
 		} else {
