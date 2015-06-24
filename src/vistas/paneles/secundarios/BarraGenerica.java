@@ -28,8 +28,10 @@ public abstract class BarraGenerica extends JPanel {
 	private Unidad unidadActual;
 	private Image fondoDeVida;
 	private Image contenidoVida;
+	private JLabel contenedorBarraDentro;
+	private JLabel texto;
 	private double escala = 0.71;
-	private double porcentajeVida = 0.8;
+	private double porcentajeVida = 1;
 	private int margen = 7;
 	
 	protected String ubicacionFondo;
@@ -52,16 +54,14 @@ public abstract class BarraGenerica extends JPanel {
         contenedorBarra.setHorizontalTextPosition(SwingConstants.LEFT);
         contenedorBarra.setBounds(0, 0, contenedorBarra.getIcon().getIconWidth(), contenedorBarra.getIcon().getIconHeight());
         
-        JLabel contenedorBarraDentro = new JLabel(new ImageIcon(contenidoVida));
+        this.contenedorBarraDentro = new JLabel(new ImageIcon(contenidoVida));
         contenedorBarraDentro.setHorizontalTextPosition(SwingConstants.LEFT);
         contenedorBarraDentro.setBounds(margen, margen, contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
         
-        JLabel texto = Aplicacion.titulo("60/100", 24f);
+        this.texto = Aplicacion.titulo("60/100", 24f);
         texto.setHorizontalTextPosition(SwingConstants.LEFT);
         
         texto.setBounds((int)(margen*3), (int)(margen*1.5), contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
-        
-        
         
         layeredPane.add(contenedorBarra, new Integer(2));
         layeredPane.add(contenedorBarraDentro, new Integer(3));
@@ -82,43 +82,42 @@ public abstract class BarraGenerica extends JPanel {
         try {
         	fondoDeVida = ImageIO.read(ubicacionContenedor);
         	fondoDeVida = fondoDeVida.getScaledInstance((int)(fondoDeVida.getWidth(null)*escala)+1, (int)(fondoDeVida.getHeight(null)*escala), Image.SCALE_FAST);
+        	
         	contenidoVida = ImageIO.read(ubicacionDentro);
         	BufferedImage contenidoVidaBuffer = new BufferedImage(contenidoVida.getWidth(null), contenidoVida.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         	contenidoVidaBuffer = contenidoVidaBuffer.getSubimage(0, 0, (int)(contenidoVida.getWidth(null)*porcentajeVida), contenidoVida.getHeight(null));
         	contenidoVida = contenidoVida.getScaledInstance((int)(contenidoVidaBuffer.getWidth(null)*escala), (int)(contenidoVidaBuffer.getHeight(null)*escala), Image.SCALE_SMOOTH);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
 	
-	public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        /*
-        int w = fondoDeVida.getWidth(null);
-        int h = fondoDeVida.getHeight(null);
-        
-        g.drawImage(fondoDeVida, 0, 0, (int)(w*escala), (int)(h*escala), this);
-        
-        int wd = contenidoVida.getWidth(null);
-        int hd = contenidoVida.getHeight(null);
-        
-        BufferedImage contenidoVidaCrop = contenidoVida.getSubimage(0, 0, (int)(wd*porcentajeVida), hd);
-        
-        g.drawImage(contenidoVidaCrop, (int)(margen*escala), (int)(margen*escala), (int)(wd*porcentajeVida*escala)+1, (int)(hd*escala)+1, this);*/
-        
-    }
+	public void actualizarBarras() {
+		this.crearBarras();
+		this.contenedorBarraDentro.setIcon(new ImageIcon(contenidoVida));
+	}
 	
 	public void seleccionarUnidad(Unidad seleccionada) {
-		this.unidadActual = seleccionada;
-		this.actualizarVida();
+		if(seleccionada == null) {
+			this.removerSeleccion();
+		} else {
+			this.unidadActual = seleccionada;
+			this.actualizarVida();
+			//this.actualizarBarras();
+			this.setVisible(true);
+		}
 	}
 	
 	public void removerSeleccion() {
 		this.unidadActual = null;
+		this.setVisible(false);
 	}
 	
 	private void actualizarVida() {
+		this.porcentajeVida = this.unidadActual.vidaActual() / 300.0;
 		
+		this.texto.setText(Float.toString(this.unidadActual.vidaActual()));
 	}
 	
 	

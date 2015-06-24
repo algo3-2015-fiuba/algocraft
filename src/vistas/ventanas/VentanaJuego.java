@@ -16,25 +16,30 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.unidades.Unidad;
 import juego.razas.unidades.terran.Marine;
 import juego.razas.unidades.terran.NaveCiencia;
 import vistas.Aplicacion;
 import vistas.handlers.HandScrollListener;
+import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.paneles.secundarios.PanelIzquierdoJuego;
 import vistas.paneles.secundarios.PanelMapa;
 import vistas.utilidades.ScalablePane;
 
-public class VentanaJuego extends JFrame {
+public class VentanaJuego extends JFrame implements ObservadorCelda {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6641141523429026335L;
 	
 	private Vector<Jugador> jugadores;
+	private PanelMapa panelMapa;
+	private PanelIzquierdoJuego panelIzquierdo;
 
 	public VentanaJuego(Vector<Jugador> jugadores) {
 		
@@ -90,7 +95,7 @@ public class VentanaJuego extends JFrame {
 		
 		panelPrincipal.add(logo, BorderLayout.PAGE_START);
 		
-		PanelIzquierdoJuego panelIzquierdo = new PanelIzquierdoJuego(this);		
+		this.panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
 		Mapa generado = new GeneradorMapa().obtenerMapa("mapas/test.map");
@@ -106,7 +111,7 @@ public class VentanaJuego extends JFrame {
 			e.printStackTrace();
 		}
 		
-		PanelMapa panelMapa = new PanelMapa(generado);
+		this.panelMapa = new PanelMapa(this,generado);
 		
 		JScrollPane scroll = new JScrollPane(panelMapa);
 		scroll.setBackground(new Color(0, 0, 0, 0));
@@ -121,6 +126,17 @@ public class VentanaJuego extends JFrame {
 		panelPrincipal.add(scroll);
 		
 		this.add(panelPrincipal);
+	}
+
+	@Override
+	public void notificar(Celda celdaSeleccionada) {
+		Unidad unidad = null;
+		
+		if(!celdaSeleccionada.getUnidades().isEmpty()) {
+			unidad = celdaSeleccionada.getUnidades().iterator().next();
+		}
+		
+		this.panelIzquierdo.seleccionarUnidad(unidad);
 	}
 	
 	

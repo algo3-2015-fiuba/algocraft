@@ -4,11 +4,13 @@ import java.util.HashMap;
 
 import juego.materiales.Material;
 import juego.razas.unidades.terran.Marine;
+import juego.razas.unidades.terran.NaveCiencia;
 import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import vistas.actores.Actor;
 import vistas.actores.ActorMarine;
+import vistas.actores.ActorNaveCiencia;
 import vistas.actores.ActorObject;
 import vistas.actores.recursos.ActorGas;
 import vistas.actores.recursos.ActorMineral;
@@ -28,6 +30,7 @@ public class AsignadorVistas {
 		
 		
 		this.actores.put(Marine.class, new ActorMarine());
+		this.actores.put(NaveCiencia.class, new ActorNaveCiencia());
 	}
 	
 	public static AsignadorVistas getInstance() {

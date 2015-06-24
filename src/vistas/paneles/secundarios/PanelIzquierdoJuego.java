@@ -2,11 +2,14 @@ package vistas.paneles.secundarios;
 
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+
+import juego.razas.unidades.Unidad;
 import vistas.utilidades.Item;
 import vistas.ventanas.VentanaJuego;
 
@@ -19,6 +22,8 @@ public class PanelIzquierdoJuego extends JPanel {
 	private VentanaJuego ventanaOriginal;
 	private JComboBox<String> seleccionDeRaza;
 	private JComboBox<Item> seleccionDeColor;
+	private PanelUnidadSeleccionada panelSeleccion;
+	private PanelAcciones panelAcciones;
 	
 	public PanelIzquierdoJuego(VentanaJuego ventanaOriginal) {
 		
@@ -32,13 +37,21 @@ public class PanelIzquierdoJuego extends JPanel {
 	}
 
 	private void agregarUnidadSeleccionada() {
-		PanelUnidadSeleccionada panel = new PanelUnidadSeleccionada();
-		panel.setMaximumSize(panel.getPreferredSize());
-		this.add(panel);
+		panelSeleccion = new PanelUnidadSeleccionada();
+		panelSeleccion.setMaximumSize(panelSeleccion.getPreferredSize());
+		this.add(panelSeleccion);
+		
+		
 		this.add(Box.createVerticalGlue());
-		PanelAcciones panel2 = new PanelAcciones();
-		panel2.setMaximumSize(panel2.getPreferredSize());
-		this.add(panel2);
+		
+		
+		this.panelAcciones = new PanelAcciones();
+		panelAcciones.setMaximumSize(panelAcciones.getPreferredSize());
+		this.add(panelAcciones);
 		this.add(Box.createRigidArea(new Dimension(1,50)));
+	}
+	
+	public void seleccionarUnidad(Unidad seleccionada) {
+		this.panelSeleccion.seleccionarUnidad(seleccionada);
 	}
 }

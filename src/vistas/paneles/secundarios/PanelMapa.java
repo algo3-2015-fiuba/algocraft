@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -26,66 +27,96 @@ import juego.razas.unidades.terran.Marine;
 import juego.recursos.Mineral;
 import vistas.handlers.CeldaMouseListener;
 import vistas.handlers.PassOverListener;
+import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.mapa.VistaCelda;
+import vistas.ventanas.VentanaJuego;
 
-public class PanelMapa extends JPanel {
+public class PanelMapa extends JPanel implements ObservadorCelda {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
-	
+
 	private int celdas_x;
 	private int celdas_y;
 	private Mapa mapa;
+	private VentanaJuego ventanaOriginal;
+	private LinkedList<VistaCelda> vistaCeldas;
 
-	public PanelMapa(Mapa mapa) {
-		
+	public PanelMapa(VentanaJuego ventanaJuego, Mapa mapa) {
+
 		this.mapa = mapa;
-		
+		this.ventanaOriginal = ventanaJuego;
+		this.vistaCeldas = new LinkedList<VistaCelda>();
+
 		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new GridBagLayout());
-		
 
 		this.agregarCeldasDeMapa(mapa);
 	}
-	
+
 	private void agregarCeldasDeMapa(Mapa mapa) {
-		
+
 		HashMap<Coordenada, Celda> celdas = mapa.obtenerCeldas();
-		
+
 		int i = 0;
-		
+
 		for (Map.Entry<Coordenada, Celda> parCelda : celdas.entrySet()) {
-			
+
 			Coordenada coordenada = parCelda.getKey();
 			Celda celda = parCelda.getValue();
-		
+
 			GridBagConstraints c = new GridBagConstraints();
-			
+
 			c.fill = GridBagConstraints.NONE;
-			c.insets = new Insets(2,2,2,2);
+			c.insets = new Insets(2, 2, 2, 2);
 			c.gridx = coordenada.getX();
 			c.gridy = coordenada.getY();
-			
+
 			VistaCelda vistaCelda = new VistaCelda(celda);
-			
-			vistaCelda.addMouseListener(new CeldaMouseListener());
-			vistaCelda.addMouseMotionListener(new CeldaMouseListener());
-			
-			this.add(vistaCelda,c);	
+			vistaCelda.addMouseListener(new CeldaMouseListener(vistaCelda));
+			vistaCelda
+					.addMouseMotionListener(new CeldaMouseListener(vistaCelda));
+
+			vistaCelda.agregarObservador(this);
+
+			this.add(vistaCelda, c);
+			this.vistaCeldas.add(vistaCelda);
 		}
 	}
-	
+
 	@Override
 	public Dimension getMinimumSize() {
-		
-		VistaCelda celda = new VistaCelda(new Celda(Material.aire, new Mineral(500), new Coordenada(0,0)));
-		int tamanio_x = (int) (celda.getPreferredSize().getWidth()+4);
-		int tamanio_y = (int) (celda.getPreferredSize().getHeight()+4);
-		
-        return new Dimension(tamanio_x * this.celdas_x, tamanio_y * this.celdas_y);
-    }
+
+		VistaCelda celda = new VistaCelda(new Celda(Material.aire, new Mineral(
+				500), new Coordenada(0, 0)));
+		int tamanio_x = (int) (celda.getPreferredSize().getWidth() + 4);
+		int tamanio_y = (int) (celda.getPreferredSize().getHeight() + 4);
+
+		return new Dimension(tamanio_x * this.celdas_x, tamanio_y
+				* this.celdas_y);
+	}
+
+	@Override
+	public void notificar(final Celda celdaSeleccionada) {
+
+		for (VistaCelda vista : this.vistaCeldas) {
+			if (!vista.obtenerCelda().equals(celdaSeleccionada)) {
+				vista.deseleccionar();
+			}
+		}
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				// Here, we can safely update the GUI
+				// because we'll be called from the
+				// event dispatch thread
+				ventanaOriginal.notificar(celdaSeleccionada);
+			}
+		});
+
+	}
 
 }

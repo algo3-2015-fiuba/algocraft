@@ -21,7 +21,6 @@ public class ActorRecurso extends Actor {
 
 	protected Color color = Color.white;
 	protected URL url;
-	protected String nombre;
 
 	@Override
 	public void dibujar(Graphics g) {
@@ -76,6 +75,10 @@ public class ActorRecurso extends Actor {
 	    
 	    g.setColor(Color.white);
 	    g.drawString(this.nombre, 1, alto);
+	}
+	
+	public String nombre() {
+		return this.nombre;
 	}
 
 }

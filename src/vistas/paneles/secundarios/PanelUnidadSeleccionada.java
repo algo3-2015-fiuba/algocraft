@@ -1,14 +1,20 @@
 package vistas.paneles.secundarios;
 
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.protoss.AltoTemplario;
+import juego.razas.unidades.terran.Marine;
 import vistas.Aplicacion;
+import vistas.actores.Actor;
+import vistas.utilidades.AsignadorVistas;
 
 public class PanelUnidadSeleccionada extends JPanel {
 	
@@ -19,10 +25,9 @@ public class PanelUnidadSeleccionada extends JPanel {
 	private Unidad unidadActual;
 	private JLabel nombreUnidad;
 	private BarraGenerica vida;
-	private BarraGenerica escudo;
 	
 	public PanelUnidadSeleccionada() {
-		this.setBackground(new Color(0, 0, 0, 180));
+		this.setBackground(new Color(0, 0, 0, 255));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
@@ -39,20 +44,21 @@ public class PanelUnidadSeleccionada extends JPanel {
 		vida = new BarraDeVida();
 		this.add(vida);
 		
-		escudo = new BarraDeEscudo();
-		this.add(escudo);
-		
 		
 		this.removerSeleccion();		
-		this.seleccionarUnidad(new AltoTemplario());
+		this.seleccionarUnidad(new Marine());
 		
+	}
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(500,200);
 	}
 	
 	public void seleccionarUnidad(Unidad seleccionada) {
 		this.unidadActual = seleccionada;
 		this.vida.seleccionarUnidad(this.unidadActual);
 		this.asignarNombre();
-		
 	}
 	
 	public void removerSeleccion() {
@@ -60,7 +66,13 @@ public class PanelUnidadSeleccionada extends JPanel {
 	}
 	
 	private void asignarNombre() {
-		this.nombreUnidad.setText(this.unidadActual.getClass().getSimpleName());
+		
+		if(this.unidadActual != null) {		
+			Actor responsable = AsignadorVistas.getInstance().obtenerRepresentacion(this.unidadActual.getClass());
+			this.nombreUnidad.setText(responsable.nombre());
+		} else {
+			this.nombreUnidad.setText("");
+		}
 	}
 	
 	
