@@ -3,6 +3,7 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Vector;
 
 import juego.Juego;
 import juego.interfaces.Construible;
@@ -136,6 +137,10 @@ public class Celda {
 		{
 			rad.afectar(unidad);
 		}
+	}
+	
+	public Collection<Unidad> getUnidades() {
+		return this.unidades;
 	}
 	
 }

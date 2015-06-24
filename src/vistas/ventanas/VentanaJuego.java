@@ -2,6 +2,7 @@ package vistas.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,15 +11,20 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
+import vistas.handlers.HandScrollListener;
+import vistas.paneles.secundarios.PanelIzquierdoJuego;
+import vistas.paneles.secundarios.PanelMapa;
 import vistas.utilidades.ScalablePane;
 
 public class VentanaJuego extends JFrame {
@@ -76,10 +82,24 @@ public class VentanaJuego extends JFrame {
 		
 		panelPrincipal.add(logo, BorderLayout.PAGE_START);
 		
-		JLabel titulo = Aplicacion.titulo("Unidad Seleccionada");		
-		titulo.setVerticalAlignment(SwingConstants.TOP);
+		PanelIzquierdoJuego panelIzquierdo = new PanelIzquierdoJuego(this);		
+		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
-		panelPrincipal.add(titulo, BorderLayout.LINE_START);
+		
+		
+		PanelMapa panelMapa = new PanelMapa(30,30);
+		
+		JScrollPane scroll = new JScrollPane(panelMapa);
+		scroll.setBackground(new Color(0, 0, 0, 0));
+		scroll.setBorder(BorderFactory.createEmptyBorder());
+		scroll.setOpaque(false);
+		
+		HandScrollListener h = new HandScrollListener();
+		
+		scroll.addMouseListener(h);
+		scroll.addMouseMotionListener(h);
+		
+		panelPrincipal.add(scroll);
 		
 		this.add(panelPrincipal);
 	}

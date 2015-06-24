@@ -141,12 +141,12 @@ public class Aplicacion {
 		return boton;
 	}
 	
-	public static JLabel titulo(String contenido) {
+	public static JLabel titulo(String contenido, float tamanio) {
 		JLabel titulo = new JLabel();
 		
 		InputStream is = Aplicacion.class.getResourceAsStream("/assets/fonts/BebasNeue Bold.ttf");
 		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(36f);
+			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(tamanio);
 			
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
