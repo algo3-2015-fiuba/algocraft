@@ -21,6 +21,7 @@ import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.terran.Marine;
+import juego.razas.unidades.terran.NaveCiencia;
 import vistas.Aplicacion;
 import vistas.handlers.HandScrollListener;
 import vistas.paneles.secundarios.PanelIzquierdoJuego;
@@ -95,11 +96,11 @@ public class VentanaJuego extends JFrame {
 		Mapa generado = new GeneradorMapa().obtenerMapa("mapas/test.map");
 		
 		Marine marine = new Marine();
-		Marine marine2 = new Marine();
+		NaveCiencia nc = new NaveCiencia();
 		
 		try {
 			generado.obtenerCelda(new Coordenada(0,1)).ocupar(marine);
-			generado.obtenerCelda(new Coordenada(0,2)).ocupar(marine2);
+			generado.obtenerCelda(new Coordenada(0,2)).ocupar(nc);
 		} catch (CoordenadaFueraDeRango e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
