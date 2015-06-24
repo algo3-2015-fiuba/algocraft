@@ -1,4 +1,4 @@
-package vistas.actores;
+package vistas.actores.materiales;
 
 import java.awt.Color;
 import java.awt.Graphics;

@@ -8,8 +8,8 @@ import java.util.Collection;
 import javax.swing.JComponent;
 
 import vistas.actores.Actor;
-import vistas.actores.ActorAire;
-import vistas.actores.ActorTierra;
+import vistas.actores.materiales.ActorAire;
+import vistas.actores.materiales.ActorTierra;
 import vistas.utilidades.AsignadorVistas;
 import juego.mapa.Celda;
 import juego.materiales.Material;
@@ -22,7 +22,7 @@ public class VistaCelda extends JComponent {
 	 * 
 	 */
 	private static final long serialVersionUID = -4451841605373415808L;
-	public static final int lado = 20;
+	public static final int lado = 40;
 	private final Color colorInterno = new Color(50, 50, 50);
 	private final Color colorBorde = new Color(80, 80, 80);
 

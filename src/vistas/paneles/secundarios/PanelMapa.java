@@ -43,7 +43,7 @@ public class PanelMapa extends JPanel {
 		
 		this.mapa = mapa;
 		
-		this.setBackground(new Color(0, 0, 0, 180));
+		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new GridBagLayout());
 		

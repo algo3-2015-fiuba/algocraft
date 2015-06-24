@@ -8,11 +8,11 @@ import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import vistas.actores.Actor;
-import vistas.actores.ActorGas;
 import vistas.actores.ActorMarine;
-import vistas.actores.ActorMineral;
 import vistas.actores.ActorObject;
-import vistas.actores.ActorRecurso;
+import vistas.actores.recursos.ActorGas;
+import vistas.actores.recursos.ActorMineral;
+import vistas.actores.recursos.ActorRecurso;
 
 public class AsignadorVistas {
 	
