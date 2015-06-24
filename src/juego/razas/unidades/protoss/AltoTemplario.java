@@ -39,7 +39,7 @@ public class AltoTemplario extends UnidadMagica {
 		this.activarMagias();
 	}
 	
-	public void activarMagias() {
+	private void activarMagias() {
 		
 		Collection<Magia> magiasInactivas = new ArrayList<Magia>();
 		

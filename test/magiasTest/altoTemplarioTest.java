@@ -19,6 +19,8 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.protoss.AltoTemplario;
+import juego.razas.unidades.protoss.Zealot;
+import juego.razas.unidades.terran.Golliat;
 import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
@@ -57,7 +59,7 @@ public class altoTemplarioTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineEstaBajoUnaTormentaDosTurnosMuere() 
+	public void testSiUnMarineEstaBajoUnaTormentaMuere() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
 		
 		this.reiniciarJuego();
@@ -90,28 +92,13 @@ public class altoTemplarioTest {
 		
 		Celda celdaMarine = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine);
 		assertTrue(celdaMarine.contiene(marine));
-		
-		
-		/*
-		 * Pasan dos turnos
-		 */
-		
-		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaMarine.contiene(marine));
-		
-		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaMarine.contiene(marine));
-		
-		/*
-		 * Y debería morir el Marine
-		 */
-		
+				
 		Juego.getInstance().turnoDe().finalizarTurno();
 		assertFalse(celdaMarine.contiene(marine));
 	}
 	
 	@Test
-	public void testSiUnMarineEstaBajoUnaTormentaPeroSeMueveAntesNoMuere() 
+	public void testSiUnGolliatEstaBajoUnaTormentaPeroSeMueveAntesNoMuere() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
 		
 		this.reiniciarJuego();
@@ -123,19 +110,19 @@ public class altoTemplarioTest {
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
 		
 		Coordenada ubicacionTormenta = new Coordenada(0,20);
-		Coordenada ubicacionMarineBajoTormenta = new Coordenada(5,20);
-		Coordenada ubicacionMarineFueraDeTormenta = new Coordenada(6,20);
+		Coordenada ubicacionGolliatBajoTormenta = new Coordenada(5,20);
+		Coordenada ubicacionGolliatFueraDeTormenta = new Coordenada(6,20);
 		Coordenada ubicacionAltoTemplario = new Coordenada(8,21);
 		
-		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineBajoTormenta);
+		Golliat golliat = new Golliat();
+		golliat.moverse(ubicacionGolliatBajoTormenta);
 		
 		AltoTemplario altoTemplario = new AltoTemplario();
 		altoTemplario.moverse(ubicacionAltoTemplario);
 		
 		
 		jugadorAtacante.asignarUnidad(altoTemplario);
-		jugadorReceptor.asignarUnidad(marine);
+		jugadorReceptor.asignarUnidad(golliat);
 		
 		/*
 		 * Gana energia el Alto Templario...
@@ -145,11 +132,12 @@ public class altoTemplarioTest {
 			Juego.getInstance().turnoDe().finalizarTurno();
 		}
 		
+		assertTrue(golliat.vidaActual() == 125);
 		altoTemplario.lanzarTormentaPsionica(ubicacionTormenta);
 		
-		Celda celdaMarineDentroDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarineBajoTormenta);
-		Celda celdaMarineFueraDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarineFueraDeTormenta);
-		assertTrue(celdaMarineDentroDeTormenta.contiene(marine));
+		Celda celdaGolliatDentroDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionGolliatBajoTormenta);
+		Celda celdaGolliatFueraDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionGolliatFueraDeTormenta);
+		assertTrue(celdaGolliatDentroDeTormenta.contiene(golliat));
 		
 		
 		/*
@@ -157,23 +145,70 @@ public class altoTemplarioTest {
 		 */
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaMarineDentroDeTormenta.contiene(marine));
+		assertTrue(celdaGolliatDentroDeTormenta.contiene(golliat));
 		
 		/*
-		 * Movemos al marine
+		 * Movemos al golliat
 		 */
 		
-		marine.moverse(ubicacionMarineFueraDeTormenta);
+		golliat.moverse(ubicacionGolliatFueraDeTormenta);
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaMarineFueraDeTormenta.contiene(marine));
+		assertTrue(celdaGolliatFueraDeTormenta.contiene(golliat));
 		
 		/*
-		 * Y debería estar el marine vivo
+		 * Y deberia estar el golliat vivo
 		 */
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaMarineFueraDeTormenta.contiene(marine));
+		assertTrue(celdaGolliatFueraDeTormenta.contiene(golliat));
+		assertTrue(golliat.vidaActual() == 25);
+	}
+	
+	@Test
+	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() throws UbicacionInvalida {
+		
+		this.reiniciarJuego();
+		
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
+		
+		jugadorReceptor.finalizarTurno();
+		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarine = new Coordenada(0,20);
+		Coordenada ubicacionAltoTemplario = new Coordenada(1,20);
+		Coordenada ubicacionZealot = new Coordenada(0,21);
+		
+		Marine marine = new Marine();
+		AltoTemplario altoTemplario = new AltoTemplario();
+		Zealot zealot = new Zealot();
+		
+		marine.moverse(ubicacionMarine);
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		zealot.moverse(ubicacionZealot);		
+		
+		jugadorAtacante.asignarUnidad(altoTemplario);
+		jugadorAtacante.asignarUnidad(zealot);
+		jugadorReceptor.asignarUnidad(marine);
+		
+		altoTemplario.lanzarAlucinacion(zealot); //Se ubicaran cerca de la unidad a alucinar.
+		
+	}
+	
+	@Test
+	public void testSiUnaCopiaDelAltoTemplarioMuereElAltoTemplarioYLaOtraCopiaContinuanVivos() {
+		
+	}
+	
+	@Test
+	public void testSiElAltoTemplarioMuereSusAlucinacionesMueren() {
+		
+	}
+	
+	@Test
+	public void testSiUnaAlucinacionDelAltoTemplarioAtacaNoSacaDanio() {
+		
 	}
 
 }

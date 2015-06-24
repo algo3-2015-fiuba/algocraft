@@ -46,4 +46,9 @@ public class Radiacion extends Magia {
 		if (this.infectado == unidad) this.infectado = null;		
 	}
 
+	@Override
+	public boolean activa() {
+		return (this.infectado == null);
+	}
+
 }

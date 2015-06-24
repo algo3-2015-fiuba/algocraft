@@ -34,6 +34,6 @@ public abstract class Magia {
 	
 	public abstract void afectar(Unidad unidad);
 
-	public boolean activa() { return false; }
+	public abstract boolean activa();
 	
 }

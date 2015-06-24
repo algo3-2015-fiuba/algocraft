@@ -33,4 +33,10 @@ public class MisilEMP extends Magia {
 		unidad.afectadaPorMagia(this);		
 	}	
 	
+	@Override
+	public boolean activa() {
+		//Su duracion es de un turno
+		return false;
+	}
+	
 }
