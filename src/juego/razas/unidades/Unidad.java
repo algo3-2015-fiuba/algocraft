@@ -1,5 +1,9 @@
 package juego.razas.unidades;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.informadores.Costos;
 import juego.interfaces.Atacable;
@@ -26,11 +30,13 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected EstrategiaMovimiento estrategiaDeMovimiento;
 	protected Coordenada posicion;
 	protected Jugador propietario;
+	protected Collection<UnidadAlucinada> alucinaciones;
 	
 	public Unidad() {
 		super();
 		this.posicion = null;
 		this.pesoTransporte = 0;
+		this.alucinaciones = new ArrayList<UnidadAlucinada>();
 	}
 	
 	
@@ -69,6 +75,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.rangoDeMovimiento;
 	}
 	
+	public EstrategiaMovimiento estrategiaDeMovimiento() {
+		return this.estrategiaDeMovimiento;
+	}
+	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
@@ -94,8 +104,12 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	public void afectadaPorMagia(Alucinacion alucinacion) {
 		
-		this.propietario.asignarUnidad(new UnidadAlucinada(this));
-		this.propietario.asignarUnidad(new UnidadAlucinada(this));
+		for (int i = 0; i < 2; i++) {
+			UnidadAlucinada alucinada = new UnidadAlucinada(this);
+			this.alucinaciones.add(alucinada);
+			this.propietario.asignarUnidad(alucinada);
+			alucinada.ubicar(this.posicion);
+		}
 		
 	}	
 	
@@ -112,6 +126,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 			this.estrategiaDeMovimiento.desocupar(this.posicion, this);
 		} catch (CoordenadaFueraDeRango cfdr) {
 			//No deberia suceder nunca esto.
+		}
+		Iterator<UnidadAlucinada> it = this.alucinaciones.iterator();
+		while (it.hasNext()) {
+			it.next().originalMuerto();
 		}
 	}
 	

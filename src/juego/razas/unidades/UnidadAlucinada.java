@@ -1,11 +1,14 @@
 package juego.razas.unidades;
 
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.decoradores.Escudo;
 import juego.informadores.Costos;
 import juego.interfaces.Controlable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.mapa.Celda;
+import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
@@ -22,6 +25,7 @@ public class UnidadAlucinada extends Unidad {
 		this.vida = new Escudo(this.alucinada.vidaActual());
 		this.vision = unidadACopiar.vision();
 		this.rangoDeMovimiento = unidadACopiar.rangoDeMovimiento();
+		this.estrategiaDeMovimiento = this.alucinada.estrategiaDeMovimiento();
 	}
 	
 	/* * * * * * * * * * * * * 
@@ -88,6 +92,35 @@ public class UnidadAlucinada extends Unidad {
 			//No deberia suceder nunca esto.
 		}
 		
+	}
+
+	public void originalMuerto() {
+		this.morir();
+	}
+
+	public void ubicar(Coordenada posicionCentral) {
+		
+		boolean ocupado = false;
+		Iterator<Celda> celdasAOcupar = Juego.getInstance().getMapa().obtenerRadialmenteRangoDeCeldasDisponibles(posicionCentral, 5).iterator();
+		
+		Celda celdaPosible = null;
+		
+		while ((celdasAOcupar.hasNext()) && (!ocupado)) {
+		
+			celdaPosible = celdasAOcupar.next();
+		
+			Iterator<Unidad> unidadesEnCelda = celdaPosible.getUnidades().iterator();
+			boolean colisiona = false;
+			while (unidadesEnCelda.hasNext()) {
+				Unidad unidad = unidadesEnCelda.next();
+				if (unidad.colisionaCon(this.estrategiaDeMovimiento)) colisiona = true;
+			}
+			
+			if (!colisiona) ocupado = true;
+		
+		}
+		
+		if ((!ocupado) && (celdaPosible != null)) celdaPosible.ocupar(this);
 	}
 	
 }
