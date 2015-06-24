@@ -59,6 +59,7 @@ public class PanelJugadores extends MenuPanel {
 		jugadores.add(jugador1.obtenerJugador());
 		jugadores.add(jugador2.obtenerJugador());
 		
+		
 		return jugadores;
 	}
 }

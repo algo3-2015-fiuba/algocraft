@@ -1,8 +1,6 @@
 package vistas.actores.recursos;
 
 import java.awt.Color;
-import java.awt.Graphics;
-
 import vistas.Aplicacion;
 
 public class ActorGas extends ActorRecurso {

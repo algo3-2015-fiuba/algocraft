@@ -1,32 +1,21 @@
 package vistas.paneles.secundarios;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.materiales.Material;
-import juego.razas.unidades.protoss.Dragon;
-import juego.razas.unidades.terran.Marine;
-import juego.recursos.Mineral;
 import vistas.handlers.CeldaMouseListener;
-import vistas.handlers.PassOverListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.mapa.VistaCelda;
 import vistas.ventanas.VentanaJuego;
@@ -75,7 +64,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 			c.gridx = coordenada.getX();
 			c.gridy = coordenada.getY();
 
-			VistaCelda vistaCelda = new VistaCelda(celda);
+			VistaCelda vistaCelda = new VistaCelda(celda, coordenada);
 			vistaCelda.addMouseListener(new CeldaMouseListener(vistaCelda));
 			vistaCelda
 					.addMouseMotionListener(new CeldaMouseListener(vistaCelda));
@@ -88,22 +77,10 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	}
 
 	@Override
-	public Dimension getMinimumSize() {
-
-		VistaCelda celda = new VistaCelda(new Celda(Material.aire, new Mineral(
-				500), new Coordenada(0, 0)));
-		int tamanio_x = (int) (celda.getPreferredSize().getWidth() + 4);
-		int tamanio_y = (int) (celda.getPreferredSize().getHeight() + 4);
-
-		return new Dimension(tamanio_x * this.celdas_x, tamanio_y
-				* this.celdas_y);
-	}
-
-	@Override
-	public void notificar(final Celda celdaSeleccionada) {
+	public void notificar(final Coordenada coordenada) {
 
 		for (VistaCelda vista : this.vistaCeldas) {
-			if (!vista.obtenerCelda().equals(celdaSeleccionada)) {
+			if (!vista.obtenerPosicion().equals(coordenada)) {
 				vista.deseleccionar();
 			}
 		}
@@ -113,7 +90,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 				// Here, we can safely update the GUI
 				// because we'll be called from the
 				// event dispatch thread
-				ventanaOriginal.notificar(celdaSeleccionada);
+				ventanaOriginal.notificar(coordenada);
 			}
 		});
 

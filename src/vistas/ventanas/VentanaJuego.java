@@ -15,16 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+import juego.Juego;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.terran.Marine;
-import juego.razas.unidades.terran.NaveCiencia;
 import vistas.Aplicacion;
+import vistas.acciones.AccionPendiente;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.paneles.secundarios.PanelIzquierdoJuego;
@@ -40,10 +41,13 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	private Vector<Jugador> jugadores;
 	private PanelMapa panelMapa;
 	private PanelIzquierdoJuego panelIzquierdo;
+	private AccionPendiente accionPendiente;
 
+	//TODO: Que tenga un Juego en vez de Jugadores
 	public VentanaJuego(Vector<Jugador> jugadores) {
 		
 		this.jugadores = jugadores;
+		this.accionPendiente = null;
 		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize(1280, 720);
@@ -98,18 +102,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		this.panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
-		Mapa generado = new GeneradorMapa().obtenerMapa("mapas/test.map");
+		Mapa generado = Juego.getInstance().getMapa();
 		
-		Marine marine = new Marine();
-		NaveCiencia nc = new NaveCiencia();
-		
-		try {
-			generado.obtenerCelda(new Coordenada(0,1)).ocupar(marine);
-			generado.obtenerCelda(new Coordenada(0,2)).ocupar(nc);
-		} catch (CoordenadaFueraDeRango e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.agregarUnidadesDeEjemplo();
 		
 		this.panelMapa = new PanelMapa(this,generado);
 		
@@ -129,14 +124,60 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	}
 
 	@Override
-	public void notificar(Celda celdaSeleccionada) {
+	public void notificar(Coordenada coordenada) {
 		Unidad unidad = null;
+		
+		Celda celdaSeleccionada = null;
+		try {
+			celdaSeleccionada = Juego.getInstance().getMapa().obtenerCelda(coordenada);
+		} catch (CoordenadaFueraDeRango e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(!celdaSeleccionada.getUnidades().isEmpty()) {
 			unidad = celdaSeleccionada.getUnidades().iterator().next();
 		}
 		
 		this.panelIzquierdo.seleccionarUnidad(unidad);
+		
+		if(this.accionPendiente != null) {
+			this.accionPendiente.finalizar(coordenada);
+			this.panelMapa.repaint();
+			this.accionPendiente = null;
+		}
+	}
+	
+	public void agregarAccionPendiente(AccionPendiente accion) {
+		this.accionPendiente = accion;
+	}
+	
+	private void agregarUnidadesDeEjemplo() {
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
+		jugadorReceptor.finalizarTurno();		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarineEnemigo = new Coordenada(0,1);
+		Coordenada ubicacionZealotAtacante = new Coordenada(0,2);
+		
+		Marine marine = new Marine();
+		try {
+			marine.moverse(ubicacionMarineEnemigo);
+		} catch (UbicacionInvalida e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Marine marine1 = new Marine();
+		try {
+			marine1.moverse(ubicacionZealotAtacante);
+		} catch (UbicacionInvalida e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		jugadorReceptor.asignarUnidad(marine);	
+		jugadorAtacante.asignarUnidad(marine1);
 	}
 	
 	

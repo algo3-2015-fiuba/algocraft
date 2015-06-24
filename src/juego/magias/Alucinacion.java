@@ -10,4 +10,10 @@ public class Alucinacion extends Magia {
 		
 	}
 
+	@Override
+	public boolean activa() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

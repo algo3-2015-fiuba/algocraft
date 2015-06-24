@@ -19,7 +19,7 @@ public abstract class UnidadAtaque extends Unidad {
 	
 	public void atacarA(Unidad unidad) throws NoTieneVision {
 		
-		Jugador propietario = Juego.getInstance().turnoDe();
+		Jugador propietario = this.propietario;
 		
 		if (!propietario.esAliado(unidad)) {
 			if(propietario.tieneVisionDe(unidad)) {

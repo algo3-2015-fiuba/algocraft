@@ -1,7 +1,7 @@
 package vistas.handlers.interfaces;
 
-import juego.mapa.Celda;
+import juego.mapa.Coordenada;
 
 public interface ObservadorCelda {
-	public void notificar(Celda celdaSeleccionada);
+	public void notificar(Coordenada coordenadaSeleccionada);
 }

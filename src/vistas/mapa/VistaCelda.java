@@ -2,7 +2,6 @@ package vistas.mapa;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
@@ -18,6 +17,7 @@ import vistas.actores.materiales.ActorTierra;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.utilidades.AsignadorVistas;
 import juego.mapa.Celda;
+import juego.mapa.Coordenada;
 import juego.materiales.Material;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
@@ -34,14 +34,21 @@ public class VistaCelda extends JComponent {
 	private ArrayList<ObservadorCelda> observadores;
 
 	private Celda celdaRepresentante;
+	private Coordenada posicion;
 
-	public VistaCelda(Celda celdaRepresentante) {
+	public VistaCelda(Celda celdaRepresentante, Coordenada coordenada) {
 		this.celdaRepresentante = celdaRepresentante;
+		this.posicion = coordenada;
 		this.observadores = new ArrayList<ObservadorCelda>();
+		
 		
 		this.seleccionada = false;
 		
 		this.setPreferredSize(new Dimension(lado + 1, lado + 1));
+	}
+	
+	public Coordenada obtenerPosicion() {
+		return this.posicion;
 	}
 	
 	public void agregarObservador(ObservadorCelda o) {
@@ -54,7 +61,7 @@ public class VistaCelda extends JComponent {
 	
 	public void notificarSeleccion() {
 		for(ObservadorCelda obs : this.observadores) {
-			obs.notificar(this.celdaRepresentante);
+			obs.notificar(this.obtenerPosicion());
 		}
 	}
 	

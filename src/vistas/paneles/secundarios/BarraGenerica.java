@@ -2,7 +2,6 @@ package vistas.paneles.secundarios;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import juego.razas.unidades.Unidad;
-import juego.razas.unidades.protoss.AltoTemplario;
 import vistas.Aplicacion;
 
 public abstract class BarraGenerica extends JPanel {
@@ -71,8 +69,6 @@ public abstract class BarraGenerica extends JPanel {
         this.add(layeredPane);
 		
 		this.removerSeleccion();
-		
-		this.seleccionarUnidad(new AltoTemplario());
 		
 	}
 	

@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import vistas.Aplicacion;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;

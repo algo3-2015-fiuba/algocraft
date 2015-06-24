@@ -1,9 +1,6 @@
 package vistas.actores.materiales;
 
 import java.awt.Color;
-import java.awt.Graphics;
-
-import vistas.mapa.VistaCelda;
 
 public class ActorTierra extends ActorMaterial {
 	

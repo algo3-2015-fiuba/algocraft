@@ -45,7 +45,7 @@ public class PanelIzquierdoJuego extends JPanel {
 		this.add(Box.createVerticalGlue());
 		
 		
-		this.panelAcciones = new PanelAcciones();
+		this.panelAcciones = new PanelAcciones(ventanaOriginal);
 		panelAcciones.setMaximumSize(panelAcciones.getPreferredSize());
 		this.add(panelAcciones);
 		this.add(Box.createRigidArea(new Dimension(1,50)));
@@ -53,5 +53,6 @@ public class PanelIzquierdoJuego extends JPanel {
 	
 	public void seleccionarUnidad(Unidad seleccionada) {
 		this.panelSeleccion.seleccionarUnidad(seleccionada);
+		this.panelAcciones.seleccionarUnidad(seleccionada);
 	}
 }

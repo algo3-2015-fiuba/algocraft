@@ -1,9 +1,6 @@
 package vistas.actores.recursos;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.net.URL;
-
 import vistas.Aplicacion;
 
 public class ActorMineral extends ActorRecurso {

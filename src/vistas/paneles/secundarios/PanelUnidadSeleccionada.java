@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import juego.razas.unidades.Unidad;
-import juego.razas.unidades.protoss.AltoTemplario;
-import juego.razas.unidades.terran.Marine;
 import vistas.Aplicacion;
 import vistas.actores.Actor;
 import vistas.utilidades.AsignadorVistas;
@@ -45,14 +43,13 @@ public class PanelUnidadSeleccionada extends JPanel {
 		this.add(vida);
 		
 		
-		this.removerSeleccion();		
-		this.seleccionarUnidad(new Marine());
+		this.removerSeleccion();
 		
 	}
 	
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(500,200);
+		return new Dimension(450,200);
 	}
 	
 	public void seleccionarUnidad(Unidad seleccionada) {
