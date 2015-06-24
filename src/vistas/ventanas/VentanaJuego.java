@@ -16,8 +16,11 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import juego.jugadores.Jugador;
+import juego.mapa.Coordenada;
 import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.unidades.terran.Marine;
 import vistas.Aplicacion;
 import vistas.handlers.HandScrollListener;
 import vistas.paneles.secundarios.PanelIzquierdoJuego;
@@ -38,6 +41,8 @@ public class VentanaJuego extends JFrame {
 		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize(1280, 720);
+		this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+		
 		this.setLocationRelativeTo( null );
 		this.setTitle("AlgoCraft - Juego");
 		
@@ -88,6 +93,17 @@ public class VentanaJuego extends JFrame {
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
 		Mapa generado = new GeneradorMapa().obtenerMapa("mapas/test.map");
+		
+		Marine marine = new Marine();
+		Marine marine2 = new Marine();
+		
+		try {
+			generado.obtenerCelda(new Coordenada(0,1)).ocupar(marine);
+			generado.obtenerCelda(new Coordenada(0,2)).ocupar(marine2);
+		} catch (CoordenadaFueraDeRango e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		PanelMapa panelMapa = new PanelMapa(generado);
 		

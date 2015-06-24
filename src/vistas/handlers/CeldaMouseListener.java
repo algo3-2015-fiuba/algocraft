@@ -1,6 +1,7 @@
 package vistas.handlers;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
@@ -14,6 +15,11 @@ public class CeldaMouseListener extends MouseAdapter {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getComponent().getParent());
+		System.out.println(e);
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 }

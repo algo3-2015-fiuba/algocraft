@@ -144,24 +144,31 @@ public class Aplicacion {
 	public static JLabel titulo(String contenido, float tamanio) {
 		JLabel titulo = new JLabel();
 		
-		InputStream is = Aplicacion.class.getResourceAsStream("/assets/fonts/BebasNeue Bold.ttf");
-		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(tamanio);
-			
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            //register the font
-            ge.registerFont(font);
-			
-			titulo.setFont(font);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		titulo.setFont(Aplicacion.fontBebas(tamanio));
 		
 		titulo.setText(contenido);
 		titulo.setForeground(Color.WHITE);
 		
 		return titulo;
+	}
+	
+	public static Font fontBebas(float tamanio) {
+		
+		Font font = null;
+		
+		InputStream is = Aplicacion.class.getResourceAsStream("/assets/fonts/BebasNeue Bold.ttf");
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(tamanio);
+			
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(font);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return font;
 	}
 	
 	private static void estilos() {

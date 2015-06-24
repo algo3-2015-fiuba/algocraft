@@ -3,12 +3,10 @@ package vistas.actores;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class ActorMarine extends Actor {
+public class ActorMarine extends ActorUnidad {
 
-	@Override
-	public void dibujar(Graphics g) {
-		g.setColor(Color.cyan);
-	    g.drawRect (20, 20, 10, 10);
+	public ActorMarine() {
+		this.name = "Marine";
 	}
 
 }
