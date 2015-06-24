@@ -1,7 +1,5 @@
 package vistas.acciones;
 
-import static org.junit.Assert.assertTrue;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,9 +50,9 @@ public class IniciarJuego implements ActionListener {
 		try {
 			juego.iniciarJuego("mapas/smallest.map");
 		} catch (FaltanJugadores fj) {
-			assertTrue(false);
+			//Falta mostrar ventana de error
 		} catch (IOException ioe) {
-			assertTrue(false);
+			//Falta mostrar ventana de error
 		}
 		
 		VentanaJuego v = new VentanaJuego(jugadores);
