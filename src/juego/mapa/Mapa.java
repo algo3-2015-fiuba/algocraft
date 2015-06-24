@@ -31,6 +31,10 @@ public class Mapa {
 		}
 	}
 	
+	public HashMap<Coordenada, Celda> obtenerCeldas() {
+		return this.celdas;
+	}
+	
 	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
 			throws CoordenadaFueraDeRango {	
 		

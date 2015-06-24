@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
 
 public class HandScrollListener extends MouseAdapter {
 	private final Point pp = new Point();

@@ -2,25 +2,22 @@ package vistas.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import juego.jugadores.Jugador;
+import juego.mapa.GeneradorMapa;
+import juego.mapa.Mapa;
 import vistas.Aplicacion;
 import vistas.handlers.HandScrollListener;
 import vistas.paneles.secundarios.PanelIzquierdoJuego;
@@ -45,7 +42,12 @@ public class VentanaJuego extends JFrame {
 		this.setTitle("AlgoCraft - Juego");
 		
 		this.prepararFondo();
-		this.agregarElementos();
+		try {
+			this.agregarElementos();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.setVisible(true);
 	}
@@ -69,7 +71,7 @@ public class VentanaJuego extends JFrame {
 		this.setContentPane(fondo);
 	}
 	
-	private void agregarElementos() {
+	private void agregarElementos() throws IOException {
 		
 		JPanel panelPrincipal = new JPanel();
 		
@@ -85,9 +87,9 @@ public class VentanaJuego extends JFrame {
 		PanelIzquierdoJuego panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
+		Mapa generado = new GeneradorMapa().obtenerMapa("mapas/test.map");
 		
-		
-		PanelMapa panelMapa = new PanelMapa(30,30);
+		PanelMapa panelMapa = new PanelMapa(generado);
 		
 		JScrollPane scroll = new JScrollPane(panelMapa);
 		scroll.setBackground(new Color(0, 0, 0, 0));

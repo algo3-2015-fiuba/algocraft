@@ -1,54 +1,32 @@
 package vistas.paneles.secundarios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Random;
-import java.util.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
-import juego.jugadores.Jugador;
-import juego.jugadores.JugadorProtoss;
-import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.materiales.Material;
-import juego.razas.unidades.Unidad;
-import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.terran.Marine;
 import juego.recursos.Mineral;
-import vistas.Aplicacion;
-import vistas.handlers.HandScrollListener;
+import vistas.handlers.CeldaMouseListener;
+import vistas.handlers.PassOverListener;
 import vistas.mapa.VistaCelda;
-import vistas.utilidades.CampoDeTextoPredeterminado;
-import vistas.utilidades.Item;
-import vistas.ventanas.VentanaJuego;
 
 public class PanelMapa extends JPanel {
 
@@ -59,64 +37,44 @@ public class PanelMapa extends JPanel {
 	
 	private int celdas_x;
 	private int celdas_y;
+	private Mapa mapa;
 
-	public PanelMapa(int celdas_x, int celdas_y) {
+	public PanelMapa(Mapa mapa) {
 		
-		this.celdas_x = celdas_x;
-		this.celdas_y = celdas_y;
+		this.mapa = mapa;
 		
 		this.setBackground(new Color(0, 0, 0, 180));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new GridBagLayout());
 		
 
-		for (int i = 0; i < celdas_x; i++) {
-			for (int j = 0; j < celdas_y; j++) {
-
-				GridBagConstraints c = new GridBagConstraints();
-				
-				c.fill = GridBagConstraints.NONE;
-				c.insets = new Insets(2,2,2,2);
-				c.gridx = i;
-				c.gridy = j;
-				
-				Celda contenido = new Celda(Material.aire, null, new Coordenada(i,j));
-				
-				
-				
-				if(i % 2 == 0 && j % 2 == 0) {
-					Marine unidad = new Marine();
-					contenido.ocupar(unidad);
-				} else if(i % 5 == 0) {
-					Dragon unidad = new Dragon();
-					contenido.ocupar(unidad);
-				}
-				
-				
-
-				VistaCelda celda = new VistaCelda(contenido);
-				
-				celda.addMouseListener(new MouseAdapter() {
-
-	                @Override
-	                public void mousePressed(MouseEvent e) {
-	                   System.out.println(e.getSource());
-	                }
-
-	                @Override
-	                public void mouseReleased(MouseEvent e) {
-	                	System.out.println(e.getSource());
-	                }
-	            });
-				
-				
-				
-				
-				
-				this.add(celda, c);
-				
-				
-			}			
+		this.agregarCeldasDeMapa(mapa);
+	}
+	
+	private void agregarCeldasDeMapa(Mapa mapa) {
+		
+		HashMap<Coordenada, Celda> celdas = mapa.obtenerCeldas();
+		
+		int i = 0;
+		
+		for (Map.Entry<Coordenada, Celda> parCelda : celdas.entrySet()) {
+			
+			Coordenada coordenada = parCelda.getKey();
+			Celda celda = parCelda.getValue();
+		
+			GridBagConstraints c = new GridBagConstraints();
+			
+			c.fill = GridBagConstraints.NONE;
+			c.insets = new Insets(2,2,2,2);
+			c.gridx = coordenada.getX();
+			c.gridy = coordenada.getY();
+			
+			VistaCelda vistaCelda = new VistaCelda(celda);
+			
+			vistaCelda.addMouseListener(new CeldaMouseListener());
+			vistaCelda.addMouseMotionListener(new CeldaMouseListener());
+			
+			this.add(vistaCelda,c);	
 		}
 	}
 	

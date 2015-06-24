@@ -1,35 +1,16 @@
 package vistas.paneles.secundarios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.util.Random;
-import java.util.Vector;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
-import juego.jugadores.Jugador;
-import juego.jugadores.JugadorProtoss;
-import juego.jugadores.JugadorTerran;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.protoss.AltoTemplario;
-import juego.razas.unidades.protoss.Dragon;
 import vistas.Aplicacion;
-import vistas.utilidades.CampoDeTextoPredeterminado;
-import vistas.utilidades.Item;
-import vistas.ventanas.VentanaJuego;
 
 public class PanelAcciones extends JPanel {
 	

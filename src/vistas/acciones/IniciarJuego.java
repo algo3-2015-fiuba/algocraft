@@ -8,7 +8,6 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import juego.InterfazGrafica.VentanaDeJuego;
 import juego.jugadores.Jugador;
 import vistas.paneles.principales.PanelJugadores;
 import vistas.ventanas.VentanaJuego;

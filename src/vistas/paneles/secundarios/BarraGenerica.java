@@ -1,44 +1,23 @@
 package vistas.paneles.secundarios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
-import java.util.Vector;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
-import juego.decoradores.Vida;
-import juego.jugadores.Jugador;
-import juego.jugadores.JugadorProtoss;
-import juego.jugadores.JugadorTerran;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.protoss.AltoTemplario;
-import juego.razas.unidades.protoss.Dragon;
 import vistas.Aplicacion;
-import vistas.utilidades.CampoDeTextoPredeterminado;
-import vistas.utilidades.Item;
-import vistas.ventanas.VentanaJuego;
 
 public abstract class BarraGenerica extends JPanel {
 	

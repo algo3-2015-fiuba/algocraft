@@ -3,8 +3,6 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Vector;
-
 import juego.Juego;
 import juego.interfaces.Construible;
 import juego.jugadores.Jugador;
