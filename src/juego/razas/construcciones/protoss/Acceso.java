@@ -17,6 +17,7 @@ import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.Zealot;
 import juego.decoradores.*;
+import juego.estrategias.MovimientoConstruccion;
 
 public class Acceso extends ConstruccionMilitar {
 
@@ -24,6 +25,7 @@ public class Acceso extends ConstruccionMilitar {
 		super();
 		this.vida = new Escudo(new Vida(500), 500);
 		this.costos = new Costos(150,0,8,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(4);
 	}
 
 	@Override

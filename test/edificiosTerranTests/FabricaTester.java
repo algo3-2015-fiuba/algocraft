@@ -82,8 +82,8 @@ public class FabricaTester {
 		 * - - - - - -
 		 */
 
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 		
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -118,7 +118,7 @@ public class FabricaTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(200);
+		jugadorActual.recolectarGasVespeno(200);
 		
 		exception.expect(RequiereBarraca.class);
 		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
@@ -135,8 +135,8 @@ public class FabricaTester {
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 		
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -189,8 +189,8 @@ public class FabricaTester {
 		Coordenada ubicacionInvalida = new Coordenada(-10,3);
 		
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 		
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		
@@ -214,8 +214,8 @@ public class FabricaTester {
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 		
 		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
 		

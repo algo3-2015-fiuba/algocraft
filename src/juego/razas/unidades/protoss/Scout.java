@@ -12,12 +12,10 @@ public class Scout extends UnidadAtaque {
 	public Scout() {
 		
 		super();
-		this.rangoDeMovimiento = 3;
-		this.vision = 7;
 		this.vida = new Escudo(new Vida(150), 100);		
 		this.costos = new Costos(300,150,9,3);
 		this.ataqueUnidad = new AtaqueUnidad(8,14,4,4);
-		this.estrategiaDeMovimiento = new MovimientoVolador();
+		this.estrategiaDeMovimiento = new MovimientoVolador(3,7);
 		
 	}
 	

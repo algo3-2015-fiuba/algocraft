@@ -84,8 +84,8 @@ public class ArchivoTemplarioTester {
 		 * - - - - - -
 		 */
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		
@@ -127,8 +127,8 @@ public class ArchivoTemplarioTester {
 		Jugador jugadorActual = juego.turnoDe();
 		Coordenada ubicacionValidaArchivoTemplario =  new Coordenada(0,1);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 
 		exception.expect(RequierePuertoEstelar.class);
 		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
@@ -146,8 +146,8 @@ public class ArchivoTemplarioTester {
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(150);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(100);
+		jugadorActual.recolectarGasVespeno(150);
+		jugadorActual.recolectarMinerales(100);
 
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		
@@ -179,8 +179,8 @@ public class ArchivoTemplarioTester {
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionInvalidaArchivoTemplario = new Coordenada (-10,3);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		
@@ -212,8 +212,8 @@ public class ArchivoTemplarioTester {
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
 
 		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
 		

@@ -3,6 +3,7 @@ package juego.informadores;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.interfaces.Controlable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
@@ -17,71 +18,65 @@ public class AtaqueUnidad {
 	private int rangoTierra, rangoAire;
 	
 	public AtaqueUnidad(int danioTierra, int danioAire, int rangoTierra, int rangoAire) {
+		
 		super();
 		this.danioTierra = danioTierra;
 		this.danioAire = danioAire;
 		this.rangoTierra = rangoTierra;
 		this.rangoAire = rangoAire;
+		
 	}
-
-	//Estos metodos son practicamente iguales, habria que hacer un refactoring en el futuro
 	
 	public boolean estaEnRango(Unidad agresor, Unidad victima) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		int distancia = 0;
 		Coordenada ubicacionVictima = mapa.obtenerUbicacion(victima);
 		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
-		distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, ubicacionVictima);
 		
-		if (victima.colisionaCon(agresor)) {
-			return (distancia <= this.rangoTierra);
-		} else {
-			return (distancia <= this.rangoAire);
-		}
+		if ((ubicacionVictima == null) || (ubicacionAgresor == null)) return false;
+		
+		int distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, ubicacionVictima);
+		
+		return (victima.colisionaCon(agresor)) ? (distancia <= this.rangoTierra) : (distancia <= this.rangoAire);
 		
 	}
 	
-	public boolean estaEnRango(Unidad agresor, Construccion victima) 
-			throws CoordenadaFueraDeRango {
+	public boolean estaEnRango(Unidad agresor, Construccion victima) throws CoordenadaFueraDeRango {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		int distancia = -1;
-		
 		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
+		int distancia;
 		
 		Iterator<Celda> it = victima.obtenerRangoDeOcupacion().iterator();
+		
+		if (it.hasNext()) {
+			
+			distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
+			
+		} else return false;
+		
 		while (it.hasNext()) {
+			
 			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
-			if ((distancia == -1) || (distancia > distanciaEntreCoordenadas)) {
-				distancia = distanciaEntreCoordenadas;
-			}
+			
+			if (distancia > distanciaEntreCoordenadas) distancia = distanciaEntreCoordenadas;
+			
 		}
 		
-		if (victima.colisionaCon(agresor)) {
-			return (distancia <= this.rangoTierra);
-		} else {
-			return (distancia <= this.rangoAire);
-		}
+		return (victima.colisionaCon(agresor)) ? (distancia <= this.rangoTierra) : (distancia <= this.rangoAire);
+		
 		
 	}
 	
-	public void atacar(EstrategiaMovimiento movimientoAgresor, Unidad victima) {
+	public void atacar(EstrategiaMovimiento movimientoAgresor, Controlable controlable) {
 		
-		if (victima.colisionaCon(movimientoAgresor)) {
-			victima.recibirAtaque(this.danioTierra);
+		if (controlable.colisionaCon(movimientoAgresor)) {
+			
+			controlable.recibirAtaque(this.danioTierra);
+		
 		} else {
-			victima.recibirAtaque(this.danioAire);
-		}
-		
-	}
-	
-	public void atacar(EstrategiaMovimiento movimientoAgresor, Construccion victima) {
-		
-		if (victima.colisionaCon(movimientoAgresor)) {
-			victima.recibirAtaque(this.danioTierra);
-		} else {
-			victima.recibirAtaque(this.danioAire);
+			
+			controlable.recibirAtaque(this.danioAire);
 		}
 		
 	}

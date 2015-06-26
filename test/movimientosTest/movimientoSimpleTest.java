@@ -129,8 +129,8 @@ public class movimientoSimpleTest {
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,1);
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(5000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(5000);
+		jugadorActual.recolectarMinerales(5000);
+		jugadorActual.recolectarGasVespeno(5000);
 		jugadorActual.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
@@ -155,8 +155,8 @@ public class movimientoSimpleTest {
 			jugadorActual = Juego.getInstance().turnoDe();;
 		}
 		
-		jugadorActual.activarUnidad(barraca, marine1, ubicacionValidaMarine1);
-		jugadorActual.activarUnidad(barraca, marine2, ubicacionValidaMarine2);
+		barraca.activarUnidad(marine1, ubicacionValidaMarine1);
+		barraca.activarUnidad(marine2, ubicacionValidaMarine2);
 		
 		for (int i = 1; i < 7; i++) {
 			marine1.atacarA(marine2);

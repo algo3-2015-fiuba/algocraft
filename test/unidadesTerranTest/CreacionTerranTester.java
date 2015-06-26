@@ -68,10 +68,10 @@ public class CreacionTerranTester {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,1);
-		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(4,20);
+		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(5,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
@@ -103,12 +103,12 @@ public class CreacionTerranTester {
 		jugadorActual = Juego.getInstance().turnoDe();
 		
 		assertTrue(marine.entrenamientoFinalizado());
-		assertTrue(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).puedeOcuparTierra(marine));
+		assertFalse(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).contiene(marine));
 		
 		//La unidad aun se encuentra en la barraca por lo que no posee una ubicacion fisica en el mapa.
-		jugadorActual.activarUnidad(barraca, marine, ubicacionPosibleMovimientoMarine);
+		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
 		
-		assertFalse(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).puedeOcuparTierra(marine));
+		assertTrue(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine).contiene(marine));
 		
 		
 	}

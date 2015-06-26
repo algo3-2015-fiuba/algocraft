@@ -18,11 +18,7 @@ public class CargaTransporte {
 		this.capacidadMaxima = capacidadMaxima;
 		
 	}
-	
-	public int rangoDeMovimiento() {
-		return (this.capacidadActual() > 4) ? 3 : 5;
-	}
-	
+
 	public boolean puedeSubir(Unidad unidad) {
 		
 		if (unidad.pesoTransporte() == 0) return false;

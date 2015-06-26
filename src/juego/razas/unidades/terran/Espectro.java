@@ -11,12 +11,10 @@ public class Espectro extends UnidadAtaque {
 	public Espectro() {
 		
 		super();
-		this.rangoDeMovimiento = 3;
-		this.vision = 7;
 		this.vida = new Vida(120);		
 		this.costos = new Costos(150,100,8,2);
 		this.ataqueUnidad = new AtaqueUnidad(8,20,5,5);
-		this.estrategiaDeMovimiento = new MovimientoVolador();
+		this.estrategiaDeMovimiento = new MovimientoVolador(3,7);
 		
 	}
 	

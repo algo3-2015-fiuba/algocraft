@@ -29,7 +29,7 @@ public class Coordenada {
 			return false;
 		} else {		
 			Coordenada otra = (Coordenada) o;
-			return (otra.getX() == this.x && otra.getY() == this.y);
+			return ((otra.getX() == this.x) && (otra.getY() == this.y));
 		}
 	}
 

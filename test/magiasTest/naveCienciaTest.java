@@ -9,7 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
-import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorTerran;
@@ -53,7 +53,7 @@ public class naveCienciaTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineEstaIrradiadoPierdeVida() throws UbicacionInvalida, RecursosInsuficientes {
+	public void testSiUnMarineEstaIrradiadoPierdeVida() throws UbicacionInvalida, EnergiaInsuficiente {
 		this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -97,7 +97,7 @@ public class naveCienciaTest {
 	}
 	
 	@Test
-	public void testSiUnMarineEstaIrradiadoLastimaASusCercanos() throws UbicacionInvalida, RecursosInsuficientes {
+	public void testSiUnMarineEstaIrradiadoLastimaASusCercanos() throws UbicacionInvalida, EnergiaInsuficiente {
 		this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -150,7 +150,7 @@ public class naveCienciaTest {
 	}
 	
 	@Test
-	public void testSiDosMarinesEstanIrradiadosSeLastimanEntreSiAditivamente() throws UbicacionInvalida, RecursosInsuficientes {
+	public void testSiDosMarinesEstanIrradiadosSeLastimanEntreSiAditivamente() throws UbicacionInvalida, EnergiaInsuficiente {
 	this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -190,17 +190,17 @@ public class naveCienciaTest {
 		
 		
 		//El primer marine original no pierde vida		
-		assertEquals(marine.vidaActual(), 40, 0.001);
+		assertTrue(marine.vidaActual() == 40);
 		
 		//Al igual que el segundo	
-		assertEquals(marine2.vidaActual(), 40, 0.001);
+		assertTrue(marine2.vidaActual() == 40);
 		
 		jugadorAtacante.finalizarTurno();
 		
-		//Deberia perder un 20% de su vida, dos veces: 26		
-		assertEquals(marine.vidaActual(), 26, 0.001);
+		//Deberia perder un 20% de su vida original (40), es decir recibir un danio de 16.		
+		assertTrue(marine.vidaActual() == 24);
 		
 		//Tambien el segundo	
-		assertEquals(marine2.vidaActual(), 26, 0.001);
+		assertTrue(marine2.vidaActual() == 24);
 	}
 }

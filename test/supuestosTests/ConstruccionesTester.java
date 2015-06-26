@@ -73,8 +73,8 @@ public class ConstruccionesTester {
 		Acceso acceso = new Acceso();
 		Zealot zealot = new Zealot();
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.construir(pilon, ubicacionValidaPilon);
 		jugadorActual.construir(acceso, ubicacionValidaAcceso);
 		
@@ -92,7 +92,7 @@ public class ConstruccionesTester {
 		
 		assertFalse(mapa.obtenerCelda(ubicacionValidaZealot).contiene(zealot));
 		
-		acceso.ubicar(zealot, ubicacionValidaZealot);
+		acceso.activarUnidad(zealot, ubicacionValidaZealot);
 		
 		assertTrue(mapa.obtenerCelda(ubicacionValidaZealot).contiene(zealot));
 		
@@ -102,8 +102,8 @@ public class ConstruccionesTester {
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(9,20);
 		DepositoSuministro depositoSuministro = new DepositoSuministro();
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.construir(depositoSuministro, ubicacionValidaDepositoSuministro);
 		
 		jugadorActual.finalizarTurno();
@@ -132,7 +132,7 @@ public class ConstruccionesTester {
 		int x = 0;
 		int y = 20;
 			
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000000);
+		jugadorActual.recolectarMinerales(1000000);
 			
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {

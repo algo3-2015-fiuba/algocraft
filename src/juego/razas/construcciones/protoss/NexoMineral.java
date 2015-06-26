@@ -5,6 +5,7 @@ import java.util.Collection;
 import juego.Juego;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -24,6 +25,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 		super();
 		this.vida = new Escudo(new Vida(250), 250);
 		this.costos = new Costos(50,0,4,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(1);
 	}
 	
 	@Override
@@ -33,7 +35,7 @@ public class NexoMineral extends ConstruccionRecolectora {
 	public void recolectar() {
 		if ((this.construccionFinalizada()) && (!this.nodoMineral.estaAgotado())) {
 			int extraidos = this.nodoMineral.extraer();
-			this.propietario.bolsaDeRecursos().recolectarMinerales(extraidos);		
+			this.propietario.recolectarMinerales(extraidos);		
 		}
 	}
 	

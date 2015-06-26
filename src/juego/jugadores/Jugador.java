@@ -12,7 +12,6 @@ import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.magias.Magia;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
@@ -26,8 +25,7 @@ public abstract class Jugador {
 	protected Collection<Construible> enConstruccion;
 	protected Collection<Construible> construcciones;
 	protected Collection<Unidad> unidades;
-	protected Collection<Magia> magias;
-	protected RecursosJugador bolsaDeRecursos;
+	protected RecursosJugador recursos;
 	protected VisionJugador vision;
 	
 	public Jugador(String nombre, Color color) {
@@ -36,24 +34,71 @@ public abstract class Jugador {
 		this.construcciones = new ArrayList<Construible>();
 		this.enConstruccion = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
-		this.magias = new ArrayList<Magia>();
-		this.bolsaDeRecursos = new RecursosJugador();
+		this.recursos = new RecursosJugador();
 		this.vision = new VisionJugador(this.unidades);
 	}
-		
+	
 	public Color getColor() { return this.color; }
 	public String getNombre() { return this.nombre; }
-	public RecursosJugador bolsaDeRecursos() { return this.bolsaDeRecursos; }
 	
-	public void finalizarTurno() {		
+	public void finalizarTurno() {	
 		Juego.getInstance().finalizarTurno();		
+	}
+		
+	public boolean mineralesSuficientes(int cantidad) { return this.recursos.mineralesSuficientes(cantidad); }
+	public boolean gasVespenoSuficiente(int cantidad) { return this.recursos.gasVespenoSuficiente(cantidad); }
+	public boolean suministrosSuficientes(int cantidad) { 
+		
+		this.recursos.poblacionActual(this.unidades, this.getMilitables());
+		this.recursos.limiteDePoblacion(this.getHospedables());
+		
+		return this.recursos.suministrosSuficientes(cantidad); 
+		
+	}
+	
+	
+	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes { 
+		this.recursos.consumirMinerales(costoMinerales); 
+		}
+	
+	public void consumirGasVespeno(int costoGasVespeno) throws RecursosInsuficientes {
+		this.recursos.consumirGasVespeno(costoGasVespeno);
+	}
+	
+	public void recolectarGasVespeno(int extraidos) {
+		this.recursos.recolectarGasVespeno(extraidos);		
+	}
+	
+	public void recolectarMinerales(int extraidos) {
+		this.recursos.recolectarMinerales(extraidos);		
+	}
+	
+	public int getGasVespenoRecolectado() {
+		return this.recursos.getGasVespenoRecolectado();
+	}
+	
+	public int getMineralesRecolectados() {
+		return this.recursos.getMineralesRecolectados();
+	}
+	
+	public int poblacionMaxima() {
+		return this.recursos.limiteDePoblacion(this.getHospedables());
+	}
+	
+	public int poblacionActual() {
+		return this.recursos.poblacionActual(this.unidades, this.getMilitables());
+	}
+	
+	public boolean tieneVisionDe(Unidad unidad) {
+		return this.vision.tieneVisionDe(unidad);
 	}
 	
 	public abstract void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
 	
 	public void asignarUnidad(Unidad unidad) {
-		this.unidades.add(unidad);
-		unidad.asignarPropietario(this);
+		if (!this.unidades.contains(unidad)) {
+			this.unidades.add(unidad);
+			unidad.asignarPropietario(this);}
 	}
 	
 	public void actualizarObservadores() {
@@ -61,58 +106,6 @@ public abstract class Jugador {
 		this.actualizarEntrenamientos();
 		this.actualizarUnidades();
 		this.recolectarRecursos();
-		this.actualizarMagias();
-	}
-
-	public int poblacionMaxima() {
-		
-		Collection<ConstruccionHabitable> hospedables = this.getHospedables();
-		int limiteDePoblacion = 0;
-		
-		Iterator<ConstruccionHabitable> it = hospedables.iterator();
-		while (it.hasNext()) {
-			limiteDePoblacion += it.next().capacidadDeHabitantes();
-		}
-		
-		return (limiteDePoblacion > 200) ? 200 : limiteDePoblacion;
-		
-	}
-	
-	public int poblacionActual() {	
-		
-		int poblacionActual = 0;
-		
-		Iterator<Unidad> itU = this.unidades.iterator();
-		
-		while (itU.hasNext()) {
-			poblacionActual += itU.next().suministrosNecesarios();
-		}
-		
-		Iterator<ConstruccionMilitar> itC = this.getMilitables().iterator();
-		
-		while (itC.hasNext()) {
-			poblacionActual += itC.next().suministrosEnEntrenamiento();
-		}
-		
-		return poblacionActual;
-		
-	}
-	
-	public boolean suministrosSuficientes(int costoSuministros) {
-		int suministrosRestantes = this.poblacionMaxima() - this.poblacionActual();
-		return (suministrosRestantes >= costoSuministros);
-	}
-	
-	public void unidadActiva(Unidad unidadActiva) {
-		if (!this.unidades.contains(unidadActiva)) {
-			this.asignarUnidad(unidadActiva);
-		}
-	}
-	
-	public void activarMagia(Magia magia) {
-		if (!this.magias.contains(magia)) {
-			this.magias.add(magia);
-		}
 	}
 	
 	public boolean esAliado(Unidad unidad) {
@@ -121,17 +114,6 @@ public abstract class Jugador {
 	
 	public boolean esAliado(Construible construible) {
 		return (this.construcciones.contains(construible));
-	}
-	
-	public void activarUnidad(ConstruccionMilitar construccion, Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
-		
-		// Cuando un entrenamiento finaliza, la unidad esta inactiva en la construccion creadora, con este metodo
-		// puede activarse la unidad moviendola a otra ubicacion cercana.
-		Iterator<ConstruccionMilitar> it = this.getMilitables().iterator();
-		
-		while (it.hasNext()) {
-			if (it.next() == construccion) construccion.ubicar(unidad, coordFinal);
-		}
 	}
 
 	public void fallecida(Unidad unidad) {
@@ -243,20 +225,6 @@ public abstract class Jugador {
 			it.next().recolectar();
 		}
 		
-	}
-	
-	private void actualizarMagias() {
-		
-		Iterator<Magia> it = this.magias.iterator();
-		
-		while (it.hasNext()) {
-			it.next().activar();
-		}
-		
-	}
-
-	public boolean tieneVisionDe(Unidad unidad) {
-		return this.vision.tieneVisionDe(unidad);
 	}
 	
 }

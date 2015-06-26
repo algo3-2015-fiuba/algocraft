@@ -2,8 +2,10 @@ package juego.magias;
 
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
 
 public class Radiacion extends Magia {
@@ -20,19 +22,11 @@ public class Radiacion extends Magia {
 
 	@Override
 	public void activar() {
-		this.irradiar(this.infectado.coordenadas());
+		Mapa mapa = Juego.getInstance().getMapa();
+		this.irradiar(mapa.obtenerUbicacion(this.infectado));
 	}
 	
-	public void irradiarUnidad(Unidad unidad) {
-		this.infectado = unidad;
-	}
-	
-	@Override
-	public void afectar(Unidad unidad) {
-		unidad.afectadaPorMagia(this);
-	}
-	
-	public void irradiar(Coordenada ubicacionInfectado) {
+	private void irradiar(Coordenada ubicacionInfectado) {
 		
 		Iterator<Celda> it = this.obtenerRadioDeImpacto(ubicacionInfectado, 1).iterator();
 		
@@ -40,6 +34,15 @@ public class Radiacion extends Magia {
 			it.next().afectadaPorMagia(this);
 		}
 		
+	}
+	
+	public void infectar(Unidad unidad) {
+		this.infectado = unidad;
+	}
+	
+	@Override
+	public void afectar(Unidad unidad) {
+		unidad.afectadaPorMagia(this);
 	}
 
 	public void fallecido(Unidad unidad) {

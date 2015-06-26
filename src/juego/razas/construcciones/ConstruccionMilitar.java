@@ -9,8 +9,10 @@ import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 
 public abstract class ConstruccionMilitar extends Construccion {
@@ -61,9 +63,28 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 	}
 	
-	public void ubicar(Unidad unidadActiva, Coordenada coordFinal) throws UbicacionInvalida {
+	private boolean ubicacionValida(Coordenada coordFinal) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
+		
+		try {
+			
+			Iterator<Celda> it = this.obtenerRangoDeOcupacion().iterator();
+			
+			while (it.hasNext()) {
+				Coordenada coordenadaCelda = mapa.obtenerCoordenada(it.next());
+				if (mapa.distanciaEntreCoordenadas(coordenadaCelda, coordFinal) <= this.estrategiaDeMovimiento.getVision()) return true;
+			}			
+			
+		} catch (CoordenadaFueraDeRango cfdr) {
+			//Esta excepcion no deberia suceder ya que la construccion ya ha sido construida y validada.
+		}
+		
+		return false;
+		
+	}
+	
+	public void activarUnidad(Unidad unidadActivable, Coordenada coordFinal) throws UbicacionInvalida {
 		
 		Iterator<Unidad> it = this.unidadesEntrenadas.iterator();
 		
@@ -71,16 +92,16 @@ public abstract class ConstruccionMilitar extends Construccion {
 			
 			Unidad unidad = it.next();
 			
-			if (unidad == unidadActiva) {
-				if (mapa.distanciaEntreCoordenadas(this.posicion, coordFinal) <= 5) {
-					unidadActiva.moverse(coordFinal);
-					this.propietario.unidadActiva(unidadActiva);
+			if (unidad == unidadActivable) {
+				if (this.ubicacionValida(coordFinal)) {
+					unidadActivable.moverse(coordFinal);
+					this.propietario.asignarUnidad(unidadActivable);
 				}
 			}
 			
 		}
 		
-		this.unidadesEntrenadas.remove(unidadActiva);
+		this.unidadesEntrenadas.remove(unidadActivable);
 		
 	}
 	
@@ -88,8 +109,8 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 		unidad.asignarPropietario(this.propietario);
 
-		if (!unidad.costos().recursosSuficientes(this.propietario)) { throw new RecursosInsuficientes(); }
-		if (!this.propietario.suministrosSuficientes(unidad.costos().suministrosNecesarios())) { throw new SobrePoblacion(); }
+		if (!unidad.recursosSuficientes(this.propietario)) { throw new RecursosInsuficientes(); }
+		if (!this.propietario.suministrosSuficientes(unidad.suministrosNecesarios())) { throw new SobrePoblacion(); }
 		
 		costos.consumirRecursos(this.propietario);
 		this.entrenamientos.add(unidad);	

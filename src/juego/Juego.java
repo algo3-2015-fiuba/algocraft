@@ -43,7 +43,7 @@ public class Juego {
 	
 	public void iniciarJuego(String ubicacionDelMapa) throws FaltanJugadores, IOException {
 		
-		if (this.listaDeJugadores.size() <= 1) throw new FaltanJugadores();
+		if (this.listaDeJugadores.size() < 2) throw new FaltanJugadores();
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
 		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa);
@@ -57,7 +57,7 @@ public class Juego {
 			this.turnoDe = jugadorNuevo;
 			this.listaDeJugadores.add(turnoDe);
 			
-		} else if (this.listaDeJugadores.size() < 6){
+		} else {
 		
 			Iterator<Jugador> it  = this.listaDeJugadores.iterator();
 		

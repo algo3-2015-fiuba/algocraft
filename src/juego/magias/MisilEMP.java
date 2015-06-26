@@ -3,6 +3,7 @@ package juego.magias;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
@@ -13,6 +14,7 @@ public class MisilEMP extends Magia {
 		
 		super();
 		this.costoEnergia = 100;
+		this.propietario = null;
 		
 	}
 
@@ -26,22 +28,23 @@ public class MisilEMP extends Magia {
 			it.next().afectadaPorMagia(this);
 		}			
 		
+		this.propietario = Juego.getInstance().turnoDe();
+		
 	}
 
 	@Override
 	public void afectar(Unidad unidad) {
-		unidad.afectadaPorMagia(this);		
+		if (!this.propietario.esAliado(unidad)) {
+			unidad.afectadaPorMagia(this);		
+		}
 	}	
-	
-	@Override
-	public boolean activa() {
-		//Su duracion es de un turno
-		return false;
-	}
 
 	@Override
 	public void activar() {
 		//Su duracion es de un turno, por lo que se activa una sola vez al lanzarse.
 	}
+	
+	@Override
+	public boolean activa() { return false; }
 	
 }

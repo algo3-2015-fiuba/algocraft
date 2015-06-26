@@ -3,22 +3,47 @@ package juego.estrategias;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.Juego;
+import juego.interfaces.Controlable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
-import juego.razas.unidades.Unidad;
 
 public class MovimientoConstruccion implements EstrategiaMovimiento {
 
+	private int vision;
+	
+	public MovimientoConstruccion(int vision) {
+		super();
+		this.vision = vision;
+	}
+	
 	@Override
-	public void moverse(Unidad unidad, Coordenada coordInicial,
-			Coordenada coordFinal) throws UbicacionInvalida {
+	public int getVision() { return this.vision; }
+	
+	@Override
+	public void moverse(Controlable construccion, Coordenada coordenadaFinal) {
 		//Las construcciones no se mueven
+	}
+	
+	@Override
+	public void desocupar(Controlable controlable) {
+		
+		try {
+		
+			Collection<Celda> celdasOcupadas = ((Construccion)controlable).obtenerRangoDeOcupacion();
+			
+			Iterator<Celda> it = celdasOcupadas.iterator();
+			
+			while (it.hasNext()) {
+				(it.next()).desocupar(((Construccion)controlable));
+			}
+		
+		} catch (CoordenadaFueraDeRango cfdr) {
+			//Esta excepcion no deberia ocurrir nunca, ya que este metodo solo debe usarse si la construccion ya fue construida.
+		}
+		
 	}
 
 	@Override
@@ -39,25 +64,6 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 	@Override
 	public boolean colisionaCon(MovimientoConstruccion construccion) {
 		return true;
-	}
-
-	@Override
-	public void desocupar(Coordenada coordenada, Unidad unidad) throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		mapa.obtenerCelda(coordenada).desocupar(unidad);
-	}	
-	
-	@Override
-	public void desocupar(Coordenada posicion, Construccion construccion) throws CoordenadaFueraDeRango {
-		
-		Collection<Celda> celdasOcupadas = construccion.obtenerRangoDeOcupacion();
-		
-		Iterator<Celda> it = celdasOcupadas.iterator();
-		
-		while (it.hasNext()) {
-			(it.next()).desocupar(construccion);
-		}
-		
 	}
 
 }

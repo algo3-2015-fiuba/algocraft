@@ -11,13 +11,11 @@ public class Golliat extends UnidadAtaque {
 	public Golliat() {
 		
 		super();
-		this.rangoDeMovimiento = 1;
-		this.vision = 8;
 		this.vida = new Vida(125);	
-		this.pesoTransporte = 2;
 		this.costos = new Costos(100,50,6,2);
 		this.ataqueUnidad = new AtaqueUnidad(12,10,6,5);
-		this.estrategiaDeMovimiento = new MovimientoTerrestre();
+		this.pesoTransporte = 2;
+		this.estrategiaDeMovimiento = new MovimientoTerrestre(1,8);
 	}
 	
 }

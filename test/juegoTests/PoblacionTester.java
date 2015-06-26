@@ -101,8 +101,8 @@ public class PoblacionTester {
 		Marine marine = new Marine();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
@@ -127,8 +127,8 @@ public class PoblacionTester {
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(4,20);
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(2000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(2000);
+		jugadorActual.recolectarMinerales(2000);
+		jugadorActual.recolectarGasVespeno(2000);
 		jugadorActual.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {

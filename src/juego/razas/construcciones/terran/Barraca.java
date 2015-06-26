@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -23,6 +24,7 @@ public class Barraca extends ConstruccionMilitar {
 		super();
 		this.vida = new Vida(1000);
 		this.costos = new Costos(150,0,12,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(4);
 	}
 
 	@Override

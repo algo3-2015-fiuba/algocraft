@@ -1,5 +1,7 @@
 package juego.energia;
 
+import juego.interfaces.excepciones.EnergiaInsuficiente;
+
 public class Energia {
 	
 	private int energiaActual;
@@ -24,8 +26,11 @@ public class Energia {
 		if (this.energiaActual > this.energiaMaxima) this.energiaActual = this.energiaMaxima;
 	}
 	
-	public void consumir(int cantidad) {
+	public void consumir(int cantidad) throws EnergiaInsuficiente {
 		if (cantidad <= this.energiaActual) this.energiaActual -= cantidad;
+		else {
+			throw new EnergiaInsuficiente();
+		}
 	}
 	
 }

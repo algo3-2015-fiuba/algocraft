@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import juego.Juego;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -23,6 +24,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 		super();
 		this.vida = new Vida(500);
 		this.costos = new Costos(50,0,4,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(1);
 	}
 	
 	@Override
@@ -32,7 +34,7 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	public void recolectar() {
 		if ((this.construccionFinalizada()) && (!this.nodoMineral.estaAgotado())) {
 			int extraidos = this.nodoMineral.extraer();
-			this.propietario.bolsaDeRecursos().recolectarMinerales(extraidos);		
+			this.propietario.recolectarMinerales(extraidos);		
 		}
 	}
 	

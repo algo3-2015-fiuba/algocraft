@@ -2,7 +2,6 @@ package juego.razas.construcciones;
 
 import java.util.Collection;
 
-import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
@@ -31,7 +30,6 @@ public abstract class Construccion implements Construible, Controlable {
 		
 		super();
 		this.propietario = null;
-		this.estrategiaDeMovimiento = new MovimientoConstruccion();
 		
 	}
 	
@@ -41,7 +39,8 @@ public abstract class Construccion implements Construible, Controlable {
 	 *                             *
 	 * * * * * * * * * * * * * * * */
 	
-	public void recibirAtaque(int danio) {
+	@Override
+	public void recibirAtaque(float danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
 			this.morir();
@@ -50,11 +49,7 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	private void morir() {
 		this.propietario.fallecida(this);
-		try {
-			this.estrategiaDeMovimiento.desocupar(this.posicion, this);
-		} catch (CoordenadaFueraDeRango cfdr) {
-			//No deberia suceder nunca esto.
-		}
+		this.estrategiaDeMovimiento.desocupar(this);
 	}
 	
 	
@@ -67,8 +62,13 @@ public abstract class Construccion implements Construible, Controlable {
 	public abstract Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
 	@Override
-	public void moverse(Coordenada coordFinal) {
-		//Las construcciones no pueden moverse
+	public int getVision() {
+		return this.estrategiaDeMovimiento.getVision();
+	}
+	
+	@Override
+	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+		this.estrategiaDeMovimiento.moverse(this, coordFinal);
 	}
 	
 	@Override
@@ -78,7 +78,7 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	@Override
 	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) { 
-		return estrategiaDeMovimiento.colisionaCon(movimientoDesconocido); 
+		return this.estrategiaDeMovimiento.colisionaCon(movimientoDesconocido); 
 	}
 	
 	
@@ -90,7 +90,7 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	@Override
 	public boolean construccionFinalizada() {
-		return (this.costos.tiempoDeConstruccionRestante() == 0);
+		return this.costos.construccionFinalizada();
 	}
 	
 	@Override
@@ -101,6 +101,7 @@ public abstract class Construccion implements Construible, Controlable {
 	}
 	
 	//La construccion redefine este metodo segun el jugador que tiene permitido construirla.
+	//este metodo deberia estar en cada jugador no en la construccion
 	@Override
 	public void construir(JugadorTerran jt, Coordenada coordenada)
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}

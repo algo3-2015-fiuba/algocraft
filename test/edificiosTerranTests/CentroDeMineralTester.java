@@ -70,7 +70,7 @@ public class CentroDeMineralTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 150);
+				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
 			}
 		
 		}
@@ -81,18 +81,18 @@ public class CentroDeMineralTester {
 		// Pasaron 4 turnos desde que el jugador Terran construyo el centro de mineral, 
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 160);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
 		
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
 		//El jugador Protoss no modifica su cantidad de minerales
-		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 200);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 200);
 		
 		jugadorActual.finalizarTurno(); //Recolecto otros 10
 		jugadorActual = juego.turnoDe();
 		;
-		assertTrue(jugadorActual.bolsaDeRecursos().getMineralesRecolectados() == 180);
+		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
 		
 	}
 
@@ -106,7 +106,7 @@ public class CentroDeMineralTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//El centro de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
-		jugadorActual.bolsaDeRecursos().consumirMinerales(160);
+		jugadorActual.consumirMinerales(160);
 		
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		

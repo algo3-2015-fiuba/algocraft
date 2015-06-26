@@ -1,13 +1,8 @@
 package juego.razas.unidades.protoss;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import juego.energia.Energia;
 import juego.estrategias.MovimientoTerrestre;
 import juego.informadores.Costos;
-import juego.interfaces.excepciones.RecursosInsuficientes;
+import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
@@ -20,15 +15,10 @@ public class AltoTemplario extends UnidadMagica {
 	public AltoTemplario() {
 		
 		super();
-		this.rangoDeMovimiento = 2;
-		this.vision = 7;
-		this.pesoTransporte = 2;
 		this.vida = new Escudo(new Vida(40), 40);		
 		this.costos = new Costos(150,50,7,2);
-		this.estrategiaDeMovimiento = new MovimientoTerrestre();
-		@SuppressWarnings("unused")
-		Collection<Magia> magiasActivas = new ArrayList<Magia>();
-		this.energia = new Energia();
+		this.pesoTransporte = 2;
+		this.estrategiaDeMovimiento = new MovimientoTerrestre(2,7);
 		
 	}
 
@@ -39,41 +29,25 @@ public class AltoTemplario extends UnidadMagica {
 		this.activarMagias();
 	}
 	
-	private void activarMagias() {
+	public void lanzarTormentaPsionica(Coordenada coordImpacto) throws EnergiaInsuficiente {
 		
-		Collection<Magia> magiasInactivas = new ArrayList<Magia>();
+		TormentaPsionica tormentaPsionica = new TormentaPsionica();
 		
-		Iterator<Magia> it = this.magiasActivas.iterator();
-		
-		while (it.hasNext()) {
-			Magia magia = it.next();
-			magia.activar();
-			if (!magia.activa()) { magiasInactivas.add(magia); }
-		}
-	
-		this.magiasActivas.removeAll(magiasInactivas);
-	}
-	
-	public void lanzarTormentaPsionica(Coordenada coordImpacto) throws RecursosInsuficientes {
-		
-		TormentaPsionica tp = new TormentaPsionica(coordImpacto);
-		
-		if (tp.esPosibleLanzarla(this.energia)) {
-			tp.activar();
-			this.magiasActivas.add(tp);
-		} else {
-			throw new RecursosInsuficientes();
+		if (tormentaPsionica.energiaSuficiente(this.energia)) {
+			tormentaPsionica.consumir(this.energia);
+			tormentaPsionica.lanzar(coordImpacto);
+			this.magiasActivas.add(tormentaPsionica);
 		}
 		
 	}
 	
-	public void lanzarAlucinacion(Unidad UnidadACopiar) {
+	public void lanzarAlucinacion(Unidad unidadACopiar) throws EnergiaInsuficiente {
 		
 		Alucinacion alucinacion = new Alucinacion();
 		
-		if (alucinacion.esPosibleLanzarla(this.energia)) {
-			alucinacion.afectar(UnidadACopiar);
-			this.magiasActivas.add(alucinacion);
+		if (alucinacion.energiaSuficiente(this.energia)) {
+			alucinacion.consumir(this.energia);
+			alucinacion.afectar(unidadACopiar);
 		}
 		
 	}

@@ -14,11 +14,10 @@ public class NaveTransporte extends UnidadTransporte {
 	public NaveTransporte() {
 		
 		super();
-		this.rangoDeMovimiento = 5;
-		this.vision = 8;
 		this.vida = new Escudo(new Vida(80), 60);		
 		this.costos = new Costos(200,0,8,2);
-		this.estrategiaDeMovimiento = new MovimientoTerrestre();
+		this.pesoTransporte = 8;
+		this.estrategiaDeMovimiento = new MovimientoTerrestre(5,8);
 		
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
@@ -27,6 +28,7 @@ public class PuertoEstelar extends ConstruccionMilitar {
 		super();
 		this.vida = new Escudo(new Vida(600), 600);
 		this.costos = new Costos(150,150,10,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(6);
 	}
 	
 	@Override

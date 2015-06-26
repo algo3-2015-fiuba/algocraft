@@ -5,10 +5,12 @@ import juego.razas.unidades.Unidad;
 
 public class Alucinacion extends Magia {
 
-	private boolean activa;
-	
 	public Alucinacion() {
-		this.activa = true;
+		
+		super();
+		this.costoEnergia = 100;
+		this.propietario = Juego.getInstance().turnoDe();
+		
 	}
 	
 	@Override
@@ -19,17 +21,15 @@ public class Alucinacion extends Magia {
 		}
 		
 	}
-	
-	public void deshabilitar() { this.activa = false; }
-
-	@Override
-	public boolean activa() {
-		return this.activa;
-	}
 
 	@Override
 	public void activar() {
 		//Se activa unicamente una sola vez al lanzarse.
 	}
 
+	@Override
+	public boolean activa() {
+		return false;
+	}
+	
 }

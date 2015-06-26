@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import juego.Juego;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -23,6 +24,7 @@ public class Refineria extends ConstruccionRecolectora {
 		super();
 		this.vida = new Vida(750);
 		this.costos = new Costos(100,0,6,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(1);
 	}
 	
 	@Override
@@ -32,7 +34,7 @@ public class Refineria extends ConstruccionRecolectora {
 	public void recolectar() {
 		if ((this.construccionFinalizada())  && (!this.nodoGasVespeno.estaAgotado())){
 			int extraidos = this.nodoGasVespeno.extraer();
-			this.propietario.bolsaDeRecursos().recolectarGasVespeno(extraidos);		
+			this.propietario.recolectarGasVespeno(extraidos);		
 		}
 	}
 	

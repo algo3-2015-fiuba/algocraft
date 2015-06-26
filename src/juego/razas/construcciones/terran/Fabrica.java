@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
@@ -25,6 +26,7 @@ public class Fabrica extends ConstruccionMilitar {
 		super();
 		this.vida = new Vida(1250);
 		this.costos = new Costos(200,100,12,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(6);
 	}
 	
 	@Override

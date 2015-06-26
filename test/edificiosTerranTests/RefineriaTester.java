@@ -70,7 +70,7 @@ public class RefineriaTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 0);
+				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
 			}
 		
 		}
@@ -81,18 +81,18 @@ public class RefineriaTester {
 		// Pasaron 6 turnos desde que el jugador Terran construyo la refineria, 
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 10);
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 10);
 		
 		jugadorActual.finalizarTurno(); //Recolecto 10
 		jugadorActual = juego.turnoDe();
 		
 		//El jugador Protoss no modifica su cantidad de gas vespeno
-		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 0);
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
 		
 		jugadorActual.finalizarTurno(); //Recolecto otros 10
 		jugadorActual = juego.turnoDe();
 		;
-		assertTrue(jugadorActual.bolsaDeRecursos().getGasVespenoRecolectado() == 30);
+		assertTrue(jugadorActual.getGasVespenoRecolectado() == 30);
 		
 	}
 
@@ -106,7 +106,7 @@ public class RefineriaTester {
 		Jugador jugadorActual = juego.turnoDe();
 		
 		//La refineria vale 100 minerales, si gasto 110 de los 200 iniciales le quedan 90 minerales.
-		jugadorActual.bolsaDeRecursos().consumirMinerales(110);
+		jugadorActual.consumirMinerales(110);
 		
 		Coordenada ubicacionGasVespeno = new Coordenada(1,0);
 		

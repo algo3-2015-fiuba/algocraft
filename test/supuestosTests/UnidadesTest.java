@@ -71,8 +71,8 @@ public class UnidadesTest {
 		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(2,1);
 		Coordenada ubicacionConRecursos = new Coordenada(1,0);
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(1000);
-		jugadorActual.bolsaDeRecursos().recolectarGasVespeno(1000);
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
@@ -96,7 +96,7 @@ public class UnidadesTest {
 			jugadorActual = Juego.getInstance().turnoDe();
 		}
 		
-		jugadorActual.activarUnidad(barraca, marine, ubicacionPosibleMovimientoMarine);
+		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
 		
 		exception.expect(UbicacionInvalida.class);
 		marine.moverse(ubicacionConRecursos);
@@ -133,7 +133,7 @@ public class UnidadesTest {
 		 * Se mueve 12 veces
 		 */
 		
-		for(int i = 0; i < 12; i++) {
+		for(int i = 0; i < 15; i++) {
 			marine.moverse(new Coordenada(3 + i, 20));
 		}
 		

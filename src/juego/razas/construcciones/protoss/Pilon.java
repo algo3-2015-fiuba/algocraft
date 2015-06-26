@@ -6,6 +6,7 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
+import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -22,6 +23,7 @@ public class Pilon extends ConstruccionHabitable {
 		super();
 		this.vida = new Escudo(new Vida(300), 300);
 		this.costos = new Costos(100,0,5,0);
+		this.estrategiaDeMovimiento = new MovimientoConstruccion(2);
 	}
 	
 	@Override

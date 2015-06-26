@@ -36,13 +36,13 @@ public class VisionJugador {
 		return (this.celdasVisibles().contains(celdaEnCuestion));
 	}
 	
-	public boolean tieneVisionDe(Unidad unidadEnCuestion) {
+	public boolean tieneVisionDe(Unidad unidad) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
 		Celda celdaDeUnidad = null;
 		try {
-			celdaDeUnidad = mapa.obtenerCelda(unidadEnCuestion.coordenadas());
+			celdaDeUnidad = mapa.obtenerCelda(mapa.obtenerUbicacion(unidad));
 		} catch (CoordenadaFueraDeRango cfdr) { }
 		
 		return this.tieneVisionDe(celdaDeUnidad);
@@ -51,9 +51,9 @@ public class VisionJugador {
 	private void agregarVisionDe(Unidad visor, Set<Celda> celdasVisibles) {
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		Coordenada posicionVisor = visor.coordenadas();
+		Coordenada posicionVisor = mapa.obtenerUbicacion(visor);
 		
-		Collection<Celda> celdasEnVision = mapa.obtenerRadialmenteRangoDeCeldasDisponibles(posicionVisor, visor.vision());
+		Collection<Celda> celdasEnVision = mapa.obtenerRangoRadialDeCeldas(posicionVisor, visor.getVision());
 		
 		Iterator<Celda> it = celdasEnVision.iterator();
 		

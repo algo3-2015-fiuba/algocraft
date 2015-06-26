@@ -9,24 +9,32 @@ import juego.razas.unidades.Unidad;
 
 public class TormentaPsionica extends Magia {
 
-	protected Coordenada coordImpacto;
-	protected boolean activa;
-	protected int turnosActiva;
+	private Coordenada coordImpacto;
+	private int turnosActiva;
+	private int danio;
 	
-	public TormentaPsionica(Coordenada coordImpacto) {
+	public TormentaPsionica() {
 		
 		super();
 		this.costoEnergia = 100;
 		this.coordImpacto = null;
 		this.turnosActiva = 2;
-		this.coordImpacto = coordImpacto;
+		this.danio = 100;
 		
 	}
 	
 	@Override
 	public void activar() {
-		if (this.turnosActiva > 0) {
-			this.lanzar();
+		if (this.activa()) {
+			
+			Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5);
+			
+			Iterator<Celda> it = celdasEnRango.iterator();
+			
+			while (it.hasNext()) {
+				it.next().afectadaPorMagia(this);
+			}	
+			
 			this.turnosActiva--;
 		}
 	}
@@ -34,22 +42,18 @@ public class TormentaPsionica extends Magia {
 	@Override
 	public boolean activa() { return (this.turnosActiva > 0); }
 
-	
-	public void lanzar() {
-		
-		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5);
-		
-		Iterator<Celda> it = celdasEnRango.iterator();
-		
-		while (it.hasNext()) {
-			it.next().afectadaPorMagia(this);
-		}	
-		
+	public void lanzar(Coordenada coordImpacto) {
+		//Se activa al finalizar el turno
+		this.coordImpacto = coordImpacto;
 	}
 
 	@Override
 	public void afectar(Unidad unidad) {
 		unidad.afectadaPorMagia(this);
+	}
+
+	public int getDanio() {
+		return this.danio;
 	}
 	
 }

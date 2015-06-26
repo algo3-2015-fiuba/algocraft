@@ -16,8 +16,6 @@ public class Mapa {
 		this.celdas = new HashMap<Coordenada, Celda>();
 	}
 	
-	
-	
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}	
@@ -53,7 +51,7 @@ public class Mapa {
 			
 	}
 	
-	public Collection<Celda> obtenerRadialmenteRangoDeCeldasDisponibles(Coordenada centro, int distancia) {
+	public Collection<Celda> obtenerRangoRadialDeCeldas(Coordenada centro, int distancia) {
 		ArrayList<Celda> celdasSeleccionadas = new ArrayList<Celda>();
 		
 		//Seleccionamos un cuadrado y despues sacamos todos los que no cumplen la distancia
@@ -120,13 +118,13 @@ public class Mapa {
 
 
 
-	public Coordenada obtenerCoordenada(Celda celdaAEncontrara) {
+	public Coordenada obtenerCoordenada(Celda celdaAEncontrar) {
 		
 		for (Coordenada coordenada : this.celdas.keySet()) {
 			
 			Celda celda = this.celdas.get(coordenada);
 			
-			if (celda == celdaAEncontrara) {
+			if (celda == celdaAEncontrar) {
 				return coordenada;
 			}
 		}

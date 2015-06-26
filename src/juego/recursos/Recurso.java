@@ -1,6 +1,7 @@
 package juego.recursos;
 
 import juego.interfaces.Recolectable;
+import juego.razas.construcciones.ConstruccionRecolectora;
 
 public abstract class Recurso implements Recolectable {
 	
@@ -31,5 +32,8 @@ public abstract class Recurso implements Recolectable {
 		return resto;
 		
 	}
+	
+	@Override
+	public abstract boolean puedeRecolectar(ConstruccionRecolectora cr);
 	
 }

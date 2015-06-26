@@ -20,20 +20,23 @@ public class Costos {
 	
 	public boolean recursosSuficientes(Jugador jugador) {
 		
-		return ((jugador.bolsaDeRecursos().mineralesSuficientes(this.costoMinerales)) &&
-				(jugador.bolsaDeRecursos().gasVespenoSuficiente(this.costoGasVespeno))
-				);
+		return ((jugador.mineralesSuficientes(this.costoMinerales)) &&
+				(jugador.gasVespenoSuficiente(this.costoGasVespeno)));
 		
 	}
 
 	public void consumirRecursos(Jugador jugador) throws RecursosInsuficientes {
-		jugador.bolsaDeRecursos().consumirMinerales(this.costoMinerales);
-		jugador.bolsaDeRecursos().consumirGasVespeno(this.costoGasVespeno);
+		jugador.consumirMinerales(this.costoMinerales);
+		jugador.consumirGasVespeno(this.costoGasVespeno);
 	}
+	
+	public boolean construccionFinalizada() { return (this.tiempoDeConstruccion == 0); }
 	
 	public int tiempoDeConstruccionRestante() { return this.tiempoDeConstruccion; }
 	
-	public void disminuirTiempoDeConstruccion() { this.tiempoDeConstruccion--; }
+	public void disminuirTiempoDeConstruccion() { 
+		if (this.tiempoDeConstruccion > 0) this.tiempoDeConstruccion--; 
+	}
 	
 	public int suministrosNecesarios() { return this.costoSuministros; }
 

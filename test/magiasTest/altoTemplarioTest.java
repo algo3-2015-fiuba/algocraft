@@ -9,6 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -60,7 +61,7 @@ public class altoTemplarioTest {
 	
 	@Test
 	public void testSiUnMarineEstaBajoUnaTormentaMuere() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, EnergiaInsuficiente {
 		
 		this.reiniciarJuego();
 		
@@ -88,10 +89,10 @@ public class altoTemplarioTest {
 			Juego.getInstance().turnoDe().finalizarTurno();
 		}
 		
-		altoTemplario.lanzarTormentaPsionica(ubicacionMarine);
-		
 		Celda celdaMarine = Juego.getInstance().getMapa().obtenerCelda(ubicacionMarine);
 		assertTrue(celdaMarine.contiene(marine));
+		
+		altoTemplario.lanzarTormentaPsionica(ubicacionMarine);
 				
 		Juego.getInstance().turnoDe().finalizarTurno();
 		assertFalse(celdaMarine.contiene(marine));
@@ -99,7 +100,7 @@ public class altoTemplarioTest {
 	
 	@Test
 	public void testSiUnGolliatEstaBajoUnaTormentaPeroSeMueveAntesNoMuere() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, EnergiaInsuficiente {
 		
 		this.reiniciarJuego();
 		
@@ -139,7 +140,6 @@ public class altoTemplarioTest {
 		Celda celdaGolliatFueraDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionGolliatFueraDeTormenta);
 		assertTrue(celdaGolliatDentroDeTormenta.contiene(golliat));
 		
-		
 		/*
 		 * Pasa 1 turno
 		 */
@@ -166,7 +166,8 @@ public class altoTemplarioTest {
 	}
 	
 	@Test
-	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() throws UbicacionInvalida {
+	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() 
+			throws UbicacionInvalida, EnergiaInsuficiente {
 		
 		this.reiniciarJuego();
 		

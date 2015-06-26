@@ -127,7 +127,7 @@ public class AccesoTester {
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//El Acceso vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.bolsaDeRecursos().consumirMinerales(60);
+		jugadorActual.consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
 		jugadorActual.construir(new Acceso(), ubicacionValida);
@@ -158,7 +158,7 @@ public class AccesoTester {
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
 		
-		jugadorActual.bolsaDeRecursos().recolectarMinerales(300);
+		jugadorActual.recolectarMinerales(300);
 		
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		

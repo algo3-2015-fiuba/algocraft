@@ -5,10 +5,14 @@ import juego.interfaces.Atacable;
 public class Vida implements Atacable {
 
 	private float vida;
+	private float vidaMaxima;
 	
 	public Vida(int vidaMaxima) {
+		
 		super();
 		this.vida = vidaMaxima;
+		this.vidaMaxima = vidaMaxima;
+		
 	}
 
 	@Override
@@ -36,9 +40,13 @@ public class Vida implements Atacable {
 		return this.vida;
 	}
 	
+	private float danioRadiacion() {
+		return ((float)Math.round(this.vidaMaxima * 0.20));
+	}
+		
 	@Override
 	public void afectadoPorRadiacion() {
-		this.daniar((float)Math.round(this.vidaActual() * 0.20));
+		this.daniar(this.danioRadiacion());
 	}
 	
 }

@@ -2,6 +2,7 @@ package juego.razas.unidades;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import juego.energia.Energia;
 import juego.magias.Magia;
@@ -14,6 +15,23 @@ public abstract class UnidadMagica extends Unidad {
 	
 	public UnidadMagica() {
 		this.magiasActivas = new ArrayList<Magia>();
+		this.energia = new Energia();
+	}
+	
+	protected void activarMagias() {
+		
+		Iterator<Magia> it = this.magiasActivas.iterator();
+		
+		while (it.hasNext()) {
+			it.next().activar();
+		}
+	}
+	
+	@Override
+	public void actualizar() {
+		this.vida.regenerar();
+		this.energia.cargar(15);
+		this.activarMagias();
 	}
 	
 	@Override

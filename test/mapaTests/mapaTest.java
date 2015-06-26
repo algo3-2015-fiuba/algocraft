@@ -59,7 +59,7 @@ public class mapaTest {
 		
 		Coordenada centro = new Coordenada(5, 5);
 		
-		Collection<Celda> celdasSeleccionadas = mapa.obtenerRadialmenteRangoDeCeldasDisponibles(centro, 1);
+		Collection<Celda> celdasSeleccionadas = mapa.obtenerRangoRadialDeCeldas(centro, 1);
 		
 		/*    
 		 *    ----O----
@@ -68,7 +68,7 @@ public class mapaTest {
 		 */
 		assertEquals(celdasSeleccionadas.size(), 5);
 		
-		Collection<Celda> celdasSeleccionadas2 = mapa.obtenerRadialmenteRangoDeCeldasDisponibles(centro, 2);
+		Collection<Celda> celdasSeleccionadas2 = mapa.obtenerRangoRadialDeCeldas(centro, 2);
 		
 		/*    
 		 * 	  -----O----

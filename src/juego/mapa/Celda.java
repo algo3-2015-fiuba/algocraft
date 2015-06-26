@@ -3,11 +3,9 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import juego.Juego;
+
 import juego.interfaces.Construible;
-import juego.jugadores.Jugador;
 import juego.magias.Magia;
-import juego.magias.Radiacion;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
@@ -33,6 +31,10 @@ public class Celda {
 	public boolean poseeRecursos() { return (this.recurso != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
+	
+	public Collection<Unidad> getUnidades() {
+		return this.unidades;
+	}
 	
 	public boolean puedeOcuparTierra(Unidad terrestre) {
 		
@@ -112,33 +114,13 @@ public class Celda {
 
 	public void afectadaPorMagia(Magia magia) {
 		
-		Jugador agresor = Juego.getInstance().turnoDe();
-		
 		Unidad unidades[] = new Unidad[this.unidades.size()];
 		unidades = this.unidades.toArray(unidades);
 		
-		for(Unidad unidad : unidades)
-		{
-			if (!agresor.esAliado(unidad)) {
-				magia.afectar(unidad);
-			}
+		for(Unidad unidad : unidades) {
+			magia.afectar(unidad);
 		}
 		
-	}
-	
-	public void afectadaPorMagia(Radiacion rad) {
-		
-		Unidad unidades[] = new Unidad[this.unidades.size()];
-		unidades = this.unidades.toArray(unidades);
-		
-		for(Unidad unidad : unidades)
-		{
-			rad.afectar(unidad);
-		}
-	}
-	
-	public Collection<Unidad> getUnidades() {
-		return this.unidades;
 	}
 	
 }
