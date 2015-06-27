@@ -120,5 +120,5 @@ public class UnidadAlucinada extends Unidad {
 	public void originalMuerto() {
 		this.morir();
 	}
-	
+
 }

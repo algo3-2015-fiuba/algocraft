@@ -3,7 +3,6 @@ package juego.razas.construcciones;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.Juego;
 import juego.costos.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
@@ -14,10 +13,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.unidades.UnidadAtaque;
-
 
 public abstract class Construccion implements Construible, Controlable {
 
@@ -58,36 +54,6 @@ public abstract class Construccion implements Construible, Controlable {
 	}
 	
 	@Override
-	public boolean estaEnRangoDeAtaque(UnidadAtaque agresor, int rangoAtaque) {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
-		int distancia;
-		Iterator<Celda> it;
-		
-		try {
-			it = this.obtenerRangoDeOcupacion().iterator();
-		} catch (CoordenadaFueraDeRango cfdr) { return false; }
-		
-		if (it.hasNext()) {
-			
-			distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
-			
-		} else return false;
-		
-		while (it.hasNext()) {
-			
-			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
-			
-			if (distancia > distanciaEntreCoordenadas) distancia = distanciaEntreCoordenadas;
-			
-		}
-		
-		return (distancia <= rangoAtaque);
-		
-	}
-	
-	@Override
 	public void recibirAtaque(float danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
@@ -107,6 +73,7 @@ public abstract class Construccion implements Construible, Controlable {
 	 *                                     *
 	 * * * * * * * * * * * * * * * * * * * */ 
 	
+	@Override
 	public abstract Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
 	@Override
@@ -147,11 +114,14 @@ public abstract class Construccion implements Construible, Controlable {
 				celda.ocupar(this);
 			}
 		} catch (UbicacionInvalida ui) {
+			
 			itCeldas = celdas.iterator();
 			while (itCeldas.hasNext()) {
 				itCeldas.next().desocupar(this);
 			}
+			
 			throw new UbicacionInvalida();
+			
 		}
 		
 		this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);

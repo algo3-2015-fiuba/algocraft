@@ -16,8 +16,10 @@ import juego.magias.Alucinacion;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
 import juego.magias.TormentaPsionica;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.proxys.ProxyMovimiento;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 
@@ -48,6 +50,19 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 *  Informacion basica   *
 	 *                       *
 	 * * * * * * * * * * * * */
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		Collection<Celda> ocupacion = new ArrayList<Celda>();
+		
+		ocupacion.add(mapa.obtenerCelda(this.posicion));
+		
+		return ocupacion;
+		
+	}
+	
 	
 	public int suministrosNecesarios() {
 		return this.costos.suministrosNecesarios();
@@ -100,20 +115,6 @@ public abstract class Unidad implements Controlable, Entrenable {
 		}
 		
 	}	
-	
-	@Override
-	public boolean estaEnRangoDeAtaque(UnidadAtaque agresor, int rangoAtaque) {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
-		
-		if ((this.posicion == null) || (ubicacionAgresor == null)) return false;
-		
-		int distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, this.posicion);
-		
-		return (distancia <= rangoAtaque);
-		
-	}
 	
 	@Override
 	public void recibirAtaque(float danio) {

@@ -1,13 +1,16 @@
 package juego.interfaces;
 
+import java.util.Collection;
+
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.razas.unidades.UnidadAtaque;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 public interface Controlable {
 	
 	public void recibirAtaque(float danio);
-	public boolean estaEnRangoDeAtaque(UnidadAtaque agresor, int rangoAtaque);
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida;
 	
