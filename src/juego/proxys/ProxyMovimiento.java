@@ -19,7 +19,7 @@ public class ProxyMovimiento {
 		
 	}
 	
-	public boolean destinoValido(Unidad unidad, Coordenada coordFinal) {
+	private boolean destinoValido(Unidad unidad, Coordenada coordFinal) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada ubicacionUnidad = mapa.obtenerUbicacion(unidad);
