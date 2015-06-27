@@ -61,7 +61,7 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 
 	}
 	
-	private boolean puedeMoverse(Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
+	private boolean puedeMoverse(Unidad unidad, Coordenada coordFinal) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
@@ -69,7 +69,11 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 		
 		if (ubicacionUnidad == null) return true;
 		
-		if (!mapa.obtenerCelda(coordFinal).puedeOcuparTierra(unidad)) return false;
+		try {
+			
+			if (!mapa.obtenerCelda(coordFinal).puedeOcuparTierra(unidad)) return false;
+			
+		} catch (UbicacionInvalida ui) { return false; }
 		
 		int distanciaAMover = mapa.distanciaEntreCoordenadas(ubicacionUnidad, coordFinal);
 		
@@ -81,9 +85,11 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 	public void desocupar(Controlable controlable) {
 		
 		try {
+			
 			Mapa mapa = Juego.getInstance().getMapa();
 			Coordenada coordenada = mapa.obtenerUbicacion((Unidad)controlable);
 			if (coordenada != null) mapa.obtenerCelda(coordenada).desocupar((Unidad)controlable);
+			
 		} catch (CoordenadaFueraDeRango cfdr) {
 			//Esto no deberia ocurrir nunca a que si el mapa encontro la ubicacion del controlable, la coordenada deberia ser valida.
 		}

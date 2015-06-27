@@ -61,7 +61,7 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 
 	}
 	
-	private boolean puedeMoverse(Unidad unidad, Coordenada coordFinal) throws UbicacionInvalida {
+	private boolean puedeMoverse(Unidad unidad, Coordenada coordFinal) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
@@ -69,8 +69,12 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 		
 		if (posicion == null) return true;
 		
-		if (!mapa.obtenerCelda(coordFinal).puedeOcuparAire(unidad)) return false;
+		try {
+			
+			if (!mapa.obtenerCelda(coordFinal).puedeOcuparAire(unidad)) return false;
 		
+		} catch (UbicacionInvalida ui) { return false; }	
+			
 		int distanciaAMover = mapa.distanciaEntreCoordenadas(posicion, coordFinal);
 		
 		return (distanciaAMover <= this.rangoDeMovimiento);

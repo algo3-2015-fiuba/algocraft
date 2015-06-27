@@ -32,8 +32,6 @@ public class Costos {
 	
 	public boolean construccionFinalizada() { return (this.tiempoDeConstruccion == 0); }
 	
-	public int tiempoDeConstruccionRestante() { return this.tiempoDeConstruccion; }
-	
 	public void disminuirTiempoDeConstruccion() { 
 		if (this.tiempoDeConstruccion > 0) this.tiempoDeConstruccion--; 
 	}

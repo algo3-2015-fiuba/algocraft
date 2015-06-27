@@ -1,14 +1,8 @@
 package juego.magias;
 
-import java.util.Collection;
-
-import juego.Juego;
 import juego.energia.Energia;
 import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.jugadores.Jugador;
-import juego.mapa.Celda;
-import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
 
 public abstract class Magia {
@@ -16,10 +10,11 @@ public abstract class Magia {
 	protected int costoEnergia;
 	protected Jugador propietario;
 	
-	protected Collection<Celda> obtenerRadioDeImpacto(Coordenada coordenadaDeterminante, int rango) {
+	public Magia() {
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoRadialDeCeldas(coordenadaDeterminante, rango);
+		super();
+		this.costoEnergia = 0;
+		this.propietario = null;
 		
 	}
 	

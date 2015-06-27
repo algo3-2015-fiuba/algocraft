@@ -9,7 +9,6 @@ public class Alucinacion extends Magia {
 		
 		super();
 		this.costoEnergia = 100;
-		this.propietario = Juego.getInstance().turnoDe();
 		
 	}
 	
@@ -28,8 +27,6 @@ public class Alucinacion extends Magia {
 	}
 
 	@Override
-	public boolean activa() {
-		return false;
-	}
+	public boolean activa() { return false; }
 	
 }

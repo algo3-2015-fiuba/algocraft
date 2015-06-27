@@ -28,7 +28,9 @@ public class Radiacion extends Magia {
 	
 	private void irradiar(Coordenada ubicacionInfectado) {
 		
-		Iterator<Celda> it = this.obtenerRadioDeImpacto(ubicacionInfectado, 1).iterator();
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		Iterator<Celda> it = mapa.obtenerRangoRadialDeCeldas(ubicacionInfectado, 1).iterator();
 		
 		while (it.hasNext()) {
 			it.next().afectadaPorMagia(this);

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import juego.Juego;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
 
 public class MisilEMP extends Magia {
@@ -14,13 +15,14 @@ public class MisilEMP extends Magia {
 		
 		super();
 		this.costoEnergia = 100;
-		this.propietario = null;
 		
 	}
 
 	public void lanzar(Coordenada coordenadaImpacto) {
 		
-		Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordenadaImpacto, 5);
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		Collection<Celda> celdasEnRango = mapa.obtenerRangoRadialDeCeldas(coordenadaImpacto, 5);
 		
 		Iterator<Celda> it = celdasEnRango.iterator();
 		

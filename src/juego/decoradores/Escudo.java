@@ -50,7 +50,7 @@ public class Escudo implements Atacable {
 
 	@Override
 	public boolean vidaAgotada() {
-		return (this.proteger != null) ? this.proteger.vidaAgotada() : true;
+		return (this.proteger != null) ? this.proteger.vidaAgotada() : (this.escudoActual > 0);
 	}
 	
 	@Override

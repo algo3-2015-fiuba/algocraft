@@ -3,8 +3,10 @@ package juego.magias;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
 
 public class TormentaPsionica extends Magia {
@@ -27,7 +29,9 @@ public class TormentaPsionica extends Magia {
 	public void activar() {
 		if (this.activa()) {
 			
-			Collection<Celda> celdasEnRango = this.obtenerRadioDeImpacto(coordImpacto, 5);
+			Mapa mapa = Juego.getInstance().getMapa();
+			
+			Collection<Celda> celdasEnRango = mapa.obtenerRangoRadialDeCeldas(coordImpacto, 5);
 			
 			Iterator<Celda> it = celdasEnRango.iterator();
 			

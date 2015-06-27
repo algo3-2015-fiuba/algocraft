@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.interfaces.Construible;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
@@ -16,7 +15,7 @@ public class Celda {
 	
 	private Material material;
 	private Recurso recurso;
-	private Collection<Construible> construibles;
+	private Collection<Construccion> construcciones;
 	private Collection<Unidad> unidades;
 	
 	public Celda(Material material, Recurso recurso, Coordenada posicion) {
@@ -24,7 +23,7 @@ public class Celda {
 		super();
 		this.material = material;
 		this.recurso = recurso;
-		this.construibles = new ArrayList<Construible>();
+		this.construcciones = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
 		
 	}
@@ -42,7 +41,7 @@ public class Celda {
 		if (!this.material.equals(Material.tierra)) return false;
 		if (this.poseeRecursos()) return false;
 		
-		if (!this.construibles.isEmpty()) return false;
+		if (!this.construcciones.isEmpty()) return false;
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		while (it.hasNext()) {
@@ -89,7 +88,7 @@ public class Celda {
 				
 		}
 		
-		return (this.construibles.isEmpty());
+		return (this.construcciones.isEmpty());
 		
 	}
 	
@@ -108,32 +107,36 @@ public class Celda {
 				
 		}
 		
-		return (this.construibles.isEmpty());
+		return (this.construcciones.isEmpty());
 		
 	}
 	
-	public void ocupar(Unidad unidad){		
-		this.unidades.add(unidad);		
+	public void ocupar(Unidad unidad){	
+		if (!this.unidades.contains(unidad)) {
+			this.unidades.add(unidad);		
+		}
 	}
 	
-	public void ocupar(Construccion construible) {	
-		this.construibles.add(construible);
+	public void ocupar(Construccion construccion) {	
+		if (!this.construcciones.contains(construccion)) {
+			this.construcciones.add(construccion);
+		}
 	}
 	
 	public void desocupar(Unidad unidad) {
 		this.unidades.remove(unidad);
 	}
 	
-	public void desocupar(Construible construible) {
-		this.construibles.remove(construible);
+	public void desocupar(Construccion construccion) {
+		this.construcciones.remove(construccion);
 	}
 
 	public boolean contiene(Unidad unidad) {
 		return (this.unidades.contains(unidad));
 	}
 
-	public boolean contiene(Construible construible) {
-		return (this.construibles.contains(construible));
+	public boolean contiene(Construccion construccion) {
+		return (this.construcciones.contains(construccion));
 	}
 
 	public void afectadaPorMagia(Magia magia) {

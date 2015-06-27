@@ -20,7 +20,7 @@ public class Juego {
 	private Collection<Jugador> jugadores;
 	private Mapa mapa;
 	
-	private Juego(){
+	private Juego() {
 		
 		super();
 		this.jugadores = new ArrayList<Jugador>();
@@ -33,7 +33,7 @@ public class Juego {
 		return instance;
 	}
 	
-	public void reiniciar() {
+	public static void reiniciar() {
 		instance = new Juego();
 	}
 		

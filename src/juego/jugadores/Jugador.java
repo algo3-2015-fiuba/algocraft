@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
@@ -23,20 +22,23 @@ public abstract class Jugador {
 
 	protected String nombre;
 	protected Color color;
-	protected Collection<Construible> enConstruccion;
-	protected Collection<Construible> construcciones;
+	protected Collection<Construccion> enConstruccion;
+	protected Collection<Construccion> construcciones;
 	protected Collection<Unidad> unidades;
 	protected RecursosJugador recursos;
 	protected MapaJugador mapaDescubierto;
 	
 	public Jugador(String nombre, Color color) {
+		
+		super();
 		this.nombre = nombre;
 		this.color = color;
-		this.construcciones = new ArrayList<Construible>();
-		this.enConstruccion = new ArrayList<Construible>();
+		this.construcciones = new ArrayList<Construccion>();
+		this.enConstruccion = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
 		this.recursos = new RecursosJugador();
 		this.mapaDescubierto = new MapaJugador();
+		
 	}
 	
 	public Color getColor() { return this.color; }
@@ -46,8 +48,6 @@ public abstract class Jugador {
 		Juego.getInstance().finalizarTurno();		
 	}
 		
-	public boolean mineralesSuficientes(int cantidad) { return this.recursos.mineralesSuficientes(cantidad); }
-	public boolean gasVespenoSuficiente(int cantidad) { return this.recursos.gasVespenoSuficiente(cantidad); }
 	public boolean suministrosSuficientes(int cantidad) { 
 		
 		this.recursos.poblacionActual(this.unidades, this.getMilitables());
@@ -57,74 +57,42 @@ public abstract class Jugador {
 		
 	}
 	
+	public boolean mineralesSuficientes(int cantidad) { return this.recursos.mineralesSuficientes(cantidad); }
+	public boolean gasVespenoSuficiente(int cantidad) { return this.recursos.gasVespenoSuficiente(cantidad); }
 	
-	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes { 
-		this.recursos.consumirMinerales(costoMinerales); 
-		}
+	public void consumirMinerales(int costoMinerales) throws RecursosInsuficientes { this.recursos.consumirMinerales(costoMinerales); }
+	public void consumirGasVespeno(int costoGasVespeno) throws RecursosInsuficientes { this.recursos.consumirGasVespeno(costoGasVespeno); }
 	
-	public void consumirGasVespeno(int costoGasVespeno) throws RecursosInsuficientes {
-		this.recursos.consumirGasVespeno(costoGasVespeno);
-	}
+	public void recolectarGasVespeno(int extraidos) { this.recursos.recolectarGasVespeno(extraidos); }
+	public void recolectarMinerales(int extraidos) { this.recursos.recolectarMinerales(extraidos); }
 	
-	public void recolectarGasVespeno(int extraidos) {
-		this.recursos.recolectarGasVespeno(extraidos);		
-	}
+	public int getGasVespenoRecolectado() {	return this.recursos.getGasVespenoRecolectado(); }
+	public int getMineralesRecolectados() {	return this.recursos.getMineralesRecolectados(); }
 	
-	public void recolectarMinerales(int extraidos) {
-		this.recursos.recolectarMinerales(extraidos);		
-	}
+	public int limiteDePoblacion() { return this.recursos.limiteDePoblacion(this.getHospedables()); }
+	public int poblacionActual() { return this.recursos.poblacionActual(this.unidades, this.getMilitables()); }
 	
-	public int getGasVespenoRecolectado() {
-		return this.recursos.getGasVespenoRecolectado();
-	}
-	
-	public int getMineralesRecolectados() {
-		return this.recursos.getMineralesRecolectados();
-	}
-	
-	public int poblacionMaxima() {
-		return this.recursos.limiteDePoblacion(this.getHospedables());
-	}
-	
-	public int poblacionActual() {
-		return this.recursos.poblacionActual(this.unidades, this.getMilitables());
-	}
-	
-	public void asignarUnidad(Unidad unidad) {
-		if (!this.unidades.contains(unidad)) {
-			this.unidades.add(unidad);
-			unidad.asignarPropietario(this);}
-	}
-	
-	public void actualizarObservadores() {
-		this.actualizarConstrucciones();
-		this.actualizarEntrenamientos();
-		this.actualizarUnidades();
-		this.recolectarRecursos();
-	}
-	
-	public boolean esAliado(Unidad unidad) {
-		return (this.unidades.contains(unidad));
-	}
-	
-	public boolean esAliado(Construible construible) {
-		return (this.construcciones.contains(construible));
+	public boolean esAliado(Unidad unidad) { return (this.unidades.contains(unidad)); }
+	public boolean esAliado(Construccion construccion) { 
+		return ((this.construcciones.contains(construccion)) || (this.enConstruccion.contains(construccion))); 
 	}
 
-	public void fallecida(Unidad unidad) {
-		this.unidades.remove(unidad);
+	public void fallecida(Unidad unidad) { this.unidades.remove(unidad); }
+	public void fallecida(Construccion construccion) { 
+		if (this.construcciones.contains(construccion)) this.construcciones.remove(construccion); 
+		else if (this.enConstruccion.contains(construccion)) this.enConstruccion.remove(construccion);
 	}
 	
-	public void fallecida(Construible construible) {
-		this.construcciones.remove(construible);
-	}
+	public boolean tieneVision(Unidad unidad) { return this.mapaDescubierto.tieneVision(unidad); }
+	public boolean tieneVision(Construccion construccion) { return this.mapaDescubierto.tieneVision(construccion); }
 	
-	public boolean tieneVision(Unidad unidad) {
-		return this.mapaDescubierto.tieneVision(unidad);
-	}
-	
-	public boolean tieneVision(Construccion construccion) {
-		return this.mapaDescubierto.tieneVision(construccion);
+	public void asignarUnidad(Unidad unidad) {
+		
+		if (!this.unidades.contains(unidad)) {
+			this.unidades.add(unidad);
+			unidad.asignarPropietario(this);
+		}
+		
 	}
 	
 	public void mapaDescubierto(Collection<Celda> celdasDescubiertas) {
@@ -134,7 +102,16 @@ public abstract class Jugador {
 			this.mapaDescubierto.celdaDescubierta(it.next());
 		}
 	
-	}	
+	}
+	
+	public void actualizarObservadores() {
+		
+		this.actualizarConstrucciones();
+		this.actualizarEntrenamientos();
+		this.actualizarUnidades();
+		this.recolectarRecursos();
+		
+	}
 	
 	protected void constructor(Construccion construccion, Coordenada posicion) throws UbicacionInvalida, RecursosInsuficientes {
 		
@@ -145,18 +122,19 @@ public abstract class Jugador {
 		construccion.consumirRecursos(this);
 		
 		this.enConstruccion.add(construccion);
+
 	}
 	
 	protected Collection<ConstruccionRecolectora> getRecolectores() {
 		
 		Collection<ConstruccionRecolectora> recolectores = new ArrayList<ConstruccionRecolectora>();
- 		Iterator<Construible> it = this.construcciones.iterator();
+ 		Iterator<Construccion> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
-			Construible construible = it.next();
-			if (construible.puedeExtraerRecursos())  {
-				recolectores.add((ConstruccionRecolectora)construible);
+			Construccion construccion = it.next();
+			if (construccion.puedeExtraerRecursos())  {
+				recolectores.add((ConstruccionRecolectora)construccion);
 			}
 			
 		}
@@ -168,13 +146,13 @@ public abstract class Jugador {
 	protected Collection<ConstruccionHabitable> getHospedables() {
 		
 		Collection<ConstruccionHabitable> hospedables = new ArrayList<ConstruccionHabitable>();
- 		Iterator<Construible> it = this.construcciones.iterator();
+ 		Iterator<Construccion> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
-			Construible construible = it.next();
-			if (construible.puedeHospedarUnidades())  {
-				hospedables.add((ConstruccionHabitable)construible);
+			Construccion construccion = it.next();
+			if (construccion.puedeHospedarUnidades())  {
+				hospedables.add((ConstruccionHabitable)construccion);
 			}
 			
 		}
@@ -186,13 +164,13 @@ public abstract class Jugador {
 	protected Collection<ConstruccionMilitar> getMilitables() {
 		
 		Collection<ConstruccionMilitar> militables = new ArrayList<ConstruccionMilitar>();
- 		Iterator<Construible> it = this.construcciones.iterator();
+ 		Iterator<Construccion> it = this.construcciones.iterator();
 		
 		while (it.hasNext()) {
 		
-			Construible construible = it.next();
-			if (construible.puedeEntrenarUnidades())  {
-				militables.add((ConstruccionMilitar)construible);
+			Construccion construccion = it.next();
+			if (construccion.puedeEntrenarUnidades())  {
+				militables.add((ConstruccionMilitar)construccion);
 			}
 			
 		}
@@ -203,16 +181,16 @@ public abstract class Jugador {
 	
 	private void actualizarConstrucciones() {
 		
-		Collection<Construible> construccionesFinalizadas = new ArrayList<Construible>();
+		Collection<Construccion> construccionesFinalizadas = new ArrayList<Construccion>();
 			
-		Iterator<Construible> it = this.enConstruccion.iterator();
+		Iterator<Construccion> it = this.enConstruccion.iterator();
 			
 		while (it.hasNext()) {			
-			Construible construible = it.next();
-			construible.actualizarConstruccion();
-			if (construible.construccionFinalizada()) {
-				construccionesFinalizadas.add(construible);	
-				construcciones.add(construible);
+			Construccion construccion = it.next();
+			construccion.actualizarConstruccion();
+			if (construccion.construccionFinalizada()) {
+				construccionesFinalizadas.add(construccion);	
+				construcciones.add(construccion);
 			}
 		}
 			

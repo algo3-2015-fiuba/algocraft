@@ -23,7 +23,7 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 	}
 	
 	@Override
-	public boolean visionSuficiente(Coordenada posicion,	Coordenada coordFinal) {
+	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal) {
 		Mapa mapa = Juego.getInstance().getMapa();
 		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
 	}

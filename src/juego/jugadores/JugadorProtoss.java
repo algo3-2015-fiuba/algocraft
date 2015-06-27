@@ -20,9 +20,11 @@ public class JugadorProtoss extends Jugador {
 	private int puertoEstelarHabilitado, archivoTemplarioHabilitado;
 	
 	public JugadorProtoss(String nombre, Color color) {
+		
 		super(nombre, color);
 		this.puertoEstelarHabilitado = 0;
 		this.archivoTemplarioHabilitado = 0;
+		
 	}
 
 	public boolean puertoEstelarHabilitado() { return (this.puertoEstelarHabilitado > 0); }

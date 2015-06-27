@@ -152,7 +152,7 @@ public class ConstruccionesTester {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertEquals(0, jugadorActual.poblacionMaxima());
+				assertEquals(0, jugadorActual.limiteDePoblacion());
 				assertEquals(0, jugadorActual.poblacionActual());
 			}
 		}
@@ -160,7 +160,7 @@ public class ConstruccionesTester {
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
 			
-		assertEquals(200, jugadorActual.poblacionMaxima());
+		assertEquals(200, jugadorActual.limiteDePoblacion());
 		assertEquals(0, jugadorActual.poblacionActual());
 		
 	}
