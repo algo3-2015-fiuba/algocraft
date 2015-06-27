@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
-import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.interfaces.EstrategiaMovimiento;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;

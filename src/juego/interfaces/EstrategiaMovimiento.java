@@ -1,9 +1,8 @@
-package juego.interfaces.estrategias;
+package juego.interfaces;
 
 import juego.estrategias.MovimientoConstruccion;
 import juego.estrategias.MovimientoTerrestre;
 import juego.estrategias.MovimientoVolador;
-import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 

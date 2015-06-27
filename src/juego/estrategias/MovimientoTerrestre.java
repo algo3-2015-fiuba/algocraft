@@ -2,7 +2,7 @@ package juego.estrategias;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
-import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;

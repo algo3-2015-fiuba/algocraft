@@ -1,6 +1,5 @@
 package juego.interfaces;
 
-import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 

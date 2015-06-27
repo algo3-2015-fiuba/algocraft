@@ -9,7 +9,7 @@ import juego.informadores.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
-import juego.interfaces.estrategias.EstrategiaMovimiento;
+import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.magias.Alucinacion;
