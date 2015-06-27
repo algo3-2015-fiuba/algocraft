@@ -21,6 +21,8 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
+import juego.razas.unidades.excepciones.UnidadAliada;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
@@ -114,7 +116,7 @@ public class movimientoSimpleTest {
 	
 	@Test
 	public void testSiUnMismoJugadorCreaDosMarinesEstosNoPuedenAtacarseEntreSiYaQueSonAliados() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
@@ -159,14 +161,9 @@ public class movimientoSimpleTest {
 		barraca.activarUnidad(marine1, ubicacionValidaMarine1);
 		barraca.activarUnidad(marine2, ubicacionValidaMarine2);
 		
-		for (int i = 1; i < 7; i++) {
-			marine1.atacarA(marine2);
-			assertTrue(mapa.obtenerCelda(ubicacionValidaMarine2).contiene(marine2));
-		}
-		
-		// Si el marine1 ataca al marine2 7 veces deberia destruirlo, por lo que deberia desaparecer del mapa.
-		// pero como son aliados, permanece en el mapa ya que en realidad no recibio danio alguno.
+		exception.expect(UnidadAliada.class);
 		marine1.atacarA(marine2);
+
 		assertTrue(mapa.obtenerCelda(ubicacionValidaMarine2).contiene(marine2));
 		
 	}	

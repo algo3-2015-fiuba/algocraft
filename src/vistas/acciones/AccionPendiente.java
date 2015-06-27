@@ -2,6 +2,7 @@ package vistas.acciones;
 
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public abstract class AccionPendiente {
 	protected Unidad unidadEmisora;
@@ -10,5 +11,5 @@ public abstract class AccionPendiente {
 		this.unidadEmisora = unidadEmisora;
 	}
 
-	public abstract void finalizar(Coordenada coordenada);
+	public abstract void finalizar(Coordenada coordenada) throws AtaqueInvalido;
 }

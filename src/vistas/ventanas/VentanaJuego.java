@@ -23,6 +23,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.terran.Marine;
 import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
@@ -124,7 +125,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	}
 
 	@Override
-	public void notificar(Coordenada coordenada) {
+	public void notificar(Coordenada coordenada) throws AtaqueInvalido {
 		Unidad unidad = null;
 		
 		Celda celdaSeleccionada = null;

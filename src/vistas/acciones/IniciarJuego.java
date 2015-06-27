@@ -32,7 +32,7 @@ public class IniciarJuego implements ActionListener {
 		JFrame frame = (JFrame)SwingUtilities.getRoot((Component) e.getSource());
 		
 
-		Juego.getInstance().reiniciar();
+		Juego.reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
 		for (Jugador jugador : jugadores) {

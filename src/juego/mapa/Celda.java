@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.interfaces.Controlable;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
@@ -131,12 +132,12 @@ public class Celda {
 		this.construcciones.remove(construccion);
 	}
 
-	public boolean contiene(Unidad unidad) {
-		return (this.unidades.contains(unidad));
-	}
-
-	public boolean contiene(Construccion construccion) {
-		return (this.construcciones.contains(construccion));
+	public boolean contiene(Controlable controlable) {
+		
+		if (this.unidades.contains(controlable)) return true;
+		
+		return (this.construcciones.contains(controlable));
+		
 	}
 
 	public void afectadaPorMagia(Magia magia) {

@@ -1,8 +1,7 @@
 package juego.mapa;
 
 import juego.Juego;
-import juego.razas.construcciones.Construccion;
-import juego.razas.unidades.Unidad;
+import juego.interfaces.Controlable;
 
 public class MapaJugador {
 	
@@ -22,23 +21,11 @@ public class MapaJugador {
 		
 	}
 	
-	public boolean tieneVision(Unidad unidad) {
+	public boolean tieneVision(Controlable controlable) {
 		
 		for (Celda celda : this.mapaDescubierto.obtenerCeldas()) {
 			
-			if (celda.contiene(unidad)) return true;
-			
-		}
-		
-		return false;
- 		
-	}
-	
-	public boolean tieneVision(Construccion construccion) {
-		
-		for (Celda celda : this.mapaDescubierto.obtenerCeldas()) {
-			
-			if (celda.contiene(construccion)) return true;
+			if (celda.contiene(controlable)) return true;
 			
 		}
 		

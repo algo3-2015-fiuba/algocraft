@@ -2,16 +2,16 @@ package vistas.acciones;
 
 import juego.Juego;
 import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadAtaque;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public class AccionAtacar extends AccionPendiente {
 
-	public void finalizar(Coordenada destino) {
+	public void finalizar(Coordenada destino) throws AtaqueInvalido {
 		
 		Unidad unidad = null;
 		

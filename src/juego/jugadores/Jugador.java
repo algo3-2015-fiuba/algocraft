@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
@@ -72,19 +73,28 @@ public abstract class Jugador {
 	public int limiteDePoblacion() { return this.recursos.limiteDePoblacion(this.getHospedables()); }
 	public int poblacionActual() { return this.recursos.poblacionActual(this.unidades, this.getMilitables()); }
 	
-	public boolean esAliado(Unidad unidad) { return (this.unidades.contains(unidad)); }
-	public boolean esAliado(Construccion construccion) { 
-		return ((this.construcciones.contains(construccion)) || (this.enConstruccion.contains(construccion))); 
+	public boolean tieneVision(Controlable controlable) { return this.mapaDescubierto.tieneVision(controlable); }
+	
+	public boolean esAliado(Controlable controlable) { 
+	
+		if (this.unidades.contains(controlable)) return true;	
+		return (this.construcciones.contains(controlable)); 
+	
 	}
 
-	public void fallecida(Unidad unidad) { this.unidades.remove(unidad); }
-	public void fallecida(Construccion construccion) { 
-		if (this.construcciones.contains(construccion)) this.construcciones.remove(construccion); 
-		else if (this.enConstruccion.contains(construccion)) this.enConstruccion.remove(construccion);
-	}
+	public void fallecido(Controlable controlable) { 
+		
+		if (this.unidades.contains(controlable)) {
+			this.unidades.remove(controlable); 
+		}
+		
+		if (this.construcciones.contains(controlable)) {
+			this.construcciones.remove(controlable); 
+		} else if (this.enConstruccion.contains(controlable)) {
+			this.enConstruccion.remove(controlable);
+		}
 	
-	public boolean tieneVision(Unidad unidad) { return this.mapaDescubierto.tieneVision(unidad); }
-	public boolean tieneVision(Construccion construccion) { return this.mapaDescubierto.tieneVision(construccion); }
+	}
 	
 	public void asignarUnidad(Unidad unidad) {
 		

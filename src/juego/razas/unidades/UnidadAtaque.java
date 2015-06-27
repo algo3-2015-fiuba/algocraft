@@ -1,11 +1,13 @@
 package juego.razas.unidades;
 
+import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.NoTieneVision;
-import juego.razas.construcciones.Construccion;
+import juego.proxys.ProxyAtaque;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public abstract class UnidadAtaque extends Unidad {
 
-	protected AtaqueUnidad ataqueUnidad;
+	protected Ataques ataques;
 	
 	/* * * * * * * 
 	 *           *
@@ -13,31 +15,10 @@ public abstract class UnidadAtaque extends Unidad {
 	 *           *
 	 * * * * * * */
 	
-	public void atacarA(Unidad unidad) throws NoTieneVision {
+	public void atacarA(Controlable victima) throws NoTieneVision, AtaqueInvalido {
 		
-		if (!this.propietario.esAliado(unidad)) {
-			if (this.propietario.tieneVision(unidad)) {
-				if (ataqueUnidad.estaEnRango(this, unidad)) {
-					ataqueUnidad.atacar(this.estrategiaDeMovimiento, unidad);
-				}
-			} else {
-				throw new NoTieneVision();
-			}
-		}
-		
-	}
-	
-	public void atacarA(Construccion construccion) throws NoTieneVision {
-		
-		if (!this.propietario.esAliado(construccion)) {
-			if (this.propietario.tieneVision(construccion)) {
-				if (ataqueUnidad.estaEnRango(this, construccion)) {
-					ataqueUnidad.atacar(this.estrategiaDeMovimiento, construccion);
-				}
-			} else {
-				throw new NoTieneVision();
-			}
-		}
+		ProxyAtaque proxyAtaque = new ProxyAtaque(this.ataques);
+		proxyAtaque.atacarA(this, victima);
 		
 	}
 	

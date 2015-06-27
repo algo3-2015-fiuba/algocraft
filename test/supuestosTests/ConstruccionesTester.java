@@ -22,6 +22,7 @@ import juego.mapa.Mapa;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.Pilon;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.protoss.Zealot;
 
 import org.junit.Before;
@@ -61,7 +62,7 @@ public class ConstruccionesTester {
 	
 	@Test
 	public void testZealotAtacaDepositoSuministroTerranAunEnConstruccionYLoDestruye() 
-			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos, NoTieneVision {
+			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, NoTieneVision, AtaqueInvalido {
 		
 		this.reiniciarJuego();
 		Mapa mapa = Juego.getInstance().getMapa();

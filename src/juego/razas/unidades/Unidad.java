@@ -17,6 +17,7 @@ import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 
 public abstract class Unidad implements Controlable, Entrenable {
 	
@@ -62,11 +63,11 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}	
 	
 	
-	/* * * * * * * * * * * * * * * *
-	 *                             *
-	 *  Modificaciones de estado   *
-	 *                             *
-	 * * * * * * * * * * * * * * * */
+	/* * * * * * * * * * * *
+	 *                     *
+	 *      Ataques        *
+	 *                     *
+	 * * * * * * * * * * * */
 	
 	public void afectadaPorMagia(MisilEMP emp) {
 		this.vida.deshabilitar();
@@ -98,6 +99,20 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}	
 	
 	@Override
+	public boolean estaEnRangoDeAtaque(UnidadAtaque agresor, int rangoAtaque) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
+		
+		if ((this.posicion == null) || (ubicacionAgresor == null)) return false;
+		
+		int distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, this.posicion);
+		
+		return (distancia <= rangoAtaque);
+		
+	}
+	
+	@Override
 	public void recibirAtaque(float danio) {
 		this.vida.daniar(danio);
 		if (this.vida.vidaAgotada()) {
@@ -106,7 +121,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}
 	
 	protected void morir() {
-		this.propietario.fallecida(this);
+		this.propietario.fallecido(this);
 		this.estrategiaDeMovimiento.desocupar(this);
 		Iterator<UnidadAlucinada> it = this.alucinaciones.iterator();
 		while (it.hasNext()) {

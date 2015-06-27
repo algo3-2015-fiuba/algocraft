@@ -106,7 +106,7 @@ public class UnidadAlucinada extends Unidad {
 	@Override
 	protected void morir() {
 		
-		this.propietario.fallecida(this);
+		this.propietario.fallecido(this);
 		try {
 			Mapa mapa = Juego.getInstance().getMapa();
 			Celda celda = mapa.obtenerCelda(mapa.obtenerUbicacion(this));

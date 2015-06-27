@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import vistas.handlers.CeldaMouseListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.mapa.VistaCelda;
@@ -90,7 +91,12 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 				// Here, we can safely update the GUI
 				// because we'll be called from the
 				// event dispatch thread
-				ventanaOriginal.notificar(coordenada);
+				try {
+					ventanaOriginal.notificar(coordenada);
+				} catch (AtaqueInvalido e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 

@@ -20,6 +20,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.materiales.Material;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.recursos.Recurso;
 
 public class VistaCelda extends JComponent {
@@ -61,7 +62,12 @@ public class VistaCelda extends JComponent {
 	
 	public void notificarSeleccion() {
 		for(ObservadorCelda obs : this.observadores) {
-			obs.notificar(this.obtenerPosicion());
+			try {
+				obs.notificar(this.obtenerPosicion());
+			} catch (AtaqueInvalido e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

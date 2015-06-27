@@ -21,6 +21,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 import juego.razas.unidades.terran.NaveCiencia;
@@ -62,7 +63,7 @@ public class PoblacionTester {
 	
 	@Test
 	public void testHacerUnMarineAumentaPoblacion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
 		
 		this.reiniciarJuego();
 		
