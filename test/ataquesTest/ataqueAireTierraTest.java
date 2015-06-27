@@ -58,7 +58,7 @@ public class ataqueAireTierraTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testUnZealotNoPuedeAtacarAUnaNaveCiencia() 
+	public void testUnZealotTerrestreNoPuedeAtacarAUnaNaveCienciaVoladora() 
 			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
 		
 		this.reiniciarJuego();
@@ -81,9 +81,11 @@ public class ataqueAireTierraTest {
 		jugadorReceptor.asignarUnidad(naveCiencia);	
 		jugadorAtacante.asignarUnidad(zealot);
 		
-		for(int i = 0; i < 50; i++)
+		for(int i = 0; i < 50; i++) {
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
 			zealot.atacarA(naveCiencia);
-		
+		}
 		assertTrue(mapa.obtenerCelda(ubicacionNaveCienciaEnemigo).contiene(naveCiencia));
 		
 	}

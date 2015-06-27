@@ -3,7 +3,7 @@ package juego.razas.unidades.terran;
 import juego.costos.Costos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.razas.unidades.Ataques;
+import juego.razas.ataques.Ataques;
 import juego.razas.unidades.UnidadAtaque;
 
 public class Marine extends UnidadAtaque {

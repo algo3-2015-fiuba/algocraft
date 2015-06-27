@@ -1,7 +1,7 @@
 package juego.razas.unidades.protoss;
 
 import juego.estrategias.MovimientoTerrestre;
-import juego.razas.unidades.Ataques;
+import juego.razas.ataques.Ataques;
 import juego.razas.unidades.UnidadAtaque;
 import juego.costos.Costos;
 import juego.decoradores.*;

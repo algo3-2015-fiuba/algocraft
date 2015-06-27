@@ -85,8 +85,11 @@ public class PoblacionTester {
 		jugadorReceptor.asignarUnidad(naveCiencia);	
 		jugadorAtacante.asignarUnidad(zealot);
 		
-		for(int i = 0; i < 50; i++)
+		for(int i = 0; i < 50; i++) {
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
 			zealot.atacarA(naveCiencia);
+		}
 		
 		assertTrue(mapa.obtenerCelda(ubicacionNaveCienciaEnemigo).contiene(naveCiencia));
 		

@@ -23,6 +23,7 @@ import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
 import juego.razas.unidades.excepciones.UnidadAliada;
+import juego.razas.unidades.excepciones.YaAtacoEnEsteTurno;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
@@ -85,8 +86,11 @@ public class ataqueSimpleTest {
 		jugadorReceptor.asignarUnidad(marine);	
 		jugadorAtacante.asignarUnidad(zealot);
 		
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 5; i++) {
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
 			zealot.atacarA(marine);
+		}
 		
 		assertFalse(mapa.obtenerCelda(ubicacionMarineEnemigo).contiene(marine));
 		
@@ -175,4 +179,33 @@ public class ataqueSimpleTest {
 		
 	}	
 
+	@Test
+	public void testSiUnaUnidadYaAtacoEnUnTurnoErrorYaAtacoEnEsteTurno() 
+			throws UbicacionInvalida, NoTieneVision, AtaqueInvalido {
+			
+		this.reiniciarJuego();
+				
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
+		jugadorReceptor.finalizarTurno();		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
+		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
+		
+		Marine marine = new Marine();
+		marine.moverse(ubicacionMarineEnemigo);
+		
+		Zealot zealot = new Zealot();
+		zealot.moverse(ubicacionZealotAtacante);
+		
+		jugadorReceptor.asignarUnidad(marine);	
+		jugadorAtacante.asignarUnidad(zealot);
+		
+		zealot.atacarA(marine);
+		
+		exception.expect(YaAtacoEnEsteTurno.class);
+		zealot.atacarA(marine);
+		
+	}
+	
 }

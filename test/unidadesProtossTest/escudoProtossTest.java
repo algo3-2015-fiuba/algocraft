@@ -87,17 +87,22 @@ public class escudoProtossTest {
 		
 		//Un marine ataca 6 a tierra
 		
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 20; i++) {
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
 			marine.atacarA(zealot);
-		
+		}
 		//Recibio 6x20 = 120 de danio.
 		//Recibir 60 de danio mas lo mataria si no regenerara
 		
 		for(int i = 0; i < 100; i++)
 			Juego.getInstance().turnoDe().finalizarTurno();
 		
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 10; i++) {
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
 			marine.atacarA(zealot);
+		}
 		
 		assertTrue(mapa.obtenerCelda(ubicacionZealotAtacado).contiene(zealot));
 		

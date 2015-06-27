@@ -1,7 +1,8 @@
-package juego.razas.unidades;
+package juego.razas.ataques;
 
 import juego.interfaces.Controlable;
 import juego.interfaces.EstrategiaMovimiento;
+import juego.razas.unidades.UnidadAtaque;
 
 public class Ataques {
 

@@ -116,6 +116,10 @@ public class ConstruccionesTester {
 		assertTrue(mapa.obtenerCelda(ubicacionValidaDepositoSuministro).contiene(depositoSuministro));
 		
 		for (int i = 1; i < 64; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
+			jugadorActual.finalizarTurno();
+			jugadorActual = juego.turnoDe();
 			zealot.atacarA(depositoSuministro);
 		}
 		

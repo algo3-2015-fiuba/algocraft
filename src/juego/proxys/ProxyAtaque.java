@@ -4,7 +4,7 @@ import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
-import juego.razas.unidades.Ataques;
+import juego.razas.ataques.Ataques;
 import juego.razas.unidades.UnidadAtaque;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
