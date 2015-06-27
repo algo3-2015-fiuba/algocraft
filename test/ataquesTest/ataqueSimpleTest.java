@@ -93,7 +93,7 @@ public class ataqueSimpleTest {
 	}	
 	
 	@Test
-	public void testSiUnZealotAtacaAUnMarineErrorFueraDeRango() 
+	public void testSiUnZealotAtacaAUnMarineFueraDeSuRangoDeAtaqueErrorFueraDeRangoDeAtaque() 
 			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
 		
 		this.reiniciarJuego();
