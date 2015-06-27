@@ -19,8 +19,7 @@ public class JuegoTester {
 	@Before 
 	public void inicioJuegoCorrectamente() throws ColorInvalido, NombreInvalido, FaltanJugadores {
 		
-		Juego juego = Juego.getInstance();
-		juego.reiniciar();
+		Juego.reiniciar();
 		
 	}
 	

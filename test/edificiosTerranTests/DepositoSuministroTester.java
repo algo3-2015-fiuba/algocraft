@@ -29,7 +29,7 @@ public class DepositoSuministroTester {
 	@Before 
 	public void reiniciarJuego() {
 		
-		Juego.getInstance().reiniciar();
+		Juego.reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
 		try {

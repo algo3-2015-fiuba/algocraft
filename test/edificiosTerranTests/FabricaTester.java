@@ -32,7 +32,7 @@ public class FabricaTester {
 	@Before 
 	public void reiniciarJuego() {
 		
-		Juego.getInstance().reiniciar();
+		Juego.reiniciar();
 		Juego juego = Juego.getInstance(); 
 		
 		try {
