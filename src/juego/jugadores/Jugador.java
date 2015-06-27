@@ -6,11 +6,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.informadores.MapaJugador;
 import juego.informadores.RecursosJugador;
-import juego.informadores.VisionJugador;
 import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionHabitable;
@@ -26,7 +27,7 @@ public abstract class Jugador {
 	protected Collection<Construible> construcciones;
 	protected Collection<Unidad> unidades;
 	protected RecursosJugador recursos;
-	protected VisionJugador vision;
+	protected MapaJugador mapaDescubierto;
 	
 	public Jugador(String nombre, Color color) {
 		this.nombre = nombre;
@@ -35,7 +36,7 @@ public abstract class Jugador {
 		this.enConstruccion = new ArrayList<Construible>();
 		this.unidades = new ArrayList<Unidad>();
 		this.recursos = new RecursosJugador();
-		this.vision = new VisionJugador(this.unidades);
+		this.mapaDescubierto = new MapaJugador();
 	}
 	
 	public Color getColor() { return this.color; }
@@ -89,10 +90,6 @@ public abstract class Jugador {
 		return this.recursos.poblacionActual(this.unidades, this.getMilitables());
 	}
 	
-	public boolean tieneVisionDe(Unidad unidad) {
-		return this.vision.tieneVisionDe(unidad);
-	}
-	
 	public void asignarUnidad(Unidad unidad) {
 		if (!this.unidades.contains(unidad)) {
 			this.unidades.add(unidad);
@@ -122,13 +119,30 @@ public abstract class Jugador {
 		this.construcciones.remove(construible);
 	}
 	
+	public boolean tieneVision(Unidad unidad) {
+		return this.mapaDescubierto.tieneVision(unidad);
+	}
+	
+	public boolean tieneVision(Construccion construccion) {
+		return this.mapaDescubierto.tieneVision(construccion);
+	}
+	
+	public void mapaDescubierto(Collection<Celda> celdasDescubiertas) {
+		
+		Iterator<Celda> it = celdasDescubiertas.iterator();
+		while (it.hasNext()) {
+			this.mapaDescubierto.celdaDescubierta(it.next());
+		}
+	
+	}	
+	
 	protected void constructor(Construccion construccion, Coordenada posicion) throws UbicacionInvalida, RecursosInsuficientes {
 		
 		if (!construccion.recursosSuficientes(this)) throw new RecursosInsuficientes();
 		
+		construccion.setPropietario(this);
 		construccion.posicionar(posicion);
 		construccion.consumirRecursos(this);
-		construccion.setPropietario(this);
 		
 		this.enConstruccion.add(construccion);
 	}

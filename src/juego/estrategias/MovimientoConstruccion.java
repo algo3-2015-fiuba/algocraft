@@ -3,10 +3,13 @@ package juego.estrategias;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.EstrategiaMovimiento;
+import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
 
@@ -20,10 +23,33 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 	}
 	
 	@Override
-	public int getVision() { return this.vision; }
+	public boolean visionSuficiente(Coordenada posicion,	Coordenada coordFinal) {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
+	}
 	
 	@Override
-	public void moverse(Controlable construccion, Coordenada coordenadaFinal) {
+	public void descubrirMapa(Jugador propietario, Controlable controlable) {
+		
+		Construccion construccion = (Construccion) controlable;
+		Mapa mapa = Juego.getInstance().getMapa();
+		Iterator<Celda> it = null;
+		
+		try {
+			it = construccion.obtenerRangoDeOcupacion().iterator();
+		} catch (CoordenadaFueraDeRango cfdr) {}
+		
+		while (it.hasNext()) {
+			
+			Coordenada posicion = mapa.obtenerCoordenada(it.next());
+			propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+			
+		}
+		
+	}
+	
+	@Override
+	public void moverse(Jugador controlador, Controlable construccion, Coordenada coordenadaFinal) {
 		//Las construcciones no se mueven
 	}
 	

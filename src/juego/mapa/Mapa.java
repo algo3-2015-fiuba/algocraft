@@ -16,6 +16,10 @@ public class Mapa {
 		this.celdas = new HashMap<Coordenada, Celda>();
 	}
 	
+	public boolean contiene(Celda celda) {
+		return (this.celdas.containsValue(celda));
+	}
+	
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}	
@@ -29,7 +33,11 @@ public class Mapa {
 		}
 	}
 	
-	public HashMap<Coordenada, Celda> obtenerCeldas() {
+	public Collection<Celda> obtenerCeldas() {
+		return this.celdas.values();
+	}
+	
+	public HashMap<Coordenada, Celda> obtenerMapa() {
 		return this.celdas;
 	}
 	

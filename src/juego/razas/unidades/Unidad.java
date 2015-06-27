@@ -148,14 +148,9 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * * * * * * * * */
 	
 	@Override
-	public int getVision() {
-		return this.estrategiaDeMovimiento.getVision();
-	}
-	
-	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
 		
-		this.estrategiaDeMovimiento.moverse(this, coordFinal);
+		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordFinal);
 		this.posicion = coordFinal;
 
 	}
@@ -176,7 +171,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 
 
 	public void bajarDeCarro(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
-		this.estrategiaDeMovimiento.moverse(this, coordBajar);
+		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordBajar);
 		this.posicion = coordActual;
 	}
 	

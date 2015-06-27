@@ -4,6 +4,7 @@ import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -22,10 +23,23 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	}
 	
 	@Override
-	public int getVision() { return this.vision; }
+	public boolean visionSuficiente(Coordenada posicion,	Coordenada coordFinal) {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
+	}
 	
 	@Override
-	public void moverse(Controlable controlable, Coordenada coordFinal) throws UbicacionInvalida {
+	public void descubrirMapa(Jugador propietario, Controlable controlable) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		Coordenada posicion = mapa.obtenerUbicacion((Unidad) controlable);
+		
+		propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+		
+	}
+	
+	@Override
+	public void moverse(Jugador controlador, Controlable controlable, Coordenada coordFinal) throws UbicacionInvalida {
 		
 		Unidad unidad = (Unidad) controlable;
 		
@@ -38,6 +52,8 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 			if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
 				
 			mapa.obtenerCelda(coordFinal).ocupar(unidad);
+			
+			this.descubrirMapa(controlador, controlable);
 				
 		} else {
 			throw new UbicacionInvalida();

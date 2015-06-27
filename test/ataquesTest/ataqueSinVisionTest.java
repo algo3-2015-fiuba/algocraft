@@ -14,13 +14,16 @@ import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
+import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.protoss.Pilon;
+import juego.razas.construcciones.terran.Barraca;
+import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -61,29 +64,73 @@ public class ataqueSinVisionTest {
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
 		
 		this.reiniciarJuego();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		
-		Mapa mapa = Juego.getInstance().getMapa();
+		jugadorTerran.finalizarTurno();
 		
-		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
-		jugadorReceptor.finalizarTurno();		
-		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss)Juego.getInstance().turnoDe();
 		
-		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
-		Coordenada ubicacionZealotAtacante = new Coordenada(8,21);
+		jugadorProtoss.finalizarTurno();
 		
-		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
-		
+		Barraca barraca = new Barraca();
+		Acceso acceso = new Acceso();
+		DepositoSuministro depositoSuministro = new DepositoSuministro();
+		Pilon pilon = new Pilon();
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
+		Marine marine = new Marine();
+
+		Coordenada ubicacionValidaBarraca = new Coordenada(12,3);
+		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(16,3);
+		Coordenada ubicacionMarine = new Coordenada(17,3);
+		Coordenada ubicacionValidaPilon = new Coordenada(0,20);
+		Coordenada ubicacionValidaAcceso = new Coordenada(3,20);
+		Coordenada ubicacionZealot = new Coordenada(6,20);
 		
-		jugadorReceptor.asignarUnidad(marine);	
-		jugadorAtacante.asignarUnidad(zealot);
+		jugadorTerran.recolectarMinerales(1000);
+		jugadorTerran.recolectarGasVespeno(1000);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.finalizarTurno();
+		
+		jugadorProtoss.recolectarMinerales(1000);
+		jugadorProtoss.recolectarGasVespeno(1000);
+		jugadorProtoss.construir(acceso, ubicacionValidaAcceso);
+		jugadorProtoss.finalizarTurno();
+		
+		for (int i = 1; i < 10; i++) {
+			jugadorTerran.finalizarTurno();
+			jugadorProtoss.finalizarTurno();
+		}
+		
+		jugadorTerran.construir(depositoSuministro, ubicacionValidaDepositoSuministro);
+		jugadorTerran.finalizarTurno();
+		
+		jugadorProtoss.construir(pilon, ubicacionValidaPilon);
+		jugadorProtoss.finalizarTurno();
+		
+		for (int i = 1; i < 10; i++) {
+			jugadorTerran.finalizarTurno();
+			jugadorProtoss.finalizarTurno();
+		}
+		
+		barraca.entrenar(marine);
+		jugadorTerran.finalizarTurno();
+		
+		acceso.entrenar(zealot);
+		jugadorProtoss.finalizarTurno();
+		
+		for (int i = 1; i < 10; i++) {
+			jugadorTerran.finalizarTurno();
+			jugadorProtoss.finalizarTurno();
+		}
+		
+		barraca.activarUnidad(marine, ubicacionMarine);
+		jugadorTerran.finalizarTurno();
+		
+		acceso.activarUnidad(zealot, ubicacionZealot);
 		
 		exception.expect(NoTieneVision.class);
 		zealot.atacarA(marine);
-		assertTrue(mapa.obtenerCelda(ubicacionMarineEnemigo).contiene(marine));
-		
-	}	
+
+	}		
 
 }

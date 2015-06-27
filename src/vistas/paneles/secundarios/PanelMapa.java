@@ -48,7 +48,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 
 	private void agregarCeldasDeMapa(Mapa mapa) {
 
-		HashMap<Coordenada, Celda> celdas = mapa.obtenerCeldas();
+		HashMap<Coordenada, Celda> celdas = mapa.obtenerMapa();
 
 		int i = 0;
 

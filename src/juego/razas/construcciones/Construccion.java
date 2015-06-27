@@ -77,13 +77,8 @@ public abstract class Construccion implements Construible, Controlable {
 	public abstract Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
 	@Override
-	public int getVision() {
-		return this.estrategiaDeMovimiento.getVision();
-	}
-	
-	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		this.estrategiaDeMovimiento.moverse(this, coordFinal);
+		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordFinal);
 	}
 	
 	@Override
@@ -125,6 +120,8 @@ public abstract class Construccion implements Construible, Controlable {
 			}
 			throw new UbicacionInvalida();
 		}
+		
+		this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
 		
 	}
 	

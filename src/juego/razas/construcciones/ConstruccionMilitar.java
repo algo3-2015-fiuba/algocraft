@@ -73,7 +73,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 			
 			while (it.hasNext()) {
 				Coordenada coordenadaCelda = mapa.obtenerCoordenada(it.next());
-				if (mapa.distanciaEntreCoordenadas(coordenadaCelda, coordFinal) <= this.estrategiaDeMovimiento.getVision()) return true;
+				if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
 			}			
 			
 		} catch (CoordenadaFueraDeRango cfdr) {

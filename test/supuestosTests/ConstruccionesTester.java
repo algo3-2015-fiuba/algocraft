@@ -9,6 +9,7 @@ import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.NoTieneVision;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -60,7 +61,7 @@ public class ConstruccionesTester {
 	
 	@Test
 	public void testZealotAtacaDepositoSuministroTerranAunEnConstruccionYLoDestruye() 
-			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos {
+			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, RequerimientosInvalidos, NoTieneVision {
 		
 		this.reiniciarJuego();
 		Mapa mapa = Juego.getInstance().getMapa();

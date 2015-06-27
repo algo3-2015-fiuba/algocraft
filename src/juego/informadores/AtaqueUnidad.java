@@ -41,13 +41,16 @@ public class AtaqueUnidad {
 		
 	}
 	
-	public boolean estaEnRango(Unidad agresor, Construccion victima) throws CoordenadaFueraDeRango {
+	public boolean estaEnRango(Unidad agresor, Construccion victima) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada ubicacionAgresor = mapa.obtenerUbicacion(agresor);
 		int distancia;
+		Iterator<Celda> it;
 		
-		Iterator<Celda> it = victima.obtenerRangoDeOcupacion().iterator();
+		try {
+			it = victima.obtenerRangoDeOcupacion().iterator();
+		} catch (CoordenadaFueraDeRango cfdr) { return false; }
 		
 		if (it.hasNext()) {
 			

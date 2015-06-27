@@ -17,13 +17,13 @@ public class Juego {
 
 	private static Juego instance = new Juego();
 	private Jugador turnoDe;
-	private Collection<Jugador> listaDeJugadores;
+	private Collection<Jugador> jugadores;
 	private Mapa mapa;
 	
 	private Juego(){
 		
 		super();
-		this.listaDeJugadores = new ArrayList<Jugador>();
+		this.jugadores = new ArrayList<Jugador>();
 		this.turnoDe = null;
 		this.mapa = null;
 		
@@ -43,7 +43,7 @@ public class Juego {
 	
 	public void iniciarJuego(String ubicacionDelMapa) throws FaltanJugadores, IOException {
 		
-		if (this.listaDeJugadores.size() < 2) throw new FaltanJugadores();
+		if (this.jugadores.size() < 2) throw new FaltanJugadores();
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
 		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa);
@@ -52,14 +52,14 @@ public class Juego {
 	
 	public void crearJugador(Jugador jugadorNuevo) throws ColorInvalido, NombreInvalido {
 		
-		if (this.listaDeJugadores.isEmpty()) {
+		if (this.jugadores.isEmpty()) {
 			
 			this.turnoDe = jugadorNuevo;
-			this.listaDeJugadores.add(turnoDe);
+			this.jugadores.add(turnoDe);
 			
 		} else {
 		
-			Iterator<Jugador> it  = this.listaDeJugadores.iterator();
+			Iterator<Jugador> it  = this.jugadores.iterator();
 		
 			while (it.hasNext()) {
 				Jugador jugadorActual = it.next();
@@ -67,7 +67,7 @@ public class Juego {
 				if (jugadorActual.getNombre().equals(jugadorNuevo.getNombre())) throw new NombreInvalido();
 			}
 		
-			this.listaDeJugadores.add(jugadorNuevo);
+			this.jugadores.add(jugadorNuevo);
 		
 		}
 			
@@ -75,20 +75,20 @@ public class Juego {
 
 	public void finalizarTurno() {
 		
-		Iterator<Jugador> it = this.listaDeJugadores.iterator();
+		Iterator<Jugador> it = this.jugadores.iterator();
 
 		while (it.hasNext()) {
 			if (this.turnoDe.equals(it.next())) {
 				try {
 					this.turnoDe = it.next();
 				} catch (NoSuchElementException nsee) {
-					it = this.listaDeJugadores.iterator();
+					it = this.jugadores.iterator();
 					this.turnoDe = it.next();
 				}
 			}
 		}
 		
-		it = this.listaDeJugadores.iterator();
+		it = this.jugadores.iterator();
 		
 		while (it.hasNext()) {
 			it.next().actualizarObservadores();
