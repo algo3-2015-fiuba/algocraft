@@ -101,6 +101,8 @@ public class movimientoVoladorTest {
 		jugadorZealot.asignarUnidad(scout);		
 		scout.moverse(ubicacionTierra);
 		
+		jugadorZealot.finalizarTurno();
+		
 		scout.moverse(ubicacionAire);
 		
 		assertTrue(mapa.obtenerCelda(ubicacionAire).contiene(scout));

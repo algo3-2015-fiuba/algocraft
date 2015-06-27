@@ -11,7 +11,9 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
+import juego.razas.construcciones.ConstruccionRecolectora;
 
 public class MovimientoConstruccion implements EstrategiaMovimiento {
 
@@ -45,6 +47,33 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 			propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
 			
 		}
+		
+	}
+	
+	@Override
+	public boolean distanciaAlcanzable(int distanciaAMover) {
+		return false;
+	}
+	
+	@Override
+	public boolean puedeOcupar(Controlable controlable, Celda celda) {
+		
+		Construccion construccion = (Construccion) controlable;
+		
+		if (!celda.getMaterial().equals(Material.tierra)) return false;
+		
+		if (construccion.puedeExtraerRecursos()) {
+			
+			if (!celda.poseeRecursos()) return false;
+			if (!celda.getRecurso().puedeRecolectar((ConstruccionRecolectora)construccion)) return false;
+			
+		} else {
+			if (celda.poseeRecursos()) return false;
+		}
+		
+		if (celda.colisiona(controlable)) return false;
+		
+		return true;
 		
 	}
 	

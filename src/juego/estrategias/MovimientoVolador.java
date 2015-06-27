@@ -5,6 +5,7 @@ import juego.interfaces.Controlable;
 import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -39,46 +40,25 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	}
 	
 	@Override
+	public boolean distanciaAlcanzable(int distanciaAMover) {
+		return (distanciaAMover <= this.rangoDeMovimiento);
+	}
+	
+	@Override
 	public void moverse(Jugador controlador, Controlable controlable, Coordenada coordFinal) throws UbicacionInvalida {
 		
 		Unidad unidad = (Unidad) controlable;
-		
-		if (this.puedeMoverse(unidad, coordFinal)) {
-		
-			Mapa mapa = Juego.getInstance().getMapa();
 
-			Coordenada coordInicial = mapa.obtenerUbicacion(unidad);
-				
-			if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
-				
-			mapa.obtenerCelda(coordFinal).ocupar(unidad);
-			
-			this.descubrirMapa(controlador, controlable);
-				
-		} else {
-			throw new UbicacionInvalida();
-		}
-
-	}
-	
-	private boolean puedeMoverse(Unidad unidad, Coordenada coordFinal) {
-		
 		Mapa mapa = Juego.getInstance().getMapa();
-		
-		Coordenada posicion = mapa.obtenerUbicacion(unidad);
-		
-		if (posicion == null) return true;
-		
-		try {
+
+		Coordenada coordInicial = mapa.obtenerUbicacion(unidad);
+				
+		if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
+				
+		mapa.obtenerCelda(coordFinal).ocupar(unidad);
 			
-			if (!mapa.obtenerCelda(coordFinal).puedeOcuparAire(unidad)) return false;
-		
-		} catch (UbicacionInvalida ui) { return false; }	
-			
-		int distanciaAMover = mapa.distanciaEntreCoordenadas(posicion, coordFinal);
-		
-		return (distanciaAMover <= this.rangoDeMovimiento);
-		
+		this.descubrirMapa(controlador, controlable);
+				
 	}
 	
 	@Override
@@ -112,6 +92,17 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	@Override
 	public boolean colisionaCon(MovimientoConstruccion construccion) {
 		return false;
+	}
+
+	@Override
+	public boolean puedeOcupar(Controlable controlable, Celda celda) {
+		
+		if (celda.poseeRecursos()) return false;
+		
+		if (celda.colisiona(controlable)) return false;
+		
+		return true;
+		
 	}
 
 }

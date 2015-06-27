@@ -18,6 +18,8 @@ import juego.magias.Radiacion;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.proxys.ProxyMovimiento;
+import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 
 public abstract class Unidad implements Controlable, Entrenable {
 	
@@ -28,6 +30,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	protected Jugador propietario;
 	protected Collection<UnidadAlucinada> alucinaciones;
 	protected int pesoTransporte;
+	protected ProxyMovimiento proxyMovimiento;
 	
 	public Unidad() {
 		
@@ -130,6 +133,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	}
 	
 	public void actualizar() { 
+		this.proxyMovimiento = null;
 		this.vida.regenerar();
 	}
 
@@ -170,8 +174,16 @@ public abstract class Unidad implements Controlable, Entrenable {
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
 		
-		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordFinal);
-		this.posicion = coordFinal;
+		if (this.proxyMovimiento == null) {
+			
+			this.proxyMovimiento = new ProxyMovimiento(this.estrategiaDeMovimiento);
+			this.proxyMovimiento.moverse(this.propietario, this, coordFinal);
+			this.posicion = coordFinal;
+			
+			
+		} else {
+			throw new YaSeMovioEnEsteTurno();
+		}
 
 	}
 	

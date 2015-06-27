@@ -143,7 +143,7 @@ public abstract class Construccion implements Construible, Controlable {
 		try {
 			while (itCeldas.hasNext()) {
 				Celda celda = itCeldas.next();
-				if (!celda.puedeConstruir(this)) throw new UbicacionInvalida();
+				if (!this.estrategiaDeMovimiento.puedeOcupar(this, celda)) throw new UbicacionInvalida();
 				celda.ocupar(this);
 			}
 		} catch (UbicacionInvalida ui) {

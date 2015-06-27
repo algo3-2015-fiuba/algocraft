@@ -35,6 +35,7 @@ public abstract class UnidadMagica extends Unidad {
 	
 	@Override
 	public void actualizar() {
+		this.proxyMovimiento = null;
 		this.vida.regenerar();
 		this.energia.cargar(15);
 		this.activarMagias();

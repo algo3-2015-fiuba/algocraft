@@ -32,7 +32,7 @@ public abstract class ConstruccionRecolectora extends Construccion {
 		try {
 			while (itCeldas.hasNext()) {
 				Celda celda = itCeldas.next();
-				if (!celda.puedeConstruir(this)) throw new UbicacionInvalida();
+				if (!this.estrategiaDeMovimiento.puedeOcupar(this, celda)) throw new UbicacionInvalida();
 				celda.ocupar(this);
 				this.nodoRecurso = celda.getRecurso();
 			}

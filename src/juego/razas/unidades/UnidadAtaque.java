@@ -37,6 +37,7 @@ public abstract class UnidadAtaque extends Unidad {
 	
 	@Override
 	public void actualizar() { 
+		this.proxyMovimiento = null;
 		this.proxyAtaque = null;
 		this.vida.regenerar();
 	}

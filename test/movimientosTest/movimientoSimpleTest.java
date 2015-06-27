@@ -23,6 +23,7 @@ import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.UnidadAliada;
+import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
@@ -80,6 +81,7 @@ public class movimientoSimpleTest {
 		jugadorZealot.asignarUnidad(zealot);		
 		zealot.moverse(ubicacionViejaZealot);
 		
+		jugadorZealot.finalizarTurno();
 		
 		zealot.moverse(ubicacionNuevaZealot);
 		
@@ -167,5 +169,27 @@ public class movimientoSimpleTest {
 		assertTrue(mapa.obtenerCelda(ubicacionValidaMarine2).contiene(marine2));
 		
 	}	
+	
+	@Test
+	public void testSiUnZealotTrataDeMoverseDosVecesEnUnMismoTurnoExcepcion() 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+		
+		this.reiniciarJuego();
+			
+		Juego.getInstance().turnoDe().finalizarTurno();		
+		Jugador jugadorZealot = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionViejaZealot = new Coordenada(1,20);
+		Coordenada ubicacionNuevaZealot = new Coordenada(2,20); //Mas que el rango de un Zealot	
+		
+		Zealot zealot = new Zealot();
+		jugadorZealot.asignarUnidad(zealot);
+		
+		zealot.moverse(ubicacionViejaZealot);
+		
+		exception.expect(YaSeMovioEnEsteTurno.class);
+		zealot.moverse(ubicacionNuevaZealot);
+
+	}
 
 }

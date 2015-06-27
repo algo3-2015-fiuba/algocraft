@@ -8,7 +8,6 @@ import juego.interfaces.Controlable;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
-import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
@@ -37,78 +36,23 @@ public class Celda {
 		return this.unidades;
 	}
 	
-	public boolean puedeOcuparTierra(Unidad terrestre) {
+	public boolean colisiona(Controlable controlable) {
 		
-		if (!this.material.equals(Material.tierra)) return false;
-		if (this.poseeRecursos()) return false;
-		
-		if (!this.construcciones.isEmpty()) return false;
-		
-		Iterator<Unidad> it = this.unidades.iterator();
-		while (it.hasNext()) {
+		Iterator<Unidad> itUnid = this.unidades.iterator();
+		while (itUnid.hasNext()) {
 				
-			if (it.next().colisionaCon(terrestre)) {
-				return false;
-			}
+			if (controlable.colisionaCon(itUnid.next())) return true;
 				
 		}
 		
-		return true;
-		
-	}
-	
-	public boolean puedeOcuparAire(Unidad voladora) {
-		
-		Iterator<Unidad> it = this.unidades.iterator();
-		while (it.hasNext()) {
-				
-			if (it.next().colisionaCon(voladora)) {
-				return false;
-			}
-				
-		}
-		
-		return true;
-		
-	}
-	
-	public boolean puedeConstruir(ConstruccionRecolectora construccion) {
-		
-		if (!this.material.equals(Material.tierra)) return false;
+		Iterator<Construccion> itConst = this.construcciones.iterator();
+		while(itConst.hasNext()) {
+			
+			if (controlable.colisionaCon(itConst.next())) return true;
 
-		if (!this.poseeRecursos()) return false;
-		
-		if (!this.recurso.puedeRecolectar(construccion)) return false;
-		
-		Iterator<Unidad> itU = this.unidades.iterator();
-		while (itU.hasNext()) {
-				
-			if (itU.next().colisionaCon(construccion)) {
-				return false;
-			}
-				
 		}
 		
-		return (this.construcciones.isEmpty());
-		
-	}
-	
-	public boolean puedeConstruir(Construccion construccion) {
-		
-		if (!this.material.equals(Material.tierra)) return false;
-		
-		if (this.poseeRecursos()) return false;
-		
-		Iterator<Unidad> itU = this.unidades.iterator();
-		while (itU.hasNext()) {
-				
-			if (itU.next().colisionaCon(construccion)) {
-				return false;
-			}
-				
-		}
-		
-		return (this.construcciones.isEmpty());
+		return false;
 		
 	}
 	
