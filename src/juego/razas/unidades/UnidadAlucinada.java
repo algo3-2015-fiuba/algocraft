@@ -7,6 +7,7 @@ import juego.Juego;
 import juego.decoradores.Escudo;
 import juego.interfaces.Controlable;
 import juego.interfaces.EstrategiaMovimiento;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
@@ -20,9 +21,10 @@ public class UnidadAlucinada extends Unidad {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		this.ubicar(mapa.obtenerUbicacion(alucinada));
 		this.alucinada = alucinada;
+		this.estrategiaDeMovimiento = alucinada.getMovimiento();
 		this.propietario = Juego.getInstance().turnoDe();
+		this.ubicar(mapa.obtenerUbicacion(alucinada));
 		this.propietario.asignarUnidad(this);
 		this.vida = new Escudo(alucinada.vidaActual());
 	}
@@ -84,6 +86,14 @@ public class UnidadAlucinada extends Unidad {
 	 * * * * * * * * */
 	
 	@Override
+	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+		
+		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordFinal);
+		this.posicion = coordFinal;
+
+	}
+	
+	@Override
 	public boolean colisionaCon(Controlable controlable) { 
 		return controlable.colisionaCon(this.alucinada); 
 	}
@@ -100,7 +110,7 @@ public class UnidadAlucinada extends Unidad {
 		try {
 			Mapa mapa = Juego.getInstance().getMapa();
 			Celda celda = mapa.obtenerCelda(mapa.obtenerUbicacion(this));
-			celda.desocupar(this);
+			if (celda != null) celda.desocupar(this);
 		} catch (CoordenadaFueraDeRango cfdr) {
 			//No deberia suceder nunca esto.
 		}

@@ -20,11 +20,17 @@ public abstract class UnidadMagica extends Unidad {
 	
 	protected void activarMagias() {
 		
+		Collection<Magia> magiasFinalizadas = new ArrayList<Magia>();
+		
 		Iterator<Magia> it = this.magiasActivas.iterator();
 		
 		while (it.hasNext()) {
-			it.next().activar();
+			Magia magia = it.next();
+			magia.activar();
+			if (!magia.activa()) magiasFinalizadas.add(magia);
 		}
+		
+		this.magiasActivas.removeAll(magiasFinalizadas);
 	}
 	
 	@Override

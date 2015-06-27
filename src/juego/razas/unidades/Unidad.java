@@ -61,6 +61,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.vida.vidaActual();
 	}	
 	
+	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
@@ -146,6 +147,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * Movimientos   *
  	 *               *
 	 * * * * * * * * */
+	
+	public EstrategiaMovimiento getMovimiento() {
+		return this.estrategiaDeMovimiento;
+	}
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {

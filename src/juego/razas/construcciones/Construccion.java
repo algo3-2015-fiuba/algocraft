@@ -139,7 +139,7 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	/* * * * * * * * * * * * * * * * * * * * *
 	 *                                       * 
-	 * Caracteristicas de las construcciones *
+	 * Propiedades de las construcciones     *
 	 *                                       * 
 	 * * * * * * * * * * * * * * * * * * * * */
 	

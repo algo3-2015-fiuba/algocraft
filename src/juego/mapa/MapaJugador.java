@@ -12,6 +12,16 @@ public class MapaJugador {
 		this.mapaDescubierto = new Mapa();
 	}
 	
+	public void celdaDescubierta(Celda celda) {
+		
+		Coordenada coordenadaDeCelda = Juego.getInstance().getMapa().obtenerCoordenada(celda);
+		
+		if (!this.mapaDescubierto.contiene(celda)) {
+			this.mapaDescubierto.agregarCelda(coordenadaDeCelda, celda);
+		}
+		
+	}
+	
 	public boolean tieneVision(Unidad unidad) {
 		
 		for (Celda celda : this.mapaDescubierto.obtenerCeldas()) {
@@ -33,16 +43,6 @@ public class MapaJugador {
 		}
 		
 		return false;
-		
-	}
-	
-	public void celdaDescubierta(Celda celda) {
-		
-		Coordenada coordenadaDeCelda = Juego.getInstance().getMapa().obtenerCoordenada(celda);
-		
-		if (!this.mapaDescubierto.contiene(celda)) {
-			this.mapaDescubierto.agregarCelda(coordenadaDeCelda, celda);
-		}
 		
 	}
 

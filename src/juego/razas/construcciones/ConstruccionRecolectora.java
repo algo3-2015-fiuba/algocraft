@@ -44,6 +44,8 @@ public abstract class ConstruccionRecolectora extends Construccion {
 			throw new UbicacionInvalida();
 		}
 		
+		this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
+		
 	}
 	
 	@Override
