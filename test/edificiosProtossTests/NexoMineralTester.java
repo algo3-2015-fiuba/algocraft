@@ -61,9 +61,10 @@ public class NexoMineralTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
-		jugadorActual.construir(new NexoMineral(), ubicacionNodoMineral);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionNodoMineral);
 
 		for (int i = 1; i < 4; i++) {
 		
@@ -99,13 +100,13 @@ public class NexoMineralTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 
-		jugadorActual.consumirMinerales(160);
+		jugadorProtoss.consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new NexoMineral(), ubicacionNodoMineral);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionNodoMineral);
 		
 	}
 
@@ -115,11 +116,11 @@ public class NexoMineralTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionInvalida = new Coordenada(-10,3);
 
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new NexoMineral(), ubicacionInvalida);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionInvalida);
 		
 	}
 	
@@ -129,13 +130,13 @@ public class NexoMineralTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
-		jugadorActual.construir(new NexoMineral(), ubicacionNodoMineral);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionNodoMineral);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new NexoMineral(), ubicacionNodoMineral);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionNodoMineral);
 		
 	}
 	
@@ -145,11 +146,11 @@ public class NexoMineralTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionGasVespeno = new Coordenada(1,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new NexoMineral(), ubicacionGasVespeno);
+		jugadorProtoss.construir(new NexoMineral(), ubicacionGasVespeno);
 		
 	}
 	

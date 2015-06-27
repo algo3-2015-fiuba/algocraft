@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class DepositoSuministroTester {
-
+	
 	@Before 
 	public void reiniciarJuego() {
 		
@@ -60,7 +60,7 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		/* El rango de celdas de un deposito de suministro debe ser de dos
@@ -75,34 +75,32 @@ public class DepositoSuministroTester {
 		 * - - - - - -
 		 */
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValida);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValida);
 		
 		for (int i = 1; i < 6; i++) {
-		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertTrue(jugadorActual.poblacionActual() == 0);
-				assertTrue(jugadorActual.poblacionMaxima() == 0);
-			}
+			
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+
+			assertTrue(jugadorTerran.poblacionActual() == 0);
+			assertTrue(jugadorTerran.poblacionMaxima() == 0);
 		
 		}
 		
-		jugadorActual.finalizarTurno(); //Recolecto 10
-		jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
+		jugadorProtoss.finalizarTurno(); //Recolecto 10
 		
 		// Pasaron 6 turnos desde que el jugador Terran construyo el deposito de suministro, 
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.poblacionActual() == 0);
-		assertTrue(jugadorActual.poblacionMaxima() == 5);
+		assertTrue(jugadorTerran.poblacionActual() == 0);
+		assertTrue(jugadorTerran.poblacionMaxima() == 5);
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno();
 
 		//Verifico que el jugador Protoss no haya modificado su poblacion
-		assertTrue(jugadorActual.poblacionActual() == 0);
-		assertTrue(jugadorActual.poblacionMaxima() == 0);
+		assertTrue(jugadorProtoss.poblacionActual() == 0);
+		assertTrue(jugadorProtoss.poblacionMaxima() == 0);
 		
 	}
 
@@ -112,32 +110,31 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		int x = 0;
 		int y = 20;
 		
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorTerran.recolectarMinerales(1000000);
 		
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {
-				jugadorActual.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
+				jugadorTerran.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
 			}
 		}
 		
 		for (int i = 0; i < 5; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertEquals(0, jugadorActual.poblacionMaxima());
-				assertEquals(0, jugadorActual.poblacionActual());
-			}
+			
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+			
+			assertEquals(0, jugadorTerran.poblacionMaxima());
+			assertEquals(0, jugadorTerran.poblacionActual());
 		}
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno();
 		
-		assertEquals(200, jugadorActual.poblacionMaxima());
-		assertEquals(0, jugadorActual.poblacionActual());
+		assertEquals(200, jugadorTerran.poblacionMaxima());
+		assertEquals(0, jugadorTerran.poblacionActual());
 		
 	}
 
@@ -147,14 +144,14 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//El deposito de suministro vale 100 minerales, si gasto 110 de los 200 iniciales le quedan 90 minerales.
-		jugadorActual.consumirMinerales(160);
+		jugadorTerran.consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValida);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValida);
 		
 	}
 
@@ -164,13 +161,13 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada coordenadaInvalida = new Coordenada(-10,3);
 		
 		//Una coordenada negativa no existe en ningun mapa.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new DepositoSuministro(), coordenadaInvalida);
+		jugadorTerran.construir(new DepositoSuministro(), coordenadaInvalida);
 		
 	}
 	
@@ -181,14 +178,14 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValida);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValida);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValida);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValida);
 		
 	}
 
@@ -199,12 +196,12 @@ public class DepositoSuministroTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new DepositoSuministro(), ubicacionNodoGasVespeno);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionNodoGasVespeno);
 		
 	}
 	

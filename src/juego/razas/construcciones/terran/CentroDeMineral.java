@@ -6,19 +6,13 @@ import juego.Juego;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
-import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.Mineral;
 
 public class CentroDeMineral extends ConstruccionRecolectora {
-	
-	private Mineral nodoMineral;
 	
 	public CentroDeMineral() {
 		super();
@@ -32,36 +26,10 @@ public class CentroDeMineral extends ConstruccionRecolectora {
 	
 	@Override
 	public void recolectar() {
-		if ((this.construccionFinalizada()) && (!this.nodoMineral.estaAgotado())) {
-			int extraidos = this.nodoMineral.extraer();
+		if ((this.construccionFinalizada()) && (!this.nodoRecurso.estaAgotado())) {
+			int extraidos = this.nodoRecurso.extraer();
 			this.propietario.recolectarMinerales(extraidos);		
 		}
-	}
-	
-	@Override
-	public void construir(JugadorTerran jugador, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Celda celda;
-		
-		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
-		
-		celda = mapa.obtenerCelda(coordenada);
-		
-		if ((!celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
-		
-		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
-		
-		celda.ocupar(this);
-		
-		this.costos.consumirRecursos(jugador);
-		
-		this.posicion = coordenada;
-		this.propietario = jugador;
-		
-		this.nodoMineral = (Mineral) celda.getRecurso();
-			
 	}
 	
 	@Override

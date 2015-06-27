@@ -61,6 +61,7 @@ public class PilonTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		/* El rango de celdas de un pilon debe ser de dos
@@ -76,7 +77,7 @@ public class PilonTester {
 		 */
 		
 		//En el caso del mapa 'test', la coordenada (0,1) cumple este requisito.
-		jugadorActual.construir(new Pilon(), ubicacionValida);
+		jugadorProtoss.construir(new Pilon(), ubicacionValida);
 		
 		for (int i = 1; i < 6; i++) {
 			jugadorActual.finalizarTurno();
@@ -102,14 +103,15 @@ public class PilonTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		int x = 0;
 		int y = 20;
 		
-		jugadorActual.recolectarMinerales(1000000);
+		jugadorProtoss.recolectarMinerales(1000000);
 		
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {
-				jugadorActual.construir(new Pilon(), new Coordenada(x+j,y+i));
+				jugadorProtoss.construir(new Pilon(), new Coordenada(x+j,y+i));
 			}
 		}
 		
@@ -136,11 +138,11 @@ public class PilonTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Pilon(), ubicacionNodoMineral);
+		jugadorProtoss.construir(new Pilon(), ubicacionNodoMineral);
 		
 	}
 	
@@ -150,13 +152,13 @@ public class PilonTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		//Un pilon costa un total de 100 minerales, si inicia con 200 no deberian alcanzarle.
-		jugadorActual.consumirMinerales(110);
+		jugadorProtoss.consumirMinerales(110);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Pilon(), ubicacionValida);
+		jugadorProtoss.construir(new Pilon(), ubicacionValida);
 		
 	}
 	
@@ -166,11 +168,11 @@ public class PilonTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionInvalida = new Coordenada(-10,3);
 
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Pilon(), ubicacionInvalida);
+		jugadorProtoss.construir(new Pilon(), ubicacionInvalida);
 		
 	}
 	
@@ -180,13 +182,13 @@ public class PilonTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
-		jugadorActual.construir(new Pilon(), ubicacionValida);
+		jugadorProtoss.construir(new Pilon(), ubicacionValida);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Pilon(), ubicacionValida);
+		jugadorProtoss.construir(new Pilon(), ubicacionValida);
 	
 	}
 

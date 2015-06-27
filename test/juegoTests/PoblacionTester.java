@@ -97,13 +97,14 @@ public class PoblacionTester {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Barraca barraca = new Barraca();
 		Marine marine = new Marine();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
 			
@@ -123,13 +124,14 @@ public class PoblacionTester {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Barraca barraca = new Barraca();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(4,20);
 		
 		jugadorActual.recolectarMinerales(2000);
 		jugadorActual.recolectarGasVespeno(2000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
 			
@@ -138,7 +140,7 @@ public class PoblacionTester {
 			
 		}
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
 		
 		for (int i = 1; i < 7; i++) {
 		

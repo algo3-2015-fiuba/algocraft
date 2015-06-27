@@ -6,19 +6,13 @@ import juego.Juego;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
 import juego.informadores.Costos;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
-import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.GasVespeno;
 
 public class Refineria extends ConstruccionRecolectora {
-	
-	private GasVespeno nodoGasVespeno;
 
 	public Refineria() {
 		super();
@@ -32,36 +26,10 @@ public class Refineria extends ConstruccionRecolectora {
 
 	@Override
 	public void recolectar() {
-		if ((this.construccionFinalizada())  && (!this.nodoGasVespeno.estaAgotado())){
-			int extraidos = this.nodoGasVespeno.extraer();
+		if ((this.construccionFinalizada())  && (!this.nodoRecurso.estaAgotado())){
+			int extraidos = this.nodoRecurso.extraer();
 			this.propietario.recolectarGasVespeno(extraidos);		
 		}
-	}
-	
-	@Override
-	public void construir(JugadorTerran jugador, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Celda celda;
-		
-		celda = mapa.obtenerCelda(coordenada);
-		
-		if (!this.costos.recursosSuficientes(jugador)) throw new RecursosInsuficientes();
-		
-		if ((!celda.poseeRecursos()) || (!celda.puedeConstruir(this))) throw new UbicacionInvalida();
-		
-		if (!celda.getRecurso().puedeRecolectar(this)) throw new UbicacionInvalida();
-		
-		celda.ocupar(this);
-		
-		this.costos.consumirRecursos(jugador);
-		
-		this.posicion = coordenada;
-		this.propietario = jugador;
-		
-		this.nodoGasVespeno = (GasVespeno) celda.getRecurso();
-			
 	}
 	
 	@Override

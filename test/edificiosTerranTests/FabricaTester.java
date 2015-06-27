@@ -63,7 +63,7 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Fabrica nuevaFabrica = new Fabrica();
@@ -82,28 +82,28 @@ public class FabricaTester {
 		 * - - - - - -
 		 */
 
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorTerran.recolectarGasVespeno(1000);
+		jugadorTerran.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
-		jugadorActual.construir(nuevaFabrica, ubicacionValidaFabrica);
+		jugadorTerran.construir(nuevaFabrica, ubicacionValidaFabrica);
 		
 		for (int i = 0; i < 11; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertFalse(nuevaFabrica.construccionFinalizada());
-			}
+			
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+
+			assertFalse(nuevaFabrica.construccionFinalizada());
+			
 		}
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno();
 		
 		assertTrue(nuevaFabrica.construccionFinalizada());
 		
@@ -115,13 +115,13 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 
-		jugadorActual.recolectarGasVespeno(200);
+		jugadorTerran.recolectarGasVespeno(200);
 		
 		exception.expect(RequiereBarraca.class);
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 	}
 	
@@ -131,28 +131,28 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorTerran.recolectarGasVespeno(1000);
+		jugadorTerran.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
-		
-		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-		}
-		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
-		assertTrue(((JugadorTerran)jugadorActual).puertoEstelarHabilitado());
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
+		
+		for (int i = 0; i < 12; i++) {
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+		}
+		
+		assertTrue(((JugadorTerran)jugadorTerran).puertoEstelarHabilitado());
 		
 	}
 	
@@ -162,19 +162,19 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 	}
 
@@ -184,23 +184,23 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionInvalida = new Coordenada(-10,3);
 		
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorTerran.recolectarGasVespeno(1000);
+		jugadorTerran.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Fabrica(), ubicacionInvalida);
+		jugadorTerran.construir(new Fabrica(), ubicacionInvalida);
 		
 	}
 
@@ -210,24 +210,24 @@ public class FabricaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(0,1);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorTerran.recolectarGasVespeno(1000);
+		jugadorTerran.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 	}
 

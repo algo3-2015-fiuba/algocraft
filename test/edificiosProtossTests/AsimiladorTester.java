@@ -61,9 +61,10 @@ public class AsimiladorTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 		
-		jugadorActual.construir(new Asimilador(), ubicacionNodoGasVespeno);
+		jugadorProtoss.construir(new Asimilador(), ubicacionNodoGasVespeno);
 
 		for (int i = 1; i < 6; i++) {
 		
@@ -100,12 +101,13 @@ public class AsimiladorTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 		//El Asimilador vale 100 minerales, si gasto 160 de los 200 iniciales le quedan 40 gasVespeno.
 		jugadorActual.consumirMinerales(160);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Asimilador(), ubicacionNodoGasVespeno);
+		jugadorProtoss.construir(new Asimilador(), ubicacionNodoGasVespeno);
 		
 	}
 
@@ -115,11 +117,11 @@ public class AsimiladorTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionInvalida =  new Coordenada(-10,3);
 
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Asimilador(), ubicacionInvalida);
+		jugadorProtoss.construir(new Asimilador(), ubicacionInvalida);
 		
 	}
 
@@ -129,13 +131,13 @@ public class AsimiladorTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(1,0);
 		
-		jugadorActual.construir(new Asimilador(), ubicacionValida);
+		jugadorProtoss.construir(new Asimilador(), ubicacionValida);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Asimilador(), ubicacionValida);
+		jugadorProtoss.construir(new Asimilador(), ubicacionValida);
 		
 	}
 
@@ -145,11 +147,11 @@ public class AsimiladorTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionNodoMinerales = new Coordenada(0,0);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Asimilador(), ubicacionNodoMinerales);
+		jugadorProtoss.construir(new Asimilador(), ubicacionNodoMinerales);
 		
 	}
 

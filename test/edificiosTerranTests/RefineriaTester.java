@@ -61,17 +61,15 @@ public class RefineriaTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
-		
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionGasVespeno = new Coordenada(1,0);
-		jugadorActual.construir(new Refineria(), ubicacionGasVespeno);
+		jugadorTerran.construir(new Refineria(), ubicacionGasVespeno);
 		
 		for (int i = 1; i < 6; i++) {
 		
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertTrue(jugadorActual.getGasVespenoRecolectado() == 0);
-			}
+			assertTrue(jugadorTerran.getGasVespenoRecolectado() == 0);
 		
 		}
 		
@@ -103,15 +101,15 @@ public class RefineriaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		//La refineria vale 100 minerales, si gasto 110 de los 200 iniciales le quedan 90 minerales.
-		jugadorActual.consumirMinerales(110);
+		jugadorTerran.consumirMinerales(110);
 		
 		Coordenada ubicacionGasVespeno = new Coordenada(1,0);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Refineria(), ubicacionGasVespeno);
+		jugadorTerran.construir(new Refineria(), ubicacionGasVespeno);
 		
 	}
 
@@ -121,13 +119,13 @@ public class RefineriaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada coordenadaInvalida = new Coordenada(-10,3);
 		
 		//Una coordenada negativa no existe en ningun mapa.
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Refineria(), coordenadaInvalida);
+		jugadorTerran.construir(new Refineria(), coordenadaInvalida);
 		
 	}
 	
@@ -138,14 +136,14 @@ public class RefineriaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 		
-		jugadorActual.construir(new Refineria(), ubicacionNodoGasVespeno);
+		jugadorTerran.construir(new Refineria(), ubicacionNodoGasVespeno);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Refineria(), ubicacionNodoGasVespeno);
+		jugadorTerran.construir(new Refineria(), ubicacionNodoGasVespeno);
 		
 	}
 
@@ -156,12 +154,12 @@ public class RefineriaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionNodoMinerales = new Coordenada(0,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Refineria(), ubicacionNodoMinerales);
+		jugadorTerran.construir(new Refineria(), ubicacionNodoMinerales);
 		
 	}
 

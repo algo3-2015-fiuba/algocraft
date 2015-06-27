@@ -65,6 +65,7 @@ public class ArchivoTemplarioTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
@@ -87,21 +88,21 @@ public class ArchivoTemplarioTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 
-		jugadorActual.construir(nuevoArchivoTemplario, ubicacionValidaArchivoTemplario);
+		jugadorProtoss.construir(nuevoArchivoTemplario, ubicacionValidaArchivoTemplario);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
@@ -124,14 +125,14 @@ public class ArchivoTemplarioTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaArchivoTemplario =  new Coordenada(0,1);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorProtoss.recolectarGasVespeno(1000);
+		jugadorProtoss.recolectarMinerales(1000);
 
 		exception.expect(RequierePuertoEstelar.class);
-		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
+		jugadorProtoss.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 	
@@ -142,21 +143,22 @@ public class ArchivoTemplarioTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
 		
-		jugadorActual.recolectarGasVespeno(150);
-		jugadorActual.recolectarMinerales(100);
+		jugadorProtoss.recolectarGasVespeno(150);
+		jugadorProtoss.recolectarMinerales(100);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
@@ -164,7 +166,7 @@ public class ArchivoTemplarioTester {
 		}
 
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
+		jugadorProtoss.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 
@@ -175,6 +177,7 @@ public class ArchivoTemplarioTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionInvalidaArchivoTemplario = new Coordenada (-10,3);
@@ -182,14 +185,14 @@ public class ArchivoTemplarioTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
@@ -197,7 +200,7 @@ public class ArchivoTemplarioTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new ArchivoTemplario(), ubicacionInvalidaArchivoTemplario);
+		jugadorProtoss.construir(new ArchivoTemplario(), ubicacionInvalidaArchivoTemplario);
 		
 	}
 
@@ -208,6 +211,7 @@ public class ArchivoTemplarioTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		Coordenada ubicacionValidaArchivoTemplario = new Coordenada (4,20);
@@ -215,24 +219,24 @@ public class ArchivoTemplarioTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
+		jugadorProtoss.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
+		jugadorProtoss.construir(new ArchivoTemplario(), ubicacionValidaArchivoTemplario);
 		
 	}
 

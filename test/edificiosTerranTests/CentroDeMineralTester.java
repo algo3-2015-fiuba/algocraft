@@ -34,7 +34,7 @@ public class CentroDeMineralTester {
 		
 		try {
 			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
-			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
+			juego.crearJugador(new JugadorProtoss("JugadorTerranProtoss", Color.blue));
 		} catch (ColorInvalido ci) {
 			assertTrue(false);
 		} catch (NombreInvalido ni) {
@@ -55,96 +55,92 @@ public class CentroDeMineralTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJugadorTerranCreaCentroDeMineralesEnNodoSatisfactoriamenteYRecolectaMinerales() 
+	public void testjugadorTerranCreaCentroDeMineralesEnNodoSatisfactoriamenteYRecolectaMinerales() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
-		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
+		jugadorTerran.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 		for (int i = 1; i < 4; i++) {
-		
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertTrue(jugadorActual.getMineralesRecolectados() == 150);
-			}
-		
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+			assertTrue(jugadorTerran.getMineralesRecolectados() == 150);
 		}
 		
-		jugadorActual.finalizarTurno(); //Recolecto 10
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno(); //Recolecto 10
+		jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
-		// Pasaron 4 turnos desde que el jugador Terran construyo el centro de mineral, 
+		// Pasaron 4 turnos desde que el JugadorTerran Terran construyo el centro de mineral, 
 		// por lo que la construccion deberia haber finalizado
 		
-		assertTrue(jugadorActual.getMineralesRecolectados() == 160);
+		assertTrue(jugadorTerran.getMineralesRecolectados() == 160);
 		
-		jugadorActual.finalizarTurno(); //Recolecto 10
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno(); //Recolecto 10
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) Juego.getInstance().turnoDe();
 		
-		//El jugador Protoss no modifica su cantidad de minerales
-		assertTrue(jugadorActual.getMineralesRecolectados() == 200);
+		//El Jugador Protoss no modifica su cantidad de minerales
+		assertTrue(jugadorProtoss.getMineralesRecolectados() == 200);
 		
-		jugadorActual.finalizarTurno(); //Recolecto otros 10
-		jugadorActual = juego.turnoDe();
-		;
-		assertTrue(jugadorActual.getMineralesRecolectados() == 180);
+		jugadorProtoss.finalizarTurno(); //Recolecto otros 10
+		jugadorTerran = (JugadorTerran) juego.turnoDe();
+
+		assertTrue(jugadorTerran.getMineralesRecolectados() == 180);
 		
 	}
 
 	
 	@Test
-	public void testSiJugadorNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
+	public void testSiJugadorTerranNoPoseeSuficientesRecursosParaConstruirErrorRecursosInsuficientes() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		//El centro de mineral vale 50 minerales, si gasto 160 de los 200 iniciales le quedan 40 minerales.
-		jugadorActual.consumirMinerales(160);
+		jugadorTerran.consumirMinerales(160);
 		
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
+		jugadorTerran.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 	}
 
 	@Test
-	public void testSiJugadorIndicaCoordenadaInvalidaErrorUbicacionInvalida() 
+	public void testSiJugadorTerranIndicaCoordenadaInvalidaErrorUbicacionInvalida() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada coordenadaInvalida = new Coordenada(-10,3);
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new CentroDeMineral(), coordenadaInvalida);
+		jugadorTerran.construir(new CentroDeMineral(), coordenadaInvalida);
 		
 	}
 	
 
 	@Test
-	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorNoPuedeConstruir() 
+	public void testSiLaCeldaFuePreviamenteOcupadaElJugadorTerranNoPuedeConstruir() 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionNodoMineral = new Coordenada(0,0);
 		
-		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
+		jugadorTerran.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoMineral);
+		jugadorTerran.construir(new CentroDeMineral(), ubicacionNodoMineral);
 		
 	}
 
@@ -155,12 +151,12 @@ public class CentroDeMineralTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new CentroDeMineral(), ubicacionNodoGasVespeno);
+		jugadorTerran.construir(new CentroDeMineral(), ubicacionNodoGasVespeno);
 		
 	}
 

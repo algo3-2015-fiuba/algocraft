@@ -2,11 +2,18 @@ package juego.jugadores;
 
 import java.awt.Color;
 
-import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
+import juego.interfaces.excepciones.RequiereAcceso;
+import juego.interfaces.excepciones.RequierePuertoEstelar;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
+import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.protoss.ArchivoTemplario;
+import juego.razas.construcciones.protoss.Asimilador;
+import juego.razas.construcciones.protoss.NexoMineral;
+import juego.razas.construcciones.protoss.Pilon;
+import juego.razas.construcciones.protoss.PuertoEstelar;
 
 public class JugadorProtoss extends Jugador {
 
@@ -16,15 +23,6 @@ public class JugadorProtoss extends Jugador {
 		super(nombre, color);
 		this.puertoEstelarHabilitado = 0;
 		this.archivoTemplarioHabilitado = 0;
-	}
-	
-	@Override
-	public void construir(Construible construible, Coordenada coordenada) 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
-		
-		construible.construir(this, coordenada);
-		this.enConstruccion.add(construible);	
-	
 	}
 
 	public boolean puertoEstelarHabilitado() { return (this.puertoEstelarHabilitado > 0); }
@@ -40,4 +38,48 @@ public class JugadorProtoss extends Jugador {
 		else archivoTemplarioHabilitado--;
 	}
 
+	public void construir(NexoMineral nexoMineral, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida {
+		
+		this.constructor(nexoMineral, posicion);
+		
+	}
+	
+	public void construir(Asimilador asimilador, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida {
+		
+		this.constructor(asimilador, posicion);
+		
+	}
+	
+	public void construir(Pilon pilon, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida {
+		
+		this.constructor(pilon, posicion);
+		
+	}
+	
+	public void construir(Acceso acceso, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida {
+		
+		this.constructor(acceso, posicion);
+		
+	}
+	
+	public void construir(PuertoEstelar puertoEstelar, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
+		
+		if (!this.puertoEstelarHabilitado()) throw new RequiereAcceso();
+		this.constructor(puertoEstelar, posicion);
+		
+	}
+	
+	public void construir(ArchivoTemplario archivoTemplario, Coordenada posicion) 
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
+		
+		if (!this.archivoTemplarioHabilitado()) throw new RequierePuertoEstelar();
+		this.constructor(archivoTemplario, posicion);
+		
+	}
+	
 }

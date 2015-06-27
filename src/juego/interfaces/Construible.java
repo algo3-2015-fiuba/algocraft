@@ -1,16 +1,16 @@
 package juego.interfaces;
 
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
+import java.util.Collection;
+
 import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.JugadorProtoss;
-import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 public interface Construible {
 
-	public void construir(JugadorTerran jt, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
-	public void construir(JugadorProtoss jp, Coordenada coordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
+	public void posicionar(Coordenada posicion) throws UbicacionInvalida;
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	public void actualizarConstruccion();
 	public boolean construccionFinalizada();
 	

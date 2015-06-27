@@ -60,7 +60,7 @@ public class BarracaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Barraca nuevaBarraca = new Barraca();
 		
@@ -77,18 +77,16 @@ public class BarracaTester {
 		 * - - - - - -
 		 */
 		
-		jugadorActual.construir(nuevaBarraca, ubicacionValida);
+		jugadorTerran.construir(nuevaBarraca, ubicacionValida);
 			
 		for (int i = 0; i < 11; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
-			if (jugadorActual.getNombre().equals("jugadorTerran")) {
-				assertFalse(nuevaBarraca.construccionFinalizada());
-			}
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
+			assertFalse(nuevaBarraca.construccionFinalizada());
 		}
 		
-		jugadorActual.finalizarTurno();
-		jugadorActual = juego.turnoDe();
+		jugadorTerran.finalizarTurno();
+		jugadorTerran = (JugadorTerran)juego.turnoDe();
 		
 		assertTrue(nuevaBarraca.construccionFinalizada());
 		
@@ -100,20 +98,20 @@ public class BarracaTester {
 	
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Barraca nuevaBarraca = new Barraca();
 		
-		jugadorActual.construir(nuevaBarraca, ubicacionValida);
+		jugadorTerran.construir(nuevaBarraca, ubicacionValida);
 			
-		assertFalse(((JugadorTerran)jugadorActual).fabricaHabilitada());
+		assertFalse(((JugadorTerran)jugadorTerran).fabricaHabilitada());
 		
 		for (int i = 0; i < 12; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = juego.turnoDe();
+			Jugador j = juego.turnoDe();
+			j.finalizarTurno();
 		}
 		
-		assertTrue(((JugadorTerran)jugadorActual).fabricaHabilitada());
+		assertTrue(((JugadorTerran)jugadorTerran).fabricaHabilitada());
 		
 	}
 
@@ -123,14 +121,14 @@ public class BarracaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//La barraca vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		jugadorTerran.consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Barraca(), ubicacionValida);
+		jugadorTerran.construir(new Barraca(), ubicacionValida);
 		
 	}
 
@@ -140,12 +138,12 @@ public class BarracaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		
 		Coordenada coordenadaInvalida = new Coordenada(-10,3);
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Barraca(), coordenadaInvalida);
+		jugadorTerran.construir(new Barraca(), coordenadaInvalida);
 		
 	}
 	
@@ -156,16 +154,16 @@ public class BarracaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		
-		jugadorActual.recolectarMinerales(300);
+		jugadorTerran.recolectarMinerales(300);
 		
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValida);
+		jugadorTerran.construir(new Barraca(), ubicacionValida);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Barraca(), ubicacionValida);
+		jugadorTerran.construir(new Barraca(), ubicacionValida);
 		
 	}
 
@@ -176,12 +174,12 @@ public class BarracaTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)juego.turnoDe();
 		
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Barraca(), ubicacionNodoGasVespeno);
+		jugadorTerran.construir(new Barraca(), ubicacionNodoGasVespeno);
 		
 	}
 	

@@ -118,6 +118,7 @@ public class movimientoSimpleTest {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Mapa mapa = Juego.getInstance().getMapa();
 		
 		Barraca barraca = new Barraca();
@@ -131,7 +132,7 @@ public class movimientoSimpleTest {
 		
 		jugadorActual.recolectarMinerales(5000);
 		jugadorActual.recolectarGasVespeno(5000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
 			
@@ -140,7 +141,7 @@ public class movimientoSimpleTest {
 			
 		}
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
 		
 		for (int i = 1; i < 7; i++) {
 			jugadorActual.finalizarTurno();

@@ -10,9 +10,9 @@ import juego.informadores.RecursosJugador;
 import juego.informadores.VisionJugador;
 import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
+import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.ConstruccionRecolectora;
@@ -93,8 +93,6 @@ public abstract class Jugador {
 		return this.vision.tieneVisionDe(unidad);
 	}
 	
-	public abstract void construir(Construible construible, Coordenada cordenada) throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos;
-	
 	public void asignarUnidad(Unidad unidad) {
 		if (!this.unidades.contains(unidad)) {
 			this.unidades.add(unidad);
@@ -122,6 +120,17 @@ public abstract class Jugador {
 	
 	public void fallecida(Construible construible) {
 		this.construcciones.remove(construible);
+	}
+	
+	protected void constructor(Construccion construccion, Coordenada posicion) throws UbicacionInvalida, RecursosInsuficientes {
+		
+		if (!construccion.recursosSuficientes(this)) throw new RecursosInsuficientes();
+		
+		construccion.posicionar(posicion);
+		construccion.consumirRecursos(this);
+		construccion.setPropietario(this);
+		
+		this.enConstruccion.add(construccion);
 	}
 	
 	protected Collection<ConstruccionRecolectora> getRecolectores() {

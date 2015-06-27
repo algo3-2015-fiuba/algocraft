@@ -126,6 +126,7 @@ public class ataqueSimpleTest {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Mapa mapa = Juego.getInstance().getMapa();
 		
 		Barraca barraca = new Barraca();
@@ -137,9 +138,9 @@ public class ataqueSimpleTest {
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,1);
 		
-		jugadorActual.recolectarMinerales(5000);
-		jugadorActual.recolectarGasVespeno(5000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.recolectarMinerales(5000);
+		jugadorTerran.recolectarGasVespeno(5000);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
 			
@@ -148,7 +149,7 @@ public class ataqueSimpleTest {
 			
 		}
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
 		
 		for (int i = 1; i < 7; i++) {
 			jugadorActual.finalizarTurno();

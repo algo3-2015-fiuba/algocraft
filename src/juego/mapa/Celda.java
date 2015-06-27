@@ -8,6 +8,7 @@ import juego.interfaces.Construible;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
+import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
@@ -71,10 +72,33 @@ public class Celda {
 		
 	}
 	
-	public boolean puedeConstruir(Construccion construccion) {
+	public boolean puedeConstruir(ConstruccionRecolectora construccion) {
 		
 		if (!this.material.equals(Material.tierra)) return false;
 
+		if (!this.poseeRecursos()) return false;
+		
+		if (!this.recurso.puedeRecolectar(construccion)) return false;
+		
+		Iterator<Unidad> itU = this.unidades.iterator();
+		while (itU.hasNext()) {
+				
+			if (itU.next().colisionaCon(construccion)) {
+				return false;
+			}
+				
+		}
+		
+		return (this.construibles.isEmpty());
+		
+	}
+	
+	public boolean puedeConstruir(Construccion construccion) {
+		
+		if (!this.material.equals(Material.tierra)) return false;
+		
+		if (this.poseeRecursos()) return false;
+		
 		Iterator<Unidad> itU = this.unidades.iterator();
 		while (itU.hasNext()) {
 				

@@ -1,6 +1,7 @@
 package juego.razas.construcciones;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import juego.informadores.Costos;
 import juego.interfaces.Atacable;
@@ -8,11 +9,8 @@ import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
 import juego.interfaces.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
-import juego.jugadores.JugadorProtoss;
-import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -33,11 +31,28 @@ public abstract class Construccion implements Construible, Controlable {
 		
 	}
 	
+	/* * * * * * * * * * * * * * *
+	 *                           *
+	 *  Informacion Basica       *
+	 *                           *
+	 * * * * * * * * * * * * * * */
+	
+	public boolean recursosSuficientes(Jugador jugador) {
+		return this.costos.recursosSuficientes(jugador);
+	}
+	
+	public void consumirRecursos(Jugador jugador) throws RecursosInsuficientes {
+		this.costos.consumirRecursos(jugador);
+	}
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
 	 *                             *
 	 * * * * * * * * * * * * * * * */
+	
+	public void setPropietario(Jugador jugador) {
+		this.propietario = jugador;
+	}
 	
 	@Override
 	public void recibirAtaque(float danio) {
@@ -89,6 +104,31 @@ public abstract class Construccion implements Construible, Controlable {
 	 * * * * * * * * * * * * * * * * */
 	
 	@Override
+	public void posicionar(Coordenada posicion) throws UbicacionInvalida {
+		
+		this.posicion = posicion;
+		
+		Collection<Celda> celdas = this.obtenerRangoDeOcupacion();		
+		
+		Iterator<Celda> itCeldas = celdas.iterator();
+		
+		try {
+			while (itCeldas.hasNext()) {
+				Celda celda = itCeldas.next();
+				if (!celda.puedeConstruir(this)) throw new UbicacionInvalida();
+				celda.ocupar(this);
+			}
+		} catch (UbicacionInvalida ui) {
+			itCeldas = celdas.iterator();
+			while (itCeldas.hasNext()) {
+				itCeldas.next().desocupar(this);
+			}
+			throw new UbicacionInvalida();
+		}
+		
+	}
+	
+	@Override
 	public boolean construccionFinalizada() {
 		return this.costos.construccionFinalizada();
 	}
@@ -98,18 +138,7 @@ public abstract class Construccion implements Construible, Controlable {
 		if (!this.construccionFinalizada())	{
 			this.costos.disminuirTiempoDeConstruccion();		
 		}	
-	}
-	
-	//La construccion redefine este metodo segun el jugador que tiene permitido construirla.
-	//este metodo deberia estar en cada jugador no en la construccion
-	@Override
-	public void construir(JugadorTerran jt, Coordenada coordenada)
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
-
-	@Override
-	public void construir(JugadorProtoss jp, Coordenada coordenada)
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {}
-	
+	}	
 	
 	/* * * * * * * * * * * * * * * * * * * * *
 	 *                                       * 

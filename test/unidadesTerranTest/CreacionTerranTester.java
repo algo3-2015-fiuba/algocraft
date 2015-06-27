@@ -63,6 +63,7 @@ public class CreacionTerranTester {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Barraca barraca = new Barraca();
 		Marine marine = new Marine();
 		Mapa mapa = Juego.getInstance().getMapa();
@@ -72,7 +73,7 @@ public class CreacionTerranTester {
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.construir(barraca, ubicacionValidaBarraca);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
 		
 		for (int i = 1; i < 13; i++) {
 			
@@ -81,7 +82,7 @@ public class CreacionTerranTester {
 			
 		}
 		
-		jugadorActual.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
 		
 		for (int i = 1; i < 7; i++) {
 			jugadorActual.finalizarTurno();

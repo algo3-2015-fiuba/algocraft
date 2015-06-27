@@ -65,6 +65,7 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
@@ -87,21 +88,21 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(nuevoPuertoEstelar, ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(nuevoPuertoEstelar, ubicacionValidaPuertoEstelar);
 		
 		// El metodo 'puedeConstruirMarine' verifica unicamente si hay una barraca activa,
 		// no tiene en cuenta el costo mineral de construir un marine
@@ -128,13 +129,14 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaPuertoEstelar =  new Coordenada(0,1);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
 		exception.expect(RequiereFabrica.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 	
@@ -145,6 +147,7 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
@@ -152,14 +155,14 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarGasVespeno(100);
 		jugadorActual.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
@@ -167,7 +170,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 
@@ -178,6 +181,7 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionInvalidaPuertoEstelar = new Coordenada(-10,3);
@@ -185,14 +189,14 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
@@ -200,7 +204,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
 		
 	}
 
@@ -211,6 +215,7 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran) juego.turnoDe();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(-10,3);
@@ -218,14 +223,14 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Barraca(), ubicacionValidaBarraca);
+		jugadorTerran.construir(new Barraca(), ubicacionValidaBarraca);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(new Fabrica(), ubicacionValidaFabrica);
+		jugadorTerran.construir(new Fabrica(), ubicacionValidaFabrica);
 		
 		for (int i = 0; i < 12; i++) {
 			jugadorActual.finalizarTurno();
@@ -233,10 +238,10 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 	

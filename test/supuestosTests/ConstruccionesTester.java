@@ -66,6 +66,7 @@ public class ConstruccionesTester {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss)Juego.getInstance().turnoDe();
 		Coordenada ubicacionValidaPilon = new Coordenada(0,20);
 		Coordenada ubicacionValidaAcceso = new Coordenada(4,20);
 		Coordenada ubicacionValidaZealot = new Coordenada(8,20);
@@ -75,8 +76,8 @@ public class ConstruccionesTester {
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.construir(pilon, ubicacionValidaPilon);
-		jugadorActual.construir(acceso, ubicacionValidaAcceso);
+		jugadorProtoss.construir(pilon, ubicacionValidaPilon);
+		jugadorProtoss.construir(acceso, ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
@@ -98,13 +99,14 @@ public class ConstruccionesTester {
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(9,20);
 		DepositoSuministro depositoSuministro = new DepositoSuministro();
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.construir(depositoSuministro, ubicacionValidaDepositoSuministro);
+		jugadorTerran.construir(depositoSuministro, ubicacionValidaDepositoSuministro);
 		
 		jugadorActual.finalizarTurno();
 		jugadorActual = juego.turnoDe();
@@ -129,6 +131,7 @@ public class ConstruccionesTester {
 		jugadorActual.finalizarTurno();
 		
 		jugadorActual = juego.turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		int x = 0;
 		int y = 20;
 			
@@ -136,7 +139,7 @@ public class ConstruccionesTester {
 			
 		for(int i = 0; i < 4; i++) {
 			for (int j = 0; j < 30; j += 2) {
-				jugadorActual.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
+				jugadorTerran.construir(new DepositoSuministro(), new Coordenada(x+j,y+i));
 			}
 		}
 		

@@ -64,6 +64,7 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		PuertoEstelar nuevoPuertoEstelar = new PuertoEstelar();
@@ -85,14 +86,14 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorActual.construir(nuevoPuertoEstelar, ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(nuevoPuertoEstelar, ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 10; i++) {
 			jugadorActual.finalizarTurno();
@@ -115,14 +116,14 @@ public class PuertoEstelarTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaPuertoEstelar =  new Coordenada(0,1);
 		
-		jugadorActual.recolectarGasVespeno(1000);
-		jugadorActual.recolectarMinerales(1000);
+		jugadorProtoss.recolectarGasVespeno(1000);
+		jugadorProtoss.recolectarMinerales(1000);
 
 		exception.expect(RequiereAcceso.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 	
@@ -133,13 +134,14 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
 		
 		jugadorActual.recolectarGasVespeno(100);
 		jugadorActual.recolectarMinerales(1000);
 		
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
@@ -147,7 +149,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 
@@ -158,13 +160,14 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionInvalidaPuertoEstelar = new Coordenada(-10,3);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
@@ -172,7 +175,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
 		
 	}
 
@@ -183,13 +186,14 @@ public class PuertoEstelarTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(-10,3);
 		
 		jugadorActual.recolectarGasVespeno(1000);
 		jugadorActual.recolectarMinerales(1000);
 
-		jugadorActual.construir(new Acceso(), ubicacionValidaAcceso);
+		jugadorProtoss.construir(new Acceso(), ubicacionValidaAcceso);
 		
 		for (int i = 1; i < 9; i++) {
 			jugadorActual.finalizarTurno();
@@ -197,7 +201,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
 		
 	}
 

@@ -61,6 +61,7 @@ public class AccesoTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Acceso nuevoAcceso = new Acceso();
 		
@@ -77,7 +78,7 @@ public class AccesoTester {
 		 * - - - - - -
 		 */
 		
-		jugadorActual.construir(nuevoAcceso, ubicacionValida);
+		jugadorProtoss.construir(nuevoAcceso, ubicacionValida);
 			
 		for (int i = 1; i < 8; i++) {
 			jugadorActual.finalizarTurno();
@@ -101,10 +102,11 @@ public class AccesoTester {
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
 		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		Acceso nuevoAcceso = new Acceso();
 				
-		jugadorActual.construir(nuevoAcceso, ubicacionValida);
+		jugadorProtoss.construir(nuevoAcceso, ubicacionValida);
 			
 		assertFalse(((JugadorProtoss)jugadorActual).puertoEstelarHabilitado());
 		
@@ -123,14 +125,14 @@ public class AccesoTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
 		//El Acceso vale 150 minerales, si gasto 60 de los 200 iniciales le quedan 140 minerales.
-		jugadorActual.consumirMinerales(60);
+		jugadorProtoss.consumirMinerales(60);
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorActual.construir(new Acceso(), ubicacionValida);
+		jugadorProtoss.construir(new Acceso(), ubicacionValida);
 		
 	}
 
@@ -140,12 +142,12 @@ public class AccesoTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		
 		Coordenada coordenadaInvalida = new Coordenada(-10,3);
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorActual.construir(new Acceso(), coordenadaInvalida);
+		jugadorProtoss.construir(new Acceso(), coordenadaInvalida);
 		
 	}
 	
@@ -156,16 +158,16 @@ public class AccesoTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		
-		jugadorActual.recolectarMinerales(300);
+		jugadorProtoss.recolectarMinerales(300);
 		
 		Coordenada ubicacionValida = new Coordenada(0,1);
 		
-		jugadorActual.construir(new Acceso(), ubicacionValida);
+		jugadorProtoss.construir(new Acceso(), ubicacionValida);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Acceso(), ubicacionValida);
+		jugadorProtoss.construir(new Acceso(), ubicacionValida);
 		
 	}
 
@@ -176,12 +178,12 @@ public class AccesoTester {
 		
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();
-		Jugador jugadorActual = juego.turnoDe();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		
 		Coordenada ubicacionNodoGasVespeno = new Coordenada(1,0);
 
 		exception.expect(UbicacionInvalida.class);
-		jugadorActual.construir(new Acceso(), ubicacionNodoGasVespeno);
+		jugadorProtoss.construir(new Acceso(), ubicacionNodoGasVespeno);
 		
 	}
 
