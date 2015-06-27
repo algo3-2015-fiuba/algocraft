@@ -1,10 +1,10 @@
 package juego.razas.unidades.protoss;
 
+import juego.costos.Costos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
-import juego.informadores.AtaqueUnidad;
-import juego.informadores.Costos;
+import juego.razas.unidades.AtaqueUnidad;
 import juego.razas.unidades.UnidadAtaque;
 
 public class Scout extends UnidadAtaque {

@@ -1,9 +1,6 @@
-package juego.informadores;
+package juego.mapa;
 
 import juego.Juego;
-import juego.mapa.Celda;
-import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 

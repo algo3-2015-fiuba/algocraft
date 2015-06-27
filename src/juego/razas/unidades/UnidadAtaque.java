@@ -1,6 +1,5 @@
 package juego.razas.unidades;
 
-import juego.informadores.AtaqueUnidad;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.razas.construcciones.Construccion;
 

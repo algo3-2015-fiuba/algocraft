@@ -1,9 +1,9 @@
 package juego.razas.unidades.terran;
 
+import juego.costos.Costos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
-import juego.informadores.AtaqueUnidad;
-import juego.informadores.Costos;
+import juego.razas.unidades.AtaqueUnidad;
 import juego.razas.unidades.UnidadAtaque;
 
 public class Espectro extends UnidadAtaque {

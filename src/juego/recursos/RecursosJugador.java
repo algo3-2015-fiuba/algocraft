@@ -1,4 +1,4 @@
-package juego.informadores;
+package juego.recursos;
 
 import java.util.Collection;
 import java.util.Iterator;

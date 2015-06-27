@@ -1,4 +1,4 @@
-package juego.informadores;
+package juego.razas.unidades;
 
 import java.util.Iterator;
 
@@ -10,7 +10,6 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.Construccion;
-import juego.razas.unidades.Unidad;
 
 public class AtaqueUnidad {
 

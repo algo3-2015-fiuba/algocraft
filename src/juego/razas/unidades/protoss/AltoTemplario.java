@@ -1,12 +1,12 @@
 package juego.razas.unidades.protoss;
 
 import juego.estrategias.MovimientoTerrestre;
-import juego.informadores.Costos;
 import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadMagica;
+import juego.costos.Costos;
 import juego.decoradores.*;
 import juego.magias.*;
 

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.informadores.Costos;
+import juego.costos.Costos;
 import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;

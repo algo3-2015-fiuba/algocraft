@@ -3,10 +3,8 @@ package juego.razas.construcciones.protoss;
 import java.util.Collection;
 
 import juego.Juego;
-import juego.informadores.Costos;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
-
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Celda;
 import juego.mapa.Mapa;
@@ -14,6 +12,7 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.Zealot;
+import juego.costos.Costos;
 import juego.decoradores.*;
 import juego.estrategias.MovimientoConstruccion;
 

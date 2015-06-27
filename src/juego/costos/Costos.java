@@ -1,4 +1,4 @@
-package juego.informadores;
+package juego.costos;
 
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.jugadores.Jugador;

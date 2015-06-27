@@ -3,10 +3,10 @@ package juego.razas.construcciones.protoss;
 import java.util.Collection;
 
 import juego.Juego;
+import juego.costos.Costos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
-import juego.informadores.Costos;
 import juego.mapa.Celda;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;

@@ -1,9 +1,9 @@
 package juego.razas.unidades.protoss;
 
 import juego.estrategias.MovimientoTerrestre;
-import juego.informadores.AtaqueUnidad;
-import juego.informadores.Costos;
+import juego.razas.unidades.AtaqueUnidad;
 import juego.razas.unidades.UnidadAtaque;
+import juego.costos.Costos;
 import juego.decoradores.*;
 
 public class Zealot extends UnidadAtaque {

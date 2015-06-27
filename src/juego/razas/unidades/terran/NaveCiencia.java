@@ -1,8 +1,8 @@
 package juego.razas.unidades.terran;
 
+import juego.costos.Costos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoVolador;
-import juego.informadores.Costos;
 import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;

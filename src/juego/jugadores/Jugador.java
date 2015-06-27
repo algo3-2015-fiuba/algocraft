@@ -6,18 +6,18 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.informadores.MapaJugador;
-import juego.informadores.RecursosJugador;
 import juego.interfaces.Construible;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.MapaJugador;
 import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.razas.unidades.Unidad;
+import juego.recursos.RecursosJugador;
 
 public abstract class Jugador {
 
