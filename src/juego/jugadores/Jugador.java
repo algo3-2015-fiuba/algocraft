@@ -145,8 +145,8 @@ public abstract class Jugador {
 		
 		if (!construccionBase.recursosSuficientes(this)) throw new RecursosInsuficientes();
 		
-		construccionBase.posicionar(construccionBase.getPosicion());
 		construccionBase.consumirRecursos(this);
+		construccionBase.posicionar(construccionBase.getPosicion());
 		
 		this.asignarBase(construccionBase);
 		

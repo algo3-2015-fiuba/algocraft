@@ -6,6 +6,7 @@ import juego.Juego;
 import juego.costos.Costos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
@@ -14,7 +15,7 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 public class ConstruccionBase extends Construccion {
 
-	public ConstruccionBase(Jugador propietario, Coordenada posicion) {
+	public ConstruccionBase(Jugador propietario, Coordenada posicion) throws UbicacionInvalida {
 		
 		super();
 		this.propietario = propietario;

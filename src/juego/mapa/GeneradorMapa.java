@@ -15,6 +15,7 @@ import java.util.Random;
 
 import juego.excepciones.BasesInsuficientes;
 import juego.excepciones.InicioInvalido;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.materiales.Material;
 import juego.razas.construcciones.ConstruccionBase;
@@ -73,12 +74,16 @@ public class GeneradorMapa {
 			
 		} catch (IOException io) { throw new InicioInvalido(); }
 	        
-        this.crearBases(mapa, posiblesBases, jugadores);
+		try {
+			this.crearBases(mapa, posiblesBases, jugadores);
+		} catch (UbicacionInvalida ui) {
+			throw new InicioInvalido();
+		}
         
 		return mapa;
 	}
 	
-	private void crearBases(Mapa mapa, Collection<Celda> posiblesBases , Collection<Jugador> jugadores) throws BasesInsuficientes {
+	private void crearBases(Mapa mapa, Collection<Celda> posiblesBases , Collection<Jugador> jugadores) throws BasesInsuficientes, UbicacionInvalida {
 		
         if (posiblesBases.size() < jugadores.size()) throw new BasesInsuficientes();
         else {
@@ -96,10 +101,10 @@ public class GeneradorMapa {
    
         			if (cont == idBase) {
         				
-        				ConstruccionBase nuevaBase = new ConstruccionBase(jugadoresEnMapa[i], celdaBase.getPosicion());
-        				celdaBase.ocupar(nuevaBase);
         				mapa.agregarCelda(celdaBase.getPosicion(), celdaBase);
-        				jugadoresEnMapa[i].asignarBase(nuevaBase);
+        				ConstruccionBase base = new ConstruccionBase(jugadoresEnMapa[i], celdaBase.getPosicion());
+        				celdaBase.ocupar(base);
+        				jugadoresEnMapa[i].asignarBase(base);
         				baseOcupada = celdaBase;
         				
         			}
