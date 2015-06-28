@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.Juego;
 import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 
@@ -65,14 +63,12 @@ public abstract class ConstruccionMilitar extends Construccion {
 	
 	private boolean ubicacionValida(Coordenada coordFinal) {
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		
 		try {
 			
 			Iterator<Celda> it = this.obtenerRangoDeOcupacion().iterator();
 			
 			while (it.hasNext()) {
-				Coordenada coordenadaCelda = mapa.obtenerCoordenada(it.next());
+				Coordenada coordenadaCelda = it.next().getPosicion();
 				if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
 			}			
 			

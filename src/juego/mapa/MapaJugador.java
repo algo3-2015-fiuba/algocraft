@@ -1,6 +1,5 @@
 package juego.mapa;
 
-import juego.Juego;
 import juego.interfaces.Controlable;
 
 public class MapaJugador {
@@ -13,7 +12,7 @@ public class MapaJugador {
 	
 	public void celdaDescubierta(Celda celda) {
 		
-		Coordenada coordenadaDeCelda = Juego.getInstance().getMapa().obtenerCoordenada(celda);
+		Coordenada coordenadaDeCelda = celda.getPosicion();
 		
 		if (!this.mapaDescubierto.contiene(celda)) {
 			this.mapaDescubierto.agregarCelda(coordenadaDeCelda, celda);

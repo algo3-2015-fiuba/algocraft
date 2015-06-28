@@ -39,13 +39,13 @@ public class Ataques {
 		
 		if (it.hasNext()) {
 			
-			distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
+			distancia = mapa.distanciaEntreCoordenadas(ubicacionAgresor, it.next().getPosicion());
 			
 		} else return false;
 		
 		while (it.hasNext()) {
 			
-			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacionAgresor, mapa.obtenerCoordenada(it.next()));
+			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacionAgresor, it.next().getPosicion());
 			
 			if (distancia > distanciaEntreCoordenadas) distancia = distanciaEntreCoordenadas;
 			

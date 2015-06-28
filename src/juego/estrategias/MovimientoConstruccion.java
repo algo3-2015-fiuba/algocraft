@@ -43,7 +43,7 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 		
 		while (it.hasNext()) {
 			
-			Coordenada posicion = mapa.obtenerCoordenada(it.next());
+			Coordenada posicion = it.next().getPosicion();
 			propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
 			
 		}

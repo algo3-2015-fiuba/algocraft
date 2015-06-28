@@ -119,20 +119,5 @@ public class Mapa {
 		
 		return null;
 	}
-
-	public Coordenada obtenerCoordenada(Celda celdaAEncontrar) {
-		
-		for (Coordenada coordenada : this.celdas.keySet()) {
-			
-			Celda celda = this.celdas.get(coordenada);
-			
-			if (celda == celdaAEncontrar) {
-				return coordenada;
-			}
-		}
-		
-		return null;
-		
-	}
 	
 }
