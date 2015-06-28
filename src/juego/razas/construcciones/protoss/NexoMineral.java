@@ -1,15 +1,9 @@
 package juego.razas.construcciones.protoss;
 
-import java.util.Collection;
-
-import juego.Juego;
 import juego.costos.Costos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
-import juego.mapa.Celda;
-import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionRecolectora;
 import juego.recursos.Mineral;
 
@@ -31,12 +25,6 @@ public class NexoMineral extends ConstruccionRecolectora {
 			int extraidos = this.nodoRecurso.extraer();
 			this.propietario.recolectarMinerales(extraidos);		
 		}
-	}
-	
-	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
 	}
 	
 }

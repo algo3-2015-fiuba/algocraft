@@ -3,9 +3,12 @@ package juego.razas.construcciones;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
@@ -19,6 +22,12 @@ public abstract class ConstruccionRecolectora extends Construccion {
 	}
 	
 	public abstract void recolectar();
+	
+	@Override
+	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+		Mapa mapa = Juego.getInstance().getMapa();
+		return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
+	}
 	
 	@Override
 	public void posicionar(Coordenada posicion) throws UbicacionInvalida {

@@ -36,6 +36,10 @@ public abstract class Construccion implements Construible, Controlable {
 	 *                           *
 	 * * * * * * * * * * * * * * */
 	
+	public Coordenada getPosicion() {
+		return this.posicion;
+	}
+	
 	public boolean recursosSuficientes(Jugador jugador) {
 		return this.costos.recursosSuficientes(jugador);
 	}
@@ -61,7 +65,7 @@ public abstract class Construccion implements Construible, Controlable {
 		}
 	}
 	
-	private void morir() {
+	protected void morir() {
 		this.propietario.fallecido(this);
 		this.estrategiaDeMovimiento.desocupar(this);
 	}

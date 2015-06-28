@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
-import juego.bases.Base;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -14,6 +13,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.MapaJugador;
 import juego.razas.construcciones.Construccion;
+import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.construcciones.ConstruccionHabitable;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.construcciones.ConstruccionRecolectora;
@@ -24,7 +24,7 @@ public abstract class Jugador {
 
 	protected String nombre;
 	protected Color color;
-	protected Collection<Base> bases;
+	protected Collection<ConstruccionBase> bases;
 	protected Collection<Construccion> enConstruccion;
 	protected Collection<Construccion> construcciones;
 	protected Collection<Unidad> unidades;
@@ -36,7 +36,7 @@ public abstract class Jugador {
 		super();
 		this.nombre = nombre;
 		this.color = color;
-		this.bases = new ArrayList<Base>();
+		this.bases = new ArrayList<ConstruccionBase>();
 		this.construcciones = new ArrayList<Construccion>();
 		this.enConstruccion = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
@@ -86,7 +86,7 @@ public abstract class Jugador {
 	
 	}
 	
-	public void baseDestruida(Base base) {
+	public void baseDestruida(ConstruccionBase base) {
 		if (this.bases.contains(base)) {
 			this.bases.remove(base);
 		}
@@ -106,7 +106,7 @@ public abstract class Jugador {
 	
 	}
 	
-	public void asignarBase(Base nuevaBase) {
+	public void asignarBase(ConstruccionBase nuevaBase) {
 		if (!this.bases.contains(nuevaBase)) {
 			this.bases.add(nuevaBase);
 		}
@@ -132,10 +132,23 @@ public abstract class Jugador {
 	
 	public void actualizarObservadores() {
 		
+		this.actualizarBases();
 		this.actualizarConstrucciones();
 		this.actualizarEntrenamientos();
 		this.actualizarUnidades();
 		this.recolectarRecursos();
+		
+	}
+	
+	public void construir(ConstruccionBase construccionBase) 
+			throws UbicacionInvalida, RecursosInsuficientes {
+		
+		if (!construccionBase.recursosSuficientes(this)) throw new RecursosInsuficientes();
+		
+		construccionBase.posicionar(construccionBase.getPosicion());
+		construccionBase.consumirRecursos(this);
+		
+		this.asignarBase(construccionBase);
 		
 	}
 	
@@ -202,6 +215,22 @@ public abstract class Jugador {
 		}
 		
 		return militables;
+		
+	}
+	
+	private void actualizarBases() {
+		
+		Iterator<ConstruccionBase> it = this.bases.iterator();
+		
+		while (it.hasNext()) {
+			
+			ConstruccionBase base = it.next();
+			
+			if (!base.construccionFinalizada()) {
+				base.actualizarConstruccion();
+			}
+			
+		}
 		
 	}
 	

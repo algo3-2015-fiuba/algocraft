@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import juego.bases.Base;
 import juego.interfaces.Controlable;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
+import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
@@ -16,7 +16,7 @@ public class Celda {
 	
 	private Material material;
 	private Recurso recurso;
-	private Base base;
+	private ConstruccionBase base;
 	private Coordenada posicion;
 	private Collection<Construccion> construcciones;
 	private Collection<Unidad> unidades;
@@ -36,15 +36,11 @@ public class Celda {
 	public boolean poseeBase() { return (this.base != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
-	public Base getBase() { return (this.base); }
+	public ConstruccionBase getBase() { return (this.base); }
 	public Coordenada getPosicion() { return this.posicion; }
 	
 	public Collection<Unidad> getUnidades() {
 		return this.unidades;
-	}
-	
-	public void construir(Base base) {
-		this.base = base;
 	}
 	
 	public boolean colisiona(Controlable controlable) {
@@ -73,6 +69,10 @@ public class Celda {
 		}
 	}
 	
+	public void ocupar(ConstruccionBase base) {
+		this.base = base;
+	}
+	
 	public void ocupar(Construccion construccion) {	
 		if (!this.construcciones.contains(construccion)) {
 			this.construcciones.add(construccion);
@@ -91,7 +91,11 @@ public class Celda {
 		
 		if (this.unidades.contains(controlable)) return true;
 		
-		return (this.construcciones.contains(controlable));
+		if (this.construcciones.contains(controlable)) return true;
+		
+		if (this.base == null) return false;
+		
+		return (this.base.equals(controlable));
 		
 	}
 

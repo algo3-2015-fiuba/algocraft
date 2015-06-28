@@ -13,11 +13,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
-import juego.bases.Base;
 import juego.excepciones.BasesInsuficientes;
 import juego.excepciones.InicioInvalido;
 import juego.jugadores.Jugador;
 import juego.materiales.Material;
+import juego.razas.construcciones.ConstruccionBase;
 import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
@@ -92,15 +92,15 @@ public class GeneradorMapa {
         		Celda baseOcupada = null;
         		int cont = 0;
         		
-        		for (Celda base : posiblesBases) {
+        		for (Celda celdaBase : posiblesBases) {
    
         			if (cont == idBase) {
         				
-        				Base nuevaBase = new Base(jugadoresEnMapa[i]);
-        				base.construir(nuevaBase);
+        				ConstruccionBase nuevaBase = new ConstruccionBase(jugadoresEnMapa[i], celdaBase.getPosicion());
+        				celdaBase.ocupar(nuevaBase);
+        				mapa.agregarCelda(celdaBase.getPosicion(), celdaBase);
         				jugadoresEnMapa[i].asignarBase(nuevaBase);
-        				mapa.agregarCelda(base.getPosicion(), base);
-        				baseOcupada = base;
+        				baseOcupada = celdaBase;
         				
         			}
    
