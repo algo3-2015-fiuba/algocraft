@@ -52,7 +52,7 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 		
 		if (celda.poseeBase()) return false;
 		
-		if (celda.poseeRecursos()) return false;
+		if (celda.poseeRecurso()) return false;
 		
 		if (celda.colisiona(controlable)) return false;
 		

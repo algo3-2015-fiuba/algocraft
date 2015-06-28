@@ -41,10 +41,10 @@ public class GeneradorMapaTester {
 		
 		// El mapa test posee en la primera celda un nodo de minerales y en la segunda uno de gas vespeno,
 		// en la tercera y cuarta no posee recursos.
-		assertTrue(mapa.obtenerCelda(new Coordenada(0, 0)).poseeRecursos());
-		assertTrue(mapa.obtenerCelda(new Coordenada(1, 0)).poseeRecursos());
-		assertFalse(mapa.obtenerCelda(new Coordenada(2, 0)).poseeRecursos());
-		assertFalse(mapa.obtenerCelda(new Coordenada(3, 0)).poseeRecursos());
+		assertTrue(mapa.obtenerCelda(new Coordenada(0, 0)).poseeRecurso());
+		assertTrue(mapa.obtenerCelda(new Coordenada(1, 0)).poseeRecurso());
+		assertFalse(mapa.obtenerCelda(new Coordenada(2, 0)).poseeRecurso());
+		assertFalse(mapa.obtenerCelda(new Coordenada(3, 0)).poseeRecurso());
 		
 		
 	}

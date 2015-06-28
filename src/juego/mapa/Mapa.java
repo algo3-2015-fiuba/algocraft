@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import juego.interfaces.Controlable;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.construcciones.Construccion;
-import juego.razas.unidades.Unidad;
 
 public class Mapa {
 	
@@ -92,27 +91,13 @@ public class Mapa {
 		return (distanciaX + distanciaY);
 	}
 
-	public Coordenada obtenerUbicacion(Unidad unidad) {
+	public Coordenada obtenerUbicacion(Controlable controlable) {
 
 		for (Coordenada coordenada : this.celdas.keySet()) {
 			
 			Celda celda = this.celdas.get(coordenada);
 			
-			if (celda.contiene(unidad)) {
-				return coordenada;
-			}
-		}
-		
-		return null;
-	}
-	
-	public Coordenada obtenerUbicacion(Construccion construccion) {
-		
-		for (Coordenada coordenada : this.celdas.keySet()) {
-			
-			Celda celda = this.celdas.get(coordenada);
-			
-			if (celda.contiene(construccion)) {
+			if (celda.contiene(controlable)) {
 				return coordenada;
 			}
 		}

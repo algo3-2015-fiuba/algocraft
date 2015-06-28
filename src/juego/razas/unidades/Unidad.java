@@ -51,6 +51,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 *                       *
 	 * * * * * * * * * * * * */
 	
+	public Coordenada getPosicion() {
+		return this.posicion;
+	}
+	
 	@Override
 	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
 		

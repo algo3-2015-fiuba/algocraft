@@ -66,11 +66,11 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 		
 		if (construccion.puedeExtraerRecursos()) {
 			
-			if (!celda.poseeRecursos()) return false;
+			if (!celda.poseeRecurso()) return false;
 			if (!celda.getRecurso().puedeRecolectar((ConstruccionRecolectora)construccion)) return false;
 			
 		} else {
-			if (celda.poseeRecursos()) return false;
+			if (celda.poseeRecurso()) return false;
 		}
 		
 		if (celda.colisiona(controlable)) return false;

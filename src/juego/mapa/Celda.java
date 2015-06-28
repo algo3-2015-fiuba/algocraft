@@ -32,7 +32,7 @@ public class Celda {
 		
 	}
 
-	public boolean poseeRecursos() { return (this.recurso != null); }
+	public boolean poseeRecurso() { return (this.recurso != null); }
 	public boolean poseeBase() { return (this.base != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }

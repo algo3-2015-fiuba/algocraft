@@ -26,6 +26,10 @@ public class ConstruccionBase extends Construccion {
 		
 	}
 	
+	public Coordenada getPosicion() {
+		return this.posicion;
+	}
+	
 	@Override
 	protected void morir() {
 		this.propietario.baseDestruida(this);
