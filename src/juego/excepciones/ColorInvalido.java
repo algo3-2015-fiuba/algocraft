@@ -1,6 +1,6 @@
 package juego.excepciones;
 
-public class ColorInvalido extends Exception {
+public class ColorInvalido extends InicioInvalido {
 
 	/**
 	 * 

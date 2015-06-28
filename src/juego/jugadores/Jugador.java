@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.Juego;
+import juego.bases.Base;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -23,6 +24,7 @@ public abstract class Jugador {
 
 	protected String nombre;
 	protected Color color;
+	protected Collection<Base> bases;
 	protected Collection<Construccion> enConstruccion;
 	protected Collection<Construccion> construcciones;
 	protected Collection<Unidad> unidades;
@@ -34,6 +36,7 @@ public abstract class Jugador {
 		super();
 		this.nombre = nombre;
 		this.color = color;
+		this.bases = new ArrayList<Base>();
 		this.construcciones = new ArrayList<Construccion>();
 		this.enConstruccion = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
@@ -44,6 +47,7 @@ public abstract class Jugador {
 	
 	public Color getColor() { return this.color; }
 	public String getNombre() { return this.nombre; }
+	public boolean perdio() { return (this.bases.size() == 0); }
 	
 	public void finalizarTurno() {	
 		Juego.getInstance().finalizarTurno();		
@@ -94,6 +98,12 @@ public abstract class Jugador {
 			this.enConstruccion.remove(controlable);
 		}
 	
+	}
+	
+	public void asignarBase(Base nuevaBase) {
+		if (!this.bases.contains(nuevaBase)) {
+			this.bases.add(nuevaBase);
+		}
 	}
 	
 	public void asignarUnidad(Unidad unidad) {

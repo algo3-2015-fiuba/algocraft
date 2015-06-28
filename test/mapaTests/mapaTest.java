@@ -3,13 +3,10 @@ package mapaTests;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
-import java.io.IOException; 
 import java.util.Collection;
 
 import juego.Juego;
-import juego.excepciones.ColorInvalido;
-import juego.excepciones.FaltanJugadores;
-import juego.excepciones.NombreInvalido;
+import juego.excepciones.InicioInvalido;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
@@ -32,19 +29,11 @@ public class mapaTest {
 		try {
 			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
 			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
-		} catch (ColorInvalido ci) {
-			assertTrue(false);
-		} catch (NombreInvalido ni) {
-			assertTrue(false);
-		}
+		} catch (InicioInvalido ii) {}
 		
 		try {
 			juego.iniciarJuego("mapas/test.map");
-		} catch (FaltanJugadores fj) {
-			assertTrue(false);
-		} catch (IOException ioe) {
-			assertTrue(false);
-		}
+		} catch (InicioInvalido ii) {}
 		
 	}
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.bases.Base;
 import juego.interfaces.Controlable;
 import juego.magias.Magia;
 import juego.materiales.Material;
@@ -15,6 +16,8 @@ public class Celda {
 	
 	private Material material;
 	private Recurso recurso;
+	private Base base;
+	private Coordenada posicion;
 	private Collection<Construccion> construcciones;
 	private Collection<Unidad> unidades;
 	
@@ -23,17 +26,24 @@ public class Celda {
 		super();
 		this.material = material;
 		this.recurso = recurso;
+		this.posicion = posicion;
 		this.construcciones = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
 		
 	}
-	
+
 	public boolean poseeRecursos() { return (this.recurso != null); }
+	public boolean poseeBase() { return (this.base != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
+	public Coordenada getPosicion() { return this.posicion; }
 	
 	public Collection<Unidad> getUnidades() {
 		return this.unidades;
+	}
+	
+	public void construir(Base base) {
+		this.base = base;
 	}
 	
 	public boolean colisiona(Controlable controlable) {

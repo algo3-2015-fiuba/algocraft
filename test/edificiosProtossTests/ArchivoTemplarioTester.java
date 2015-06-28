@@ -4,12 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import juego.Juego;
-import juego.excepciones.ColorInvalido;
-import juego.excepciones.FaltanJugadores;
-import juego.excepciones.NombreInvalido;
+import juego.excepciones.InicioInvalido;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.RequierePuertoEstelar;
@@ -39,19 +36,11 @@ public class ArchivoTemplarioTester {
 		try {
 			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
 			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
-		} catch (ColorInvalido ci) {
-			assertTrue(false);
-		} catch (NombreInvalido ni) {
-			assertTrue(false);
-		}
+		} catch (InicioInvalido ii) {}
 		
 		try {
 			juego.iniciarJuego("mapas/test.map");
-		} catch (FaltanJugadores fj) {
-			assertTrue(false);
-		} catch (IOException ioe) {
-			assertTrue(false);
-		}
+		} catch (InicioInvalido ii) {}
 		
 	}
 	

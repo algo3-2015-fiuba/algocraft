@@ -3,12 +3,9 @@ package supuestosTests;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import juego.Juego;
-import juego.excepciones.ColorInvalido;
-import juego.excepciones.FaltanJugadores;
-import juego.excepciones.NombreInvalido;
+import juego.excepciones.InicioInvalido;
 import juego.jugadores.JugadorTerran;
 
 import org.junit.Before;
@@ -19,7 +16,7 @@ import org.junit.rules.ExpectedException;
 public class JuegoTester {
 
 	@Before 
-	public void inicioJuegoCorrectamente() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void inicioJuegoCorrectamente() throws InicioInvalido {
 		
 		Juego.reiniciar();
 		
@@ -30,7 +27,7 @@ public class JuegoTester {
 	
 	@Test
 	public void testElJugadorEnIniciarSeraElPrimeroEnSerAgregado() 
-			throws NombreInvalido, ColorInvalido, FaltanJugadores, IOException {
+			throws InicioInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();

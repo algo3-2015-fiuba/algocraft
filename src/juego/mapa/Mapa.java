@@ -92,8 +92,6 @@ public class Mapa {
 		return (distanciaX + distanciaY);
 	}
 
-
-
 	public Coordenada obtenerUbicacion(Unidad unidad) {
 
 		for (Coordenada coordenada : this.celdas.keySet()) {
@@ -107,9 +105,7 @@ public class Mapa {
 		
 		return null;
 	}
-
-
-
+	
 	public Coordenada obtenerUbicacion(Construccion construccion) {
 		
 		for (Coordenada coordenada : this.celdas.keySet()) {
@@ -123,8 +119,6 @@ public class Mapa {
 		
 		return null;
 	}
-
-
 
 	public Coordenada obtenerCoordenada(Celda celdaAEncontrar) {
 		

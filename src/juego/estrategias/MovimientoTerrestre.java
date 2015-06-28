@@ -50,6 +50,8 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 		
 		if (!celda.getMaterial().equals(Material.tierra)) return false;
 		
+		if (celda.poseeBase()) return false;
+		
 		if (celda.poseeRecursos()) return false;
 		
 		if (celda.colisiona(controlable)) return false;

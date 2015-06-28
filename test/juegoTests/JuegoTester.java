@@ -1,11 +1,11 @@
 package juegoTests;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
+import juego.excepciones.InicioInvalido;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.JugadorTerran;
 
@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 public class JuegoTester {
 
 	@Before 
-	public void inicioJuegoCorrectamente() throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void inicioJuegoCorrectamente() throws InicioInvalido {
 		
 		Juego.reiniciar();
 		
@@ -27,8 +27,7 @@ public class JuegoTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() 
-			throws NombreInvalido, ColorInvalido, FaltanJugadores {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoNombre() throws InicioInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
@@ -41,8 +40,7 @@ public class JuegoTester {
 	}
 
 	@Test
-	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() 
-			throws ColorInvalido, NombreInvalido, FaltanJugadores {
+	public void testJuegoNoPuedeTenerDosJugadoresConElMismoColor() throws InicioInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
@@ -55,8 +53,7 @@ public class JuegoTester {
 	}
 
 	@Test
-	public void testJuegoNoPuedeEmpezarSinJugadores() 
-			throws FaltanJugadores, IOException, ColorInvalido, NombreInvalido {
+	public void testJuegoNoPuedeEmpezarSinJugadores() throws InicioInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();
@@ -67,8 +64,7 @@ public class JuegoTester {
 	}
 	
 	@Test 
-	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores() 
-			throws FaltanJugadores, IOException, ColorInvalido, NombreInvalido {
+	public void testJuegoNoPuedeEmpezarConMenosDeDosJugadores()	throws InicioInvalido {
 		
 		this.inicioJuegoCorrectamente();
 		Juego juego = Juego.getInstance();

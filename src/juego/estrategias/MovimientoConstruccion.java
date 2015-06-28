@@ -62,6 +62,8 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 		
 		if (!celda.getMaterial().equals(Material.tierra)) return false;
 		
+		if (celda.poseeBase()) return false;
+		
 		if (construccion.puedeExtraerRecursos()) {
 			
 			if (!celda.poseeRecursos()) return false;

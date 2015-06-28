@@ -1,6 +1,6 @@
 package juego.excepciones;
 
-public class NombreInvalido extends Exception {
+public class NombreInvalido extends InicioInvalido {
 
 	/**
 	 * 

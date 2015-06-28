@@ -2,8 +2,11 @@ package mapaTests;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import juego.excepciones.InicioInvalido;
+import juego.jugadores.Jugador;
 import juego.materiales.Material;
 import juego.mapa.Coordenada;
 import juego.mapa.GeneradorMapa;
@@ -15,10 +18,11 @@ import org.junit.Test;
 public class GeneradorMapaTester {
 
 	@Test
-	public void testGeneradorDeMapaObtieneMaterialesCorrectamente() throws IOException, CoordenadaFueraDeRango {
+	public void testGeneradorDeMapaObtieneMaterialesCorrectamente() throws InicioInvalido, CoordenadaFueraDeRango {
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
-		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map");
+		Collection<Jugador> jugadores = new ArrayList<Jugador>();
+		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map", jugadores);
 		
 		// El mapa test posee las primeras tres celdas de tierra y la cuarta de aire		
 		assertEquals(Material.tierra, mapa.obtenerCelda(new Coordenada(0, 0)).getMaterial());
@@ -29,10 +33,11 @@ public class GeneradorMapaTester {
 	}
 	
 	@Test
-	public void testGeneradorDeMapaObtieneRecursosCorrectamente() throws IOException, CoordenadaFueraDeRango {
+	public void testGeneradorDeMapaObtieneRecursosCorrectamente() throws InicioInvalido, CoordenadaFueraDeRango {
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
-		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map");
+		Collection<Jugador> jugadores = new ArrayList<Jugador>();
+		Mapa mapa = generadorMapa.obtenerMapa("mapas/test.map", jugadores);
 		
 		// El mapa test posee en la primera celda un nodo de minerales y en la segunda uno de gas vespeno,
 		// en la tercera y cuarta no posee recursos.

@@ -3,7 +3,6 @@ package vistas.acciones;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -12,6 +11,7 @@ import javax.swing.SwingUtilities;
 import juego.Juego;
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
+import juego.excepciones.InicioInvalido;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.Jugador;
 import vistas.paneles.principales.PanelJugadores;
@@ -44,6 +44,9 @@ public class IniciarJuego implements ActionListener {
 			} catch (NombreInvalido e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			} catch (InicioInvalido ii) {
+				// TODO Auto-generated catch block
+				ii.printStackTrace();
 			}
 		}
 		
@@ -51,8 +54,8 @@ public class IniciarJuego implements ActionListener {
 			juego.iniciarJuego("mapas/smallest.map");
 		} catch (FaltanJugadores fj) {
 			//Falta mostrar ventana de error
-		} catch (IOException ioe) {
-			//Falta mostrar ventana de error
+		} catch (InicioInvalido ii) {
+			//Algo fallo
 		}
 		
 		VentanaJuego v = new VentanaJuego(jugadores);

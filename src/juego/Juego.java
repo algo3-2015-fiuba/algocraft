@@ -1,6 +1,5 @@
 package juego;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,6 +7,7 @@ import java.util.NoSuchElementException;
 
 import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
+import juego.excepciones.InicioInvalido;
 import juego.excepciones.NombreInvalido;
 import juego.jugadores.Jugador;
 import juego.mapa.GeneradorMapa;
@@ -36,21 +36,40 @@ public class Juego {
 	public static void reiniciar() {
 		instance = new Juego();
 	}
+	
+	public boolean finalizo() {
+		
+		Collection<Jugador> perdedores = new ArrayList<Jugador>();
+		
+		Iterator<Jugador> it = this.jugadores.iterator();
+		
+		while (it.hasNext()) {
+			
+			Jugador actual = it.next();
+			if (actual.perdio()) perdedores.add(actual);
+			
+		}
+		
+		this.jugadores.removeAll(perdedores);
+		
+		return (this.jugadores.size() <= 1);
+		
+	}
 		
 	public Mapa getMapa() { return this.mapa; }
 	
 	public Jugador turnoDe() { return this.turnoDe; }
 	
-	public void iniciarJuego(String ubicacionDelMapa) throws FaltanJugadores, IOException {
+	public void iniciarJuego(String ubicacionDelMapa) throws InicioInvalido {
 		
 		if (this.jugadores.size() < 2) throw new FaltanJugadores();
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
-		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa);
+		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa, this.jugadores);
 		
 	}
 	
-	public void crearJugador(Jugador jugadorNuevo) throws ColorInvalido, NombreInvalido {
+	public void crearJugador(Jugador jugadorNuevo) throws InicioInvalido {
 		
 		if (this.jugadores.isEmpty()) {
 			
@@ -75,23 +94,27 @@ public class Juego {
 
 	public void finalizarTurno() {
 		
-		Iterator<Jugador> it = this.jugadores.iterator();
-
-		while (it.hasNext()) {
-			if (this.turnoDe.equals(it.next())) {
-				try {
-					this.turnoDe = it.next();
-				} catch (NoSuchElementException nsee) {
-					it = this.jugadores.iterator();
-					this.turnoDe = it.next();
+		if (!this.finalizo()) {
+		
+			Iterator<Jugador> it = this.jugadores.iterator();
+	
+			while (it.hasNext()) {
+				if (this.turnoDe.equals(it.next())) {
+					try {
+						this.turnoDe = it.next();
+					} catch (NoSuchElementException nsee) {
+						it = this.jugadores.iterator();
+						this.turnoDe = it.next();
+					}
 				}
 			}
-		}
+			
+			it = this.jugadores.iterator();
+			
+			while (it.hasNext()) {
+				it.next().actualizarObservadores();
+			}
 		
-		it = this.jugadores.iterator();
-		
-		while (it.hasNext()) {
-			it.next().actualizarObservadores();
 		}
 		
 	}

@@ -97,8 +97,6 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	@Override
 	public boolean puedeOcupar(Controlable controlable, Celda celda) {
 		
-		if (celda.poseeRecursos()) return false;
-		
 		if (celda.colisiona(controlable)) return false;
 		
 		return true;
