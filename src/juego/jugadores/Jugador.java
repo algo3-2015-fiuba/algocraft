@@ -85,6 +85,12 @@ public abstract class Jugador {
 		return (this.construcciones.contains(controlable)); 
 	
 	}
+	
+	public void baseDestruida(Base base) {
+		if (this.bases.contains(base)) {
+			this.bases.remove(base);
+		}
+	}
 
 	public void fallecido(Controlable controlable) { 
 		

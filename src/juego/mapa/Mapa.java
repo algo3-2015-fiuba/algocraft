@@ -19,7 +19,7 @@ public class Mapa {
 	public boolean contiene(Celda celda) {
 		return (this.celdas.containsValue(celda));
 	}
-	
+		
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}	

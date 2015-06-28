@@ -36,6 +36,7 @@ public class Celda {
 	public boolean poseeBase() { return (this.base != null); }
 	public Material getMaterial() { return (this.material); }	
 	public Recurso getRecurso() { return (this.recurso); }
+	public Base getBase() { return (this.base); }
 	public Coordenada getPosicion() { return this.posicion; }
 	
 	public Collection<Unidad> getUnidades() {

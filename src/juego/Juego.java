@@ -37,6 +37,21 @@ public class Juego {
 		instance = new Juego();
 	}
 	
+	public Jugador ganador() {
+		
+		if (this.finalizo()) {
+			
+			Iterator<Jugador> it = this.jugadores.iterator();
+			if (it.hasNext()) return it.next();
+			else return null;
+			
+		} else {
+			
+			return null;
+		}
+		
+	}
+	
 	public boolean finalizo() {
 		
 		Collection<Jugador> perdedores = new ArrayList<Jugador>();
