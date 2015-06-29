@@ -1,4 +1,4 @@
-package vistas.paneles.secundarios;
+package vistas.paneles.secundarios.juego;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 class PanPanel extends JPanel {
 	
-
     /**
 	 * 
 	 */

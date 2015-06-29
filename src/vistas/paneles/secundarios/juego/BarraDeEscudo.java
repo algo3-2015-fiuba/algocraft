@@ -1,4 +1,6 @@
-package vistas.paneles.secundarios;
+package vistas.paneles.secundarios.juego;
+
+import vistas.paneles.secundarios.juego.BarraGenerica;
 
 public class BarraDeEscudo extends BarraGenerica {
 	public BarraDeEscudo() {

@@ -29,8 +29,9 @@ import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
-import vistas.paneles.secundarios.PanelIzquierdoJuego;
-import vistas.paneles.secundarios.PanelMapa;
+import vistas.paneles.secundarios.juego.PanelInfoJugador;
+import vistas.paneles.secundarios.juego.PanelIzquierdoJuego;
+import vistas.paneles.secundarios.juego.PanelMapa;
 import vistas.utilidades.ScalablePane;
 
 public class VentanaJuego extends JFrame implements ObservadorCelda {
@@ -96,9 +97,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder());
 		panelPrincipal.setOpaque(false);
 		
-		JLabel logo = Aplicacion.logoChiquito();
+		PanelInfoJugador infoJugador = new PanelInfoJugador(this);
 		
-		panelPrincipal.add(logo, BorderLayout.PAGE_START);
+		panelPrincipal.add(infoJugador, BorderLayout.PAGE_START);
 		
 		this.panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);

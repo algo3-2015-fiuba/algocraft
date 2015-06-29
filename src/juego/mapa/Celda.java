@@ -43,6 +43,10 @@ public class Celda {
 		return this.unidades;
 	}
 	
+	public Collection<Construccion> getConstrucciones() {
+		return this.construcciones;
+	}
+	
 	public boolean colisiona(Controlable controlable) {
 		
 		Iterator<Unidad> itUnid = this.unidades.iterator();

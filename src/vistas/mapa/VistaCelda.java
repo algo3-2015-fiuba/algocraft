@@ -19,6 +19,8 @@ import vistas.utilidades.AsignadorVistas;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.materiales.Material;
+import juego.razas.construcciones.Construccion;
+import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.recursos.Recurso;
@@ -93,6 +95,8 @@ public class VistaCelda extends JComponent {
 
 		this.dibujarFondo(g);
 		this.dibujarSombraDeFondo(g);
+		this.dibujarConstrucciones(g);
+		this.dibujarBases(g);
 		this.dibujarUnidades(g);
 		this.dibujarRecursos(g);
 		
@@ -100,6 +104,17 @@ public class VistaCelda extends JComponent {
 			this.dibujarSeleccion(g);
 		}
 		
+	}
+
+	private void dibujarBases(Graphics g) {
+		ConstruccionBase base = this.celdaRepresentante
+				.getBase();
+
+		if (base != null) {
+			Actor actorResponsable = AsignadorVistas.getInstance()
+					.obtenerRepresentacion(base.getClass());
+			actorResponsable.dibujar(g);
+		}
 	}
 
 	private void dibujarFondo(Graphics g) {
@@ -160,6 +175,18 @@ public class VistaCelda extends JComponent {
 		for (Unidad unidad : unidadesDeCelda) {
 			Actor actorResponsable = AsignadorVistas.getInstance()
 					.obtenerRepresentacion(unidad.getClass());
+			actorResponsable.dibujar(g);
+		}
+	}
+	
+	private void dibujarConstrucciones(Graphics g) {
+
+		Collection<Construccion> construccionesDeCelda = this.celdaRepresentante
+				.getConstrucciones();
+
+		for (Construccion construccion : construccionesDeCelda) {
+			Actor actorResponsable = AsignadorVistas.getInstance()
+					.obtenerRepresentacion(construccion.getClass());
 			actorResponsable.dibujar(g);
 		}
 	}

@@ -1,4 +1,4 @@
-package vistas.paneles.secundarios;
+package vistas.paneles.secundarios.juego;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;

@@ -1,4 +1,4 @@
-package vistas.paneles.secundarios;
+package vistas.paneles.secundarios.juego;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.actores.Actor;
+import vistas.paneles.secundarios.juego.BarraDeVida;
+import vistas.paneles.secundarios.juego.BarraGenerica;
 import vistas.utilidades.AsignadorVistas;
 
 public class PanelUnidadSeleccionada extends JPanel {

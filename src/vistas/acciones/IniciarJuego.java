@@ -51,7 +51,7 @@ public class IniciarJuego implements ActionListener {
 		}
 		
 		try {
-			juego.iniciarJuego("mapas/smallest.map");
+			juego.iniciarJuego("mapas/1v1.map");
 		} catch (FaltanJugadores fj) {
 			//Falta mostrar ventana de error
 		} catch (InicioInvalido ii) {

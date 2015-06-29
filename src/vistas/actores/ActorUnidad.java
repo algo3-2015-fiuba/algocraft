@@ -12,6 +12,10 @@ import vistas.Aplicacion;
 import vistas.mapa.VistaCelda;
 
 public class ActorUnidad extends Actor {
+	
+	public ActorUnidad() {
+		this.nombre = "Unidad";
+	}
 
 	@Override
 	public void dibujar(Graphics g) {
