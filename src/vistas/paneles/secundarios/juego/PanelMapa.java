@@ -61,7 +61,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 			GridBagConstraints c = new GridBagConstraints();
 
 			c.fill = GridBagConstraints.NONE;
-			c.insets = new Insets(2, 2, 2, 2);
+			c.insets = new Insets(0, 0, 0, 0);
 			c.gridx = coordenada.getX();
 			c.gridy = coordenada.getY();
 
