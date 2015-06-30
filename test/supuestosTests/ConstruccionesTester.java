@@ -6,11 +6,6 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
@@ -19,7 +14,6 @@ import juego.mapa.Mapa;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.Pilon;
 import juego.razas.construcciones.terran.DepositoSuministro;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.protoss.Zealot;
 
 import org.junit.Before;
@@ -50,8 +44,7 @@ public class ConstruccionesTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testZealotAtacaDepositoSuministroTerranAunEnConstruccionYLoDestruye() 
-			throws UbicacionInvalida, RecursosInsuficientes, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testZealotAtacaDepositoSuministroTerranAunEnConstruccionYLoDestruye() throws Exception {
 		
 		this.reiniciarJuego();
 		Mapa mapa = Juego.getInstance().getMapa();
@@ -117,8 +110,7 @@ public class ConstruccionesTester {
 	}
 	
 	@Test
-	public void testNoTengoLimitesParaCrearDepositosDeSuministrosPeroElLimiteDePoblacionNoSuperaraLos200() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
+	public void testNoTengoLimitesParaCrearDepositosDeSuministrosPeroElLimiteDePoblacionNoSuperaraLos200() throws Exception {
 			
 		this.reiniciarJuego();
 		Juego juego = Juego.getInstance();

@@ -6,10 +6,6 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
@@ -17,7 +13,6 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
 import juego.razas.unidades.excepciones.UnidadAliada;
 import juego.razas.unidades.excepciones.YaAtacoEnEsteTurno;
@@ -52,8 +47,7 @@ public class ataqueSimpleTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotAtaca5VecesAUnMarineMuere() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnZealotAtaca5VecesAUnMarineMuere() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -86,8 +80,7 @@ public class ataqueSimpleTest {
 	}	
 	
 	@Test
-	public void testSiUnZealotAtacaAUnMarineFueraDeSuRangoDeAtaqueErrorFueraDeRangoDeAtaque() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnZealotAtacaAUnMarineFueraDeSuRangoDeAtaqueErrorFueraDeRangoDeAtaque() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -116,8 +109,7 @@ public class ataqueSimpleTest {
 	}
 	
 	@Test
-	public void testSiUnMismoJugadorCreaDosMarinesEstosNoPuedenAtacarseEntreSiYaQueSonAliados() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnMismoJugadorCreaDosMarinesEstosNoPuedenAtacarseEntreSiYaQueSonAliados() throws Exception {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
@@ -169,8 +161,7 @@ public class ataqueSimpleTest {
 	}	
 
 	@Test
-	public void testSiUnaUnidadYaAtacoEnUnTurnoErrorYaAtacoEnEsteTurno() 
-			throws UbicacionInvalida, NoTieneVision, AtaqueInvalido {
+	public void testSiUnaUnidadYaAtacoEnUnTurnoErrorYaAtacoEnEsteTurno() throws Exception {
 			
 		this.reiniciarJuego();
 				

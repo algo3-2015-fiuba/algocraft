@@ -4,9 +4,6 @@ import java.awt.Color;
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
 import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
@@ -14,7 +11,6 @@ import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.Pilon;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
@@ -46,8 +42,7 @@ public class ataqueSinVisionTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotIntentaAtacarAUnMarineSinVisionSaltaExcepcion() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnZealotIntentaAtacarAUnMarineSinVisionSaltaExcepcion() throws Exception {
 		
 		this.reiniciarJuego();
 		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();

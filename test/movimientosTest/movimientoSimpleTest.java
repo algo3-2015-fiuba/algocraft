@@ -6,10 +6,6 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
@@ -18,7 +14,6 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.UnidadAliada;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 import juego.razas.unidades.protoss.Zealot;
@@ -52,8 +47,7 @@ public class movimientoSimpleTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotSeMueveSusCeldasSeDesocupanYSeOcupan() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+	public void testSiUnZealotSeMueveSusCeldasSeDesocupanYSeOcupan() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -81,8 +75,7 @@ public class movimientoSimpleTest {
 	}	
 	
 	@Test
-	public void testSiUnZealotSeMueveMuyLejosSaltaExcepcion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+	public void testSiUnZealotSeMueveMuyLejosSaltaExcepcion() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -106,8 +99,7 @@ public class movimientoSimpleTest {
 	}
 	
 	@Test
-	public void testSiUnMismoJugadorCreaDosMarinesEstosNoPuedenAtacarseEntreSiYaQueSonAliados() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnMismoJugadorCreaDosMarinesEstosNoPuedenAtacarseEntreSiYaQueSonAliados() throws Exception {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
@@ -160,8 +152,7 @@ public class movimientoSimpleTest {
 	}	
 	
 	@Test
-	public void testSiUnZealotTrataDeMoverseDosVecesEnUnMismoTurnoExcepcion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+	public void testSiUnZealotTrataDeMoverseDosVecesEnUnMismoTurnoExcepcion() throws Exception {
 		
 		this.reiniciarJuego();
 			

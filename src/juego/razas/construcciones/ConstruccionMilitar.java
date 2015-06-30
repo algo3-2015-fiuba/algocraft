@@ -12,6 +12,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.UnidadEnEntrenamiento;
 
 public abstract class ConstruccionMilitar extends Construccion {
 	
@@ -80,7 +81,9 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 	}
 	
-	public void activarUnidad(Unidad unidadActivable, Coordenada coordFinal) throws UbicacionInvalida {
+	public void activarUnidad(Unidad unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, UnidadEnEntrenamiento {
+		
+		if (!unidadActivable.entrenamientoFinalizado()) throw new UnidadEnEntrenamiento();
 		
 		Iterator<Unidad> it = this.unidadesEntrenadas.iterator();
 		

@@ -1,11 +1,9 @@
 package supuestosTests;
 
 import java.awt.Color;
+
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
@@ -43,8 +41,7 @@ public class UnidadesTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testUnaUnidadNoPuedeCaminarPorUnaZonaDeRecursos() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+	public void testUnaUnidadNoPuedeCaminarPorUnaZonaDeRecursos() throws Exception {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
