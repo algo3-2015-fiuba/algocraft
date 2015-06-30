@@ -10,6 +10,8 @@ public abstract class AccionPendiente {
 	public void iniciar(Unidad unidadEmisora) {
 		this.unidadEmisora = unidadEmisora;
 	}
+	
+	public abstract String nombre();
 
 	public abstract void finalizar(Coordenada coordenada) throws AtaqueInvalido;
 }

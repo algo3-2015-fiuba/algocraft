@@ -7,8 +7,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.util.Vector;
+
+import javax.swing.JLabel;
 
 import vistas.Aplicacion;
+import vistas.acciones.AccionAtacar;
+import vistas.acciones.AccionMover;
+import vistas.acciones.AccionPendiente;
+import vistas.handlers.SeleccionarCoordenadaAccionListener;
 import vistas.mapa.VistaCelda;
 
 public class ActorUnidad extends Actor {
@@ -54,6 +61,16 @@ public class ActorUnidad extends Actor {
 	    g.setFont(font);
 	    // Draw the String
 	    g.drawString(text, x, y);
+	}
+	
+	public Vector<AccionPendiente> acciones() {
+		
+		Vector<AccionPendiente> acciones = new Vector<AccionPendiente>();
+		
+		acciones.add(new AccionMover());
+		acciones.add(new AccionAtacar());
+		
+		return acciones;
 	}
 
 }

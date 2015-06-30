@@ -1,6 +1,11 @@
 package vistas.actores;
 
 import java.awt.Graphics;
+import java.util.Vector;
+
+import javax.swing.JLabel;
+
+import vistas.acciones.AccionPendiente;
 
 public abstract class Actor {
 	
@@ -11,4 +16,6 @@ public abstract class Actor {
 	public String nombre() {
 		return this.nombre;
 	}
+	
+	public abstract Vector<AccionPendiente> acciones();
 }

@@ -34,4 +34,9 @@ public class AccionAtacar extends AccionPendiente {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String nombre() {
+		return "Atacar";
+	}
 }
