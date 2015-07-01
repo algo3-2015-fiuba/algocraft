@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="juego.interfaces.estrategias.EstrategiaMovimiento" project="algocraft" 
-    file="/algocraft/src/juego/interfaces/estrategias/EstrategiaMovimiento.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="137" y="103"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="2" language="java" name="juego.estrategias.MovimientoTerrestre" project="algocraft" 
+  <class id="1" language="java" name="juego.estrategias.MovimientoTerrestre" project="algocraft" 
     file="/algocraft/src/juego/estrategias/MovimientoTerrestre.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="144" y="335"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -19,7 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="juego.estrategias.MovimientoVolador" project="algocraft" 
+  <class id="2" language="java" name="juego.estrategias.MovimientoVolador" project="algocraft" 
     file="/algocraft/src/juego/estrategias/MovimientoVolador.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="490" y="122"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -28,27 +19,15 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="juego.estrategias.MovimientoConstruccion" project="algocraft" 
+  <class id="3" language="java" name="juego.estrategias.MovimientoConstruccion" project="algocraft" 
     file="/algocraft/src/juego/estrategias/MovimientoConstruccion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="467" y="363"/>    
+    <position height="-1" width="-1" x="626" y="429"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="5">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="6">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="7">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

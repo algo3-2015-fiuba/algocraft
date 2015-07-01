@@ -8,6 +8,7 @@ import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
 import vistas.acciones.AccionUbicarEntrenable;
+import vistas.acciones.entrenamientos.protoss.AccionEntrenarZealot;
 import vistas.acciones.entrenamientos.terran.AccionEntrenarMarine;
 import vistas.actores.ActorConstruccion;
 
@@ -17,7 +18,7 @@ public class ActorAcceso extends ActorConstruccion {
 		this.nombre = "Acceso";
 		this.url = Aplicacion.class.getResource("/assets/iconos/protoss/construcciones/acceso.png");
 		
-		this.acciones.add(new AccionEntrenarMarine());
+		this.acciones.add(new AccionEntrenarZealot());
 	}
 	
 	@Override
