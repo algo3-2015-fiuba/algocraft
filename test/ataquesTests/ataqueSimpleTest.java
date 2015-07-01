@@ -96,13 +96,14 @@ public class ataqueSimpleTest {
 		Coordenada ubicacionZealotAtacante = new Coordenada(2,20);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
-		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
-		
 		jugadorReceptor.asignarUnidad(marine);	
 		jugadorAtacante.asignarUnidad(zealot);
+		
+		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
+		marine.moverse(ubicacionMarineEnemigo);
+		jugadorReceptor.finalizarTurno();
 		
 		exception.expect(FueraDeRangoDeAtaque.class);
 		zealot.atacarA(marine);
@@ -153,6 +154,8 @@ public class ataqueSimpleTest {
 			jugadorActual = Juego.getInstance().turnoDe();;
 		}
 		
+		if (!jugadorActual.equals(jugadorTerran)) jugadorActual.finalizarTurno();
+		
 		barraca.activarUnidad(marine1, ubicacionValidaMarine1);
 		barraca.activarUnidad(marine2, ubicacionValidaMarine2);
 		
@@ -175,13 +178,12 @@ public class ataqueSimpleTest {
 		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
-		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
-		
 		jugadorReceptor.asignarUnidad(marine);	
 		jugadorAtacante.asignarUnidad(zealot);
+		
+		marine.moverse(ubicacionMarineEnemigo);
+		zealot.moverse(ubicacionZealotAtacante);
 		
 		zealot.atacarA(marine);
 		

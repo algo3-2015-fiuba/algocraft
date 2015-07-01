@@ -114,8 +114,8 @@ public abstract class ConstruccionMilitar extends Construccion {
 			
 			if (unidad == unidadActivable) {
 				if (this.ubicacionValida(coordFinal)) {
-					unidad.moverse(coordFinal);
 					this.propietario.asignarUnidad(unidad);
+					unidad.moverse(coordFinal);
 				}
 			}
 			
