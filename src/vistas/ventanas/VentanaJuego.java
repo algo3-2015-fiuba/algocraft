@@ -31,10 +31,6 @@ import vistas.paneles.secundarios.juego.PanelMapa;
 import vistas.utilidades.ScalablePane;
 
 public class VentanaJuego extends JFrame implements ObservadorCelda {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6641141523429026335L;
 	
 	private Vector<Jugador> jugadores;
 	private PanelMapa panelMapa;

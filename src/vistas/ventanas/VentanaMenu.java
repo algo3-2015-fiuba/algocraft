@@ -12,11 +12,6 @@ import javax.swing.WindowConstants;
 import vistas.utilidades.ScalablePane;
 
 public class VentanaMenu extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6641141523429026335L;
-
 	public VentanaMenu() {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		

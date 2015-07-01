@@ -28,10 +28,6 @@ import juego.recursos.Recurso;
 
 public class VistaCelda extends JComponent {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4451841605373415808L;
 	public static final int lado = 60;
 	private boolean seleccionada;
 	private boolean visible;

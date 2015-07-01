@@ -17,10 +17,6 @@ import vistas.paneles.secundarios.SeleccionJugador;
 
 public class PanelJugadores extends MenuPanel {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2318162583471014637L;
 	private SeleccionJugador seleccionJugador1;
 	private SeleccionJugador seleccionJugador2;
 	
