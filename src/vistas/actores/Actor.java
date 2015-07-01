@@ -3,15 +3,30 @@ package vistas.actores;
 import java.awt.Graphics;
 import java.util.Vector;
 
-import javax.swing.JLabel;
-
 import vistas.acciones.AccionPendiente;
-import vistas.acciones.AccionPendienteUnidad;
 
 public abstract class Actor {
 	
+	public enum PosicionEnCelda {
+	    AIRE(0), TIERRA(0.35);
+	    
+	    private double posicion;
+	    
+	    private PosicionEnCelda(double posicion) {
+			this.posicion = posicion;
+		}
+	    
+	    public double posicion() {
+	    	return this.posicion;
+	    }
+	}
+	
+	
 	protected String nombre;
 	protected Vector<AccionPendiente> acciones;
+	protected PosicionEnCelda posicionCelda = PosicionEnCelda.TIERRA;
+	
+	
 	
 	public Actor() {
 		this.acciones = new Vector<AccionPendiente>();

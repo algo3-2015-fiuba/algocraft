@@ -43,6 +43,11 @@ public abstract class Construccion implements Construible, Controlable {
 	public void consumirRecursos(Jugador jugador) throws RecursosInsuficientes {
 		this.costos.consumirRecursos(jugador);
 	}
+	
+	public float vidaActual() {
+		return this.vida.vidaActual();
+	}	
+	
 	/* * * * * * * * * * * * * * * *
 	 *                             *
 	 *  Modificaciones de estado   *
@@ -52,6 +57,8 @@ public abstract class Construccion implements Construible, Controlable {
 	public void setPropietario(Jugador jugador) {
 		this.propietario = jugador;
 	}
+	
+	
 	
 	@Override
 	public void recibirAtaque(float danio) {

@@ -7,7 +7,7 @@ public class ActorGas extends ActorRecurso {
 
 	public ActorGas() {
 		this.color = Color.green;
-		this.url = Aplicacion.class.getResource("/assets/sprites/gas.png");
+		this.url = Aplicacion.class.getResource("/assets/iconos/recursos/gas vespeno.png");
 		this.nombre = "Gas";
 	}
 

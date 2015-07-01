@@ -2,9 +2,6 @@ package vistas.actores;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Vector;
-
-import vistas.acciones.AccionPendienteUnidad;
 
 public class ActorObject extends Actor {
 

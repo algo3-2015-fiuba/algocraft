@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import juego.razas.unidades.Unidad;
+import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 import vistas.actores.Actor;
 import vistas.paneles.secundarios.juego.BarraDeVida;
@@ -23,7 +23,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
-	private Unidad unidadActual;
+	private Controlable seleccionado;
 	private JLabel nombreUnidad;
 	private BarraGenerica vida;
 	private VentanaJuego ventanaOriginal;
@@ -59,9 +59,9 @@ public class PanelUnidadSeleccionada extends JPanel {
 		return new Dimension(450,200);
 	}
 	
-	public void seleccionarUnidad(Unidad seleccionada) {
-		this.unidadActual = seleccionada;
-		this.vida.seleccionarUnidad(this.unidadActual);
+	public void seleccionarElemento(Controlable seleccionado) {
+		this.seleccionado = seleccionado;
+		this.vida.seleccionarUnidad(this.seleccionado);
 		this.asignarNombre();
 		
 		
@@ -69,13 +69,13 @@ public class PanelUnidadSeleccionada extends JPanel {
 	}
 	
 	public void removerSeleccion() {
-		this.seleccionarUnidad(null);
+		this.seleccionarElemento(null);
 	}
 	
 	private void asignarNombre() {
 		
-		if(this.unidadActual != null) {		
-			Actor responsable = AsignadorVistas.getInstance().obtenerRepresentacion(this.unidadActual.getClass());
+		if(this.seleccionado != null) {		
+			Actor responsable = AsignadorVistas.getInstance().obtenerRepresentacion(this.seleccionado.getClass());
 			this.nombreUnidad.setText(responsable.nombre());
 		} else {
 			this.nombreUnidad.setText("");

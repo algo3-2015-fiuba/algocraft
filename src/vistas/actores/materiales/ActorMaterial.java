@@ -2,11 +2,6 @@ package vistas.actores.materiales;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Vector;
-
-import javax.swing.JLabel;
-
-import vistas.acciones.AccionPendienteUnidad;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;
 

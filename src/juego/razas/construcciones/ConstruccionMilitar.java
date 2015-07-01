@@ -47,6 +47,10 @@ public abstract class ConstruccionMilitar extends Construccion {
 		this.entrenamientos.removeAll(entrenados);
 		
 	}
+	
+	public Collection<Entrenable> unidadesEnEntrenamiento() {
+		return this.entrenamientos;
+	}
 
 	public int suministrosEnEntrenamiento() {
 		

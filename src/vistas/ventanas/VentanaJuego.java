@@ -2,6 +2,7 @@ package vistas.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,24 +11,18 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import juego.Juego;
-import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.interfaces.Controlable;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
-import juego.razas.unidades.terran.Marine;
-import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
-import vistas.acciones.AccionPendienteUnidad;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.paneles.secundarios.juego.PanelInfoJugador;
@@ -106,11 +101,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		this.panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
 		
-		Mapa generado = Juego.getInstance().getMapa();
-		
 		this.agregarUnidadesDeEjemplo();
 		
-		this.panelMapa = new PanelMapa(this,generado);
+		this.panelMapa = new PanelMapa(this);
 		
 		JScrollPane scroll = new JScrollPane(panelMapa);
 		scroll.setBackground(new Color(0, 0, 0, 0));
@@ -129,7 +122,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 
 	@Override
 	public void notificar(Coordenada coordenada) throws AtaqueInvalido {
-		Unidad unidad = null;
+		Controlable elementoSeleccionado = null;
 		
 		Celda celdaSeleccionada = null;
 		try {
@@ -140,25 +133,35 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		}
 		
 		if(!celdaSeleccionada.getUnidades().isEmpty()) {
-			unidad = celdaSeleccionada.getUnidades().iterator().next();
+			elementoSeleccionado = celdaSeleccionada.getUnidades().iterator().next();
+		} else if(!celdaSeleccionada.getConstrucciones().isEmpty()) {
+			elementoSeleccionado = celdaSeleccionada.getConstrucciones().iterator().next();
 		}
 		
-		this.panelIzquierdo.seleccionarUnidad(unidad);
+		this.panelIzquierdo.seleccionarElemento(elementoSeleccionado);
 		
 		if(this.accionPendiente != null) {
 			try {
 				this.accionPendiente.finalizar(coordenada);
+				
+				this.panelInfoJugador.actualizarDatosDelJugador();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.panelMapa.repaint();
-			this.accionPendiente = null;
+			this.actualizarPantalla();
+			
+			this.removerAccionPendiente();
 		}
 	}
 	
 	public void agregarAccionPendiente(AccionPendiente accion) {
 		this.accionPendiente = accion;
+	}
+	
+	public void removerAccionPendiente() {
+		this.accionPendiente = null;
+		this.setCursor(Cursor.getDefaultCursor());
 	}
 	
 	public void finalizarTurno() {

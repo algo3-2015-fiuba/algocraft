@@ -5,8 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import juego.Juego;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import vistas.mapa.VistaCelda;
 import vistas.ventanas.VentanaJuego;
 
 public class FinalizarTurnoListener extends MouseAdapter {

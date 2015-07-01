@@ -9,7 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import juego.razas.unidades.Unidad;
+import juego.interfaces.Controlable;
 import vistas.utilidades.Item;
 import vistas.ventanas.VentanaJuego;
 
@@ -51,8 +51,8 @@ public class PanelIzquierdoJuego extends JPanel {
 		this.add(Box.createRigidArea(new Dimension(1,50)));
 	}
 	
-	public void seleccionarUnidad(Unidad seleccionada) {
-		this.panelSeleccion.seleccionarUnidad(seleccionada);
-		this.panelAcciones.seleccionarUnidad(seleccionada);
+	public void seleccionarElemento(Controlable elementoSeleccionado) {
+		this.panelSeleccion.seleccionarElemento(elementoSeleccionado);
+		this.panelAcciones.seleccionarElemento(elementoSeleccionado);
 	}
 }

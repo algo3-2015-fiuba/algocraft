@@ -95,10 +95,10 @@ public class VistaCelda extends JComponent {
 
 		this.dibujarFondo(g);
 		this.dibujarSombraDeFondo(g);
+		this.dibujarRecursos(g);
 		this.dibujarConstrucciones(g);
 		this.dibujarBases(g);
 		this.dibujarUnidades(g);
-		this.dibujarRecursos(g);
 		
 		if(this.seleccionada) {
 			this.dibujarSeleccion(g);

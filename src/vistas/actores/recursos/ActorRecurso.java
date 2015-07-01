@@ -8,12 +8,9 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Vector;
-
 import javax.imageio.ImageIO;
 
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendienteUnidad;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;
 
@@ -24,7 +21,7 @@ public class ActorRecurso extends Actor {
 
 	@Override
 	public void dibujar(Graphics g) {
-		g.setColor(color);
+		
 
 		int lado = VistaCelda.lado;
 		int alto = (int) (lado * 0.3);
@@ -37,8 +34,8 @@ public class ActorRecurso extends Actor {
 			try {
 				BufferedImage image;
 				image = ImageIO.read(url);
-				Image scaled = image.getScaledInstance(lado, image.getHeight(), Image.SCALE_SMOOTH);
-				g.drawImage(scaled, 0, lado - altoImagen, null);
+				Image scaled = image.getScaledInstance(lado, lado, Image.SCALE_SMOOTH);
+				g.drawImage(scaled, 0, 0, null);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -46,7 +43,10 @@ public class ActorRecurso extends Actor {
 			}
 		}
 		
-		this.dibujarNombre(g);
+		/*g.setColor(new Color(0,0,0,100));
+		g.fillRect(0, 0, lado, lado);*/
+		
+		//this.dibujarNombre(g);
 
 	}
 	

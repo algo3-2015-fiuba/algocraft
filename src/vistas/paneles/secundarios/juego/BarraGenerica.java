@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,7 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import juego.razas.unidades.Unidad;
+
+import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 
 public abstract class BarraGenerica extends JPanel {
@@ -23,7 +25,7 @@ public abstract class BarraGenerica extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
-	private Unidad unidadActual;
+	private Controlable seleccionado;
 	private Image fondoDeVida;
 	private Image contenidoVida;
 	private JLabel contenedorBarraDentro;
@@ -94,11 +96,11 @@ public abstract class BarraGenerica extends JPanel {
 		this.contenedorBarraDentro.setIcon(new ImageIcon(contenidoVida));
 	}
 	
-	public void seleccionarUnidad(Unidad seleccionada) {
-		if(seleccionada == null) {
+	public void seleccionarUnidad(Controlable seleccionado) {
+		if(seleccionado == null) {
 			this.removerSeleccion();
 		} else {
-			this.unidadActual = seleccionada;
+			this.seleccionado = seleccionado;
 			this.actualizarVida();
 			//this.actualizarBarras();
 			this.setVisible(true);
@@ -106,14 +108,14 @@ public abstract class BarraGenerica extends JPanel {
 	}
 	
 	public void removerSeleccion() {
-		this.unidadActual = null;
+		this.seleccionado = null;
 		this.setVisible(false);
 	}
 	
 	private void actualizarVida() {
-		this.porcentajeVida = this.unidadActual.vidaActual() / 300.0;
+		this.porcentajeVida = this.seleccionado.vidaActual() / 300.0;
 		
-		this.texto.setText(Float.toString(this.unidadActual.vidaActual()));
+		this.texto.setText(Float.toString(this.seleccionado.vidaActual()));
 	}
 	
 	

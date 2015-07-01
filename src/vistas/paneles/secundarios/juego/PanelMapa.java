@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,10 +12,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import juego.Juego;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import vistas.handlers.CeldaMouseListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.mapa.VistaCelda;
@@ -36,9 +35,9 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	private LinkedList<VistaCelda> vistaCeldas;
 	private VistaCelda celdaSeleccionada;
 
-	public PanelMapa(VentanaJuego ventanaJuego, Mapa mapa) {
+	public PanelMapa(VentanaJuego ventanaJuego) {
 
-		this.mapa = mapa;
+		this.mapa = Juego.getInstance().getMapa();
 		this.ventanaOriginal = ventanaJuego;
 		this.vistaCeldas = new LinkedList<VistaCelda>();
 		this.celdaSeleccionada = null;

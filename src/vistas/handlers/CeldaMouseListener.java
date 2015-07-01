@@ -23,6 +23,8 @@ public class CeldaMouseListener extends MouseAdapter {
 	
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		if(e.getComponent().getCursor() == Cursor.getDefaultCursor()) {
+			//e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		}
 	}
 }

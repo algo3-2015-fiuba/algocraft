@@ -9,6 +9,8 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
 public interface Controlable {
 	
+	public float vidaActual();
+	
 	public void recibirAtaque(float danio);
 	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
 	
@@ -16,5 +18,7 @@ public interface Controlable {
 	
 	public boolean colisionaCon(Controlable controlable);
 	public boolean colisionaCon(EstrategiaMovimiento em);
+	
+	
 	
 }

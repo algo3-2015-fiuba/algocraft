@@ -4,10 +4,8 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import juego.razas.unidades.Unidad;
-import vistas.acciones.AccionMover;
+import juego.interfaces.Controlable;
 import vistas.acciones.AccionPendiente;
-import vistas.acciones.AccionPendienteUnidad;
 import vistas.paneles.secundarios.juego.PanelAcciones;
 import vistas.ventanas.VentanaJuego;
 
@@ -27,11 +25,12 @@ public class SeleccionarCoordenadaAccionListener extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		System.out.println(e);
 		
-		Unidad unidadSeleccionada = panelAcciones.unidadSeleccionada();
+		Controlable elementoSeleccionado = panelAcciones.elementoSeleccionado();
 		
-		accion.iniciar(unidadSeleccionada);
+		accion.iniciar(elementoSeleccionado);
 		
 		this.ventanaOriginal.agregarAccionPendiente(accion);
+		this.ventanaOriginal.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 	}
 	
 	@Override

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.util.Random;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
