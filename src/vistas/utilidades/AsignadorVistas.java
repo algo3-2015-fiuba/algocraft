@@ -2,7 +2,9 @@ package vistas.utilidades;
 
 import java.util.HashMap;
 
+import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.CentroDeMineral;
 import juego.razas.construcciones.terran.DepositoSuministro;
@@ -14,14 +16,18 @@ import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import vistas.actores.Actor;
+import vistas.actores.ActorBase;
 import vistas.actores.unidades.terran.ActorMarine;
 import vistas.actores.unidades.terran.ActorNaveCiencia;
 import vistas.actores.ActorObject;
+import vistas.actores.construcciones.protoss.ActorBaseProtoss;
 import vistas.actores.construcciones.terran.ActorBarraca;
+import vistas.actores.construcciones.terran.ActorBaseTerran;
 import vistas.actores.construcciones.terran.ActorCentroMineral;
 import vistas.actores.construcciones.terran.ActorDepositoSuministro;
 import vistas.actores.construcciones.terran.ActorFabrica;
 import vistas.actores.construcciones.terran.ActorRefineria;
+import vistas.actores.jugadores.ActorJugadorProtoss;
 import vistas.actores.jugadores.ActorJugadorTerran;
 import vistas.actores.recursos.ActorGas;
 import vistas.actores.recursos.ActorMineral;
@@ -40,7 +46,9 @@ public class AsignadorVistas {
 		this.actores.put(GasVespeno.class, new ActorGas());
 		
 		this.actores.put(JugadorTerran.class, new ActorJugadorTerran());
+		this.actores.put(JugadorProtoss.class, new ActorJugadorProtoss());
 		
+		this.actores.put(ConstruccionBase.class, new ActorBase());
 		this.actores.put(CentroDeMineral.class, new ActorCentroMineral());
 		this.actores.put(Barraca.class, new ActorBarraca());
 		this.actores.put(DepositoSuministro.class, new ActorDepositoSuministro());

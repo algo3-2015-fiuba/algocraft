@@ -14,7 +14,7 @@ import vistas.acciones.AccionAtacar;
 import vistas.acciones.AccionMover;
 import vistas.mapa.VistaCelda;
 
-public class ActorUnidad extends Actor {
+public class ActorUnidad extends ActorControlable {
 	
 	protected URL url;
 	
@@ -23,25 +23,6 @@ public class ActorUnidad extends Actor {
 		
 		this.acciones.add(new AccionMover());
 		this.acciones.add(new AccionAtacar());
-	}
-
-	@Override
-	public void dibujar(Graphics g) {
-		
-		Graphics2D g2 = (Graphics2D)g;
-	    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
-		g.setColor(Color.white);
-		
-		int lado = VistaCelda.lado;
-		int alto = (int) (lado * 0.66);
-		
-		float tamanioFont = (24 * 6) / this.nombre.length();
-		
-		Font bebasSmall = Aplicacion.fontBebas(tamanioFont);
-		Rectangle rect = new Rectangle(0,  lado, lado, lado*2);
-		
-		this.drawCenteredString(g, this.nombre, rect, bebasSmall);
 	}
 	
 	/**
