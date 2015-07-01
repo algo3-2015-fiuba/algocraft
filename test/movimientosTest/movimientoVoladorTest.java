@@ -7,10 +7,6 @@ import java.awt.Color;
 import juego.Juego;
 
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
@@ -48,8 +44,7 @@ public class movimientoVoladorTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotSeMueveAUnLugarDeAireSaltaExcepcion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+	public void testSiUnZealotSeMueveAUnLugarDeAireSaltaExcepcion() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -74,8 +69,7 @@ public class movimientoVoladorTest {
 	}
 	
 	@Test
-	public void testSiUnScoutSeMueveAUnLugarDeAireEstaBien() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, NoTieneVision {
+	public void testSiUnScoutSeMueveAUnLugarDeAireEstaBien() throws Exception {
 		
 		this.reiniciarJuego();
 		

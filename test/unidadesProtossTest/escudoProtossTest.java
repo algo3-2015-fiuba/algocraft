@@ -6,16 +6,11 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
 
@@ -48,8 +43,7 @@ public class escudoProtossTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnRecibeDanioSuEscudoSeRegenera() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiUnRecibeDanioSuEscudoSeRegenera() throws Exception {
 		
 		this.reiniciarJuego();
 		

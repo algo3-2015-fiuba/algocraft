@@ -12,6 +12,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.AccionInvalida;
 import juego.razas.unidades.excepciones.UnidadEnEntrenamiento;
 
 public abstract class ConstruccionMilitar extends Construccion {
@@ -65,10 +66,10 @@ public abstract class ConstruccionMilitar extends Construccion {
 			suministrosEnTotal += ((Unidad)(it.next())).suministrosNecesarios();
 		}
 		
-		Iterator<Unidad> uit = this.unidadesEntrenadas.iterator();
+		Iterator<Unidad> ueit = this.unidadesEntrenadas.iterator();
 		
-		while (it.hasNext()) {
-			suministrosEnTotal += ((Unidad)(it.next())).suministrosNecesarios();
+		while (ueit.hasNext()) {
+			suministrosEnTotal += ((Unidad)(ueit.next())).suministrosNecesarios();
 		}
 		
 		
@@ -96,7 +97,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 	}
 	
-	public void activarUnidad(Entrenable unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, UnidadEnEntrenamiento {
+	public void activarUnidad(Entrenable unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, AccionInvalida {
 		
 		if (!unidadActivable.entrenamientoFinalizado()) throw new UnidadEnEntrenamiento();
 		

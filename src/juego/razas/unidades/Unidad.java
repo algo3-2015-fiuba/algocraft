@@ -22,6 +22,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.proxys.ProxyMovimiento;
+import juego.razas.unidades.excepciones.AccionInvalida;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 
 public abstract class Unidad implements Controlable, Entrenable {
@@ -175,7 +176,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	 * * * * * * * * */
 	
 	@Override
-	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
+	public void moverse(Coordenada coordFinal) throws UbicacionInvalida, AccionInvalida {
 		
 		if (this.proxyMovimiento == null) {
 			
@@ -189,6 +190,11 @@ public abstract class Unidad implements Controlable, Entrenable {
 				
 				this.proxyMovimiento = null;
 				throw ui;
+				
+			} catch (AccionInvalida ai) {
+				
+				this.proxyMovimiento = null;
+				throw ai;
 				
 			}
 				

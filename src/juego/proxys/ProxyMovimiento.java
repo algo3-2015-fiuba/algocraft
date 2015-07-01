@@ -7,6 +7,8 @@ import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.excepciones.AccionInvalida;
+import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
 
 public class ProxyMovimiento {
 
@@ -38,9 +40,11 @@ public class ProxyMovimiento {
 		
 	}
 
-	public void moverse(Jugador propietario, Unidad unidad,	Coordenada coordFinal) throws UbicacionInvalida {
+	public void moverse(Jugador propietario, Unidad unidad,	Coordenada coordFinal) throws UbicacionInvalida, AccionInvalida {
 		
 		if (!this.destinoValido(unidad, coordFinal)) throw new UbicacionInvalida();
+		
+		if (!propietario.esAliado(unidad)) throw new NoSePuedenMoverUnidadesEnemigas();
 		
 		this.estrategiaMovimiento.moverse(propietario, unidad, coordFinal);
 		

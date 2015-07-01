@@ -6,8 +6,6 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.EnergiaInsuficiente;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
@@ -42,7 +40,7 @@ public class naveCienciaTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineEstaIrradiadoPierdeVida() throws UbicacionInvalida, EnergiaInsuficiente {
+	public void testSiUnMarineEstaIrradiadoPierdeVida() throws Exception {
 		this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -86,7 +84,7 @@ public class naveCienciaTest {
 	}
 	
 	@Test
-	public void testSiUnMarineEstaIrradiadoLastimaASusCercanos() throws UbicacionInvalida, EnergiaInsuficiente {
+	public void testSiUnMarineEstaIrradiadoLastimaASusCercanos() throws Exception {
 		this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -139,7 +137,7 @@ public class naveCienciaTest {
 	}
 	
 	@Test
-	public void testSiDosMarinesEstanIrradiadosSeLastimanEntreSiAditivamente() throws UbicacionInvalida, EnergiaInsuficiente {
+	public void testSiDosMarinesEstanIrradiadosSeLastimanEntreSiAditivamente() throws Exception {
 	this.reiniciarJuego();
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();

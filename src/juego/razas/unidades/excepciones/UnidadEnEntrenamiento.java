@@ -1,6 +1,6 @@
 package juego.razas.unidades.excepciones;
 
-public class UnidadEnEntrenamiento extends Exception {
+public class UnidadEnEntrenamiento extends AccionInvalida {
 
 	/**
 	 * 
