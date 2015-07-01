@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.Juego;
 import juego.interfaces.Entrenable;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AccionInvalida;
+import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
 import juego.razas.unidades.excepciones.UnidadEnEntrenamiento;
 
 public abstract class ConstruccionMilitar extends Construccion {
@@ -98,6 +101,10 @@ public abstract class ConstruccionMilitar extends Construccion {
 	}
 	
 	public void activarUnidad(Entrenable unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, AccionInvalida {
+		
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		
+		if (!this.propietario.equals(jugadorActual)) throw new NoSePuedenMoverUnidadesEnemigas();
 		
 		if (!unidadActivable.entrenamientoFinalizado()) throw new UnidadEnEntrenamiento();
 		
