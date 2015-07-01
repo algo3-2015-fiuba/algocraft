@@ -1,12 +1,11 @@
 package juegoTests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -18,8 +17,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
-import juego.razas.unidades.protoss.Zealot;
+import juego.razas.unidades.protoss.Scout;
 import juego.razas.unidades.terran.Marine;
 import juego.razas.unidades.terran.NaveCiencia;
 
@@ -37,12 +35,11 @@ public class PoblacionTester {
 		Juego juego = Juego.getInstance(); 
 		
 		try {
+			
 			juego.crearJugador(new JugadorTerran("jugadorTerran", Color.red));
 			juego.crearJugador(new JugadorProtoss("jugadorProtoss", Color.blue));
-		} catch (InicioInvalido ii) {}
-		
-		try {
 			juego.iniciarJuego("mapas/test.map");
+			
 		} catch (InicioInvalido ii) {}
 		
 	}	
@@ -51,8 +48,7 @@ public class PoblacionTester {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testHacerUnMarineAumentaPoblacion() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testSiScoutAtacaNaveCienciaEnemigaHastaDestruirlaDisminuyePoblacionEnemiga() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -63,30 +59,41 @@ public class PoblacionTester {
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
 		
 		Coordenada ubicacionNaveCienciaEnemigo = new Coordenada(0,20);
-		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
+		Coordenada ubicacionScoutAtacante = new Coordenada(1,20);
 		
 		NaveCiencia naveCiencia = new NaveCiencia();
-		naveCiencia.moverse(ubicacionNaveCienciaEnemigo);
+		Scout scout = new Scout();
+	
+		jugadorAtacante.asignarUnidad(scout);
+		scout.moverse(ubicacionScoutAtacante);
 		
-		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
 		
 		jugadorReceptor.asignarUnidad(naveCiencia);	
-		jugadorAtacante.asignarUnidad(zealot);
+		naveCiencia.moverse(ubicacionNaveCienciaEnemigo);
 		
-		for(int i = 0; i < 50; i++) {
+		jugadorReceptor.finalizarTurno();
+		
+		assertTrue(jugadorReceptor.poblacionActual() == 2);
+		assertTrue(jugadorAtacante.poblacionActual() == 3);
+		
+		for(int i = 0; i < 15; i++) {
+			
 			jugadorAtacante.finalizarTurno();
 			jugadorReceptor.finalizarTurno();
-			zealot.atacarA(naveCiencia);
+			scout.atacarA(naveCiencia);
+			
 		}
 		
-		assertTrue(mapa.obtenerCelda(ubicacionNaveCienciaEnemigo).contiene(naveCiencia));
+		assertFalse(mapa.obtenerCelda(ubicacionNaveCienciaEnemigo).contiene(naveCiencia));
+		
+		assertTrue(jugadorReceptor.poblacionActual() == 0);
+		assertTrue(jugadorAtacante.poblacionActual() == 3);
 		
 	}
 	
 	@Test
-	public void testSiJugadorNoCreaDepositoSuministroEIntentaCrearMarineErrorSobrePoblacion() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+	public void testSiJugadorNoCreaDepositoSuministroEIntentaCrearMarineErrorSobrePoblacion() throws Exception {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();

@@ -3,7 +3,9 @@ package juego.mapa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 
@@ -73,7 +75,7 @@ public class Mapa {
 					try {
 						Celda celdaActual = this.obtenerCelda(coordActual);
 						celdasSeleccionadas.add(celdaActual);						
-					} catch (CoordenadaFueraDeRango e) { }
+					} catch (CoordenadaFueraDeRango e) {}
 				}
 				
 			}
@@ -83,14 +85,6 @@ public class Mapa {
 		return celdasSeleccionadas;
 	}
 	
-	public int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
-		
-		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
-		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getY());
-		
-		return (distanciaX + distanciaY);
-	}
-
 	public Coordenada obtenerUbicacion(Controlable controlable) {
 
 		for (Coordenada coordenada : this.celdas.keySet()) {
@@ -103,6 +97,44 @@ public class Mapa {
 		}
 		
 		return null;
+	}
+	
+	public int distanciaEntreCoordenadas(Coordenada coordInicial, Coordenada coordFinal) {
+		
+		int distanciaX = Math.abs(coordInicial.getX() - coordFinal.getX());
+		int distanciaY = Math.abs(coordInicial.getY() - coordFinal.getY());
+		
+		return (distanciaX + distanciaY);
+	}
+	
+	public int distancia(Coordenada ubicacion, Controlable controlable) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		int distancia = -1;
+		Iterator<Celda> it;
+		
+		try {
+			
+			it = controlable.obtenerRangoDeOcupacion().iterator();
+			
+		} catch (CoordenadaFueraDeRango cfdr) { return -1; }
+		
+		if (it.hasNext()) {
+			
+			distancia = mapa.distanciaEntreCoordenadas(ubicacion, it.next().getPosicion());
+			
+		}
+		
+		while (it.hasNext()) {
+			
+			int distanciaEntreCoordenadas = mapa.distanciaEntreCoordenadas(ubicacion, it.next().getPosicion());
+			
+			if (distancia > distanciaEntreCoordenadas) distancia = distanciaEntreCoordenadas;
+			
+		}
+		
+		return distancia;
+		
 	}
 	
 }

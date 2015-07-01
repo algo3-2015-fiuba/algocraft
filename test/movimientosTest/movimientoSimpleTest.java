@@ -152,7 +152,7 @@ public class movimientoSimpleTest {
 	}	
 	
 	@Test
-	public void testSiUnZealotTrataDeMoverseDosVecesEnUnMismoTurnoExcepcion() throws Exception {
+	public void testSiUnZealotTrataDeMoverseDosVecesEnUnMismoTurnoErrorYaSeMovioEnEsteTurno() throws Exception {
 		
 		this.reiniciarJuego();
 			

@@ -26,9 +26,9 @@ public abstract class UnidadAtaque extends Unidad {
 		
 		if (this.noAtacoEnEsteTurno()) {
 			
-			this.proxyAtaque = new ProxyAtaque(this.ataques);
+			this.proxyAtaque = new ProxyAtaque(this.ataques, this.estrategiaDeMovimiento);
 			this.proxyAtaque.atacarA(this, victima);
-		
+			
 		} else {
 			throw new YaAtacoEnEsteTurno();
 		}

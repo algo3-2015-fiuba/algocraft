@@ -9,6 +9,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.ataques.Ataques;
 import juego.razas.unidades.Unidad;
 
 public class MovimientoVolador implements EstrategiaMovimiento {
@@ -24,7 +25,7 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	}
 	
 	@Override
-	public boolean visionSuficiente(Coordenada posicion,	Coordenada coordFinal) {
+	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal) {
 		Mapa mapa = Juego.getInstance().getMapa();
 		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
 	}
@@ -42,6 +43,31 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	@Override
 	public boolean distanciaAlcanzable(int distanciaAMover) {
 		return (distanciaAMover <= this.rangoDeMovimiento);
+	}
+	
+	@Override
+	public void atacar(Ataques ataques, Controlable victima) {
+		
+		if (victima.colisionaCon(this)) {
+			ataques.atacarPorAire(victima);
+		} else {
+			ataques.atacarPorTierra(victima);
+		}
+
+	}
+	
+	@Override
+	public boolean estaEnRangoDeAtaque(Ataques ataques, Coordenada ubicacionAgresor, Controlable victima) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		int distanciaVictima = mapa.distancia(ubicacionAgresor, victima);
+		
+		if (victima.colisionaCon(this)) {
+			return ataques.estaEnRangoAire(distanciaVictima);
+		} else {
+			return ataques.estaEnRangoTierra(distanciaVictima);
+		}
+		
 	}
 	
 	@Override
@@ -65,12 +91,12 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	public void desocupar(Controlable controlable) {
 		
 		try {
+			
 			Mapa mapa = Juego.getInstance().getMapa();
 			Coordenada coordenada = mapa.obtenerUbicacion((Unidad)controlable);
 			if (coordenada != null) mapa.obtenerCelda(coordenada).desocupar((Unidad)controlable);
-		} catch (CoordenadaFueraDeRango cfdr) {
-			//Esto no deberia ocurrir nunca a que si el mapa encontro la ubicacion del controlable, la coordenada deberia ser valida.
-		}
+			
+		} catch (CoordenadaFueraDeRango cfdr) {}
 		
 	}
 

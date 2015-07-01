@@ -7,11 +7,15 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.razas.ataques.Ataques;
 
 public interface EstrategiaMovimiento {
 
 	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal);
 	public void descubrirMapa(Jugador propietario, Controlable controlable);
+	
+	public void atacar(Ataques ataques, Controlable victima);
+	public boolean estaEnRangoDeAtaque(Ataques ataques, Coordenada ubicacionAgresor, Controlable victima);
 	
 	public void moverse(Jugador controlador, Controlable controlable, Coordenada coordFinal) throws UbicacionInvalida;
 	public boolean puedeOcupar(Controlable controlable, Celda celda);

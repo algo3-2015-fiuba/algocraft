@@ -1,21 +1,14 @@
 package ataquesTest;
 
-import static org.junit.Assert.*;
-
 import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.NoTieneVision;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.mapa.Mapa;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
+import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.NaveCiencia;
 
@@ -47,13 +40,10 @@ public class ataqueAireTierraTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testUnZealotTerrestreNoPuedeAtacarAUnaNaveCienciaVoladora() 
-			throws RecursosInsuficientes, UbicacionInvalida, SobrePoblacion, NoTieneVision, AtaqueInvalido {
+	public void testUnZealotTerrestreNoPuedeAtacarAUnaNaveCienciaVoladora() throws Exception {
 		
 		this.reiniciarJuego();
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		
+
 		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
 		jugadorReceptor.finalizarTurno();		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -70,12 +60,8 @@ public class ataqueAireTierraTest {
 		jugadorReceptor.asignarUnidad(naveCiencia);	
 		jugadorAtacante.asignarUnidad(zealot);
 		
-		for(int i = 0; i < 50; i++) {
-			jugadorAtacante.finalizarTurno();
-			jugadorReceptor.finalizarTurno();
-			zealot.atacarA(naveCiencia);
-		}
-		assertTrue(mapa.obtenerCelda(ubicacionNaveCienciaEnemigo).contiene(naveCiencia));
+		exception.expect(FueraDeRangoDeAtaque.class);
+		zealot.atacarA(naveCiencia);
 		
 	}
 

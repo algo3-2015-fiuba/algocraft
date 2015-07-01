@@ -61,20 +61,22 @@ public class ataqueSimpleTest {
 		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
-		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacante);
+		
+		jugadorAtacante.asignarUnidad(zealot);
+		marine.moverse(ubicacionMarineEnemigo);
+		jugadorAtacante.finalizarTurno();
 		
 		jugadorReceptor.asignarUnidad(marine);	
-		jugadorAtacante.asignarUnidad(zealot);
+		zealot.moverse(ubicacionZealotAtacante);
+		jugadorReceptor.finalizarTurno();
 		
 		for(int i = 0; i < 5; i++) {
 			jugadorAtacante.finalizarTurno();
 			jugadorReceptor.finalizarTurno();
 			zealot.atacarA(marine);
 		}
-		
+
 		assertFalse(mapa.obtenerCelda(ubicacionMarineEnemigo).contiene(marine));
 		
 	}	

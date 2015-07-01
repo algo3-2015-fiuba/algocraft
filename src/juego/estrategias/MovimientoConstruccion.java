@@ -12,6 +12,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.materiales.Material;
+import juego.razas.ataques.Ataques;
 import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionRecolectora;
 
@@ -53,6 +54,17 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 	@Override
 	public boolean distanciaAlcanzable(int distanciaAMover) {
 		return false;
+	}
+	
+	@Override
+	public void atacar(Ataques ataques, Controlable victima) {
+		//Las construcciones no pueden atacar
+	}
+	
+	@Override
+	public boolean estaEnRangoDeAtaque(Ataques ataques, Coordenada ubicacionAgresor, Controlable victima) {
+		//Las construcciones no puede atacar.
+		return false;		
 	}
 	
 	@Override

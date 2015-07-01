@@ -3,19 +3,16 @@ package magiasTest;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.util.Iterator;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
-import juego.interfaces.excepciones.EnergiaInsuficiente;
-import juego.interfaces.excepciones.RecursosInsuficientes;
-import juego.interfaces.excepciones.RequerimientosInvalidos;
-import juego.interfaces.excepciones.SobrePoblacion;
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Golliat;
@@ -49,8 +46,7 @@ public class altoTemplarioTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnMarineEstaBajoUnaTormentaMuere() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, EnergiaInsuficiente {
+	public void testSiUnMarineEstaBajoUnaTormentaMuere() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -88,8 +84,7 @@ public class altoTemplarioTest {
 	}
 	
 	@Test
-	public void testSiUnGolliatEstaBajoUnaTormentaPeroSeMueveAntesNoMuere() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, EnergiaInsuficiente {
+	public void testSiUnGolliatEstaBajoUnaTormentaPeroSeMueveAntesNoMuere() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -155,8 +150,7 @@ public class altoTemplarioTest {
 	}
 	
 	@Test
-	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() 
-			throws UbicacionInvalida, EnergiaInsuficiente {
+	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() throws Exception {
 		
 		this.reiniciarJuego();
 		
@@ -183,11 +177,49 @@ public class altoTemplarioTest {
 		jugadorReceptor.asignarUnidad(marine);
 		
 		altoTemplario.lanzarAlucinacion(zealot); //Se ubicaran cerca de la unidad a alucinar.
-		
+
 	}
 	
 	@Test
-	public void testSiUnaCopiaDelAltoTemplarioMuereElAltoTemplarioYLaOtraCopiaContinuanVivos() {
+	public void testSiUnaCopiaDelAltoTemplarioMuereElAltoTemplarioYLaOtraCopiaContinuanVivos() throws Exception {
+		
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
+		
+		jugadorReceptor.finalizarTurno();
+		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarine = new Coordenada(0,20);
+		Coordenada ubicacionAltoTemplario = new Coordenada(1,20);
+		Coordenada ubicacionZealot = new Coordenada(0,21);
+		
+		Marine marine = new Marine();
+		AltoTemplario altoTemplario = new AltoTemplario();
+		Zealot zealot = new Zealot();
+		
+		marine.moverse(ubicacionMarine);
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		zealot.moverse(ubicacionZealot);		
+		
+		jugadorAtacante.asignarUnidad(altoTemplario);
+		jugadorAtacante.asignarUnidad(zealot);
+		jugadorReceptor.asignarUnidad(marine);
+		
+		//El algoritmo busca posiciones disponibles para ubicar a la unidad alucinada
+		//En el mapa test, y debido a la ubicacion del zealot, estas posiciones son
+		
+		Coordenada ubicacionAlucinacion1 = new Coordenada(0,16);
+		Coordenada ubicacionAlucinacion2 = new Coordenada(0,17);
+		
+		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
+		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
+		
+		altoTemplario.lanzarAlucinacion(zealot);
+		
+		//assertTrue(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
+		//assertTrue(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
 		
 	}
 	

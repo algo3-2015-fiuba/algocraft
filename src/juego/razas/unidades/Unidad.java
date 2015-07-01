@@ -113,7 +113,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public void afectadaPorMagia(Alucinacion alucinacion) {
 		
 		for (int i = 0; i < 2; i++) {
-			UnidadAlucinada alucinada = new UnidadAlucinada(this);
+			UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento);
 			this.alucinaciones.add(alucinada);
 			this.propietario.asignarUnidad(alucinada);
 		}
@@ -172,10 +172,6 @@ public abstract class Unidad implements Controlable, Entrenable {
  	 *               *
 	 * * * * * * * * */
 	
-	public EstrategiaMovimiento getMovimiento() {
-		return this.estrategiaDeMovimiento;
-	}
-	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
 		
@@ -184,7 +180,6 @@ public abstract class Unidad implements Controlable, Entrenable {
 			this.proxyMovimiento = new ProxyMovimiento(this.estrategiaDeMovimiento);
 			this.proxyMovimiento.moverse(this.propietario, this, coordFinal);
 			this.posicion = coordFinal;
-			
 			
 		} else {
 			throw new YaSeMovioEnEsteTurno();

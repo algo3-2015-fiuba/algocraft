@@ -17,16 +17,15 @@ public class UnidadAlucinada extends Unidad {
 
 	private Unidad alucinada;
 	
-	public UnidadAlucinada(Unidad alucinada) {
+	public UnidadAlucinada(Unidad alucinada, EstrategiaMovimiento estrategiaDeMovimiento) {
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		
+		super();		
 		this.alucinada = alucinada;
-		this.estrategiaDeMovimiento = alucinada.getMovimiento();
+		this.estrategiaDeMovimiento = estrategiaDeMovimiento;
 		this.propietario = Juego.getInstance().turnoDe();
-		this.ubicar(mapa.obtenerUbicacion(alucinada));
 		this.propietario.asignarUnidad(this);
 		this.vida = new Escudo(alucinada.vidaActual());
+		
 	}
 	
 	/* * * * * * * * * * * * * 
@@ -34,31 +33,6 @@ public class UnidadAlucinada extends Unidad {
 	 *  Informacion basica   *
 	 *                       *
 	 * * * * * * * * * * * * */
-	
-	private void ubicar(Coordenada posicionCentral) {
-		
-		boolean ocupado = false;
-		Iterator<Celda> celdasAOcupar = Juego.getInstance().getMapa().obtenerRangoRadialDeCeldas(posicionCentral, 5).iterator();
-		
-		Celda celdaPosible = null;
-		
-		while ((celdasAOcupar.hasNext()) && (!ocupado)) {
-		
-			celdaPosible = celdasAOcupar.next();
-		
-			Iterator<Unidad> unidadesEnCelda = celdaPosible.getUnidades().iterator();
-			boolean colisiona = false;
-			while (unidadesEnCelda.hasNext()) {
-				Unidad unidad = unidadesEnCelda.next();
-				if (unidad.colisionaCon(this.estrategiaDeMovimiento)) colisiona = true;
-			}
-			
-			if (!colisiona) ocupado = true;
-		
-		}
-		
-		if ((!ocupado) && (celdaPosible != null)) celdaPosible.ocupar(this);
-	}
 	
 	@Override
 	public int suministrosNecesarios() { return 0; }	
@@ -84,6 +58,28 @@ public class UnidadAlucinada extends Unidad {
 	 * Movimientos   *
  	 *               *
 	 * * * * * * * * */
+	
+	protected void ubicar(Coordenada posicionCentral) {
+		
+		//Este metodo trata de ubicar a la unidad alucinada en un rango radial de 5.
+		Iterator<Celda> celdasPosiblesDeOcupacion = Juego.getInstance().getMapa().obtenerRangoRadialDeCeldas(posicionCentral, 5).iterator();
+		
+		boolean ubicado = false;
+		
+		while ((celdasPosiblesDeOcupacion.hasNext()) && (!ubicado)) {
+			
+			Celda celdaPosible = celdasPosiblesDeOcupacion.next();
+			
+			if (!celdaPosible.colisiona(this)) {
+				
+				System.out.println("X: "+celdaPosible.getPosicion().getX()+" Y: "+celdaPosible.getPosicion().getY());
+				celdaPosible.ocupar(this);
+				ubicado = true;
+			}
+			
+		}
+		
+	}
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
@@ -111,9 +107,7 @@ public class UnidadAlucinada extends Unidad {
 			Mapa mapa = Juego.getInstance().getMapa();
 			Celda celda = mapa.obtenerCelda(mapa.obtenerUbicacion(this));
 			if (celda != null) celda.desocupar(this);
-		} catch (CoordenadaFueraDeRango cfdr) {
-			//No deberia suceder nunca esto.
-		}
+		} catch (CoordenadaFueraDeRango cfdr) {}
 		
 	}
 

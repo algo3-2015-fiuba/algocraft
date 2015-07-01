@@ -147,8 +147,8 @@ public class MarineTester {
 		exception.expect(UnidadEnEntrenamiento.class);
 		barraca.activarUnidad(marine, ubicacionPosibleMarine);		
 		
-	}
-	
-	
+		assertFalse(mapa.obtenerCelda(ubicacionPosibleMarine).contiene(marine));
+		
+	}	
 	
 }

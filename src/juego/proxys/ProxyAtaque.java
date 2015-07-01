@@ -2,8 +2,10 @@ package juego.proxys;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
+import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
+import juego.mapa.Mapa;
 import juego.razas.ataques.Ataques;
 import juego.razas.unidades.UnidadAtaque;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
@@ -13,11 +15,13 @@ import juego.razas.unidades.excepciones.UnidadAliada;
 public class ProxyAtaque {
 
 	protected Ataques ataques;
+	protected EstrategiaMovimiento tacticaMovimiento;
 	
-	public ProxyAtaque(Ataques ataques) {
+	public ProxyAtaque(Ataques ataques, EstrategiaMovimiento tacticaMovimiento) {
 		
 		super();
 		this.ataques = ataques;
+		this.tacticaMovimiento = tacticaMovimiento;
 		
 	}
 	
@@ -37,13 +41,17 @@ public class ProxyAtaque {
 
 	public void atacarA(UnidadAtaque agresor, Controlable victima) throws AtaqueInvalido, NoTieneVision {
 		
+		Mapa mapa = Juego.getInstance().getMapa();
+		
+		if (!Juego.getInstance().turnoDe().esAliado(agresor)) throw new AtaqueInvalido();
+		
 		if (this.esAliado(victima)) throw new UnidadAliada();
 		
 		if (!this.atacanteTieneVision(victima)) throw new NoTieneVision();
 		
-		if (!this.ataques.estaEnRango(agresor, victima)) throw new FueraDeRangoDeAtaque();
+		if (!this.ataques.estaEnRango(this.tacticaMovimiento, mapa.obtenerUbicacion(agresor), victima)) throw new FueraDeRangoDeAtaque();
 	
-		ataques.atacar(agresor.getMovimiento(), victima);
+		this.ataques.atacar(this.tacticaMovimiento, victima);
 		
 	}	
 	

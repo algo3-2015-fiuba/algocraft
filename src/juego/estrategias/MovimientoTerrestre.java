@@ -10,6 +10,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.materiales.Material;
+import juego.razas.ataques.Ataques;
 import juego.razas.unidades.Unidad;
 
 public class MovimientoTerrestre implements EstrategiaMovimiento {
@@ -43,6 +44,31 @@ public class MovimientoTerrestre implements EstrategiaMovimiento {
 	@Override
 	public boolean distanciaAlcanzable(int distanciaAMover) {
 		return (distanciaAMover <= this.rangoDeMovimiento);
+	}
+	
+	@Override
+	public boolean estaEnRangoDeAtaque(Ataques ataques, Coordenada ubicacionAgresor, Controlable victima) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
+		int distanciaVictima = mapa.distancia(ubicacionAgresor, victima);
+		
+		if (victima.colisionaCon(this)) {
+			return ataques.estaEnRangoTierra(distanciaVictima);
+		} else {
+			return ataques.estaEnRangoAire(distanciaVictima);
+		}
+		
+	}
+	
+	@Override
+	public void atacar(Ataques ataques, Controlable victima) {
+		
+		if (victima.colisionaCon(this)) {
+			ataques.atacarPorTierra(victima);
+		} else {
+			ataques.atacarPorAire(victima);
+		}
+
 	}
 	
 	@Override
