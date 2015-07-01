@@ -42,10 +42,14 @@ public class PanelJugadores extends MenuPanel {
 		listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
 
 		listPane.add(Box.createRigidArea(new Dimension(0, 130)));
+		
 		listPane.add(jugador1, BorderLayout.CENTER);
 		listPane.add(jugador2, BorderLayout.CENTER);
+		
 		listPane.add(Box.createRigidArea(new Dimension(0, 30)));
+		
 		listPane.add(botonContinuar);
+		
 		listPane.add(Box.createRigidArea(new Dimension(0, 200)));
 		
 		
