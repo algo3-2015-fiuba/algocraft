@@ -6,13 +6,11 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
 import juego.interfaces.Controlable;
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendiente;
 import vistas.mapa.VistaCelda;
 
 public abstract class ActorControlable extends Actor {

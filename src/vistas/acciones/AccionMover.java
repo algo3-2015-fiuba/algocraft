@@ -1,6 +1,5 @@
 package vistas.acciones;
 
-import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 
 public class AccionMover extends AccionPendienteUnidad {

@@ -2,13 +2,11 @@ package vistas.acciones;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
-import juego.interfaces.excepciones.NoTieneVision;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadAtaque;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public class AccionAtacar extends AccionPendienteUnidad {
 

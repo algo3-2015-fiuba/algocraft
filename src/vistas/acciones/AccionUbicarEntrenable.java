@@ -2,17 +2,11 @@ package vistas.acciones;
 
 import java.util.Collection;
 
-import vistas.acciones.AccionPendienteConstruccion;
 import vistas.acciones.AccionPendienteEntrenamiento;
-import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
-import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.Barraca;
-import juego.razas.construcciones.terran.CentroDeMineral;
-import juego.razas.unidades.Unidad;
-import juego.razas.unidades.terran.Marine;
 
 public class AccionUbicarEntrenable extends AccionPendienteEntrenamiento {
 	

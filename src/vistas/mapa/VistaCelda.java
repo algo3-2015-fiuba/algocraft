@@ -24,7 +24,6 @@ import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.unidades.Unidad;
-import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.recursos.Recurso;
 
 public class VistaCelda extends JComponent {
