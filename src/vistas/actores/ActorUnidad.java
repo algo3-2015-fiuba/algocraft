@@ -16,8 +16,6 @@ import vistas.mapa.VistaCelda;
 
 public class ActorUnidad extends ActorControlable {
 	
-	protected URL url;
-	
 	public ActorUnidad() {
 		this.nombre = "Unidad";
 		

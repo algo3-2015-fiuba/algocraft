@@ -35,11 +35,11 @@ public abstract class ActorControlable extends Actor {
 		
 		this.dibujarFondoDeColor(g, colorElemento);
 		
-		if (url != null) {
+		if (this.url != null) {
 
 			try {
 				BufferedImage image;
-				image = ImageIO.read(url);
+				image = ImageIO.read(this.url);
 				Image scaled = image.getScaledInstance(altoImagen, altoImagen, Image.SCALE_SMOOTH);
 				g.drawImage(scaled, margenXImagen, margenYImagen, null);
 				
@@ -47,6 +47,8 @@ public abstract class ActorControlable extends Actor {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			BufferedImage image;
 		}
 	}
 	
