@@ -92,9 +92,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 				if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
 			}			
 			
-		} catch (CoordenadaFueraDeRango cfdr) {
-			//Esta excepcion no deberia suceder ya que la construccion ya ha sido construida y validada.
-		}
+		} catch (CoordenadaFueraDeRango cfdr) {}
 		
 		return false;
 		
