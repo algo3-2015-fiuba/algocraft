@@ -32,8 +32,8 @@ public class PanelJugadores extends MenuPanel {
 		JButton botonContinuar = Aplicacion.boton("/assets/botones/iniciar.png");
 		botonContinuar.addActionListener(new IniciarJuego(this));
 		
-		jugador1 = new SeleccionJugador("Jugador 1");
-		jugador2 = new SeleccionJugador("Jugador 2");
+		jugador1 = new SeleccionJugador("Jugador 1", 0);
+		jugador2 = new SeleccionJugador("Jugador 2", 1);
 		
 		JPanel listPane = new JPanel();
 

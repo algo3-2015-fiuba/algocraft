@@ -26,11 +26,12 @@ public class SeleccionJugador extends JPanel {
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
 	private String nombre;
+	private CampoDeTextoPredeterminado nombreDelJugador;
 	private JComboBox<String> seleccionDeRaza;
 	private JComboBox<Item> seleccionDeColor;
 	
 	@SuppressWarnings("unchecked")
-	public SeleccionJugador(String nombre) {
+	public SeleccionJugador(String nombre, int indexSeleccionColor) {
 		
 		this.nombre = nombre;
 
@@ -38,7 +39,7 @@ public class SeleccionJugador extends JPanel {
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		CampoDeTextoPredeterminado f = new CampoDeTextoPredeterminado(nombre);
+		this.nombreDelJugador = new CampoDeTextoPredeterminado(nombre);
 		
 		String[] razasDisponibles = { "Terran", "Protoss" };
 		
@@ -52,16 +53,17 @@ public class SeleccionJugador extends JPanel {
 		
 		this.seleccionDeColor = new JComboBox<Item>(coloresDisponibles);
 		this.seleccionDeColor.setFont(new Font(this.seleccionDeRaza.getFont().getName(), Font.PLAIN, 20));
-		this.seleccionDeColor.setSelectedIndex(new Random().nextInt(2));
+		this.seleccionDeColor.setSelectedIndex(indexSeleccionColor);
 		this.seleccionDeColor.setRenderer(new ItemRenderer());
 		
-		this.add(f);
+		this.add(this.nombreDelJugador);
 		this.add(this.seleccionDeRaza);
 		this.add(this.seleccionDeColor);
 	}
 	
 	public Jugador obtenerJugador() {
 		
+		String nombre = this.nombreDelJugador.getText();
 		String raza = String.valueOf(this.seleccionDeRaza.getSelectedItem());
 		Color color = ((Item) this.seleccionDeColor.getSelectedItem()).getColor();
 		
@@ -69,10 +71,10 @@ public class SeleccionJugador extends JPanel {
 		
 		switch (raza) {
 		  case "Terran":
-			  	jugador = new JugadorTerran(this.nombre, color);
+			  	jugador = new JugadorTerran(nombre, color);
 		        break;
 		  case "Protoss": 
-			    jugador = new JugadorProtoss(this.nombre, color);
+			    jugador = new JugadorProtoss(nombre, color);
 		        break;
 		}
 
