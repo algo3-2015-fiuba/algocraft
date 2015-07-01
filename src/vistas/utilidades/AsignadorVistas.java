@@ -56,7 +56,7 @@ public class AsignadorVistas {
 		return instance;
 	}
 	
-	public Actor obtenerRepresentacion(Class<?> claseDeObjeto) {
+	public Actor obtenerRepresentacion(Class<?> claseDeObjeto, Object estado) {
 		
 		if(claseDeObjeto == null) {
 			return new ActorObject();
@@ -64,8 +64,9 @@ public class AsignadorVistas {
 			Actor actor = this.actores.get(claseDeObjeto);
 		
 			if(actor == null) {
-				return this.obtenerRepresentacion(claseDeObjeto.getSuperclass());
+				return this.obtenerRepresentacion(claseDeObjeto.getSuperclass(), estado);
 			} else {
+				actor.asignarEstado(estado);
 				return actor;
 			}
 		}

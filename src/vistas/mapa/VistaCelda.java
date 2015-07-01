@@ -64,12 +64,7 @@ public class VistaCelda extends JComponent {
 	
 	public void notificarSeleccion() {
 		for(ObservadorCelda obs : this.observadores) {
-			try {
-				obs.notificar(this.obtenerPosicion());
-			} catch (AtaqueInvalido e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			obs.notificar(this.obtenerPosicion());
 		}
 	}
 	
@@ -112,7 +107,7 @@ public class VistaCelda extends JComponent {
 
 		if (base != null) {
 			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(base.getClass());
+					.obtenerRepresentacion(base.getClass(), base);
 			actorResponsable.dibujar(g);
 		}
 	}
@@ -174,7 +169,7 @@ public class VistaCelda extends JComponent {
 
 		for (Unidad unidad : unidadesDeCelda) {
 			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(unidad.getClass());
+					.obtenerRepresentacion(unidad.getClass(), unidad);
 			actorResponsable.dibujar(g);
 		}
 	}
@@ -186,7 +181,7 @@ public class VistaCelda extends JComponent {
 
 		for (Construccion construccion : construccionesDeCelda) {
 			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(construccion.getClass());
+					.obtenerRepresentacion(construccion.getClass(), construccion);
 			actorResponsable.dibujar(g);
 		}
 	}
@@ -196,7 +191,7 @@ public class VistaCelda extends JComponent {
 
 		if (recurso != null) {
 			Actor actorRecurso = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(recurso.getClass());
+					.obtenerRepresentacion(recurso.getClass(), recurso);
 			actorRecurso.dibujar(g);
 		}
 	}

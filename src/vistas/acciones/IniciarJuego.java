@@ -48,7 +48,7 @@ public class IniciarJuego implements ActionListener {
 				cargaValida = false;
 				
 			} catch (ColorInvalido ci){
-				JOptionPane.showMessageDialog(null, "Error, parece que los colores son iguales.", "AlgoCraft",1);
+				JOptionPane.showMessageDialog(null, "Error, parece que los colores son iguales.", "AlgoCraft", 1);
 				cargaValida = false;
 				
 			} catch (InicioInvalido ii) {

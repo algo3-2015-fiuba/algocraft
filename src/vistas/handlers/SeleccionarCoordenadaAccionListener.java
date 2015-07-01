@@ -4,6 +4,8 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
+
 import juego.interfaces.Controlable;
 import vistas.acciones.AccionPendiente;
 import vistas.paneles.secundarios.juego.PanelAcciones;
@@ -27,10 +29,18 @@ public class SeleccionarCoordenadaAccionListener extends MouseAdapter {
 		
 		Controlable elementoSeleccionado = panelAcciones.elementoSeleccionado();
 		
-		accion.iniciar(elementoSeleccionado);
+		try {
+			accion.iniciar(elementoSeleccionado);
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "No se ha podido concretar esa accion", "AlgoCraft", 1);
+		}
 		
-		this.ventanaOriginal.agregarAccionPendiente(accion);
-		this.ventanaOriginal.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+		if(accion.asignarComoPendiente()) {
+			this.ventanaOriginal.agregarAccionPendiente(accion);
+			this.ventanaOriginal.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+		}
+		
+		this.ventanaOriginal.actualizarPantalla();
 	}
 	
 	@Override

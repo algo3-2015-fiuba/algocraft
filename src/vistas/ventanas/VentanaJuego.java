@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
@@ -121,7 +122,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	}
 
 	@Override
-	public void notificar(Coordenada coordenada) throws AtaqueInvalido {
+	public void notificar(Coordenada coordenada) {
 		Controlable elementoSeleccionado = null;
 		
 		Celda celdaSeleccionada = null;
@@ -146,7 +147,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 				
 				this.panelInfoJugador.actualizarDatosDelJugador();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "Error al ejecutar la accion:" + e.getClass().getSimpleName(), "AlgoCraft", 1);
 				e.printStackTrace();
 			}
 			this.actualizarPantalla();
@@ -167,12 +168,15 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	public void finalizarTurno() {
 		Juego.getInstance().turnoDe().finalizarTurno();
 		
-		this.panelInfoJugador.actualizarDatosDelJugador();
+		
+		this.removerAccionPendiente();
+		this.panelIzquierdo.seleccionarElemento(null);
 		
 		this.actualizarPantalla();
 	}
 	
 	public void actualizarPantalla() {
+		this.panelInfoJugador.actualizarDatosDelJugador();
 		this.getContentPane().validate();
 		this.getContentPane().repaint();
 	}

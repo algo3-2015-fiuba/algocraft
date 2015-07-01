@@ -4,5 +4,5 @@ import juego.mapa.Coordenada;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public interface ObservadorCelda {
-	public void notificar(Coordenada coordenadaSeleccionada) throws AtaqueInvalido;
+	public void notificar(Coordenada coordenadaSeleccionada);
 }

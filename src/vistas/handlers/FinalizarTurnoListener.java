@@ -17,11 +17,12 @@ public class FinalizarTurnoListener extends MouseAdapter {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println(Juego.getInstance().turnoDe().getNombre());
+		for(int i = 0; i < 100; i++) {
+			Juego.getInstance().turnoDe().finalizarTurno();
+		}
 		
 		this.ventanaOriginal.finalizarTurno();
 		
-		System.out.println(Juego.getInstance().turnoDe().getNombre());
 	}
 	
 	@Override

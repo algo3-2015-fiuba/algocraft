@@ -84,7 +84,7 @@ public class PanelAcciones extends JPanel {
 
 		if (this.elementoSeleccionado != null) {
 			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(this.elementoSeleccionado.getClass());
+					.obtenerRepresentacion(this.elementoSeleccionado.getClass(), this.elementoSeleccionado);
 			
 			//Actor actorResponsable = new ActorMineral();
 
@@ -94,7 +94,7 @@ public class PanelAcciones extends JPanel {
 			Jugador jugadorActual = Juego.getInstance().turnoDe();
 			
 			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(jugadorActual.getClass());
+					.obtenerRepresentacion(jugadorActual.getClass(), this.elementoSeleccionado);
 			
 			//Actor actorResponsable = new ActorMineral();
 

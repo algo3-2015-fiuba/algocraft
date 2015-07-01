@@ -96,12 +96,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 				// Here, we can safely update the GUI
 				// because we'll be called from the
 				// event dispatch thread
-				try {
-					ventanaOriginal.notificar(coordenada);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ventanaOriginal.notificar(coordenada);
 			}
 		});
 

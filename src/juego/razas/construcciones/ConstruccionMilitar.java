@@ -45,24 +45,35 @@ public abstract class ConstruccionMilitar extends Construccion {
 		}
 
 		this.entrenamientos.removeAll(entrenados);
-		
 	}
 	
 	public Collection<Entrenable> unidadesEnEntrenamiento() {
 		return this.entrenamientos;
 	}
+	
+	public Collection<Unidad> unidadesEntrenadas() {
+		return this.unidadesEntrenadas;
+	}
 
 	public int suministrosEnEntrenamiento() {
 		
-		int suministrosEnEntrenamiento = 0;
+		int suministrosEnTotal = 0;
 		
 		Iterator<Entrenable> it = this.entrenamientos.iterator();
 		
 		while (it.hasNext()) {
-			suministrosEnEntrenamiento += ((Unidad)(it.next())).suministrosNecesarios();
+			suministrosEnTotal += ((Unidad)(it.next())).suministrosNecesarios();
 		}
 		
-		return suministrosEnEntrenamiento;
+		Iterator<Unidad> uit = this.unidadesEntrenadas.iterator();
+		
+		while (it.hasNext()) {
+			suministrosEnTotal += ((Unidad)(it.next())).suministrosNecesarios();
+		}
+		
+		
+		
+		return suministrosEnTotal;
 		
 	}
 	
@@ -85,7 +96,7 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 	}
 	
-	public void activarUnidad(Unidad unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, UnidadEnEntrenamiento {
+	public void activarUnidad(Entrenable unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, UnidadEnEntrenamiento {
 		
 		if (!unidadActivable.entrenamientoFinalizado()) throw new UnidadEnEntrenamiento();
 		
@@ -97,8 +108,8 @@ public abstract class ConstruccionMilitar extends Construccion {
 			
 			if (unidad == unidadActivable) {
 				if (this.ubicacionValida(coordFinal)) {
-					unidadActivable.moverse(coordFinal);
-					this.propietario.asignarUnidad(unidadActivable);
+					unidad.moverse(coordFinal);
+					this.propietario.asignarUnidad(unidad);
 				}
 			}
 			

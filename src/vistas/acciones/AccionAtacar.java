@@ -11,7 +11,7 @@ import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public class AccionAtacar extends AccionPendienteUnidad {
 
-	public void finalizar(Coordenada destino) throws AtaqueInvalido {
+	public void finalizar(Coordenada destino) throws Exception {
 		
 		Unidad unidad = null;
 		
@@ -27,12 +27,8 @@ public class AccionAtacar extends AccionPendienteUnidad {
 			unidad = celdaSeleccionada.getUnidades().iterator().next();
 		}
 		
-		try {
-			((UnidadAtaque)this.unidadEmisora).atacarA(unidad);
-		} catch (NoTieneVision e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		((UnidadAtaque)this.unidadEmisora).atacarA(unidad);
+		
 	}
 
 	@Override

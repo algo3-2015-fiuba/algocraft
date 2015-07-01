@@ -75,7 +75,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 	private void asignarNombre() {
 		
 		if(this.seleccionado != null) {		
-			Actor responsable = AsignadorVistas.getInstance().obtenerRepresentacion(this.seleccionado.getClass());
+			Actor responsable = AsignadorVistas.getInstance().obtenerRepresentacion(this.seleccionado.getClass(), this.seleccionado);
 			this.nombreUnidad.setText(responsable.nombre());
 		} else {
 			this.nombreUnidad.setText("");

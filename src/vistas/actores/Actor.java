@@ -7,25 +7,10 @@ import vistas.acciones.AccionPendiente;
 
 public abstract class Actor {
 	
-	public enum PosicionEnCelda {
-	    AIRE(0), TIERRA(0.35);
-	    
-	    private double posicion;
-	    
-	    private PosicionEnCelda(double posicion) {
-			this.posicion = posicion;
-		}
-	    
-	    public double posicion() {
-	    	return this.posicion;
-	    }
-	}
-	
-	
 	protected String nombre;
 	protected Vector<AccionPendiente> acciones;
 	protected PosicionEnCelda posicionCelda = PosicionEnCelda.TIERRA;
-	
+	protected Object elemento;
 	
 	
 	public Actor() {
@@ -40,5 +25,23 @@ public abstract class Actor {
 	
 	public Vector<AccionPendiente> acciones() {
 		return this.acciones;
+	}
+	
+	public void asignarEstado(Object elemento) {
+		this.elemento = elemento;
+	}
+	
+	public enum PosicionEnCelda {
+	    AIRE(0), TIERRA(0.35);
+	    
+	    private double posicion;
+	    
+	    private PosicionEnCelda(double posicion) {
+			this.posicion = posicion;
+		}
+	    
+	    public double posicion() {
+	    	return this.posicion;
+	    }
 	}
 }
