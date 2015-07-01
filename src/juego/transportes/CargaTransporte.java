@@ -45,7 +45,7 @@ public class CargaTransporte {
 		
 		unidad.subirACarro();
 		this.unidadesEnCarro.add(unidad);	
-		
+
 	}
 
 	public void bajar(Unidad unidad, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {

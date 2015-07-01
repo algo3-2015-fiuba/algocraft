@@ -10,7 +10,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
 import vistas.acciones.IniciarJuego;
@@ -55,10 +54,9 @@ public class PanelJugadores extends MenuPanel {
 	
 	public Vector<Jugador> obtenerJugadores() {
 		Vector<Jugador> jugadores = new Vector<Jugador>();
-		
+			
 		jugadores.add(jugador1.obtenerJugador());
-		jugadores.add(jugador2.obtenerJugador());
-		
+		jugadores.add(jugador2.obtenerJugador());	
 		
 		return jugadores;
 	}

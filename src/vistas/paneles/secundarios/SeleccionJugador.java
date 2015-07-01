@@ -75,9 +75,7 @@ public class SeleccionJugador extends JPanel {
 			    jugador = new JugadorProtoss(this.nombre, color);
 		        break;
 		}
-		
-		
-		
+
 		return jugador;
 	}
 }
