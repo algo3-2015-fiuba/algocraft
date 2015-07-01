@@ -23,13 +23,19 @@ public class MapaJugador {
 	public boolean tieneVision(Controlable controlable) {
 		
 		for (Celda celda : this.mapaDescubierto.obtenerCeldas()) {
-
 			if (celda.contiene(controlable)) return true;
-			
 		}
 		
 		return false;
+	}
+	
+	public boolean tieneVision(Celda celdaElegida) {
 		
+		for (Celda celda : this.mapaDescubierto.obtenerCeldas()) {
+			if (celda.equals(celdaElegida)) return true;
+		}
+		
+		return false;
 	}
 
 }

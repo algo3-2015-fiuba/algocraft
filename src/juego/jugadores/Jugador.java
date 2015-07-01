@@ -77,6 +77,7 @@ public abstract class Jugador {
 	public int limiteDePoblacion() { return this.recursos.limiteDePoblacion(this.getHospedables()); }
 	public int poblacionActual() { return this.recursos.poblacionActual(this.unidades, this.getMilitables()); }
 	
+	public boolean tieneVision(Celda celda) { return this.mapaDescubierto.tieneVision(celda); }
 	public boolean tieneVision(Controlable controlable) { return this.mapaDescubierto.tieneVision(controlable); }
 	
 	public boolean esAliado(Controlable controlable) { 

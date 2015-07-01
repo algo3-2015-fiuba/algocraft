@@ -16,6 +16,8 @@ import vistas.actores.materiales.ActorAire;
 import vistas.actores.materiales.ActorTierra;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.utilidades.AsignadorVistas;
+import juego.Juego;
+import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.materiales.Material;
@@ -33,6 +35,7 @@ public class VistaCelda extends JComponent {
 	private static final long serialVersionUID = -4451841605373415808L;
 	public static final int lado = 60;
 	private boolean seleccionada;
+	private boolean visible;
 	
 	private ArrayList<ObservadorCelda> observadores;
 
@@ -46,6 +49,7 @@ public class VistaCelda extends JComponent {
 		
 		
 		this.seleccionada = false;
+		this.visible = false;
 		
 		this.setPreferredSize(new Dimension(lado + 1, lado + 1));
 	}
@@ -87,18 +91,49 @@ public class VistaCelda extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		this.actualizarVisibilidad();
 
 		this.dibujarFondo(g);
 		this.dibujarSombraDeFondo(g);
 		this.dibujarRecursos(g);
-		this.dibujarConstrucciones(g);
-		this.dibujarBases(g);
-		this.dibujarUnidades(g);
+		
+		if(this.visible) {
+			this.dibujarConstrucciones(g);
+			this.dibujarBases(g);
+			this.dibujarUnidades(g);
+		} else {
+			this.dibujarSombraDeVision(g);
+		}
 		
 		if(this.seleccionada) {
 			this.dibujarSeleccion(g);
 		}
 		
+	}
+
+	private void actualizarVisibilidad() {
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		
+		this.visible = jugadorActual.tieneVision(this.celdaRepresentante);
+	}
+
+	private void dibujarSombraDeVision(Graphics g) {
+		final float[] FRACTIONS = { 0f, 1.0f };
+	    final Color[] DARK_COLORS = { new Color(0,0,0,180),
+	    		new Color(0,0,0,230) };
+	    
+	    int mitadDeLado = (int) (lado * 0.5);
+		
+		LinearGradientPaint gp = new LinearGradientPaint(
+				new Point2D.Double(mitadDeLado,0),
+				new Point2D.Double(mitadDeLado,lado),
+				FRACTIONS,
+				DARK_COLORS);
+		Graphics2D g2D = (Graphics2D) g;
+		
+		g2D.setPaint(gp);
+		g2D.fillRect(0, 0, lado, lado);
 	}
 
 	private void dibujarBases(Graphics g) {
