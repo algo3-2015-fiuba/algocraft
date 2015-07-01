@@ -2,9 +2,7 @@ package vistas.actores.jugadores;
 
 import java.awt.Graphics;
 
-import vistas.acciones.jugador.*;
 import vistas.actores.Actor;
-import vistas.actores.construcciones.terran.ActorBaseTerran;
 
 public abstract class ActorJugador extends Actor {
 	

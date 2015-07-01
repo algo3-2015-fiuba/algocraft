@@ -2,10 +2,8 @@ package vistas.actores.jugadores;
 
 import java.awt.Graphics;
 
-import vistas.acciones.jugador.*;
 import vistas.actores.Actor;
 import vistas.actores.construcciones.protoss.ActorBaseProtoss;
-import vistas.actores.construcciones.terran.ActorBaseTerran;
 
 public class ActorJugadorProtoss extends ActorJugador {
 	

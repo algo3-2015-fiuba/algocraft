@@ -1,4 +1,4 @@
-package vistas.acciones.jugador;
+package vistas.acciones.construcciones.terran;
 
 import vistas.acciones.AccionPendienteConstruccion;
 import juego.Juego;

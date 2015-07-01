@@ -1,14 +1,6 @@
 package vistas.actores.construcciones.protoss;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import juego.razas.construcciones.protoss.Acceso;
-import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendiente;
-import vistas.acciones.AccionUbicarEntrenable;
-import vistas.acciones.entrenamientos.terran.AccionEntrenarMarine;
 import vistas.actores.ActorConstruccion;
 
 public class ActorBaseProtoss extends ActorConstruccion {
