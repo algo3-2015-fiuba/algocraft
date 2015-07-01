@@ -1,4 +1,4 @@
-package ataquesTest;
+package ataquesTests;
 import java.awt.Color;
 
 import juego.Juego;
