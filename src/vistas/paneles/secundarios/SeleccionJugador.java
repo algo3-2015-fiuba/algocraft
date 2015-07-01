@@ -25,6 +25,7 @@ public class SeleccionJugador extends JPanel {
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
 	private String nombre;
+	private String nombrePredeterminado;
 	private CampoDeTextoPredeterminado nombreDelJugador;
 	private JComboBox<String> seleccionDeRaza;
 	private JComboBox<Item> seleccionDeColor;
@@ -33,6 +34,7 @@ public class SeleccionJugador extends JPanel {
 	public SeleccionJugador(String nombre, int indexSeleccionColor) {
 		
 		this.nombre = nombre;
+		this.nombrePredeterminado = nombre;
 
 		this.setBackground(new Color(0, 0, 0, 0));
 		this.setBorder(BorderFactory.createEmptyBorder());
@@ -63,6 +65,10 @@ public class SeleccionJugador extends JPanel {
 	public Jugador obtenerJugador() {
 		
 		String nombre = this.nombreDelJugador.getText();
+		
+		if(nombre.equals(this.nombrePredeterminado))
+			nombre = "";
+		
 		String raza = String.valueOf(this.seleccionDeRaza.getSelectedItem());
 		Color color = ((Item) this.seleccionDeColor.getSelectedItem()).getColor();
 		

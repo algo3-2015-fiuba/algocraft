@@ -111,6 +111,7 @@ public class Juego {
 				Jugador jugadorActual = it.next();
 				if (jugadorActual.getColor().equals(jugadorNuevo.getColor())) throw new ColorInvalido();
 				if (jugadorActual.getNombre().equals(jugadorNuevo.getNombre())) throw new NombreInvalido();
+				if (jugadorActual.getNombre().equals("")) throw new NombreInvalido();
 			}
 		
 			this.jugadores.add(jugadorNuevo);

@@ -21,8 +21,8 @@ public class PanelJugadores extends MenuPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2318162583471014637L;
-	private SeleccionJugador jugador1;
-	private SeleccionJugador jugador2;
+	private SeleccionJugador seleccionJugador1;
+	private SeleccionJugador seleccionJugador2;
 	
 	public PanelJugadores(JPanel panelBase) {
 		super(panelBase);
@@ -32,8 +32,8 @@ public class PanelJugadores extends MenuPanel {
 		JButton botonContinuar = Aplicacion.boton("/assets/botones/iniciar.png");
 		botonContinuar.addActionListener(new IniciarJuego(this));
 		
-		jugador1 = new SeleccionJugador("Jugador 1", 0);
-		jugador2 = new SeleccionJugador("Jugador 2", 1);
+		seleccionJugador1 = new SeleccionJugador("Jugador 1", 0);
+		seleccionJugador2 = new SeleccionJugador("Jugador 2", 1);
 		
 		JPanel listPane = new JPanel();
 
@@ -43,8 +43,8 @@ public class PanelJugadores extends MenuPanel {
 
 		listPane.add(Box.createRigidArea(new Dimension(0, 130)));
 		
-		listPane.add(jugador1, BorderLayout.CENTER);
-		listPane.add(jugador2, BorderLayout.CENTER);
+		listPane.add(seleccionJugador1, BorderLayout.CENTER);
+		listPane.add(seleccionJugador2, BorderLayout.CENTER);
 		
 		listPane.add(Box.createRigidArea(new Dimension(0, 30)));
 		
@@ -59,8 +59,8 @@ public class PanelJugadores extends MenuPanel {
 	public Vector<Jugador> obtenerJugadores() {
 		Vector<Jugador> jugadores = new Vector<Jugador>();
 			
-		jugadores.add(jugador1.obtenerJugador());
-		jugadores.add(jugador2.obtenerJugador());	
+		jugadores.add(seleccionJugador1.obtenerJugador());
+		jugadores.add(seleccionJugador2.obtenerJugador());	
 		
 		return jugadores;
 	}
