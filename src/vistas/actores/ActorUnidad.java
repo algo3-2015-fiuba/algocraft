@@ -7,12 +7,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.net.URL;
+
 import vistas.Aplicacion;
 import vistas.acciones.AccionAtacar;
 import vistas.acciones.AccionMover;
 import vistas.mapa.VistaCelda;
 
 public class ActorUnidad extends Actor {
+	
+	protected URL url;
 	
 	public ActorUnidad() {
 		this.nombre = "Unidad";
