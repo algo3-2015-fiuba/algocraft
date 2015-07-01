@@ -36,6 +36,11 @@ public class AccionUbicarEntrenable extends AccionPendienteEntrenamiento {
 			throw new Exception("El entrenable a ubicar ya no se encuentra");
 		}
 	}
+	
+	@Override
+	public boolean asignarComoPendiente() {
+		return true;
+	}
 
 	@Override
 	public String nombre() {

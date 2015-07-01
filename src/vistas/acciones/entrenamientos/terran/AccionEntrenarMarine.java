@@ -13,7 +13,6 @@ public class AccionEntrenarMarine extends AccionPendienteEntrenamiento {
 		super.iniciar(controlable);
 		Barraca barraca = (Barraca) this.construccionSeleccionada;
 		barraca.entrenar(new Marine());
-		
 	}
 
 	public void finalizar(Coordenada destino) throws Exception {		

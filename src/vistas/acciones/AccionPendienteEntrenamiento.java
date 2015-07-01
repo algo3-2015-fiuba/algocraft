@@ -11,6 +11,6 @@ public abstract class AccionPendienteEntrenamiento extends AccionPendiente {
 	
 	@Override
 	public boolean asignarComoPendiente() {
-		return true;
+		return false;
 	}
 }
