@@ -53,13 +53,14 @@ public class naveCienciaTest {
 		Coordenada ubicacionNaveCiencia = new Coordenada(5,21);
 		
 		Marine marine = new Marine();
+		jugadorReceptor.asignarUnidad(marine);
+		
 		marine.moverse(ubicacionMarineEnemigo);
+		jugadorReceptor.finalizarTurno();
 		
 		NaveCiencia naveCiencia = new NaveCiencia();
-		naveCiencia.moverse(ubicacionNaveCiencia);
-		
-		jugadorReceptor.asignarUnidad(marine);	
 		jugadorAtacante.asignarUnidad(naveCiencia);
+		naveCiencia.moverse(ubicacionNaveCiencia);
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
 		
@@ -99,16 +100,17 @@ public class naveCienciaTest {
 		Coordenada ubicacionNaveCiencia = new Coordenada(5,21);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
 		Marine marine2 = new Marine();
-		marine2.moverse(ubicacionMarineEnemigo2);
-		
-		NaveCiencia naveCiencia = new NaveCiencia();
-		naveCiencia.moverse(ubicacionNaveCiencia);
-		
 		jugadorReceptor.asignarUnidad(marine);
 		jugadorReceptor.asignarUnidad(marine2);
+		
+		marine.moverse(ubicacionMarineEnemigo);
+		marine2.moverse(ubicacionMarineEnemigo2);
+		jugadorReceptor.finalizarTurno();
+		
+		NaveCiencia naveCiencia = new NaveCiencia();
 		jugadorAtacante.asignarUnidad(naveCiencia);
+		naveCiencia.moverse(ubicacionNaveCiencia);
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
 		
@@ -152,16 +154,17 @@ public class naveCienciaTest {
 		Coordenada ubicacionNaveCiencia = new Coordenada(5,21);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineEnemigo);
 		Marine marine2 = new Marine();
-		marine2.moverse(ubicacionMarineEnemigo2);
-		
-		NaveCiencia naveCiencia = new NaveCiencia();
-		naveCiencia.moverse(ubicacionNaveCiencia);
-		
 		jugadorReceptor.asignarUnidad(marine);
 		jugadorReceptor.asignarUnidad(marine2);
+		
+		marine.moverse(ubicacionMarineEnemigo);
+		marine2.moverse(ubicacionMarineEnemigo2);
+		jugadorReceptor.finalizarTurno();
+		
+		NaveCiencia naveCiencia = new NaveCiencia();
 		jugadorAtacante.asignarUnidad(naveCiencia);
+		naveCiencia.moverse(ubicacionNaveCiencia);
 		
 		Juego.getInstance().turnoDe().finalizarTurno();
 		

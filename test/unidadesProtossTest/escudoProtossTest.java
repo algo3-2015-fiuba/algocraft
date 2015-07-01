@@ -57,14 +57,14 @@ public class escudoProtossTest {
 		Coordenada ubicacionMarineAtacante = new Coordenada(1,20);
 		
 		Marine marine = new Marine();
-		marine.moverse(ubicacionMarineAtacante);
-		
 		Zealot zealot = new Zealot();
-		zealot.moverse(ubicacionZealotAtacado);
-		
 		jugadorReceptor.asignarUnidad(zealot);	
-		
 		jugadorAtacante.asignarUnidad(marine);
+		
+		marine.moverse(ubicacionMarineAtacante);
+		jugadorAtacante.finalizarTurno();
+		zealot.moverse(ubicacionZealotAtacado);
+		jugadorReceptor.finalizarTurno();
 		
 		//Un zealot tiene 100 de vida y 60 de escudo
 		

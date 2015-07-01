@@ -62,13 +62,12 @@ public class ataqueSimpleTest {
 		
 		Marine marine = new Marine();
 		Zealot zealot = new Zealot();
-		
-		jugadorAtacante.asignarUnidad(zealot);
-		marine.moverse(ubicacionMarineEnemigo);
-		jugadorAtacante.finalizarTurno();
-		
 		jugadorReceptor.asignarUnidad(marine);	
+		jugadorAtacante.asignarUnidad(zealot);
+		
 		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
+		marine.moverse(ubicacionMarineEnemigo);
 		jugadorReceptor.finalizarTurno();
 		
 		for(int i = 0; i < 5; i++) {

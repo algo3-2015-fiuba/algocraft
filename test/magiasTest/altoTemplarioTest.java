@@ -63,15 +63,14 @@ public class altoTemplarioTest {
 		Coordenada ubicacionAltoTemplario = new Coordenada(8,21);
 		
 		Marine marine = new Marine();
+		jugadorReceptor.asignarUnidad(marine);
 		marine.moverse(ubicacionMarine);
+		jugadorAtacante.finalizarTurno();
 		
 		AltoTemplario altoTemplario = new AltoTemplario();
-		altoTemplario.moverse(ubicacionAltoTemplario);
-		
-		
 		jugadorAtacante.asignarUnidad(altoTemplario);
-		jugadorReceptor.asignarUnidad(marine);
-		
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		jugadorReceptor.finalizarTurno();
 		
 		for (int i = 0; i < 5; i++) {
 			Juego.getInstance().turnoDe().finalizarTurno();
@@ -103,14 +102,15 @@ public class altoTemplarioTest {
 		Coordenada ubicacionAltoTemplario = new Coordenada(8,21);
 		
 		Golliat golliat = new Golliat();
-		golliat.moverse(ubicacionGolliatBajoTormenta);
-		
 		AltoTemplario altoTemplario = new AltoTemplario();
-		altoTemplario.moverse(ubicacionAltoTemplario);
-		
 		
 		jugadorAtacante.asignarUnidad(altoTemplario);
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		jugadorAtacante.finalizarTurno();
+		
 		jugadorReceptor.asignarUnidad(golliat);
+		golliat.moverse(ubicacionGolliatBajoTormenta);
+		jugadorReceptor.finalizarTurno();
 		
 		/*
 		 * Gana energia el Alto Templario...

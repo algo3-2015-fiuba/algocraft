@@ -52,13 +52,15 @@ public class ataqueAireTierraTest {
 		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
 		
 		NaveCiencia naveCiencia = new NaveCiencia();
-		naveCiencia.moverse(ubicacionNaveCienciaEnemigo);
-		
 		Zealot zealot = new Zealot();
+		
+		jugadorAtacante.asignarUnidad(zealot);
 		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
 		
 		jugadorReceptor.asignarUnidad(naveCiencia);	
-		jugadorAtacante.asignarUnidad(zealot);
+		naveCiencia.moverse(ubicacionNaveCienciaEnemigo);
+		jugadorReceptor.finalizarTurno();
 		
 		exception.expect(FueraDeRangoDeAtaque.class);
 		zealot.atacarA(naveCiencia);
