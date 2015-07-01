@@ -52,6 +52,16 @@ public abstract class Jugador {
 	public void finalizarTurno() {	
 		Juego.getInstance().finalizarTurno();		
 	}
+	
+	public void inicializarMapa() throws UbicacionInvalida {
+		
+		Iterator<ConstruccionBase> it = this.bases.iterator();
+		
+		while (it.hasNext()) {
+			it.next().inicializarMapa();
+		}
+		
+	}
 		
 	public boolean suministrosSuficientes(int cantidad) { 
 		

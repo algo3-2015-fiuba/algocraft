@@ -36,6 +36,10 @@ public class ConstruccionBase extends Construccion {
 		this.estrategiaDeMovimiento.desocupar(this);
 	}
 	
+	public void inicializarMapa() {
+		this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
+	}
+	
 	@Override
 	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
 		Mapa mapa = Juego.getInstance().getMapa();

@@ -9,6 +9,7 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.InicioInvalido;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.GeneradorMapa;
 import juego.mapa.Mapa;
@@ -81,6 +82,17 @@ public class Juego {
 		
 		GeneradorMapa generadorMapa = new GeneradorMapa();
 		this.mapa = generadorMapa.obtenerMapa(ubicacionDelMapa, this.jugadores);
+		
+		try {
+			
+			Iterator<Jugador> it = this.jugadores.iterator();
+			while (it.hasNext()) {
+				it.next().inicializarMapa();
+			}
+		
+		} catch (UbicacionInvalida ui) { 
+			throw new InicioInvalido(); 
+		}
 		
 	}
 	
