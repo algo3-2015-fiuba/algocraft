@@ -104,7 +104,7 @@ public class GeneradorMapa {
         				mapa.agregarCelda(celdaBase.getPosicion(), celdaBase);
         				ConstruccionBase base = new ConstruccionBase(jugadoresEnMapa[i], celdaBase.getPosicion());
         				celdaBase.ocupar(base);
-        				base.posicionar(celdaBase.getPosicion());
+        				//base.posicionar(celdaBase.getPosicion());
         				jugadoresEnMapa[i].asignarBase(base);
         				baseOcupada = celdaBase;
         				
