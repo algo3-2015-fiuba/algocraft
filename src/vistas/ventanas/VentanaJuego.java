@@ -27,6 +27,7 @@ import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.terran.Marine;
 import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.paneles.secundarios.juego.PanelInfoJugador;
@@ -43,6 +44,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	private Vector<Jugador> jugadores;
 	private PanelMapa panelMapa;
 	private PanelIzquierdoJuego panelIzquierdo;
+	private PanelInfoJugador panelInfoJugador;
 	private AccionPendiente accionPendiente;
 
 	//TODO: Que tenga un Juego en vez de Jugadores
@@ -97,9 +99,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder());
 		panelPrincipal.setOpaque(false);
 		
-		PanelInfoJugador infoJugador = new PanelInfoJugador(this);
+		this.panelInfoJugador = new PanelInfoJugador(this);
 		
-		panelPrincipal.add(infoJugador, BorderLayout.PAGE_START);
+		panelPrincipal.add(panelInfoJugador, BorderLayout.PAGE_START);
 		
 		this.panelIzquierdo = new PanelIzquierdoJuego(this);		
 		panelPrincipal.add(panelIzquierdo, BorderLayout.LINE_START);
@@ -144,7 +146,12 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		this.panelIzquierdo.seleccionarUnidad(unidad);
 		
 		if(this.accionPendiente != null) {
-			this.accionPendiente.finalizar(coordenada);
+			try {
+				this.accionPendiente.finalizar(coordenada);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			this.panelMapa.repaint();
 			this.accionPendiente = null;
 		}
@@ -154,7 +161,20 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		this.accionPendiente = accion;
 	}
 	
-	private void agregarUnidadesDeEjemplo() {
+	public void finalizarTurno() {
+		Juego.getInstance().turnoDe().finalizarTurno();
+		
+		this.panelInfoJugador.actualizarDatosDelJugador();
+		
+		this.actualizarPantalla();
+	}
+	
+	public void actualizarPantalla() {
+		this.getContentPane().validate();
+		this.getContentPane().repaint();
+	}
+	
+	private void agregarUnidadesDeEjemplo() {/*
 		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
 		jugadorReceptor.finalizarTurno();		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
@@ -179,7 +199,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		}
 		
 		jugadorReceptor.asignarUnidad(marine);	
-		jugadorAtacante.asignarUnidad(marine1);
+		jugadorAtacante.asignarUnidad(marine1);*/
 	}
 	
 	

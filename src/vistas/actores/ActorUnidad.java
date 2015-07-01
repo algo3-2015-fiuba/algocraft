@@ -15,6 +15,7 @@ import vistas.Aplicacion;
 import vistas.acciones.AccionAtacar;
 import vistas.acciones.AccionMover;
 import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.handlers.SeleccionarCoordenadaAccionListener;
 import vistas.mapa.VistaCelda;
 
@@ -65,10 +66,8 @@ public class ActorUnidad extends Actor {
 	
 	public Vector<AccionPendiente> acciones() {
 		
-		Vector<AccionPendiente> acciones = new Vector<AccionPendiente>();
-		
-		acciones.add(new AccionMover());
-		acciones.add(new AccionAtacar());
+		this.acciones.add(new AccionMover());
+		this.acciones.add(new AccionAtacar());
 		
 		return acciones;
 	}

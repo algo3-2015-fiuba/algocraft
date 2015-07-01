@@ -13,7 +13,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;
 
@@ -79,10 +79,6 @@ public class ActorRecurso extends Actor {
 	
 	public String nombre() {
 		return this.nombre;
-	}
-	
-	public Vector<AccionPendiente> acciones() {
-		return new Vector<AccionPendiente>();
 	}
 
 }

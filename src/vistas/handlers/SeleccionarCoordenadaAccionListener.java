@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import juego.razas.unidades.Unidad;
 import vistas.acciones.AccionMover;
 import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.paneles.secundarios.juego.PanelAcciones;
 import vistas.ventanas.VentanaJuego;
 

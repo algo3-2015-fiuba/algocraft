@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -33,12 +34,14 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	private Mapa mapa;
 	private VentanaJuego ventanaOriginal;
 	private LinkedList<VistaCelda> vistaCeldas;
+	private VistaCelda celdaSeleccionada;
 
 	public PanelMapa(VentanaJuego ventanaJuego, Mapa mapa) {
 
 		this.mapa = mapa;
 		this.ventanaOriginal = ventanaJuego;
 		this.vistaCeldas = new LinkedList<VistaCelda>();
+		this.celdaSeleccionada = null;
 
 		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -67,8 +70,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 
 			VistaCelda vistaCelda = new VistaCelda(celda, coordenada);
 			vistaCelda.addMouseListener(new CeldaMouseListener(vistaCelda));
-			vistaCelda
-					.addMouseMotionListener(new CeldaMouseListener(vistaCelda));
+			//vistaCelda.addMouseMotionListener(new CeldaMouseListener(vistaCelda));
 
 			vistaCelda.agregarObservador(this);
 
@@ -80,9 +82,13 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	@Override
 	public void notificar(final Coordenada coordenada) {
 
+		if(this.celdaSeleccionada != null) {
+			this.celdaSeleccionada.deseleccionar();
+		}
+		
 		for (VistaCelda vista : this.vistaCeldas) {
-			if (!vista.obtenerPosicion().equals(coordenada)) {
-				vista.deseleccionar();
+			if (vista.obtenerPosicion().equals(coordenada)) {
+				this.celdaSeleccionada = vista;
 			}
 		}
 
@@ -93,7 +99,7 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 				// event dispatch thread
 				try {
 					ventanaOriginal.notificar(coordenada);
-				} catch (AtaqueInvalido e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

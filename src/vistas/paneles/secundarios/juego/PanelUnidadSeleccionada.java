@@ -15,6 +15,7 @@ import vistas.actores.Actor;
 import vistas.paneles.secundarios.juego.BarraDeVida;
 import vistas.paneles.secundarios.juego.BarraGenerica;
 import vistas.utilidades.AsignadorVistas;
+import vistas.ventanas.VentanaJuego;
 
 public class PanelUnidadSeleccionada extends JPanel {
 	
@@ -25,8 +26,12 @@ public class PanelUnidadSeleccionada extends JPanel {
 	private Unidad unidadActual;
 	private JLabel nombreUnidad;
 	private BarraGenerica vida;
+	private VentanaJuego ventanaOriginal;
 	
-	public PanelUnidadSeleccionada() {
+	public PanelUnidadSeleccionada(VentanaJuego ventanaOriginal) {
+		
+		this.ventanaOriginal = ventanaOriginal;
+		
 		this.setBackground(new Color(0, 0, 0, 255));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -34,7 +39,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 		JLabel titulo = Aplicacion.titulo("Unidad Seleccionada", 24f);
 		titulo.setHorizontalTextPosition(SwingConstants.LEFT);
 		
-		this.nombreUnidad = Aplicacion.titulo("Alto Templario", 42f);
+		this.nombreUnidad = Aplicacion.titulo("", 42f);
 		this.nombreUnidad.setHorizontalTextPosition(SwingConstants.LEFT);
 		this.nombreUnidad.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 		
@@ -58,10 +63,13 @@ public class PanelUnidadSeleccionada extends JPanel {
 		this.unidadActual = seleccionada;
 		this.vida.seleccionarUnidad(this.unidadActual);
 		this.asignarNombre();
+		
+		
+		
 	}
 	
 	public void removerSeleccion() {
-		this.unidadActual = null;
+		this.seleccionarUnidad(null);
 	}
 	
 	private void asignarNombre() {

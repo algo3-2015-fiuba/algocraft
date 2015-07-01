@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import juego.Juego;
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
+import vistas.handlers.FinalizarTurnoListener;
 import vistas.ventanas.VentanaJuego;
 
 public class PanelInfoJugador extends JPanel {
@@ -40,8 +41,9 @@ public class PanelInfoJugador extends JPanel {
 		this.labelGas = new JLabel();
 		this.labelSuministros = new JLabel();
 		this.finalizarTurnoButton = new JButton("Finalizar Turno");
+		this.finalizarTurnoButton.addMouseListener(new FinalizarTurnoListener(this.ventanaOriginal));
 
-		this.agregarDatosDeJugador();
+		this.actualizarDatosDelJugador();
 	}
 	
 	private void comandosDeJugador() {
@@ -109,7 +111,7 @@ public class PanelInfoJugador extends JPanel {
 		labelSuministros.setText(text);
 	}
 
-	private void agregarDatosDeJugador() {
+	public void actualizarDatosDelJugador() {
 
 		Jugador jugador = Juego.getInstance().turnoDe();
 
@@ -117,6 +119,8 @@ public class PanelInfoJugador extends JPanel {
 		this.actualizarGas();
 		this.actualizarSuministros();
 		this.comandosDeJugador();
+		
+		this.removeAll();
 
 		GridBagConstraints c = new GridBagConstraints();
 

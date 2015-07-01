@@ -1,17 +1,15 @@
 package vistas.acciones;
 
 import juego.mapa.Coordenada;
+import juego.razas.construcciones.Construccion;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 
 public abstract class AccionPendiente {
-	protected Unidad unidadEmisora;
-
-	public void iniciar(Unidad unidadEmisora) {
-		this.unidadEmisora = unidadEmisora;
-	}
-	
 	public abstract String nombre();
+	
+	public void iniciar(Unidad unidadEmisora) {}
+	public void iniciar(Construccion construccionEmisora) {}
 
-	public abstract void finalizar(Coordenada coordenada) throws AtaqueInvalido;
+	public abstract void finalizar(Coordenada coordenada) throws Exception;
 }

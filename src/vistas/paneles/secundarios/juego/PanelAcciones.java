@@ -15,7 +15,9 @@ import vistas.Aplicacion;
 import vistas.acciones.AccionAtacar;
 import vistas.acciones.AccionMover;
 import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.actores.Actor;
+import vistas.actores.recursos.ActorMineral;
 import vistas.handlers.SeleccionarCoordenadaAccionListener;
 import vistas.utilidades.AsignadorVistas;
 import vistas.ventanas.VentanaJuego;
@@ -87,10 +89,12 @@ public class PanelAcciones extends JPanel {
 		
 		this.panelAcciones.removeAll();
 
-		if (unidadActual != null) {
+		if (true) {
 
-			Actor actorResponsable = AsignadorVistas.getInstance()
-					.obtenerRepresentacion(this.unidadActual.getClass());
+			/*Actor actorResponsable = AsignadorVistas.getInstance()
+					.obtenerRepresentacion(this.unidadActual.getClass());*/
+			
+			Actor actorResponsable = new ActorMineral();
 
 			for (AccionPendiente accion : actorResponsable.acciones()) {
 				

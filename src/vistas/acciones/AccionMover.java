@@ -3,7 +3,7 @@ package vistas.acciones;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 
-public class AccionMover extends AccionPendiente {
+public class AccionMover extends AccionPendienteUnidad {
 
 	public void finalizar(Coordenada destino) {
 		try {

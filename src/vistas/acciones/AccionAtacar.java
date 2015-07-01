@@ -9,7 +9,7 @@ import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadAtaque;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 
-public class AccionAtacar extends AccionPendiente {
+public class AccionAtacar extends AccionPendienteUnidad {
 
 	public void finalizar(Coordenada destino) throws AtaqueInvalido {
 		

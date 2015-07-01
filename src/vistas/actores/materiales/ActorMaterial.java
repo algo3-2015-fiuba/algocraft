@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import javax.swing.JLabel;
 
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.AccionPendienteUnidad;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;
 
@@ -24,10 +24,6 @@ public class ActorMaterial extends Actor {
 		g.fillRect(0, 0, lado, lado);
 		g.setColor(colorBorde);
 		g.drawRect(0, 0, lado, lado);
-	}
-	
-	public Vector<AccionPendiente> acciones() {
-		return new Vector<AccionPendiente>();
 	}
 
 }

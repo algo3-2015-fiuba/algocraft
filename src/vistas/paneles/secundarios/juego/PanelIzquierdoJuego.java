@@ -37,7 +37,7 @@ public class PanelIzquierdoJuego extends JPanel {
 	}
 
 	private void agregarUnidadSeleccionada() {
-		panelSeleccion = new PanelUnidadSeleccionada();
+		panelSeleccion = new PanelUnidadSeleccionada(ventanaOriginal);
 		panelSeleccion.setMaximumSize(panelSeleccion.getPreferredSize());
 		this.add(panelSeleccion);
 		
