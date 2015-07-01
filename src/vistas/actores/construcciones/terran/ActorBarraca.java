@@ -8,7 +8,7 @@ import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
 import vistas.acciones.AccionUbicarEntrenable;
-import vistas.acciones.entrenamientos.AccionEntrenarMarine;
+import vistas.acciones.entrenamientos.terran.AccionEntrenarMarine;
 import vistas.actores.ActorConstruccion;
 
 public class ActorBarraca extends ActorConstruccion {

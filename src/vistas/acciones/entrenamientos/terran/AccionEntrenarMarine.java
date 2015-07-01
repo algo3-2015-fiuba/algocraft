@@ -1,4 +1,4 @@
-package vistas.acciones.entrenamientos;
+package vistas.acciones.entrenamientos.terran;
 
 import vistas.acciones.AccionPendienteEntrenamiento;
 import juego.interfaces.Controlable;
