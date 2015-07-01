@@ -179,10 +179,19 @@ public abstract class Unidad implements Controlable, Entrenable {
 		
 		if (this.proxyMovimiento == null) {
 			
-			this.proxyMovimiento = new ProxyMovimiento(this.estrategiaDeMovimiento);
-			this.proxyMovimiento.moverse(this.propietario, this, coordFinal);
-			this.posicion = coordFinal;
+			try {
 			
+				this.proxyMovimiento = new ProxyMovimiento(this.estrategiaDeMovimiento);
+				this.proxyMovimiento.moverse(this.propietario, this, coordFinal);
+				this.posicion = coordFinal;
+			
+			} catch (UbicacionInvalida ui) {
+				
+				this.proxyMovimiento = null;
+				throw ui;
+				
+			}
+				
 		} else {
 			throw new YaSeMovioEnEsteTurno();
 		}
