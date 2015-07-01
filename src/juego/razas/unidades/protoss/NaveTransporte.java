@@ -21,6 +21,10 @@ public class NaveTransporte extends UnidadTransporte {
 		
 	}
 	
+	public int capacidadActual() {
+		return this.cargaTransporte.capacidadActual();
+	}
+	
 	public void transportar(Unidad unidad) {
 		
 		if ((this.propietario.esAliado(unidad)) && (this.cargaTransporte.puedeSubir(unidad))) {
