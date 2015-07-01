@@ -58,6 +58,9 @@ public abstract class Construccion implements Construible, Controlable {
 		this.propietario = jugador;
 	}
 	
+	public Jugador obtenerPropietario() {
+		return this.propietario;
+	}
 	
 	
 	@Override

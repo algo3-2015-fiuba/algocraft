@@ -1,8 +1,10 @@
 package juego.interfaces;
 
+import java.awt.Color;
 import java.util.Collection;
 
 import juego.interfaces.excepciones.UbicacionInvalida;
+import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -19,6 +21,8 @@ public interface Controlable {
 	
 	public boolean colisionaCon(Controlable controlable);
 	public boolean colisionaCon(EstrategiaMovimiento em);
+
+	public Jugador obtenerPropietario();
 	
 	
 	

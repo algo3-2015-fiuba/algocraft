@@ -168,6 +168,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return (this.costos.construccionFinalizada());
 	}
 	
+	public Jugador obtenerPropietario() {
+		return this.propietario;
+	}
+	
 	public void asignarPropietario(Jugador jugador) {
 		this.propietario = jugador;
 	}
