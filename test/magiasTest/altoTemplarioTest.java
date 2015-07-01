@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
+import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
@@ -303,6 +304,49 @@ public class altoTemplarioTest {
 		assertFalse(jugadorReceptor.esAliado(alucinacionZealot1));
 		assertFalse(jugadorReceptor.esAliado(alucinacionZealot2));
 		assertFalse(jugadorReceptor.esAliado(zealot));
+		
+	}
+	
+	@Test
+	public void testSiAltoTemplarioQuiereUsarAlucinacionPeroNoPoseeEnergiaSuficienteError() throws Exception {
+		
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
+		
+		jugadorReceptor.finalizarTurno();
+		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionGolliat = new Coordenada(0,18);		
+		Coordenada ubicacionAltoTemplario = new Coordenada(1,20);
+		Coordenada ubicacionZealot = new Coordenada(0,21);
+		
+		Golliat golliat = new Golliat();
+		AltoTemplario altoTemplario = new AltoTemplario();
+		Zealot zealot = new Zealot();
+		
+		jugadorAtacante.asignarUnidad(altoTemplario);
+		jugadorAtacante.asignarUnidad(zealot);
+		
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		zealot.moverse(ubicacionZealot);		
+		jugadorAtacante.finalizarTurno();
+		
+		jugadorReceptor.asignarUnidad(golliat);
+		golliat.moverse(ubicacionGolliat);
+		jugadorReceptor.finalizarTurno();
+		
+		//El algoritmo busca posiciones disponibles para ubicar a la unidad alucinada
+		//En el mapa test, y debido a la ubicacion del zealot, estas posiciones son
+		Coordenada ubicacionAlucinacion1 = new Coordenada(0,16);
+		Coordenada ubicacionAlucinacion2 = new Coordenada(0,17);
+		
+		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
+		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
+		
+		exception.expect(EnergiaInsuficiente.class);
+		altoTemplario.lanzarAlucinacion(zealot);
 		
 	}
 
