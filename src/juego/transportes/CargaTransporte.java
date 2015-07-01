@@ -54,4 +54,14 @@ public class CargaTransporte {
 			this.unidadesEnCarro.remove(unidad);
 		}
 	}
+
+	public void perdida() {
+		
+		Iterator<Unidad> it = this.unidadesEnCarro.iterator();
+		
+		while (it.hasNext()) {
+			it.next().carroDestruido();
+		}
+		
+	}
 }

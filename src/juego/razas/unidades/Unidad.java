@@ -123,6 +123,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 		
 	}	
 	
+	public void carroDestruido() {
+		this.morir();
+	}
+	
 	@Override
 	public void recibirAtaque(float danio) {
 		this.vida.daniar(danio);
