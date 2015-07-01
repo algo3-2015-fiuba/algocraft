@@ -1,4 +1,4 @@
-package vistas.actores.construcciones;
+package vistas.actores.construcciones.terran;
 
 import vistas.Aplicacion;
 import vistas.actores.ActorConstruccion;

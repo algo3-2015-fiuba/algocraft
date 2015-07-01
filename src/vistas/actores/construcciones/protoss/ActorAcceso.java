@@ -1,23 +1,21 @@
-package vistas.actores.construcciones;
+package vistas.actores.construcciones.protoss;
 
 import java.util.Collection;
 import java.util.Vector;
 
-import juego.interfaces.Entrenable;
-import juego.razas.construcciones.terran.Barraca;
+import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.acciones.AccionPendiente;
 import vistas.acciones.AccionUbicarEntrenable;
 import vistas.acciones.entrenamientos.AccionEntrenarMarine;
-import vistas.acciones.jugador.AccionCrearCentroMineral;
 import vistas.actores.ActorConstruccion;
 
-public class ActorBarraca extends ActorConstruccion {
+public class ActorAcceso extends ActorConstruccion {
 
-	public ActorBarraca() {
-		this.nombre = "Barraca";
-		this.url = Aplicacion.class.getResource("/assets/iconos/terran/construcciones/barraca.png");
+	public ActorAcceso() {
+		this.nombre = "Acceso";
+		this.url = Aplicacion.class.getResource("/assets/iconos/protoss/construcciones/acceso.png");
 		
 		this.acciones.add(new AccionEntrenarMarine());
 	}
@@ -27,8 +25,8 @@ public class ActorBarraca extends ActorConstruccion {
 		
 		Vector<AccionPendiente> temp = new Vector<AccionPendiente>(this.acciones);
 		
-		Barraca barraca = (Barraca) this.elemento;		
-		Collection<Unidad> unidadesEnEntrenamiento = barraca.unidadesEntrenadas();
+		Acceso acceso = (Acceso) this.elemento;		
+		Collection<Unidad> unidadesEnEntrenamiento = acceso.unidadesEntrenadas();
 		
 		if(!unidadesEnEntrenamiento.isEmpty()) {
 			temp.add(new AccionUbicarEntrenable());
@@ -37,6 +35,4 @@ public class ActorBarraca extends ActorConstruccion {
 		return temp;
 	}
 	
-	
-
 }
