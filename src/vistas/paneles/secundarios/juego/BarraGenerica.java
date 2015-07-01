@@ -30,7 +30,7 @@ public abstract class BarraGenerica extends JPanel {
 	private Image contenidoVida;
 	private JLabel contenedorBarraDentro;
 	private JLabel texto;
-	private double escala = 0.71;
+	private double escala = 0.50;
 	private double porcentajeVida = 1;
 	private int margen = 7;
 	
@@ -58,12 +58,12 @@ public abstract class BarraGenerica extends JPanel {
         contenedorBarraDentro.setHorizontalTextPosition(SwingConstants.LEFT);
         contenedorBarraDentro.setBounds(margen, margen, contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
         
-        this.texto = Aplicacion.titulo("60/100", 24f);
+        this.texto = Aplicacion.titulo("60/100", 16f);
         texto.setHorizontalTextPosition(SwingConstants.LEFT);
         
         texto.setBounds((int)(margen*3), (int)(margen*1.5), contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
         
-        layeredPane.add(contenedorBarra, new Integer(2));
+        //layeredPane.add(contenedorBarra, new Integer(2));
         layeredPane.add(contenedorBarraDentro, new Integer(3));
         layeredPane.add(texto, new Integer(4));
         

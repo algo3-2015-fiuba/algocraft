@@ -64,7 +64,6 @@ public class Celda {
 		}
 		
 		return false;
-		
 	}
 	
 	public void ocupar(Unidad unidad){	
@@ -112,6 +111,19 @@ public class Celda {
 			magia.afectar(unidad);
 		}
 		
+	}
+	
+	public Controlable seleccionRelevante() {
+		
+		Controlable elementoSeleccionado = null;
+		
+		if(!this.getUnidades().isEmpty()) {
+			elementoSeleccionado = this.getUnidades().iterator().next();
+		} else if(!this.getConstrucciones().isEmpty()) {
+			elementoSeleccionado = this.getConstrucciones().iterator().next();
+		}
+		
+		return elementoSeleccionado;
 	}
 	
 }

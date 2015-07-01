@@ -1,6 +1,7 @@
 package vistas.acciones;
 
 import juego.Juego;
+import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
@@ -23,11 +24,9 @@ public class AccionAtacar extends AccionPendienteUnidad {
 			e.printStackTrace();
 		}
 		
-		if(!celdaSeleccionada.getUnidades().isEmpty()) {
-			unidad = celdaSeleccionada.getUnidades().iterator().next();
-		}
+		Controlable victima = celdaSeleccionada.seleccionRelevante();
 		
-		((UnidadAtaque)this.unidadEmisora).atacarA(unidad);
+		((UnidadAtaque)this.unidadEmisora).atacarA(victima);
 		
 	}
 
