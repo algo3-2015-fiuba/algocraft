@@ -1,5 +1,6 @@
 package juego.transportes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -16,6 +17,7 @@ public class CargaTransporte {
 		
 		super();
 		this.capacidadMaxima = capacidadMaxima;
+		this.unidadesEnCarro = new ArrayList<Unidad>();
 		
 	}
 
@@ -23,7 +25,7 @@ public class CargaTransporte {
 		
 		if (unidad.pesoTransporte() == 0) return false;
 		
-		return ((unidad.pesoTransporte() + this.capacidadActual()) > this.capacidadMaxima);
+		return ((unidad.pesoTransporte() + this.capacidadActual()) <= this.capacidadMaxima);
 	}
 
 	public int capacidadActual() {
@@ -42,7 +44,8 @@ public class CargaTransporte {
 	public void subir(Unidad unidad) {
 		
 		unidad.subirACarro();
-		this.unidadesEnCarro.add(unidad);		
+		this.unidadesEnCarro.add(unidad);	
+		
 	}
 
 	public void bajar(Unidad unidad, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
