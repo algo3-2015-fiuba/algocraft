@@ -12,6 +12,7 @@ import juego.interfaces.Entrenable;
 import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.decoradores.Escudo;
 import juego.magias.Alucinacion;
 import juego.magias.MisilEMP;
 import juego.magias.Radiacion;
@@ -113,9 +114,10 @@ public abstract class Unidad implements Controlable, Entrenable {
 	public void afectadaPorMagia(Alucinacion alucinacion) {
 		
 		for (int i = 0; i < 2; i++) {
-			UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento);
+			UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento, ((Escudo)this.vida).escudoMaximo());
 			this.alucinaciones.add(alucinada);
 			this.propietario.asignarUnidad(alucinada);
+			alucinada.ubicar(this.posicion);
 		}
 		
 	}	
@@ -194,7 +196,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 	
 	@Override
 	public boolean colisionaCon(EstrategiaMovimiento estrategiaDeOtro) { 
-		return estrategiaDeMovimiento.colisionaCon(estrategiaDeOtro); 
+		return this.estrategiaDeMovimiento.colisionaCon(estrategiaDeOtro); 
 	}
 
 	public void subirACarro() {

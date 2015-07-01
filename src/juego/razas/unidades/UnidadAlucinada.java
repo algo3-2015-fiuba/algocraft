@@ -17,14 +17,14 @@ public class UnidadAlucinada extends Unidad {
 
 	private Unidad alucinada;
 	
-	public UnidadAlucinada(Unidad alucinada, EstrategiaMovimiento estrategiaDeMovimiento) {
+	public UnidadAlucinada(Unidad alucinada, EstrategiaMovimiento estrategiaDeMovimiento, float escudoMaximo) {
 		
 		super();		
 		this.alucinada = alucinada;
 		this.estrategiaDeMovimiento = estrategiaDeMovimiento;
 		this.propietario = Juego.getInstance().turnoDe();
 		this.propietario.asignarUnidad(this);
-		this.vida = new Escudo(alucinada.vidaActual());
+		this.vida = new Escudo(escudoMaximo);
 		
 	}
 	
@@ -34,8 +34,17 @@ public class UnidadAlucinada extends Unidad {
 	 *                       *
 	 * * * * * * * * * * * * */
 	
+	public float escudoActual() {
+		return ((Escudo)this.vida).escudoActual();
+	}
+	
 	@Override
 	public int suministrosNecesarios() { return 0; }	
+	
+	@Override
+	public int pesoTransporte() {
+		return this.alucinada.pesoTransporte();
+	}
 
 	/* * * * * * * * * *
 	 *                 *
@@ -63,7 +72,6 @@ public class UnidadAlucinada extends Unidad {
 		
 		//Este metodo trata de ubicar a la unidad alucinada en un rango radial de 5.
 		Iterator<Celda> celdasPosiblesDeOcupacion = Juego.getInstance().getMapa().obtenerRangoRadialDeCeldas(posicionCentral, 5).iterator();
-		
 		boolean ubicado = false;
 		
 		while ((celdasPosiblesDeOcupacion.hasNext()) && (!ubicado)) {
@@ -71,12 +79,14 @@ public class UnidadAlucinada extends Unidad {
 			Celda celdaPosible = celdasPosiblesDeOcupacion.next();
 			
 			if (!celdaPosible.colisiona(this)) {
-				
-				System.out.println("X: "+celdaPosible.getPosicion().getX()+" Y: "+celdaPosible.getPosicion().getY());
 				celdaPosible.ocupar(this);
 				ubicado = true;
 			}
 			
+		}
+		
+		if (ubicado) {
+			this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
 		}
 		
 	}
@@ -91,12 +101,20 @@ public class UnidadAlucinada extends Unidad {
 	
 	@Override
 	public boolean colisionaCon(Controlable controlable) { 
-		return controlable.colisionaCon(this.alucinada); 
+		return controlable.colisionaCon(this.estrategiaDeMovimiento); 
 	}
 	
 	@Override
 	public boolean colisionaCon(EstrategiaMovimiento estrategiaDeOtro) { 
-		return this.alucinada.colisionaCon(estrategiaDeOtro); 
+		return this.estrategiaDeMovimiento.colisionaCon(estrategiaDeOtro); 
+	}
+	
+	@Override
+	public void recibirAtaque(float danio) {
+		this.vida.daniar(danio);
+		if (((Escudo)this.vida).escudoAgotado()) {
+			this.morir();
+		}
 	}
 	
 	@Override

@@ -48,6 +48,8 @@ public class AltoTemplario extends UnidadMagica {
 		if (alucinacion.energiaSuficiente(this.energia)) {
 			alucinacion.consumir(this.energia);
 			alucinacion.afectar(unidadACopiar);
+		} else {
+			throw new EnergiaInsuficiente();
 		}
 		
 	}

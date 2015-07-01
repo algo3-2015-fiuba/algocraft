@@ -13,6 +13,8 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.razas.unidades.Unidad;
+import juego.razas.unidades.UnidadAlucinada;
 import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Golliat;
@@ -153,37 +155,6 @@ public class altoTemplarioTest {
 	public void testSiUnAltoTemplarioUtilizaAlucionacionEnZealotYLaAlucinacionEsAtacadaElTemplarioNoSufreDanios() throws Exception {
 		
 		this.reiniciarJuego();
-		
-		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
-		
-		jugadorReceptor.finalizarTurno();
-		
-		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
-		
-		Coordenada ubicacionMarine = new Coordenada(0,20);
-		Coordenada ubicacionAltoTemplario = new Coordenada(1,20);
-		Coordenada ubicacionZealot = new Coordenada(0,21);
-		
-		Marine marine = new Marine();
-		AltoTemplario altoTemplario = new AltoTemplario();
-		Zealot zealot = new Zealot();
-		
-		marine.moverse(ubicacionMarine);
-		altoTemplario.moverse(ubicacionAltoTemplario);
-		zealot.moverse(ubicacionZealot);		
-		
-		jugadorAtacante.asignarUnidad(altoTemplario);
-		jugadorAtacante.asignarUnidad(zealot);
-		jugadorReceptor.asignarUnidad(marine);
-		
-		altoTemplario.lanzarAlucinacion(zealot); //Se ubicaran cerca de la unidad a alucinar.
-
-	}
-	
-	@Test
-	public void testSiUnaCopiaDelAltoTemplarioMuereElAltoTemplarioYLaOtraCopiaContinuanVivos() throws Exception {
-		
-		this.reiniciarJuego();
 		Mapa mapa = Juego.getInstance().getMapa();
 		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
 		
@@ -191,35 +162,63 @@ public class altoTemplarioTest {
 		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
 		
-		Coordenada ubicacionMarine = new Coordenada(0,20);
+		Coordenada ubicacionGolliat = new Coordenada(0,18);		
 		Coordenada ubicacionAltoTemplario = new Coordenada(1,20);
 		Coordenada ubicacionZealot = new Coordenada(0,21);
 		
-		Marine marine = new Marine();
+		Golliat golliat = new Golliat();
 		AltoTemplario altoTemplario = new AltoTemplario();
 		Zealot zealot = new Zealot();
 		
-		marine.moverse(ubicacionMarine);
-		altoTemplario.moverse(ubicacionAltoTemplario);
-		zealot.moverse(ubicacionZealot);		
-		
 		jugadorAtacante.asignarUnidad(altoTemplario);
 		jugadorAtacante.asignarUnidad(zealot);
-		jugadorReceptor.asignarUnidad(marine);
+		
+		altoTemplario.moverse(ubicacionAltoTemplario);
+		zealot.moverse(ubicacionZealot);		
+		jugadorAtacante.finalizarTurno();
+		
+		jugadorReceptor.asignarUnidad(golliat);
+		golliat.moverse(ubicacionGolliat);
+		jugadorReceptor.finalizarTurno();
 		
 		//El algoritmo busca posiciones disponibles para ubicar a la unidad alucinada
 		//En el mapa test, y debido a la ubicacion del zealot, estas posiciones son
-		
 		Coordenada ubicacionAlucinacion1 = new Coordenada(0,16);
 		Coordenada ubicacionAlucinacion2 = new Coordenada(0,17);
 		
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
 		
+		for (int i=0; i<2; i++) {
+			//Paso turnos para que el alto templario cargue energia
+			jugadorAtacante.finalizarTurno();
+			jugadorReceptor.finalizarTurno();
+		}
+		
 		altoTemplario.lanzarAlucinacion(zealot);
 		
-		//assertTrue(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
-		//assertTrue(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
+		Iterator<Unidad> it = mapa.obtenerCelda(ubicacionAlucinacion2).getUnidades().iterator();
+		
+		assertTrue(it.hasNext());
+		
+		UnidadAlucinada alucinacionZealot = (UnidadAlucinada)it.next();
+		
+		assertTrue(mapa.obtenerCelda(ubicacionAlucinacion2).contiene(alucinacionZealot));
+		
+		assertTrue(zealot.vidaActual() == 100);
+		assertTrue(alucinacionZealot.vidaActual() == 0);
+		assertTrue(alucinacionZealot.escudoActual() == 60);
+		
+		for (int i=0; i< 9; i++) {
+			jugadorAtacante.finalizarTurno();
+			golliat.atacarA(alucinacionZealot);
+			jugadorReceptor.finalizarTurno();
+
+		}
+		
+		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).contiene(alucinacionZealot));		
+		assertTrue(zealot.vidaActual() == 100);
+		assertTrue(alucinacionZealot.escudoActual() == 0);
 		
 	}
 	
