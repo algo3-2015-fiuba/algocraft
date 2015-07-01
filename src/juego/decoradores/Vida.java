@@ -28,6 +28,7 @@ public class Vida implements Atacable {
 	@Override
 	public void daniar(float danio) {
 		this.vida -= danio;
+		if (this.vida < 0) this.vida = 0;
 	}
 	
 	@Override

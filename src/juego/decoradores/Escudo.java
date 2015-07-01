@@ -27,7 +27,7 @@ public class Escudo implements Atacable {
 
 	@Override
 	public void regenerar() {
-		if (this.escudoActual < this.escudoMaximo) this.escudoActual += (this.escudoMaximo * (0.10));
+		if (this.escudoActual < this.escudoMaximo) this.escudoActual += (this.escudoMaximo * (0.05));
 		if (this.escudoActual > this.escudoMaximo) this.escudoActual = escudoMaximo;
 	}
 
@@ -47,15 +47,27 @@ public class Escudo implements Atacable {
 			
 		}
 	}
-
-	@Override
-	public boolean vidaAgotada() {
-		return (this.proteger != null) ? this.proteger.vidaAgotada() : (this.escudoActual > 0);
+	
+	public float escudoActual() {
+		return this.escudoActual;
+	}
+	
+	public float escudoMaximo() {
+		return this.escudoMaximo;
+	}
+	
+	public boolean escudoAgotado() {
+		return (this.escudoActual == 0);
 	}
 	
 	@Override
 	public float vidaActual() {
-		return (this.proteger != null) ? this.proteger.vidaActual() : this.escudoActual;
+		return (this.proteger != null) ? this.proteger.vidaActual() : 0;
+	}
+	
+	@Override
+	public boolean vidaAgotada() {
+		return (this.proteger != null) ? this.proteger.vidaAgotada() : true;
 	}
 
 	@Override
