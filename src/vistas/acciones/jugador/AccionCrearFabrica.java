@@ -21,6 +21,6 @@ public class AccionCrearFabrica extends AccionPendienteConstruccion {
 
 	@Override
 	public String nombre() {
-		return "Crear Fábrica";
+		return "Crear Fabrica";
 	}
 }

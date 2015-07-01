@@ -5,7 +5,6 @@ import juego.Juego;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.Barraca;
-import juego.razas.construcciones.terran.CentroDeMineral;
 
 public class AccionCrearBarraca extends AccionPendienteConstruccion {
 
@@ -20,4 +19,5 @@ public class AccionCrearBarraca extends AccionPendienteConstruccion {
 	public String nombre() {
 		return "Crear Barraca";
 	}
+	
 }

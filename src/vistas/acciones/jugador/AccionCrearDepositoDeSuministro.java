@@ -19,6 +19,6 @@ public class AccionCrearDepositoDeSuministro extends AccionPendienteConstruccion
 
 	@Override
 	public String nombre() {
-		return "Crear Depósito Suministro";
+		return "Crear Deposito Suministro";
 	}
 }
