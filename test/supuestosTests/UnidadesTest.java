@@ -85,4 +85,12 @@ public class UnidadesTest {
 		
 	}
 	
+	@Test
+	public void testSiPierdoUnidadPierdoVisionDeEsaUnidad() {
+		
+		//Falta implementar
+		
+		
+	}
+	
 }
