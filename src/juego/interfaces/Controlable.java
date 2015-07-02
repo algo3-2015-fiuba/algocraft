@@ -1,6 +1,5 @@
 package juego.interfaces;
 
-import java.awt.Color;
 import java.util.Collection;
 
 import juego.interfaces.excepciones.UbicacionInvalida;
