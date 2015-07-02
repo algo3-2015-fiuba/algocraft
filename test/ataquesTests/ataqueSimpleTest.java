@@ -13,6 +13,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
 import juego.razas.unidades.excepciones.UnidadAliada;
 import juego.razas.unidades.excepciones.YaAtacoEnEsteTurno;
@@ -190,6 +191,35 @@ public class ataqueSimpleTest {
 		
 		exception.expect(YaAtacoEnEsteTurno.class);
 		zealot.atacarA(marine);
+		
+	}
+	
+	@Test
+	public void testJugadorEnemigoNoPuedeOrdenarleAUnidadAliadaAtacar() throws Exception {
+		
+		this.reiniciarJuego();
+		
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
+		jugadorReceptor.finalizarTurno();		
+		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		
+		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
+		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
+		
+		Zealot zealot = new Zealot();
+		jugadorAtacante.asignarUnidad(zealot);
+		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
+
+		Marine marine = new Marine();
+		jugadorReceptor.asignarUnidad(marine);	
+		marine.moverse(ubicacionMarineEnemigo);
+		
+		//JugadorReceptor ataca a unidad aliada marine.
+		exception.expect(AtaqueInvalido.class);
+		zealot.atacarA(marine);
+		
+		
 		
 	}
 	
