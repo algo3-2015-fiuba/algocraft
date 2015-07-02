@@ -5,8 +5,8 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.decoradores.Escudo;
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;

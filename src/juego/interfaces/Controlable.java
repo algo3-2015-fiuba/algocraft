@@ -2,6 +2,7 @@ package juego.interfaces;
 
 import java.util.Collection;
 
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;

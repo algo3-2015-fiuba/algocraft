@@ -1,8 +1,8 @@
 package juego.proxys;
 
 import juego.Juego;
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.jugadores.Jugador;
 import juego.mapa.Mapa;

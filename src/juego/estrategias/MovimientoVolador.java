@@ -2,58 +2,19 @@ package juego.estrategias;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
-import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.ataques.Ataques;
-import juego.razas.unidades.Unidad;
 
-public class MovimientoVolador implements EstrategiaMovimiento {
-	
-	private int rangoDeMovimiento;
-	private int vision;
+public class MovimientoVolador extends MovimientoUnidad {
 
 	public MovimientoVolador(int rangoDeMovimiento, int vision) {
 	
+		super();
 		this.rangoDeMovimiento = rangoDeMovimiento;
 		this.vision = vision;
 		
-	}
-	
-	@Override
-	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal) {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
-	}
-	
-	@Override
-	public void descubrirMapa(Jugador propietario, Controlable controlable) {
-		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Coordenada posicion = mapa.obtenerUbicacion((Unidad) controlable);
-		
-		propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
-		
-	}
-	
-	@Override
-	public boolean distanciaAlcanzable(int distanciaAMover) {
-		return (distanciaAMover <= this.rangoDeMovimiento);
-	}
-	
-	@Override
-	public void atacar(Ataques ataques, Controlable victima) {
-		
-		if (victima.colisionaCon(this)) {
-			ataques.atacarPorAire(victima);
-		} else {
-			ataques.atacarPorTierra(victima);
-		}
-
 	}
 	
 	@Override
@@ -71,32 +32,21 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	}
 	
 	@Override
-	public void moverse(Jugador controlador, Controlable controlable, Coordenada coordFinal) throws UbicacionInvalida {
+	public void atacar(Ataques ataques, Controlable victima) {
 		
-		Unidad unidad = (Unidad) controlable;
+		if (victima.colisionaCon(this)) {
+			ataques.atacarPorAire(victima);
+		} else {
+			ataques.atacarPorTierra(victima);
+		}
 
-		Mapa mapa = Juego.getInstance().getMapa();
-
-		Coordenada coordInicial = mapa.obtenerUbicacion(unidad);
-				
-		if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
-				
-		mapa.obtenerCelda(coordFinal).ocupar(unidad);
-			
-		this.descubrirMapa(controlador, controlable);
-				
 	}
 	
 	@Override
-	public void desocupar(Controlable controlable) {
+	public boolean puedeOcupar(Controlable controlable, Celda celda) {
 		
-		try {
-			
-			Mapa mapa = Juego.getInstance().getMapa();
-			Coordenada coordenada = mapa.obtenerUbicacion((Unidad)controlable);
-			if (coordenada != null) mapa.obtenerCelda(coordenada).desocupar((Unidad)controlable);
-			
-		} catch (CoordenadaFueraDeRango cfdr) {}
+		if (celda.colisiona(controlable)) return false;
+		return true;
 		
 	}
 
@@ -104,29 +54,10 @@ public class MovimientoVolador implements EstrategiaMovimiento {
 	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
 		return movimientoDesconocido.colisionaCon(this);
 	}
-	
-	@Override
-	public boolean colisionaCon(MovimientoTerrestre terrestre) {
-		return false;
-	}
 
 	@Override
 	public boolean colisionaCon(MovimientoVolador volador) {
 		return true;
-	}
-
-	@Override
-	public boolean colisionaCon(MovimientoConstruccion construccion) {
-		return false;
-	}
-
-	@Override
-	public boolean puedeOcupar(Controlable controlable, Celda celda) {
-		
-		if (celda.colisiona(controlable)) return false;
-		
-		return true;
-		
 	}
 
 }

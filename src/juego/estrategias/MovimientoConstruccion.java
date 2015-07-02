@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import juego.Juego;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
@@ -16,19 +15,11 @@ import juego.razas.ataques.Ataques;
 import juego.razas.construcciones.Construccion;
 import juego.razas.construcciones.ConstruccionRecolectora;
 
-public class MovimientoConstruccion implements EstrategiaMovimiento {
-
-	private int vision;
+public class MovimientoConstruccion extends EstrategiaMovimiento {
 	
 	public MovimientoConstruccion(int vision) {
 		super();
 		this.vision = vision;
-	}
-	
-	@Override
-	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal) {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
 	}
 	
 	@Override
@@ -49,11 +40,6 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 			
 		}
 		
-	}
-	
-	@Override
-	public boolean distanciaAlcanzable(int distanciaAMover) {
-		return false;
 	}
 	
 	@Override
@@ -109,20 +95,13 @@ public class MovimientoConstruccion implements EstrategiaMovimiento {
 				(it.next()).desocupar(((Construccion)controlable));
 			}
 		
-		} catch (CoordenadaFueraDeRango cfdr) {
-			//Esta excepcion no deberia ocurrir nunca, ya que este metodo solo debe usarse si la construccion ya fue construida.
-		}
+		} catch (CoordenadaFueraDeRango cfdr) {}
 		
 	}
 
 	@Override
 	public boolean colisionaCon(EstrategiaMovimiento movimientoDesconocido) {
 		return (movimientoDesconocido.colisionaCon(this));
-	}
-
-	@Override
-	public boolean colisionaCon(MovimientoVolador volador) {
-		return false;
 	}
 
 	@Override

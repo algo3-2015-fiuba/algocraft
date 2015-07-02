@@ -1,7 +1,7 @@
 package juego.proxys;
 
 import juego.Juego;
-import juego.interfaces.EstrategiaMovimiento;
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Coordenada;

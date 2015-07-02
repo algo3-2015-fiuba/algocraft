@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.costos.Costos;
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.Atacable;
 import juego.interfaces.Construible;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;

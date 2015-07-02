@@ -1,7 +1,7 @@
 package juego.razas.ataques;
 
+import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.Controlable;
-import juego.interfaces.EstrategiaMovimiento;
 import juego.mapa.Coordenada;
 
 public class Ataques {
