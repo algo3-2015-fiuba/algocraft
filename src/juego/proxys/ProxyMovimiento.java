@@ -44,7 +44,7 @@ public class ProxyMovimiento {
 		
 		if (!this.destinoValido(unidad, coordFinal)) throw new UbicacionInvalida();
 		
-		if (!propietario.esAliado(unidad)) throw new NoSePuedenMoverUnidadesEnemigas();
+		if (!Juego.getInstance().turnoDe().equals(propietario)) throw new NoSePuedenMoverUnidadesEnemigas();
 		
 		this.estrategiaMovimiento.moverse(propietario, unidad, coordFinal);
 		

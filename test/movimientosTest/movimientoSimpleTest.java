@@ -14,6 +14,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
+import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
 import juego.razas.unidades.excepciones.UnidadAliada;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 import juego.razas.unidades.protoss.Zealot;
@@ -47,29 +48,29 @@ public class movimientoSimpleTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void testSiUnZealotSeMueveSusCeldasSeDesocupanYSeOcupan() throws Exception {
+	public void testSiUnZealotSeMueveDesocupaLaCeldaOcupadaYOcupaUnaNuevaCelda() throws Exception {
 		
 		this.reiniciarJuego();
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-			
-		Juego.getInstance().turnoDe().finalizarTurno();		
-		Jugador jugadorZealot = Juego.getInstance().turnoDe();
 		
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
+		jugadorTerran.finalizarTurno();
+		Jugador jugadorProtoss = Juego.getInstance().turnoDe();
+
 		Coordenada ubicacionViejaZealot = new Coordenada(1,20);
-		Coordenada ubicacionNuevaZealot = new Coordenada(1,21);
-		
-		
+		Coordenada ubicacionNuevaZealot = new Coordenada(1,21);	
 		Zealot zealot = new Zealot();
-		jugadorZealot.asignarUnidad(zealot);		
-		zealot.moverse(ubicacionViejaZealot);
 		
-		jugadorZealot.finalizarTurno();
+		jugadorProtoss.asignarUnidad(zealot);		
+		zealot.moverse(ubicacionViejaZealot);
+
+		jugadorProtoss.finalizarTurno();
+		jugadorTerran.finalizarTurno();
 		
 		zealot.moverse(ubicacionNuevaZealot);
 		
-		assertFalse(mapa.obtenerCelda(ubicacionViejaZealot).contiene(zealot));
-		
+		assertFalse(mapa.obtenerCelda(ubicacionViejaZealot).contiene(zealot));		
 		assertTrue(mapa.obtenerCelda(ubicacionNuevaZealot).contiene(zealot));
 		
 	}	
@@ -172,4 +173,47 @@ public class movimientoSimpleTest {
 
 	}
 
+	@Test
+	public void testJugadorEnemigoNoPuedeMoverUnidadAliada() throws Exception {
+		
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		JugadorTerran jugadorTerran = (JugadorTerran) Juego.getInstance().turnoDe();
+		jugadorTerran.finalizarTurno();
+		JugadorProtoss jugadorProtoss = (JugadorProtoss) Juego.getInstance().turnoDe();
+		jugadorProtoss.finalizarTurno();
+		
+		Marine marine = new Marine();
+		Zealot zealot = new Zealot();
+		Coordenada ubicacionValidaMarine = new Coordenada(0,20);
+		Coordenada nuevaUbicacionMarine = new Coordenada(0,21);
+		Coordenada ubicacionValidaZealot = new Coordenada(0,25);
+		Coordenada nuevaUbicacionZealot = new Coordenada(0,24);
+
+		jugadorTerran.asignarUnidad(marine);
+		marine.moverse(ubicacionValidaMarine);
+		jugadorTerran.finalizarTurno();
+		
+		jugadorProtoss.asignarUnidad(zealot);
+		zealot.moverse(ubicacionValidaZealot);
+		jugadorProtoss.finalizarTurno();
+		
+		//No deberia moverse ya que el turno actual es el del jugador terran, que no es aliado del zealot.
+		exception.expect(NoSePuedenMoverUnidadesEnemigas.class);
+		zealot.moverse(nuevaUbicacionZealot);
+		
+		assertFalse(mapa.obtenerCelda(nuevaUbicacionZealot).contiene(zealot));
+		assertTrue(mapa.obtenerCelda(ubicacionValidaZealot).contiene(zealot));
+		
+		jugadorTerran.finalizarTurno();
+		
+		//No deberia moverse ya que el turno actual es el del jugador protoss, que no es aliado del marine.
+		exception.expect(NoSePuedenMoverUnidadesEnemigas.class);
+		marine.moverse(nuevaUbicacionMarine);
+		
+		assertFalse(mapa.obtenerCelda(nuevaUbicacionMarine).contiene(marine));
+		assertTrue(mapa.obtenerCelda(ubicacionValidaMarine).contiene(marine));
+		
+	}
+	
 }

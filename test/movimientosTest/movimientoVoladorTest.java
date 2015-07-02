@@ -76,17 +76,18 @@ public class movimientoVoladorTest {
 		Mapa mapa = Juego.getInstance().getMapa();
 			
 		Juego.getInstance().turnoDe().finalizarTurno();		
-		Jugador jugadorZealot = Juego.getInstance().turnoDe();
+		Jugador jugadorScout = Juego.getInstance().turnoDe();
 		
 		Coordenada ubicacionTierra = new Coordenada(30,3);
 		Coordenada ubicacionAire = new Coordenada(31,3);
 		
 		
 		Scout scout = new Scout();
-		jugadorZealot.asignarUnidad(scout);		
+		jugadorScout.asignarUnidad(scout);		
 		scout.moverse(ubicacionTierra);
 		
-		jugadorZealot.finalizarTurno();
+		jugadorScout.finalizarTurno();
+		Juego.getInstance().turnoDe().finalizarTurno();	
 		
 		scout.moverse(ubicacionAire);
 		

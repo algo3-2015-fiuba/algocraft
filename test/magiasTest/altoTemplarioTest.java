@@ -53,11 +53,10 @@ public class altoTemplarioTest {
 		
 		this.reiniciarJuego();
 		
-		Jugador jugadorReceptor = Juego.getInstance().turnoDe();
-		
-		jugadorReceptor.finalizarTurno();
-		
+		Jugador jugadorReceptor = Juego.getInstance().turnoDe();		
+		jugadorReceptor.finalizarTurno();		
 		Jugador jugadorAtacante = Juego.getInstance().turnoDe();
+		jugadorAtacante.finalizarTurno();
 		
 		Coordenada ubicacionMarine = new Coordenada(0,20);
 		Coordenada ubicacionAltoTemplario = new Coordenada(8,21);
@@ -65,11 +64,13 @@ public class altoTemplarioTest {
 		Marine marine = new Marine();
 		jugadorReceptor.asignarUnidad(marine);
 		marine.moverse(ubicacionMarine);
-		jugadorAtacante.finalizarTurno();
-		
+		jugadorReceptor.finalizarTurno();
+	
 		AltoTemplario altoTemplario = new AltoTemplario();
 		jugadorAtacante.asignarUnidad(altoTemplario);
 		altoTemplario.moverse(ubicacionAltoTemplario);
+
+		jugadorAtacante.finalizarTurno();
 		jugadorReceptor.finalizarTurno();
 		
 		for (int i = 0; i < 5; i++) {
@@ -110,11 +111,8 @@ public class altoTemplarioTest {
 		
 		jugadorReceptor.asignarUnidad(golliat);
 		golliat.moverse(ubicacionGolliatBajoTormenta);
-		jugadorReceptor.finalizarTurno();
 		
-		/*
-		 * Gana energia el Alto Templario...
-		 */
+		 // Gana energia el Alto Templario...
 		
 		for (int i = 0; i < 5; i++) {
 			Juego.getInstance().turnoDe().finalizarTurno();
@@ -125,30 +123,17 @@ public class altoTemplarioTest {
 		
 		Celda celdaGolliatDentroDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionGolliatBajoTormenta);
 		Celda celdaGolliatFueraDeTormenta = Juego.getInstance().getMapa().obtenerCelda(ubicacionGolliatFueraDeTormenta);
+		
 		assertTrue(celdaGolliatDentroDeTormenta.contiene(golliat));
 		
-		/*
-		 * Pasa 1 turno
-		 */
+		jugadorAtacante.finalizarTurno();
 		
-		Juego.getInstance().turnoDe().finalizarTurno();
 		assertTrue(celdaGolliatDentroDeTormenta.contiene(golliat));
-		
-		/*
-		 * Movemos al golliat
-		 */
-		
 		golliat.moverse(ubicacionGolliatFueraDeTormenta);
 		
-		Juego.getInstance().turnoDe().finalizarTurno();
-		assertTrue(celdaGolliatFueraDeTormenta.contiene(golliat));
 		
-		/*
-		 * Y deberia estar el golliat vivo
-		 */
-		
-		Juego.getInstance().turnoDe().finalizarTurno();
 		assertTrue(celdaGolliatFueraDeTormenta.contiene(golliat));
+
 		assertTrue(golliat.vidaActual() == 25);
 	}
 	

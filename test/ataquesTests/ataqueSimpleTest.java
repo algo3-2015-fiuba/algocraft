@@ -176,13 +176,15 @@ public class ataqueSimpleTest {
 		Coordenada ubicacionMarineEnemigo = new Coordenada(0,20);
 		Coordenada ubicacionZealotAtacante = new Coordenada(1,20);
 		
-		Marine marine = new Marine();
 		Zealot zealot = new Zealot();
-		jugadorReceptor.asignarUnidad(marine);	
 		jugadorAtacante.asignarUnidad(zealot);
-		
-		marine.moverse(ubicacionMarineEnemigo);
 		zealot.moverse(ubicacionZealotAtacante);
+		jugadorAtacante.finalizarTurno();
+
+		Marine marine = new Marine();
+		jugadorReceptor.asignarUnidad(marine);	
+		marine.moverse(ubicacionMarineEnemigo);
+		jugadorReceptor.finalizarTurno();
 		
 		zealot.atacarA(marine);
 		
