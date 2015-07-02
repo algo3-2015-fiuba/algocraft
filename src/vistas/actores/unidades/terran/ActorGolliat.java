@@ -1,9 +1,9 @@
 package vistas.actores.unidades.terran;
 
 import vistas.Aplicacion;
-import vistas.actores.ActorUnidad;
+import vistas.actores.unidades.ActorUnidadAtaque;
 
-public class ActorGolliat extends ActorUnidad {
+public class ActorGolliat extends ActorUnidadAtaque {
 
 	public ActorGolliat() {
 		this.nombre = "Golliat";

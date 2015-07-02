@@ -10,6 +10,7 @@ import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.interfaces.EstrategiaMovimiento;
+import juego.interfaces.Transportable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.decoradores.Escudo;
@@ -25,7 +26,7 @@ import juego.proxys.ProxyMovimiento;
 import juego.razas.unidades.excepciones.AccionInvalida;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 
-public abstract class Unidad implements Controlable, Entrenable {
+public abstract class Unidad implements Controlable, Entrenable, Transportable {
 	
 	protected Atacable vida;
 	protected Costos costos;
@@ -74,6 +75,7 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.costos.suministrosNecesarios();
 	}
 	
+	@Override
 	public int pesoTransporte() {
 		return this.pesoTransporte;
 	}
@@ -123,7 +125,8 @@ public abstract class Unidad implements Controlable, Entrenable {
 		
 	}	
 	
-	public void carroDestruido() {
+	@Override
+	public void transporteDestruido() {
 		this.morir();
 	}
 	
@@ -222,12 +225,13 @@ public abstract class Unidad implements Controlable, Entrenable {
 		return this.estrategiaDeMovimiento.colisionaCon(estrategiaDeOtro); 
 	}
 
-	public void subirACarro() {
+	@Override
+	public void subirATransporte() {
 		this.estrategiaDeMovimiento.desocupar(this);
 	}
 
-
-	public void bajarDeCarro(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
+	@Override
+	public void bajarDeTransporte(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
 		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordBajar);
 		this.posicion = coordActual;
 	}

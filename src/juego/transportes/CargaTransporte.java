@@ -4,35 +4,35 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import juego.interfaces.Transportable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
-import juego.razas.unidades.Unidad;
 
 public class CargaTransporte {
 
 	private int capacidadMaxima;
-	private Collection<Unidad> unidadesEnCarro;
+	private Collection<Transportable> transportados;
 	
 	public CargaTransporte(int capacidadMaxima) {
 		
 		super();
 		this.capacidadMaxima = capacidadMaxima;
-		this.unidadesEnCarro = new ArrayList<Unidad>();
+		this.transportados = new ArrayList<Transportable>();
 		
 	}
 
-	public boolean puedeSubir(Unidad unidad) {
+	public boolean puedeSubir(Transportable transportable) {
 		
-		if (unidad.pesoTransporte() == 0) return false;
+		if (transportable.pesoTransporte() == 0) return false;
 		
-		return ((unidad.pesoTransporte() + this.capacidadActual()) <= this.capacidadMaxima);
+		return ((transportable.pesoTransporte() + this.capacidadActual()) <= this.capacidadMaxima);
 	}
 
 	public int capacidadActual() {
 		
 		int capacidadActual = 0;
 		
-		Iterator<Unidad> it = this.unidadesEnCarro.iterator();
+		Iterator<Transportable> it = this.transportados.iterator();
 		
 		while (it.hasNext()) {
 			capacidadActual += it.next().pesoTransporte();
@@ -41,26 +41,26 @@ public class CargaTransporte {
 		return capacidadActual;
 	}
 
-	public void subir(Unidad unidad) {
+	public void subir(Transportable transportable) {
 		
-		unidad.subirACarro();
-		this.unidadesEnCarro.add(unidad);	
+		transportable.subirATransporte();
+		this.transportados.add(transportable);	
 
 	}
 
-	public void bajar(Unidad unidad, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
-		if (this.unidadesEnCarro.contains(unidad)) {
-			unidad.bajarDeCarro(coordActual, coordBajar);
-			this.unidadesEnCarro.remove(unidad);
+	public void bajar(Transportable transportable, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
+		if (this.transportados.contains(transportable)) {
+			transportable.bajarDeTransporte(coordActual, coordBajar);
+			this.transportados.remove(transportable);
 		}
 	}
 
 	public void perdida() {
 		
-		Iterator<Unidad> it = this.unidadesEnCarro.iterator();
+		Iterator<Transportable> it = this.transportados.iterator();
 		
 		while (it.hasNext()) {
-			it.next().carroDestruido();
+			it.next().transporteDestruido();
 		}
 		
 	}

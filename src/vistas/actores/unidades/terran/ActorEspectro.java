@@ -1,9 +1,9 @@
 package vistas.actores.unidades.terran;
 
 import vistas.Aplicacion;
-import vistas.actores.ActorUnidad;
+import vistas.actores.unidades.ActorUnidadAtaque;
 
-public class ActorEspectro extends ActorUnidad {
+public class ActorEspectro extends ActorUnidadAtaque {
 
 	public ActorEspectro() {
 		this.nombre = "Espectro";

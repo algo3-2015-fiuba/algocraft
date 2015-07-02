@@ -4,9 +4,6 @@ import juego.costos.Costos;
 import juego.decoradores.Escudo;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
-import juego.interfaces.excepciones.UbicacionInvalida;
-import juego.mapa.Coordenada;
-import juego.razas.unidades.Unidad;
 import juego.razas.unidades.UnidadTransporte;
 
 public class NaveTransporte extends UnidadTransporte {
@@ -21,21 +18,4 @@ public class NaveTransporte extends UnidadTransporte {
 		
 	}
 	
-	public int capacidadActual() {
-		return this.cargaTransporte.capacidadActual();
-	}
-	
-	public void transportar(Unidad unidad) {
-		
-		if ((this.propietario.esAliado(unidad)) && (this.cargaTransporte.puedeSubir(unidad))) {
-			this.cargaTransporte.subir(unidad);
-		}
-		
-	}
-	
-	public void bajar(Unidad unidad, Coordenada coordBajar) throws UbicacionInvalida {
-		
-		this.cargaTransporte.bajar(unidad, this.posicion, coordBajar);
-		
-	}
 }

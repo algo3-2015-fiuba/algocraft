@@ -1,9 +1,9 @@
 package vistas.actores.unidades.protoss;
 
 import vistas.Aplicacion;
-import vistas.actores.ActorUnidad;
+import vistas.actores.unidades.ActorUnidadAtaque;
 
-public class ActorZealot extends ActorUnidad {
+public class ActorZealot extends ActorUnidadAtaque {
 
 	public ActorZealot() {
 		this.nombre = "Zealot";
