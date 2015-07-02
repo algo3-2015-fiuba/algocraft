@@ -10,7 +10,8 @@ import juego.razas.ataques.Ataques;
 import juego.razas.unidades.UnidadAtaque;
 import juego.razas.unidades.excepciones.AtaqueInvalido;
 import juego.razas.unidades.excepciones.FueraDeRangoDeAtaque;
-import juego.razas.unidades.excepciones.UnidadAliada;
+import juego.razas.unidades.excepciones.NoSePuedeOrdenarAtacarAUnidadEnemiga;
+import juego.razas.unidades.excepciones.NoSePuedenAtacarUnidadesAliadas;
 
 public class ProxyAtaque {
 
@@ -43,9 +44,9 @@ public class ProxyAtaque {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		
-		if (!Juego.getInstance().turnoDe().esAliado(agresor)) throw new AtaqueInvalido();
+		if (!this.esAliado(agresor)) throw new NoSePuedeOrdenarAtacarAUnidadEnemiga();
 		
-		if (this.esAliado(victima)) throw new UnidadAliada();
+		if (this.esAliado(victima)) throw new NoSePuedenAtacarUnidadesAliadas();
 		
 		if (!this.atacanteTieneVision(victima)) throw new NoTieneVision();
 		

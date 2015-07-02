@@ -1,6 +1,6 @@
 package juego.razas.unidades.excepciones;
 
-public class UnidadAliada extends AtaqueInvalido {
+public class NoSePuedenAtacarUnidadesAliadas extends AtaqueInvalido {
 
 	/**
 	 * 

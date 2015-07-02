@@ -15,7 +15,7 @@ import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
-import juego.razas.unidades.excepciones.UnidadAliada;
+import juego.razas.unidades.excepciones.NoSePuedenAtacarUnidadesAliadas;
 import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 import juego.razas.unidades.protoss.Zealot;
 import juego.razas.unidades.terran.Marine;
@@ -145,7 +145,7 @@ public class movimientoSimpleTest {
 		barraca.activarUnidad(marine1, ubicacionValidaMarine1);
 		barraca.activarUnidad(marine2, ubicacionValidaMarine2);
 		
-		exception.expect(UnidadAliada.class);
+		exception.expect(NoSePuedenAtacarUnidadesAliadas.class);
 		marine1.atacarA(marine2);
 
 		assertTrue(mapa.obtenerCelda(ubicacionValidaMarine2).contiene(marine2));
