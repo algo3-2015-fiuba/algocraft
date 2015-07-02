@@ -1,9 +1,9 @@
 package vistas.actores.unidades.terran;
 
 import vistas.Aplicacion;
-import vistas.actores.unidades.ActorUnidadAtaque;
+import vistas.actores.unidades.ActorUnidadTransporte;
 
-public class ActorNaveTransporte extends ActorUnidadAtaque {
+public class ActorNaveTransporte extends ActorUnidadTransporte {
 
 	public ActorNaveTransporte() {
 		this.nombre = "Nave Transporte";

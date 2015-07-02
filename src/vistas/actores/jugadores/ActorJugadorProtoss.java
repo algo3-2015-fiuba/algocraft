@@ -7,11 +7,6 @@ import vistas.acciones.construcciones.protoss.AccionCrearArchivoTemplario;
 import vistas.acciones.construcciones.protoss.AccionCrearAsimilador;
 import vistas.acciones.construcciones.protoss.AccionCrearNexoMineral;
 import vistas.acciones.construcciones.protoss.AccionCrearPilon;
-import vistas.acciones.construcciones.terran.AccionCrearBarraca;
-import vistas.acciones.construcciones.terran.AccionCrearCentroMineral;
-import vistas.acciones.construcciones.terran.AccionCrearDepositoDeSuministro;
-import vistas.acciones.construcciones.terran.AccionCrearFabrica;
-import vistas.acciones.construcciones.terran.AccionCrearRefineria;
 import vistas.actores.Actor;
 import vistas.actores.construcciones.protoss.ActorBaseProtoss;
 

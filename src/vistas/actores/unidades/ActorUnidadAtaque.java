@@ -8,7 +8,7 @@ public abstract class ActorUnidadAtaque extends ActorControlable {
 	
 	public ActorUnidadAtaque() {
 		
-		this.nombre = "Unidad";	
+		this.nombre = "Unidad Ataque";	
 		this.acciones.add(new AccionMover());
 		this.acciones.add(new AccionAtacar());
 		
