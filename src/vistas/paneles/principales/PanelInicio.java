@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import vistas.Aplicacion;
+import vistas.acciones.AlternarEstadoDeSonido;
 import vistas.acciones.CerrarVentana;
 import vistas.acciones.SiguientePanel;
 
@@ -23,9 +24,11 @@ public class PanelInicio extends MenuPanel {
 
 		JButton botonInicio = Aplicacion.boton("/assets/botones/iniciar.png");
 		JButton botonSalir = Aplicacion.boton("/assets/botones/salir.png");
+		JButton botonAudio = Aplicacion.boton("/assets/botones/sound_small.png");
 
 		botonSalir.addActionListener(new CerrarVentana());		
 		botonInicio.addActionListener(new SiguientePanel(this));
+		botonAudio.addActionListener(new AlternarEstadoDeSonido());
 
 		JPanel listPane = new JPanel();
 
@@ -35,8 +38,11 @@ public class PanelInicio extends MenuPanel {
 
 		listPane.add(Box.createRigidArea(new Dimension(0, 80)));
 		listPane.add(botonInicio, BorderLayout.CENTER);
-		listPane.add(Box.createRigidArea(new Dimension(0, 50)));
+		listPane.add(Box.createRigidArea(new Dimension(0, 30)));
 		listPane.add(botonSalir, BorderLayout.CENTER);
+		
+		listPane.add(Box.createRigidArea(new Dimension(0, 30)));
+		listPane.add(botonAudio, BorderLayout.CENTER);
 
 		this.add(listPane);
 	}

@@ -54,7 +54,7 @@ public class Aplicacion {
 
 		});
 		
-		Sonido sonidoJuego = new Sonido();
+		Sonido.getInstance().reproducir();
 		
 	}
 
