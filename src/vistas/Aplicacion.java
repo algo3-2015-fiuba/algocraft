@@ -27,10 +27,12 @@ import javax.swing.plaf.ColorUIResource;
 
 import vistas.paneles.principales.PanelInicio;
 import vistas.paneles.principales.PanelJugadores;
+import vistas.sonido.Sonido;
 import vistas.ventanas.VentanaMenu;
 
 public class Aplicacion {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		System.setProperty("awt.useSystemAAFontSettings", "on");
@@ -50,8 +52,9 @@ public class Aplicacion {
 			}
 
 		});
-		//Sonido sonidoJuego = new Sonido();
-		//sonidoJuego.reproduccir();
+		
+		Sonido sonidoJuego = new Sonido();
+		
 	}
 
 	public static void iniciarInterfaz() throws MalformedURLException,
@@ -116,6 +119,7 @@ public class Aplicacion {
 		return logo;
 	}
 
+	@SuppressWarnings("unused")
 	public static JButton boton(String ubicacion) {
 		URL url = Aplicacion.class.getResource(ubicacion);
 
