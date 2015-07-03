@@ -23,6 +23,7 @@ public class PanelInfoJugador extends JPanel {
 	private JLabel labelGas;
 	private JLabel labelSuministros;
 	private JButton finalizarTurnoButton;
+	private JButton detenerSonidoButton;
 
 	public PanelInfoJugador(VentanaJuego ventanaOriginal) {
 
@@ -38,6 +39,8 @@ public class PanelInfoJugador extends JPanel {
 		this.labelSuministros = new JLabel();
 		this.finalizarTurnoButton = new JButton("Finalizar Turno");
 		this.finalizarTurnoButton.addMouseListener(new FinalizarTurnoListener(this.ventanaOriginal));
+		this.detenerSonidoButton = new JButton("Detener Sonido");
+		this.detenerSonidoButton.setBounds(600, 20, 150, 30);
 
 		this.actualizarDatosDelJugador();
 	}
@@ -156,7 +159,8 @@ public class PanelInfoJugador extends JPanel {
 		c.anchor = GridBagConstraints.LINE_END;
 		
 		this.add(this.finalizarTurnoButton, c);
-
+		
+		this.add(this.detenerSonidoButton);
 	}
 
 }

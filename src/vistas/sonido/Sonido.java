@@ -35,7 +35,7 @@ public class Sonido{
 		
 	}
 
-	private void pausar() throws BasicPlayerException {
+	public void pausar() throws BasicPlayerException {
 		
 		this.player.pause();
 		
