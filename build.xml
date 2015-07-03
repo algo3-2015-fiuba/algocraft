@@ -9,6 +9,7 @@
 	<property name="reports.xml.dir" location="${reports.dir}/junit-xml" />
 	<property name="reports.html.dir" location="${reports.dir}/junit-html" />
 	<property name="src.dir" location="src" />
+	<property name="assets.dir" location="${src.dir}/assets" />
 	<property name="coverage.xml.dir" location="${reports.dir}/cobertura-xml" />
 	<property name="coverage.summaryxml.dir" location="${reports.dir}/cobertura-summary-xml" />
 	<property name="coverage.html.dir" location="${reports.dir}/cobertura-html" />
@@ -125,7 +126,8 @@
 		</cobertura-report>
 	</target>
 
-	<target name="test" depends="ejecutar.tests, coverage-report, alternate-coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports." />
+	<target name="test" depends="ejecutar.tests" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports." />
+	
 
 	<target name="compilar.paquete" depends="test">
 		<javac srcdir="src" destdir="${build}/classes" debug="no">
@@ -133,7 +135,21 @@
 	</target>
 
 	<target name="empaquetar" depends="compilar.paquete">
-		<jar destfile="${build}/dist/titiritero.jar" basedir="${build}/classes" />
+		<jar destfile="${build}/dist/algocraft.jar" basedir="${build}/classes" />
+	</target>
+	
+	<target name="empaquetar.con.imagenes" depends="compilar.paquete">
+			<copy todir="${build}/classes/assets">
+		 		<fileset dir="${assets.dir}" includes="**"/>
+			</copy>
+			<jar destfile="${build}/dist/ProgramaPrincipal.jar" basedir="${build}/classes"/>
+	</target>
+	
+	<target name="jugar" depends="empaquetar.con.imagenes">
+		<java classname="vistas.Aplicacion" fork="true">
+		<classpath refid="classpath" />
+			<classpath location="${build}/dist/ProgramaPrincipal.jar" />
+		</java>
 	</target>
 
 	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
