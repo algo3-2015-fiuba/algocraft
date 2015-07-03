@@ -16,7 +16,6 @@ public class Sonido{
 		this.player = new BasicPlayer();
 		this.openFile();
 		this.reproduccir();
-		
 	}
 	
 	
@@ -47,8 +46,8 @@ public class Sonido{
 
 	private void openFile() throws BasicPlayerException {
 		
-		//URL url = this.getClass().getResource("/assets/audio/theme.mp3");
-		this.player.open(new File("audio/theme.mp3"));
+		URL url = this.getClass().getResource("/assets/audio/theme.mp3");
+		this.player.open(url);
 		
 	}
 }
