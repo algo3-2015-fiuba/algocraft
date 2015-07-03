@@ -1,38 +1,35 @@
 package vistas.sonido;
 
-/*
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
-public class Sonido {
+public class Sonido{
+	
+	public Sonido(){
+		
+		File song = new File("audio/theme.wav");
+		PlaySound(song);
 
-	public void reproduccir() {
+		
+	}
+
+	private void PlaySound(File song) {
 		
 		try {
 			
-			FileInputStream fls;
-			Player player;
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(song));
+			clip.start();
 			
-			fls = new FileInputStream("\\C:\\Users\\ALE_92\\Documents\\Algos 3\\java-work\\AlgoCraft\\StarcraftSong.mp3");
-			BufferedInputStream bfs = new BufferedInputStream(fls);
+			Thread.sleep(clip.getMicrosecondLength()/100);
 			
-			player = new Player(bfs);
-			player.play();
 			
-		} catch (JavaLayerException e) {
+		} catch (Exception e){
 			
-			e.printStackTrace();
 			
-		} catch (FileNotFoundException e) {
-			
-			e.printStackTrace();
 		}
 		
 	}
-	// ejemplo de url :  \\C:\\Users\\ALE_92\\Documents\\Algos 3\\java-work\\AlgoCraft\\StarcraftSong.mp3
-
-}*/
+}
