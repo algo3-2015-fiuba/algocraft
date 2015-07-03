@@ -1,35 +1,55 @@
 package vistas.sonido;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+import java.io.File;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public class Sonido{
 	
-	public Sonido(){
+	private BasicPlayer player;
+	
+	
+	public Sonido() throws BasicPlayerException{
 		
-		try {
-			
-			FileInputStream fls;
-			Player player;
-			
-			fls = new FileInputStream("audio/theme.mp3");
-			BufferedInputStream bfs = new BufferedInputStream(fls);
-			
-			player = new Player(bfs);
-			player.play();
-			
-		} catch (JavaLayerException e) {
-			
-			e.printStackTrace();
-			
-		} catch (FileNotFoundException e) {
-			
-			e.printStackTrace();
-		}
+		
+		this.player = new BasicPlayer();
+		this.openFile();
+		this.reproduccir();
+		
+		
+		
+		
+	}
+	
+	
 
+	public void detener() throws BasicPlayerException {
+		
+		this.player.stop();
+		
+	}
+
+	public void reanudar() throws BasicPlayerException {
+		
+		this.player.resume();
+		
+	}
+
+	private void pausar() throws BasicPlayerException {
+		
+		this.player.pause();
+		
+	}
+
+	public void reproduccir() throws BasicPlayerException {
+		
+		this.player.play();
+		
+	}
+
+	private void openFile() throws BasicPlayerException {
+		
+		this.player.open(new File("audio/theme.mp3"));
+		
 	}
 }

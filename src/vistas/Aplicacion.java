@@ -25,6 +25,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 import vistas.paneles.principales.PanelInicio;
 import vistas.paneles.principales.PanelJugadores;
 import vistas.sonido.Sonido;
@@ -33,7 +34,7 @@ import vistas.ventanas.VentanaMenu;
 public class Aplicacion {
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BasicPlayerException  {
 
 		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
