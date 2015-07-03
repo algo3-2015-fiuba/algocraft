@@ -136,11 +136,13 @@ public class Aplicacion {
 		}
 
 		boton.setBorder(BorderFactory.createEmptyBorder());
+		boton.setBackground(new Color(0,0,0,0));
 		boton.setContentAreaFilled(false);
 		boton.setFocusPainted(false);
 		boton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		boton.setFocusable(false);
+		boton.setOpaque(false);
 
 		return boton;
 	}

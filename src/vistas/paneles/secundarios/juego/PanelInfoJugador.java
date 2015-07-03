@@ -9,9 +9,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import juego.Juego;
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
+import vistas.acciones.AlternarEstadoDeSonido;
 import vistas.handlers.FinalizarTurnoListener;
 import vistas.ventanas.VentanaJuego;
 
@@ -39,8 +41,9 @@ public class PanelInfoJugador extends JPanel {
 		this.labelSuministros = new JLabel();
 		this.finalizarTurnoButton = new JButton("Finalizar Turno");
 		this.finalizarTurnoButton.addMouseListener(new FinalizarTurnoListener(this.ventanaOriginal));
-		this.detenerSonidoButton = new JButton("Detener Sonido");
-		this.detenerSonidoButton.setBounds(600, 20, 150, 30);
+		
+		this.detenerSonidoButton = Aplicacion.boton("/assets/botones/sound_small.png");
+		this.detenerSonidoButton.addActionListener(new AlternarEstadoDeSonido());
 
 		this.actualizarDatosDelJugador();
 	}
@@ -122,30 +125,41 @@ public class PanelInfoJugador extends JPanel {
 		this.removeAll();
 
 		GridBagConstraints c = new GridBagConstraints();
-
-		c.insets = new Insets(0, 20, 0, 0);
+		
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.LINE_START;
+		
+
+		c.insets = new Insets(0, 0, 0, 40);
 		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.anchor = GridBagConstraints.CENTER;
+		
+		this.add(this.detenerSonidoButton, c);
+
+		c.insets = new Insets(0, 20, 0, 0);
+	
+		c.gridx = 1;
 		c.gridy = 0;
 		c.weightx = 1;
 
 		this.add(this.labelMinerales, c);
 
-		c.gridx = 1;
+		c.gridx = 2;
 		c.gridy = 0;
 		c.weightx = 1;
 
 		this.add(this.labelGas, c);
 
-		c.gridx = 2;
+		c.gridx = 3;
 		c.gridy = 0;
 		c.weightx = 1;
 
 		this.add(this.labelSuministros, c);
 		
 		c.insets = new Insets(0, 20, 0, 0);
-		c.gridx = 3;
+		c.gridx = 4;
 		c.gridy = 0;
 		c.weightx = 10;
 		c.anchor = GridBagConstraints.LINE_END;
@@ -153,14 +167,13 @@ public class PanelInfoJugador extends JPanel {
 		this.add(this.labelNombreJugador, c);
 		
 		c.insets = new Insets(0, 0, 0, 40);
-		c.gridx = 4;
+		c.gridx = 5;
 		c.gridy = 0;
 		c.weightx = 1;
 		c.anchor = GridBagConstraints.LINE_END;
 		
 		this.add(this.finalizarTurnoButton, c);
 		
-		this.add(this.detenerSonidoButton);
 	}
 
 }

@@ -20,6 +20,7 @@ public class Sonido implements BasicPlayerListener {
 
 	private Sonido() {
 		this.player = new BasicPlayer();
+		
 		//this.player.addBasicPlayerListener(this);
 		try {
 			this.abrirArchivo();
