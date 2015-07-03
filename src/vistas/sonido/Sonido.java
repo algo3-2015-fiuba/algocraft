@@ -1,35 +1,35 @@
 package vistas.sonido;
 
-import java.io.File;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 public class Sonido{
 	
 	public Sonido(){
 		
-		File song = new File("audio/theme.wav");
-		PlaySound(song);
-
-		
-	}
-
-	private void PlaySound(File song) {
-		
 		try {
 			
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(song));
-			clip.start();
+			FileInputStream fls;
+			Player player;
 			
-			Thread.sleep(clip.getMicrosecondLength()/100);
+			fls = new FileInputStream("audio/theme.mp3");
+			BufferedInputStream bfs = new BufferedInputStream(fls);
 			
+			player = new Player(bfs);
+			player.play();
 			
-		} catch (Exception e){
+		} catch (JavaLayerException e) {
 			
+			e.printStackTrace();
 			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
 		}
-		
+
 	}
 }
