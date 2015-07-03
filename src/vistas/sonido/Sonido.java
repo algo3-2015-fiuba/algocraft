@@ -1,6 +1,8 @@
 package vistas.sonido;
 
 import java.io.File;
+import java.net.URL;
+
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 
@@ -11,13 +13,9 @@ public class Sonido{
 	
 	public Sonido() throws BasicPlayerException{
 		
-		
 		this.player = new BasicPlayer();
 		this.openFile();
 		this.reproduccir();
-		
-		
-		
 		
 	}
 	
@@ -49,6 +47,7 @@ public class Sonido{
 
 	private void openFile() throws BasicPlayerException {
 		
+		//URL url = this.getClass().getResource("/assets/audio/theme.mp3");
 		this.player.open(new File("audio/theme.mp3"));
 		
 	}

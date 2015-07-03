@@ -1,6 +1,7 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="algocraft" basedir="." default="integracion-continua">
 	<property name="build" location="build" />
 	<property name="libs" location="libs" />
+	<property name="audio.libs" location="audio/lib" />
 	<property name="classes.dir" location="build" />
 	<property name="instrumented.dir" location="${build}/instrumented" />
 	<property name="cobertura.dir" location="${libs}" />
@@ -27,9 +28,20 @@
 		<fileset dir="${libs}">
 			<include name="*.jar" />
 		</fileset>
+		
+		
+		
 		<pathelement location="${build}" />
 		<pathelement location="${instrumented.dir}" />
 		<pathelement location="${build}/tests" />
+	</path>
+	
+	<path id="audio.path">
+	
+		<fileset dir="${audio.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		
 	</path>
 
 	<path id="cobertura.classpath">
@@ -54,12 +66,15 @@
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
 		<javac srcdir="src" destdir="${build}" includeantruntime="false" debug="yes" target="1.7">
+			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
 		</javac>
 	</target>
 
 	<target name="compilar.tests" depends="instrumentar.aplicacion">
 		<javac srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.7">
 			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
 		</javac>
 	</target>
 
@@ -71,6 +86,8 @@
 			<classpath location="${build}" />
 			<classpath refid="cobertura.classpath" />
 			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
+			
 			<formatter type="xml" />
 			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
 			<batchtest todir="${reports.xml.dir}" unless="testcase">
@@ -131,23 +148,22 @@
 
 	<target name="compilar.paquete" depends="test">
 		<javac srcdir="src" destdir="${build}/classes" debug="no">
+			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
 		</javac>
 	</target>
-
-	<target name="empaquetar" depends="compilar.paquete">
-		<jar destfile="${build}/dist/algocraft.jar" basedir="${build}/classes" />
-	</target>
 	
-	<target name="empaquetar.con.imagenes" depends="compilar.paquete">
+	<target name="empaquetar.con.assets" depends="compilar.paquete">
 			<copy todir="${build}/classes/assets">
 		 		<fileset dir="${assets.dir}" includes="**"/>
 			</copy>
 			<jar destfile="${build}/dist/ProgramaPrincipal.jar" basedir="${build}/classes"/>
 	</target>
 	
-	<target name="jugar" depends="empaquetar.con.imagenes">
+	<target name="jugar" depends="empaquetar.con.assets">
 		<java classname="vistas.Aplicacion" fork="true">
-		<classpath refid="classpath" />
+			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
 			<classpath location="${build}/dist/ProgramaPrincipal.jar" />
 		</java>
 	</target>
