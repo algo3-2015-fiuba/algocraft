@@ -4,19 +4,19 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="audio/lib/vorbisspi1.0.2.jar"/>
-	<classpathentry kind="lib" path="audio/lib/tritonus_share.jar"/>
-	<classpathentry kind="lib" path="audio/lib/substance.jar"></classpathentry>
-	<classpathentry kind="lib" path="audio/lib/mp3spi1.9.4.jar"/>
-	<classpathentry kind="lib" path="audio/lib/kj_dsp1.1.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jspeex0.9.7.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jml-1.0b4.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jmactritonusspi1.74.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jl1.0.jar"/>
-	<classpathentry kind="lib" path="audio/lib/jflac-1.2.jar"/>
-	<classpathentry kind="lib" path="audio/lib/commons-logging-api.jar"/>
-	<classpathentry kind="lib" path="audio/lib/basicplayer3.0.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/vorbisspi1.0.2.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/substance.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/kj_dsp1.1.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jspeex0.9.7.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jml-1.0b4.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jmactritonusspi1.74.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jl1.0.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/jflac-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/code/java/algocraft/audio/lib/basicplayer3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
