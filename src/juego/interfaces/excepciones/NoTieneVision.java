@@ -8,7 +8,7 @@ public class NoTieneVision extends Exception {
 	private static final long serialVersionUID = -2330728003536852888L;
 
 	public String getMensaje() {
-		return "Visión insuficiente para realizar acción.";
+		return "Vision insuficiente para realizar accion.";
 	}
 	
 }
