@@ -24,8 +24,8 @@ public class PanelInfoJugador extends JPanel {
 	private JLabel labelMinerales;
 	private JLabel labelGas;
 	private JLabel labelSuministros;
-	private JButton finalizarTurnoButton;
-	private JButton detenerSonidoButton;
+	private JLabel finalizarTurnoButton;
+	private JLabel detenerSonidoButton;
 
 	public PanelInfoJugador(VentanaJuego ventanaOriginal) {
 
@@ -39,11 +39,11 @@ public class PanelInfoJugador extends JPanel {
 		this.labelMinerales = new JLabel();
 		this.labelGas = new JLabel();
 		this.labelSuministros = new JLabel();
-		this.finalizarTurnoButton = new JButton("Finalizar Turno");
+		this.finalizarTurnoButton = new JLabel("Finalizar Turno");
 		this.finalizarTurnoButton.addMouseListener(new FinalizarTurnoListener(this.ventanaOriginal));
 		
 		this.detenerSonidoButton = Aplicacion.boton("/assets/botones/sound_small.png");
-		this.detenerSonidoButton.addActionListener(new AlternarEstadoDeSonido());
+		this.detenerSonidoButton.addMouseListener(new AlternarEstadoDeSonido());
 
 		this.actualizarDatosDelJugador();
 	}

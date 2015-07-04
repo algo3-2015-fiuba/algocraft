@@ -9,7 +9,9 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
 import vistas.acciones.IniciarJuego;
@@ -25,8 +27,8 @@ public class PanelJugadores extends MenuPanel {
 		
 		this.add(Aplicacion.logo(), BorderLayout.PAGE_START);
 		
-		JButton botonContinuar = Aplicacion.boton("/assets/botones/iniciar.png");
-		botonContinuar.addActionListener(new IniciarJuego(this));
+		JLabel botonContinuar = Aplicacion.boton("/assets/botones/iniciar.png");
+		botonContinuar.addMouseListener(new IniciarJuego(this));
 		
 		seleccionJugador1 = new SeleccionJugador("Jugador 1", 0);
 		seleccionJugador2 = new SeleccionJugador("Jugador 2", 1);

@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import vistas.Aplicacion;
@@ -22,13 +23,13 @@ public class PanelInicio extends MenuPanel {
 		
 		this.add(Aplicacion.logo(), BorderLayout.PAGE_START);
 
-		JButton botonInicio = Aplicacion.boton("/assets/botones/iniciar.png");
-		JButton botonSalir = Aplicacion.boton("/assets/botones/salir.png");
-		JButton botonAudio = Aplicacion.boton("/assets/botones/sound_small.png");
+		JLabel botonInicio = Aplicacion.boton("/assets/botones/iniciar.png");
+		JLabel botonSalir = Aplicacion.boton("/assets/botones/salir.png");
+		JLabel botonAudio = Aplicacion.boton("/assets/botones/sound_small.png");
 
-		botonSalir.addActionListener(new CerrarVentana());		
-		botonInicio.addActionListener(new SiguientePanel(this));
-		botonAudio.addActionListener(new AlternarEstadoDeSonido());
+		botonSalir.addMouseListener(new CerrarVentana());		
+		botonInicio.addMouseListener(new SiguientePanel(this));
+		botonAudio.addMouseListener(new AlternarEstadoDeSonido());
 
 		JPanel listPane = new JPanel();
 

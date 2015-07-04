@@ -3,6 +3,8 @@ package vistas.acciones;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -18,7 +20,7 @@ import juego.jugadores.Jugador;
 import vistas.paneles.principales.PanelJugadores;
 import vistas.ventanas.VentanaJuego;
 
-public class IniciarJuego implements ActionListener {
+public class IniciarJuego extends MouseAdapter {
 	
 	private PanelJugadores panelOriginal;
 	
@@ -27,7 +29,7 @@ public class IniciarJuego implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		
 		boolean cargaValida = true;
 		Vector<Jugador> jugadores = panelOriginal.obtenerJugadores();

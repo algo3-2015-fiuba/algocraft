@@ -2,10 +2,12 @@ package vistas.acciones;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import vistas.paneles.principales.MenuPanel;
 
-public class SiguientePanel implements ActionListener {
+public class SiguientePanel extends MouseAdapter {
 	
 	private MenuPanel panelOriginal;
 	
@@ -14,7 +16,7 @@ public class SiguientePanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		
 		panelOriginal.irASiguientePanel();
 	}
