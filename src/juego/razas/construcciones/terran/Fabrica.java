@@ -41,9 +41,19 @@ public class Fabrica extends ConstruccionMilitar {
 	}
 	
 	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 3);
+	public Collection<Celda> obtenerRangoDeOcupacion() {
+		
+		try {
+			
+			Mapa mapa = Juego.getInstance().getMapa();
+			return mapa.obtenerRangoDeCeldas(this.posicion, 2, 3);
+			
+		} catch (CoordenadaFueraDeRango cfdr) {
+			
+			return null;
+			
+		}
+	
 	}
 	
 }

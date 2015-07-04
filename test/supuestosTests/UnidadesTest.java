@@ -1,5 +1,7 @@
 package supuestosTests;
 
+import static org.junit.Assert.*;
+
 import java.awt.Color;
 
 import juego.Juego;
@@ -9,6 +11,7 @@ import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.terran.Marine;
@@ -86,10 +89,96 @@ public class UnidadesTest {
 	}
 	
 	@Test
-	public void testSiPierdoUnidadPierdoVisionDeEsaUnidad() {
+	public void testSiPierdoUnidadPeroPoseeoConstruccionPierdoVisionDeEsaUnidadPeroNoPierdoVisionDeCelda() throws Exception {
 		
-		//Falta implementar
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
+		Barraca barraca = new Barraca();
+		Marine marine = new Marine();
+		Coordenada ubicacionValidaBarraca = new Coordenada(0,21);
+		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,20);
+		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(0,25);
 		
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
+		
+		for (int i = 1; i < 13; i++) {
+			
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+			
+		}
+		
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		
+		for (int i = 1; i < 7; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+		}
+		
+		barraca.entrenar(marine);
+		
+		for (int i = 1; i < 5; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+		}
+		
+		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
+		
+		jugadorTerran.fallecido(marine);
+		
+		//Posee aun la vision de la barraca, que incluye la ubicacion del marine.
+		assertTrue(jugadorTerran.tieneVision(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine)));
+		
+	}
+	
+	@Test
+	public void testSiPierdoVisionDeConstruccionPierdoCeldasVistas() throws Exception {
+		
+		this.reiniciarJuego();
+		Mapa mapa = Juego.getInstance().getMapa();
+		Jugador jugadorActual = Juego.getInstance().turnoDe();
+		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
+		Barraca barraca = new Barraca();
+		Marine marine = new Marine();
+		Coordenada ubicacionValidaBarraca = new Coordenada(0,21);
+		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,20);
+		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(0,25);
+		
+		jugadorActual.recolectarMinerales(1000);
+		jugadorActual.recolectarGasVespeno(1000);
+		jugadorTerran.construir(barraca, ubicacionValidaBarraca);
+		
+		for (int i = 1; i < 13; i++) {
+			
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+			
+		}
+		
+		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
+		
+		for (int i = 1; i < 7; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+		}
+		
+		barraca.entrenar(marine);
+		
+		for (int i = 1; i < 5; i++) {
+			jugadorActual.finalizarTurno();
+			jugadorActual = Juego.getInstance().turnoDe();
+		}
+		
+		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
+		
+		jugadorTerran.fallecido(barraca);
+		
+		//Posee aun la vision de la barraca, que incluye la ubicacion del marine.
+		assertTrue(jugadorTerran.tieneVision(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine)));
 		
 	}
 	

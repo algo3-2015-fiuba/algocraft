@@ -41,9 +41,19 @@ public class ConstruccionBase extends Construccion {
 	}
 	
 	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
+	public Collection<Celda> obtenerRangoDeOcupacion() {
+		
+		try {
+			
+			Mapa mapa = Juego.getInstance().getMapa();
+			return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
+			
+		} catch (CoordenadaFueraDeRango cfdr) {
+			
+			return null;
+			
+		}
+
 	}
 
 }

@@ -12,7 +12,6 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AccionInvalida;
 import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
@@ -83,16 +82,14 @@ public abstract class ConstruccionMilitar extends Construccion {
 	
 	private boolean ubicacionValida(Coordenada coordFinal) {
 		
-		try {
+		Iterator<Celda> it = this.obtenerRangoDeOcupacion().iterator();
 			
-			Iterator<Celda> it = this.obtenerRangoDeOcupacion().iterator();
-			
-			while (it.hasNext()) {
-				Coordenada coordenadaCelda = it.next().getPosicion();
-				if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
-			}			
-			
-		} catch (CoordenadaFueraDeRango cfdr) {}
+		if (it == null) return false;
+		
+		while (it.hasNext()) {
+			Coordenada coordenadaCelda = it.next().getPosicion();
+			if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
+		}			
 		
 		return false;
 		

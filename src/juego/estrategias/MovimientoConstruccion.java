@@ -9,7 +9,6 @@ import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.materiales.Material;
 import juego.razas.ataques.Ataques;
 import juego.razas.construcciones.Construccion;
@@ -29,14 +28,16 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Iterator<Celda> it = null;
 		
-		try {
-			it = construccion.obtenerRangoDeOcupacion().iterator();
-		} catch (CoordenadaFueraDeRango cfdr) {}
+		it = construccion.obtenerRangoDeOcupacion().iterator();
 		
-		while (it.hasNext()) {
-			
-			Coordenada posicion = it.next().getPosicion();
-			propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+		if (it != null) {
+		
+			while (it.hasNext()) {
+				
+				Coordenada posicion = it.next().getPosicion();
+				propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+				
+			}
 			
 		}
 		
@@ -85,17 +86,17 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 	@Override
 	public void desocupar(Controlable controlable) {
 		
-		try {
-		
-			Collection<Celda> celdasOcupadas = ((Construccion)controlable).obtenerRangoDeOcupacion();
+		Collection<Celda> celdasOcupadas = ((Construccion)controlable).obtenerRangoDeOcupacion();
 			
-			Iterator<Celda> it = celdasOcupadas.iterator();
+		Iterator<Celda> it = celdasOcupadas.iterator();
+		
+		if (it != null) {
 			
 			while (it.hasNext()) {
 				(it.next()).desocupar(((Construccion)controlable));
 			}
-		
-		} catch (CoordenadaFueraDeRango cfdr) {}
+			
+		}
 		
 	}
 

@@ -24,9 +24,20 @@ public abstract class ConstruccionRecolectora extends Construccion {
 	public abstract void recolectar();
 	
 	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
+	public Collection<Celda> obtenerRangoDeOcupacion() {
+		
+		try {
+			
+			Mapa mapa = Juego.getInstance().getMapa();
+			return mapa.obtenerRangoDeCeldas(this.posicion, 1, 1);
+		
+		
+		} catch (CoordenadaFueraDeRango cfdr) {
+		
+			return null;
+		
+		}
+	
 	}
 	
 	@Override
@@ -35,6 +46,8 @@ public abstract class ConstruccionRecolectora extends Construccion {
 		this.posicion = posicion;
 		
 		Collection<Celda> celdas = this.obtenerRangoDeOcupacion();		
+		
+		if (celdas == null) throw new CoordenadaFueraDeRango();
 		
 		Iterator<Celda> itCeldas = celdas.iterator();
 		

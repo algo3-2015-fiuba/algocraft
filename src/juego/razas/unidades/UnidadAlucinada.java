@@ -78,7 +78,7 @@ public class UnidadAlucinada extends Unidad {
 			
 			Celda celdaPosible = celdasPosiblesDeOcupacion.next();
 			
-			if (!celdaPosible.colisiona(this)) {
+			if ((celdaPosible != null) && (!celdaPosible.colisiona(this))) {
 				celdaPosible.ocupar(this);
 				ubicado = true;
 			}

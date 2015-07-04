@@ -84,7 +84,7 @@ public abstract class Construccion implements Construible, Controlable {
 	 * * * * * * * * * * * * * * * * * * * */ 
 	
 	@Override
-	public abstract Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango;
+	public abstract Collection<Celda> obtenerRangoDeOcupacion();
 	
 	@Override
 	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
@@ -114,6 +114,8 @@ public abstract class Construccion implements Construible, Controlable {
 		this.posicion = posicion;
 		
 		Collection<Celda> celdas = this.obtenerRangoDeOcupacion();		
+		
+		if (celdas == null) throw new CoordenadaFueraDeRango();
 		
 		Iterator<Celda> itCeldas = celdas.iterator();
 		

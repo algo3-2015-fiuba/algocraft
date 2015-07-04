@@ -25,9 +25,20 @@ public class Barraca extends ConstruccionMilitar {
 	}
 	
 	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
-		Mapa mapa = Juego.getInstance().getMapa();
-		return mapa.obtenerRangoDeCeldas(this.posicion, 2, 2);
+	public Collection<Celda> obtenerRangoDeOcupacion(){
+		
+		try {
+			
+			Mapa mapa = Juego.getInstance().getMapa();
+			return mapa.obtenerRangoDeCeldas(this.posicion, 2, 2);
+			
+			
+		} catch (CoordenadaFueraDeRango cfdr) {
+			
+			return null;
+			
+		}
+	
 	}
 
 	@Override

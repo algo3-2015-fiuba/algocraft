@@ -59,14 +59,22 @@ public abstract class Unidad implements Controlable, Entrenable, Transportable {
 	}
 	
 	@Override
-	public Collection<Celda> obtenerRangoDeOcupacion() throws CoordenadaFueraDeRango {
+	public Collection<Celda> obtenerRangoDeOcupacion() {
 		
-		Mapa mapa = Juego.getInstance().getMapa();
-		Collection<Celda> ocupacion = new ArrayList<Celda>();
+		try {
+			
+			Mapa mapa = Juego.getInstance().getMapa();
+			Collection<Celda> ocupacion = new ArrayList<Celda>();
+			
+			ocupacion.add(mapa.obtenerCelda(this.posicion));
 		
-		ocupacion.add(mapa.obtenerCelda(this.posicion));
-		
-		return ocupacion;
+			return ocupacion;
+			
+		} catch (CoordenadaFueraDeRango cfdr) {
+			
+			return null;
+			
+		}
 		
 	}
 	

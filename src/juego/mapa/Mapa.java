@@ -42,8 +42,7 @@ public class Mapa {
 		return this.celdas;
 	}
 	
-	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) 
-			throws CoordenadaFueraDeRango {	
+	public Collection<Celda> obtenerRangoDeCeldas(Coordenada coordenadaDeterminante, int rangoX, int rangoY) throws CoordenadaFueraDeRango {	
 		
 		Collection<Celda> rangoDeCeldas = new ArrayList<Celda>();
 			
@@ -111,13 +110,12 @@ public class Mapa {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
 		int distancia = -1;
-		Iterator<Celda> it;
 		
-		try {
-			
-			it = controlable.obtenerRangoDeOcupacion().iterator();
-			
-		} catch (CoordenadaFueraDeRango cfdr) { return -1; }
+		Collection<Celda> ocupacion = controlable.obtenerRangoDeOcupacion();
+		
+		if (ocupacion == null) return -1;
+		
+		Iterator<Celda> it = ocupacion.iterator();
 		
 		if (it.hasNext()) {
 			
