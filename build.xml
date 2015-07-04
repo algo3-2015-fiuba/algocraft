@@ -1,7 +1,7 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="algocraft" basedir="." default="integracion-continua">
 	<property name="build" location="build" />
 	<property name="libs" location="libs" />
-	<property name="audio.libs" location="audio/libs" />
+	<property name="audio.libs" location="audio/lib" />
 	<property name="classes.dir" location="build" />
 	<property name="instrumented.dir" location="${build}/instrumented" />
 	<property name="cobertura.dir" location="${libs}" />
