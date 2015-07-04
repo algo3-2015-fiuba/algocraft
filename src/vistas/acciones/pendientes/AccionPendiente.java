@@ -1,4 +1,4 @@
-package vistas.acciones;
+package vistas.acciones.pendientes;
 
 import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;

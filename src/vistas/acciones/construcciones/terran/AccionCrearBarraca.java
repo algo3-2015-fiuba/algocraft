@@ -1,6 +1,6 @@
 package vistas.acciones.construcciones.terran;
 
-import vistas.acciones.AccionPendienteConstruccion;
+import vistas.acciones.pendientes.AccionPendienteConstruccion;
 import juego.Juego;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;

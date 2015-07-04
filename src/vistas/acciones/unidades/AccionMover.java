@@ -1,5 +1,6 @@
-package vistas.acciones;
+package vistas.acciones.unidades;
 
+import vistas.acciones.pendientes.AccionPendienteUnidad;
 import juego.mapa.Coordenada;
 
 public class AccionMover extends AccionPendienteUnidad {

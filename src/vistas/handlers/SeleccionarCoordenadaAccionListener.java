@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 import juego.interfaces.Controlable;
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.pendientes.AccionPendiente;
 import vistas.paneles.secundarios.juego.PanelAcciones;
 import vistas.ventanas.VentanaJuego;
 

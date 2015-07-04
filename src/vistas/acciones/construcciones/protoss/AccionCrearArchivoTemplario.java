@@ -4,7 +4,7 @@ import juego.Juego;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
-import vistas.acciones.AccionPendienteConstruccion;
+import vistas.acciones.pendientes.AccionPendienteConstruccion;
 
 public class AccionCrearArchivoTemplario extends AccionPendienteConstruccion {
 

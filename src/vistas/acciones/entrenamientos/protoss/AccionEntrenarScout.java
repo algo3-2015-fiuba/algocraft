@@ -4,7 +4,7 @@ import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.PuertoEstelar;
 import juego.razas.unidades.protoss.Scout;
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarScout extends AccionPendienteEntrenamiento {
 	

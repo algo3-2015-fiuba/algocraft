@@ -1,6 +1,6 @@
 package vistas.actores.unidades;
 
-import vistas.acciones.AccionMover;
+import vistas.acciones.unidades.AccionMover;
 import vistas.actores.ActorControlable;
 
 public abstract class ActorUnidadMagica extends ActorControlable {

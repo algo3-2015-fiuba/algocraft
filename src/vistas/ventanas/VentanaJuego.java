@@ -22,7 +22,7 @@ import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.pendientes.AccionPendiente;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.paneles.secundarios.juego.PanelInfoJugador;

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import juego.Juego;
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
-import vistas.acciones.AlternarEstadoDeSonido;
+import vistas.acciones.sonido.AlternarEstadoDeSonido;
 import vistas.handlers.FinalizarTurnoListener;
 import vistas.ventanas.VentanaJuego;
 

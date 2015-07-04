@@ -4,7 +4,7 @@ import juego.Juego;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.Acceso;
-import vistas.acciones.AccionPendienteConstruccion;
+import vistas.acciones.pendientes.AccionPendienteConstruccion;
 
 public class AccionCrearAcceso extends AccionPendienteConstruccion {
 

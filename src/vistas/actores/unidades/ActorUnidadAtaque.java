@@ -1,7 +1,7 @@
 package vistas.actores.unidades;
 
-import vistas.acciones.AccionAtacar;
-import vistas.acciones.AccionMover;
+import vistas.acciones.unidades.AccionAtacar;
+import vistas.acciones.unidades.AccionMover;
 import vistas.actores.ActorControlable;
 
 public abstract class ActorUnidadAtaque extends ActorControlable {

@@ -11,9 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import vistas.Aplicacion;
-import vistas.acciones.AlternarEstadoDeSonido;
 import vistas.acciones.CerrarVentana;
 import vistas.acciones.SiguientePanel;
+import vistas.acciones.sonido.AlternarEstadoDeSonido;
 
 public class PanelInicio extends MenuPanel {
 

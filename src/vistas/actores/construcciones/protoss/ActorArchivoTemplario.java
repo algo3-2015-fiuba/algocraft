@@ -6,8 +6,8 @@ import java.util.Vector;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendiente;
-import vistas.acciones.AccionUbicarEntrenable;
+import vistas.acciones.construcciones.AccionUbicarEntrenable;
+import vistas.acciones.pendientes.AccionPendiente;
 import vistas.actores.ActorConstruccion;
 
 public class ActorArchivoTemplario extends ActorConstruccion {

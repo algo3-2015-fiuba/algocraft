@@ -4,7 +4,7 @@ import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.unidades.protoss.AltoTemplario;
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarAltoTemplario extends AccionPendienteEntrenamiento {
 	

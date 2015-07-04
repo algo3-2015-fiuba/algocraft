@@ -14,7 +14,7 @@ import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.jugadores.Jugador;
 import vistas.Aplicacion;
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.pendientes.AccionPendiente;
 import vistas.actores.Actor;
 import vistas.handlers.SeleccionarCoordenadaAccionListener;
 import vistas.utilidades.AsignadorVistas;

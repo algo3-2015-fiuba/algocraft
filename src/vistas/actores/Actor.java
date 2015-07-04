@@ -3,7 +3,7 @@ package vistas.actores;
 import java.awt.Graphics;
 import java.util.Vector;
 
-import vistas.acciones.AccionPendiente;
+import vistas.acciones.pendientes.AccionPendiente;
 
 public abstract class Actor {
 	

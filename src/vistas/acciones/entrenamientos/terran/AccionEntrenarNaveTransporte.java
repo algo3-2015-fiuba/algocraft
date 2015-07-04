@@ -4,7 +4,7 @@ import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.PuertoEstelar;
 import juego.razas.unidades.terran.NaveTransporte;
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarNaveTransporte extends AccionPendienteEntrenamiento {
 	

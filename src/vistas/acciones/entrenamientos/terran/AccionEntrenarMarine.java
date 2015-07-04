@@ -1,6 +1,6 @@
 package vistas.acciones.entrenamientos.terran;
 
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.Barraca;

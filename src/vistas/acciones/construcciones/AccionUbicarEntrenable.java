@@ -1,8 +1,8 @@
-package vistas.acciones;
+package vistas.acciones.construcciones;
 
 import java.util.Collection;
 
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 import juego.interfaces.Controlable;
 import juego.interfaces.Entrenable;
 import juego.mapa.Coordenada;

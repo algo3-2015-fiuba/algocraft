@@ -4,7 +4,7 @@ import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.unidades.protoss.Zealot;
-import vistas.acciones.AccionPendienteEntrenamiento;
+import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarZealot extends AccionPendienteEntrenamiento {
 	

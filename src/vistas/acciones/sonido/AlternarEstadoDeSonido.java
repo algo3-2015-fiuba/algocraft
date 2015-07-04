@@ -1,4 +1,4 @@
-package vistas.acciones;
+package vistas.acciones.sonido;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

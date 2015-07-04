@@ -1,7 +1,7 @@
 package vistas.actores.unidades;
 
-import vistas.acciones.AccionMover;
-import vistas.acciones.AccionTransportar;
+import vistas.acciones.unidades.AccionMover;
+import vistas.acciones.unidades.AccionTransportar;
 import vistas.actores.ActorControlable;
 
 public class ActorUnidadTransporte extends ActorControlable {
