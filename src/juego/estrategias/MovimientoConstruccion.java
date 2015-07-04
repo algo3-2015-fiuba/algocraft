@@ -35,7 +35,13 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 			while (it.hasNext()) {
 				
 				Coordenada posicion = it.next().getPosicion();
-				propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+				Collection<Celda> descubierto = mapa.obtenerRangoRadialDeCeldas(posicion, this.vision);
+				Iterator<Celda> itDesc = descubierto.iterator();
+				while (itDesc.hasNext()) {
+					itDesc.next().agregarObservador(controlable);
+				}
+				
+				propietario.mapaDescubierto(descubierto);
 				
 			}
 			
@@ -85,7 +91,7 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 	
 	@Override
 	public void desocupar(Controlable controlable) {
-		
+
 		Collection<Celda> celdasOcupadas = ((Construccion)controlable).obtenerRangoDeOcupacion();
 			
 		Iterator<Celda> it = celdasOcupadas.iterator();
@@ -93,7 +99,9 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 		if (it != null) {
 			
 			while (it.hasNext()) {
-				(it.next()).desocupar(((Construccion)controlable));
+					
+				it.next().desocupar(((Construccion)controlable));
+				
 			}
 			
 		}

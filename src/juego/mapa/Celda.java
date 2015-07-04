@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Controlable;
+import juego.jugadores.Jugador;
 import juego.magias.Magia;
 import juego.materiales.Material;
 import juego.razas.construcciones.Construccion;
@@ -20,6 +21,7 @@ public class Celda {
 	private Coordenada posicion;
 	private Collection<Construccion> construcciones;
 	private Collection<Unidad> unidades;
+	private Collection<Controlable> observadores;
 	
 	public Celda(Material material, Recurso recurso, Coordenada posicion) {
 		
@@ -29,6 +31,7 @@ public class Celda {
 		this.posicion = posicion;
 		this.construcciones = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
+		this.observadores = new ArrayList<Controlable>();
 		
 	}
 
@@ -99,6 +102,34 @@ public class Celda {
 		if (this.base == null) return false;
 		
 		return (this.base.equals(controlable));
+		
+	}
+	
+	public void agregarObservador(Controlable controlable) {
+		if (!this.observadores.contains(controlable)) {
+			this.observadores.add(controlable);
+		}
+	}
+	
+	public void removerObservador(Controlable controlable) {
+		this.observadores.remove(controlable);
+	}
+	
+	public boolean observadaPor(Controlable controlable) {
+		return (this.observadores.contains(controlable));
+	}
+	
+	public boolean observadaPor(Jugador jugador) {
+		
+		Iterator<Controlable> it = this.observadores.iterator();
+		
+		while (it.hasNext()) {
+			
+			if (jugador.esAliado(it.next())) return true;
+			
+		}
+		
+		return false;
 		
 	}
 

@@ -61,7 +61,8 @@ public abstract class ConstruccionRecolectora extends Construccion {
 		} catch (UbicacionInvalida ui) {
 			itCeldas = celdas.iterator();
 			while (itCeldas.hasNext()) {
-				itCeldas.next().desocupar(this);
+				Celda celda = itCeldas.next();
+				celda.desocupar(this);
 			}
 			throw new UbicacionInvalida();
 		}

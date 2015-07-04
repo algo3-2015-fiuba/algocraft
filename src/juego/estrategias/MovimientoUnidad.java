@@ -1,9 +1,13 @@
 package juego.estrategias;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
@@ -19,7 +23,13 @@ public abstract class MovimientoUnidad extends EstrategiaMovimiento {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada posicion = mapa.obtenerUbicacion((Unidad) controlable);
 		
-		propietario.mapaDescubierto(mapa.obtenerRangoRadialDeCeldas(posicion, this.vision));
+		Collection<Celda> descubierto = mapa.obtenerRangoRadialDeCeldas(posicion, this.vision);
+		Iterator<Celda> itDesc = descubierto.iterator();
+		while (itDesc.hasNext()) {
+			itDesc.next().agregarObservador(controlable);
+		}
+		
+		propietario.mapaDescubierto(descubierto);
 		
 	}
 	
@@ -37,8 +47,13 @@ public abstract class MovimientoUnidad extends EstrategiaMovimiento {
 
 		Coordenada coordInicial = mapa.obtenerUbicacion(unidad);
 				
-		if (coordInicial != null) mapa.obtenerCelda(coordInicial).desocupar(unidad);
-				
+		if (coordInicial != null) {
+			
+			controlador.visionPerdida(controlable);
+			mapa.obtenerCelda(coordInicial).desocupar(unidad);
+		
+		}
+		
 		mapa.obtenerCelda(coordFinal).ocupar(unidad);
 			
 		this.descubrirMapa(controlador, controlable);

@@ -129,7 +129,8 @@ public abstract class Construccion implements Construible, Controlable {
 			
 			itCeldas = celdas.iterator();
 			while (itCeldas.hasNext()) {
-				itCeldas.next().desocupar(this);
+				Celda celda = itCeldas.next();
+				celda.desocupar(this);
 			}
 			
 			throw new UbicacionInvalida();

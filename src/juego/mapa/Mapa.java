@@ -24,6 +24,10 @@ public class Mapa {
 	public void agregarCelda(Coordenada coord, Celda celda) {		
 		this.celdas.put(coord, celda);
 	}	
+	
+	public void removerCelda(Celda celda) {
+		this.celdas.remove(celda.getPosicion());	
+	}
 
 	public Celda obtenerCelda(Coordenada coord) throws CoordenadaFueraDeRango {
 		

@@ -41,7 +41,7 @@ public abstract class Jugador {
 		this.enConstruccion = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
 		this.recursos = new RecursosJugador();
-		this.mapaDescubierto = new MapaJugador();
+		this.mapaDescubierto = new MapaJugador(this);
 		
 	}
 	
@@ -102,8 +102,14 @@ public abstract class Jugador {
 			this.bases.remove(base);
 		}
 	}
-
+	
+	public void visionPerdida(Controlable controlable) {
+		this.mapaDescubierto.perdidaDeVision(controlable);
+	}
+	
 	public void fallecido(Controlable controlable) { 
+		
+		this.visionPerdida(controlable);
 		
 		if (this.unidades.contains(controlable)) {
 			this.unidades.remove(controlable); 

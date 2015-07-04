@@ -10,6 +10,7 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.construcciones.terran.Barraca;
@@ -35,7 +36,7 @@ public class UnidadesTest {
 		} catch (InicioInvalido ii) {}
 		
 		try {
-			juego.iniciarJuego("mapas/test.map");
+			juego.iniciarJuego("mapas/small.map");
 		} catch (InicioInvalido ii) {}
 		
 	}
@@ -99,7 +100,10 @@ public class UnidadesTest {
 		Marine marine = new Marine();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,21);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,20);
-		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(0,25);
+		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(0,23);
+		Coordenada ubicacionCercanaVistaPorMarine = new Coordenada(1,23);
+		Celda celdaUbicacionMarine = mapa.obtenerCelda(ubicacionPosibleMovimientoMarine);
+		Celda celdaCercanaAMarine = mapa.obtenerCelda(ubicacionCercanaVistaPorMarine);
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
@@ -126,12 +130,21 @@ public class UnidadesTest {
 			jugadorActual = Juego.getInstance().turnoDe();
 		}
 		
+		
 		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
+		
+		assertTrue(celdaUbicacionMarine.observadaPor(marine));
+		assertTrue(celdaCercanaAMarine.observadaPor(marine));
+		assertTrue(celdaUbicacionMarine.observadaPor(barraca));
+		assertTrue(celdaCercanaAMarine.observadaPor(barraca));
 		
 		jugadorTerran.fallecido(marine);
 		
 		//Posee aun la vision de la barraca, que incluye la ubicacion del marine.
-		assertTrue(jugadorTerran.tieneVision(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine)));
+		assertTrue(jugadorTerran.tieneVision(celdaUbicacionMarine));
+		assertFalse(celdaUbicacionMarine.observadaPor(marine));
+		assertFalse(celdaCercanaAMarine.observadaPor(marine));
+		assertTrue(celdaUbicacionMarine.observadaPor(barraca));
 		
 	}
 	
@@ -143,10 +156,10 @@ public class UnidadesTest {
 		Jugador jugadorActual = Juego.getInstance().turnoDe();
 		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		Barraca barraca = new Barraca();
-		Marine marine = new Marine();
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,21);
-		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(0,20);
-		Coordenada ubicacionPosibleMovimientoMarine = new Coordenada(0,25);
+		Coordenada ubicacionCercanaABarraca = new Coordenada(3,21);
+		Celda celdaUbicacionPrincipalBarraca = mapa.obtenerCelda(ubicacionValidaBarraca);
+		Celda celdaUbicacionCercanaBarraca = mapa.obtenerCelda(ubicacionCercanaABarraca);
 		
 		jugadorActual.recolectarMinerales(1000);
 		jugadorActual.recolectarGasVespeno(1000);
@@ -159,26 +172,19 @@ public class UnidadesTest {
 			
 		}
 		
-		jugadorTerran.construir(new DepositoSuministro(), ubicacionValidaDepositoSuministro);
-		
-		for (int i = 1; i < 7; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = Juego.getInstance().turnoDe();
-		}
-		
-		barraca.entrenar(marine);
-		
-		for (int i = 1; i < 5; i++) {
-			jugadorActual.finalizarTurno();
-			jugadorActual = Juego.getInstance().turnoDe();
-		}
-		
-		barraca.activarUnidad(marine, ubicacionPosibleMovimientoMarine);
+		assertTrue(celdaUbicacionPrincipalBarraca.observadaPor(barraca));
+		assertTrue(celdaUbicacionCercanaBarraca.observadaPor(barraca));
+		assertTrue(jugadorTerran.tieneVision(barraca));
+		assertTrue(jugadorTerran.tieneVision(celdaUbicacionPrincipalBarraca));
+		assertTrue(jugadorTerran.tieneVision(celdaUbicacionCercanaBarraca));
 		
 		jugadorTerran.fallecido(barraca);
-		
-		//Posee aun la vision de la barraca, que incluye la ubicacion del marine.
-		assertTrue(jugadorTerran.tieneVision(mapa.obtenerCelda(ubicacionPosibleMovimientoMarine)));
+
+		assertFalse(celdaUbicacionPrincipalBarraca.observadaPor(barraca));
+		assertFalse(celdaUbicacionCercanaBarraca.observadaPor(barraca));
+		assertFalse(jugadorTerran.tieneVision(barraca));
+		assertFalse(jugadorTerran.tieneVision(celdaUbicacionPrincipalBarraca));
+		assertFalse(jugadorTerran.tieneVision(celdaUbicacionCercanaBarraca));
 		
 	}
 	
