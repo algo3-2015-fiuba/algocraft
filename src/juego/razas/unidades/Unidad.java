@@ -100,6 +100,10 @@ public abstract class Unidad implements Controlable, Entrenable, Transportable {
 		return niveles.get(niveles.size() - 1).nivelActual();
 	}
 	
+	public Vector<Atacable> nivelesDeVida() {
+		return this.vida.nivelesDeVida();
+	}
+	
 	
 	/* * * * * * * * * * * *
 	 *                     *

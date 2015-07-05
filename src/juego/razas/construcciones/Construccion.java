@@ -2,6 +2,7 @@ package juego.razas.construcciones;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Vector;
 
 import juego.costos.Costos;
 import juego.estrategias.EstrategiaMovimiento;
@@ -46,7 +47,11 @@ public abstract class Construccion implements Construible, Controlable {
 	
 	public float vidaActual() {
 		return this.vida.nivelActual();
-	}	
+	}
+	
+	public Vector<Atacable> nivelesDeVida() {
+		return this.vida.nivelesDeVida();
+	}
 	
 	/* * * * * * * * * * * * * * * *
 	 *                             *

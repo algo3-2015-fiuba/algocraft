@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import juego.interfaces.Atacable;
 import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 
@@ -25,7 +26,7 @@ public abstract class BarraGenerica extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
-	private Controlable seleccionado;
+	private Atacable nivelSeleccionado;
 	private Image fondoDeVida;
 	private Image contenidoVida;
 	private JLabel contenedorBarraDentro;
@@ -37,7 +38,10 @@ public abstract class BarraGenerica extends JPanel {
 	protected String ubicacionFondo;
 	protected String ubicacionContenido;
 	
-	public BarraGenerica() {
+	public BarraGenerica(Atacable nivelSeleccionado) {
+		
+		this.nivelSeleccionado = nivelSeleccionado;
+		
 		this.setBackground(new Color(0, 0, 0, 0));
 		this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -69,8 +73,8 @@ public abstract class BarraGenerica extends JPanel {
         
         //this.add(Aplicacion.titulo("60/100", 24f));
         this.add(layeredPane);
-		
-		this.removerSeleccion();
+        
+        this.actualizarVida();
 		
 	}
 	
@@ -96,26 +100,10 @@ public abstract class BarraGenerica extends JPanel {
 		this.contenedorBarraDentro.setIcon(new ImageIcon(contenidoVida));
 	}
 	
-	public void seleccionarUnidad(Controlable seleccionado) {
-		if(seleccionado == null) {
-			this.removerSeleccion();
-		} else {
-			this.seleccionado = seleccionado;
-			this.actualizarVida();
-			//this.actualizarBarras();
-			this.setVisible(true);
-		}
-	}
-	
-	public void removerSeleccion() {
-		this.seleccionado = null;
-		this.setVisible(false);
-	}
-	
 	private void actualizarVida() {
-		this.porcentajeVida = this.seleccionado.vidaActual();
+		this.porcentajeVida = (float)(this.nivelSeleccionado.nivelActual() / this.nivelSeleccionado.nivelMaximo());
 		
-		this.texto.setText(Float.toString(this.seleccionado.vidaActual()));
+		this.texto.setText(Float.toString(this.nivelSeleccionado.nivelActual()));
 	}
 	
 	

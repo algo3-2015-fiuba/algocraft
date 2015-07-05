@@ -1,6 +1,7 @@
 package juego.interfaces;
 
 import java.util.Collection;
+import java.util.Vector;
 
 import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -12,6 +13,7 @@ import juego.razas.unidades.excepciones.AccionInvalida;
 public interface Controlable {
 	
 	public float vidaActual();
+	public Vector<Atacable> nivelesDeVida();
 	
 	public void recibirAtaque(float danio);
 	public Collection<Celda> obtenerRangoDeOcupacion();
