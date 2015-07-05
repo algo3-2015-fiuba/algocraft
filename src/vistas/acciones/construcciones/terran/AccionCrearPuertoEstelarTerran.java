@@ -1,16 +1,16 @@
-package vistas.acciones.construcciones.protoss;
+package vistas.acciones.construcciones.terran;
 
 import juego.Juego;
-import juego.jugadores.JugadorProtoss;
+import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
-import juego.razas.construcciones.protoss.PuertoEstelar;
+import juego.razas.construcciones.terran.PuertoEstelar;
 import vistas.acciones.pendientes.AccionPendienteConstruccion;
 
-public class AccionCrearPuertoEstelar extends AccionPendienteConstruccion {
+public class AccionCrearPuertoEstelarTerran extends AccionPendienteConstruccion {
 
 	public void finalizar(Coordenada destino) throws Exception {
 		
-		JugadorProtoss jugador = (JugadorProtoss) Juego.getInstance().turnoDe();
+		JugadorTerran jugador = (JugadorTerran) Juego.getInstance().turnoDe();
 		
 		jugador.construir(new PuertoEstelar(), destino);
 	}

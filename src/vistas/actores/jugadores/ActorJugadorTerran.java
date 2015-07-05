@@ -6,6 +6,7 @@ import vistas.acciones.construcciones.terran.AccionCrearBarraca;
 import vistas.acciones.construcciones.terran.AccionCrearCentroMineral;
 import vistas.acciones.construcciones.terran.AccionCrearDepositoDeSuministro;
 import vistas.acciones.construcciones.terran.AccionCrearFabrica;
+import vistas.acciones.construcciones.terran.AccionCrearPuertoEstelarTerran;
 import vistas.acciones.construcciones.terran.AccionCrearRefineria;
 import vistas.actores.Actor;
 import vistas.actores.construcciones.terran.ActorBaseTerran;
@@ -19,6 +20,7 @@ public class ActorJugadorTerran extends ActorJugador {
 		this.acciones.add(new AccionCrearDepositoDeSuministro());
 		this.acciones.add(new AccionCrearRefineria());
 		this.acciones.add(new AccionCrearFabrica());
+		this.acciones.add(new AccionCrearPuertoEstelarTerran());
 		
 	}
 
