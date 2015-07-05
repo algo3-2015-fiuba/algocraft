@@ -13,7 +13,6 @@ import juego.interfaces.Entrenable;
 import juego.interfaces.Transportable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
-import juego.decoradores.Escudo;
 import juego.estrategias.EstrategiaMovimiento;
 import juego.magias.Alucinacion;
 import juego.magias.MisilEMP;

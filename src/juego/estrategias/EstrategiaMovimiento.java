@@ -1,5 +1,7 @@
 package juego.estrategias;
 
+import java.util.Iterator;
+
 import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.UbicacionInvalida;
@@ -13,10 +15,18 @@ public abstract class EstrategiaMovimiento {
 
 	protected int vision;
 	
-	public boolean visionSuficiente(Coordenada posicion, Coordenada coordFinal) {
+	public boolean visionSuficiente(Controlable controlable, Coordenada coordFinal) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
-		return (mapa.distanciaEntreCoordenadas(posicion, coordFinal) <= this.vision);
+		Iterator<Celda> ocupacion = controlable.obtenerRangoDeOcupacion().iterator();
+		
+		while (ocupacion.hasNext()) {
+			
+			if (mapa.distanciaEntreCoordenadas(ocupacion.next().getPosicion(), coordFinal) <= this.vision) return true;
+			
+		}
+		
+		return false;
 		
 	}
 	public abstract void descubrirMapa(Jugador propietario, Controlable controlable);

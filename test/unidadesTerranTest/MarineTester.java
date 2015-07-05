@@ -95,7 +95,6 @@ public class MarineTester {
 		
 		assertTrue(mapa.obtenerCelda(ubicacionPosibleMarine).contiene(marine));
 		
-		
 	}
 	
 	@Test

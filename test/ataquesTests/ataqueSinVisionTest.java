@@ -62,7 +62,7 @@ public class ataqueSinVisionTest {
 
 		Coordenada ubicacionValidaBarraca = new Coordenada(12,3);
 		Coordenada ubicacionValidaDepositoSuministro = new Coordenada(16,3);
-		Coordenada ubicacionMarine = new Coordenada(17,3);
+		Coordenada ubicacionMarine = new Coordenada(10,3);
 		Coordenada ubicacionValidaPilon = new Coordenada(0,20);
 		Coordenada ubicacionValidaAcceso = new Coordenada(3,20);
 		Coordenada ubicacionZealot = new Coordenada(6,20);

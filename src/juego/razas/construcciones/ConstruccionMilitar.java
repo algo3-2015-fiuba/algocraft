@@ -12,6 +12,8 @@ import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.mapa.Mapa;
+import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.Unidad;
 import juego.razas.unidades.excepciones.AccionInvalida;
 import juego.razas.unidades.excepciones.NoSePuedenMoverUnidadesEnemigas;
@@ -80,19 +82,22 @@ public abstract class ConstruccionMilitar extends Construccion {
 		
 	}
 	
-	private boolean ubicacionValida(Coordenada coordFinal) {
+	private boolean ubicacionValida(Coordenada coordFinal, Unidad unidad) {
+		
+		Mapa mapa = Juego.getInstance().getMapa();
 		
 		Iterator<Celda> it = this.obtenerRangoDeOcupacion().iterator();
 			
 		if (it == null) return false;
 		
-		while (it.hasNext()) {
-			Coordenada coordenadaCelda = it.next().getPosicion();
-			if (this.estrategiaDeMovimiento.visionSuficiente(coordenadaCelda, coordFinal)) return true;
-		}			
+		try {
+			
+			if ((mapa.obtenerCelda(coordFinal)).colisiona(unidad)) return false;
+			
+		} catch (CoordenadaFueraDeRango cfdr) { return false; }
 		
-		return false;
-		
+		return (this.estrategiaDeMovimiento.visionSuficiente(this, coordFinal));	
+	
 	}
 	
 	public void activarUnidad(Entrenable unidadActivable, Coordenada coordFinal) throws UbicacionInvalida, AccionInvalida {
@@ -110,9 +115,11 @@ public abstract class ConstruccionMilitar extends Construccion {
 			Unidad unidad = it.next();
 			
 			if (unidad == unidadActivable) {
-				if (this.ubicacionValida(coordFinal)) {
+				if (this.ubicacionValida(coordFinal, unidad)) {
 					this.propietario.asignarUnidad(unidad);
 					unidad.moverse(coordFinal);
+				} else {
+					throw new UbicacionInvalida();
 				}
 			}
 			

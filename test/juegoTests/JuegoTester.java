@@ -10,12 +10,15 @@ import juego.excepciones.ColorInvalido;
 import juego.excepciones.FaltanJugadores;
 import juego.excepciones.InicioInvalido;
 import juego.excepciones.NombreInvalido;
+import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.jugadores.Jugador;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.construcciones.terran.Barraca;
+import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.unidades.excepciones.NoSePuedenAtacarUnidadesAliadas;
 import juego.razas.unidades.terran.Marine;
 
@@ -203,6 +206,51 @@ public class JuegoTester {
 			
 		}
 		
+	}
+	
+	@Test
+	public void testSiTratoDeUbicarUnaUnidadEntrenadaEnUnaCeldaOcupadaErrorUbicacionInvalida() throws Exception {
+		
+		this.inicioJuegoCorrectamente();
+		JugadorTerran jugador1 = new JugadorTerran("jugadorTerran1", Color.red);
+		JugadorTerran jugador2 = new JugadorTerran("jugadorTerran2", Color.blue);
+		Juego juego = Juego.getInstance();
+		juego.crearJugador(jugador1);
+		juego.crearJugador(jugador2);
+		juego.iniciarJuego("mapas/small.map");
+		Barraca barraca = new Barraca();
+		DepositoSuministro depositoSuministro = new DepositoSuministro();
+		Marine marine1 = new Marine();
+		Marine marine2 = new Marine();
+		Coordenada coordenadaBarraca = new Coordenada(0,20);
+		Coordenada coordenadaDepositoSuministro = new Coordenada(10,20);
+		Coordenada coordenadaValidaMarine = new Coordenada(3,20);
+		
+		jugador1.recolectarGasVespeno(1000);
+		jugador1.recolectarMinerales(1000);
+		
+		jugador1.construir(depositoSuministro, coordenadaDepositoSuministro);
+		
+		jugador1.construir(barraca, coordenadaBarraca);
+
+		for (int i = 1; i < 11; i++) {
+			jugador1.finalizarTurno();
+			jugador2.finalizarTurno();
+		}
+				
+		barraca.entrenar(marine1);
+		barraca.entrenar(marine2);
+	
+		for(int i = 1; i < 5; i++) {
+			jugador1.finalizarTurno();
+			jugador2.finalizarTurno();
+		}
+		
+		barraca.activarUnidad(marine1, coordenadaValidaMarine);
+		
+		exception.expect(UbicacionInvalida.class);
+		barraca.activarUnidad(marine2, coordenadaValidaMarine);
+	
 	}
 	
 }

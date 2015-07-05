@@ -26,9 +26,11 @@ public class ProxyMovimiento {
 		Mapa mapa = Juego.getInstance().getMapa();
 		Coordenada ubicacionUnidad = mapa.obtenerUbicacion(unidad);
 		
-		if (ubicacionUnidad == null) return true;
-		
 		try {
+			
+			if ((mapa.obtenerCelda(coordFinal)).colisiona(unidad)) return false;
+			
+			if (ubicacionUnidad == null) return true;
 			
 			if (!this.estrategiaMovimiento.puedeOcupar(unidad, mapa.obtenerCelda(coordFinal))) return false;
 			
