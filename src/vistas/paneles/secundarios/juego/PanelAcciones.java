@@ -61,6 +61,18 @@ public class PanelAcciones extends JPanel {
 
 		this.removerSeleccion();
 	}
+	
+	@Override
+	public Dimension getPreferredSize() {
+		
+		int prevWidth = super.getPreferredSize().width;
+		int prevHeight = super.getPreferredSize().height;
+		int minHeight = 250;
+		
+		int finalHeight = (prevHeight > minHeight) ? prevHeight : minHeight;
+		
+		return new Dimension(super.getPreferredSize().width, finalHeight);
+	}
 
 	public void seleccionarElemento(Controlable elementoSeleccionado) {
 		this.elementoSeleccionado = elementoSeleccionado;

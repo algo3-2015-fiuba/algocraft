@@ -16,8 +16,8 @@ public class ActorJugadorProtoss extends ActorJugador {
 	public ActorJugadorProtoss() {
 		this.nombre = "Unidad";
 		this.acciones.add(new AccionCrearNexoMineral());
-		this.acciones.add(new AccionCrearPilon());
 		this.acciones.add(new AccionCrearAsimilador());
+		this.acciones.add(new AccionCrearPilon());
 		this.acciones.add(new AccionCrearAcceso());
 		this.acciones.add(new AccionCrearPuertoEstelarProtoss());
 		this.acciones.add(new AccionCrearArchivoTemplario());

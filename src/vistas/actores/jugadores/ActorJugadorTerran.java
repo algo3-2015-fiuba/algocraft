@@ -16,12 +16,11 @@ public class ActorJugadorTerran extends ActorJugador {
 	public ActorJugadorTerran() {
 		this.nombre = "Unidad";
 		this.acciones.add(new AccionCrearCentroMineral());
-		this.acciones.add(new AccionCrearBarraca());
-		this.acciones.add(new AccionCrearDepositoDeSuministro());
 		this.acciones.add(new AccionCrearRefineria());
+		this.acciones.add(new AccionCrearDepositoDeSuministro());
+		this.acciones.add(new AccionCrearBarraca());
 		this.acciones.add(new AccionCrearFabrica());
-		this.acciones.add(new AccionCrearPuertoEstelarTerran());
-		
+		this.acciones.add(new AccionCrearPuertoEstelarTerran());		
 	}
 
 	@Override
