@@ -157,6 +157,8 @@ public class Celda implements Observable {
 			elementoSeleccionado = this.getUnidades().iterator().next();
 		} else if(!this.getConstrucciones().isEmpty()) {
 			elementoSeleccionado = this.getConstrucciones().iterator().next();
+		} else if(this.getBase() != null) {
+			elementoSeleccionado = this.getBase();
 		}
 		
 		return elementoSeleccionado;

@@ -11,7 +11,7 @@ import vistas.utilidades.AsignadorVistas;
 public class ActorBase extends ActorControlable {
 	
 	public ActorBase() {
-		this.nombre = "Unidad";
+		this.nombre = "Construccion Base";
 	}
 	
 	@Override
