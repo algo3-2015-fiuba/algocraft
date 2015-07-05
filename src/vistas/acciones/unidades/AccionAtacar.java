@@ -22,7 +22,7 @@ public class AccionAtacar extends AccionPendienteUnidad {
 		
 		Controlable victima = celdaSeleccionada.seleccionRelevante();
 		
-		if (victima == null) throw new NadaSeleccionado();
+		
 		
 		((UnidadAtaque)this.unidadEmisora).atacarA(victima);
 		

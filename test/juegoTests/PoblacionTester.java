@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import juego.Juego;
 import juego.excepciones.InicioInvalido;
+import juego.interfaces.excepciones.AccesoDenegado;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.RequerimientosInvalidos;
 import juego.interfaces.excepciones.SobrePoblacion;
@@ -120,7 +121,7 @@ public class PoblacionTester {
 	
 	@Test
 	public void testSiJugadorAlcanzaLimiteDePoblacionNoPuedeCrearMasMarines() 
-			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion {
+			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos, SobrePoblacion, AccesoDenegado {
 		
 		this.reiniciarJuego();
 		Jugador jugadorActual = Juego.getInstance().turnoDe();

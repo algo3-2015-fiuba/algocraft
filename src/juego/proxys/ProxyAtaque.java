@@ -1,5 +1,6 @@
 package juego.proxys;
 
+import vistas.acciones.unidades.excepciones.NadaSeleccionado;
 import juego.Juego;
 import juego.estrategias.EstrategiaMovimiento;
 import juego.interfaces.Controlable;
@@ -40,9 +41,11 @@ public class ProxyAtaque {
 		
 	}
 
-	public void atacarA(UnidadAtaque agresor, Controlable victima) throws AtaqueInvalido, NoTieneVision {
+	public void atacarA(UnidadAtaque agresor, Controlable victima) throws AtaqueInvalido, NoTieneVision, NadaSeleccionado {
 		
 		Mapa mapa = Juego.getInstance().getMapa();
+		
+		if (victima == null) throw new NadaSeleccionado();
 		
 		if (!this.esAliado(agresor)) throw new NoSePuedeOrdenarAtacarAUnidadEnemiga();
 		

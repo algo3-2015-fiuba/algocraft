@@ -6,6 +6,7 @@ import juego.Juego;
 import juego.costos.Costos;
 import juego.decoradores.Vida;
 import juego.estrategias.MovimientoConstruccion;
+import juego.interfaces.excepciones.AccesoDenegado;
 import juego.interfaces.excepciones.RecursosInsuficientes;
 import juego.interfaces.excepciones.SobrePoblacion;
 import juego.jugadores.JugadorTerran;
@@ -51,7 +52,7 @@ public class Barraca extends ConstruccionMilitar {
 		}
 	}
 	
-	public void entrenar(Marine marine) throws RecursosInsuficientes, SobrePoblacion {
+	public void entrenar(Marine marine) throws RecursosInsuficientes, SobrePoblacion, AccesoDenegado {
 		if (this.propietario == Juego.getInstance().turnoDe()) {
 			this.iniciarEntrenamiento(marine);
 		}

@@ -31,14 +31,17 @@ public class SeleccionarCoordenadaAccionListener extends MouseAdapter {
 		
 		try {
 			accion.iniciar(elementoSeleccionado);
+			
+			if(accion.asignarComoPendiente()) {
+				this.ventanaOriginal.agregarAccionPendiente(accion);
+				this.ventanaOriginal.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+			}
+			
 		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, "No se ha podido concretar esa accion", "AlgoCraft", 1);
+			this.ventanaOriginal.notificarMensaje(e1.getMessage());
 		}
 		
-		if(accion.asignarComoPendiente()) {
-			this.ventanaOriginal.agregarAccionPendiente(accion);
-			this.ventanaOriginal.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-		}
+		
 		
 		this.ventanaOriginal.actualizarPantalla();
 	}

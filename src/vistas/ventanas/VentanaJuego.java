@@ -3,6 +3,7 @@ package vistas.ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.KeyboardFocusManager;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,7 @@ import vistas.paneles.secundarios.juego.PanelInfoJugador;
 import vistas.paneles.secundarios.juego.PanelIzquierdoJuego;
 import vistas.paneles.secundarios.juego.PanelMapa;
 import vistas.utilidades.ScalablePane;
+import vistas.utilidades.TrucosKeyEventDispatcher;
 
 public class VentanaJuego extends JFrame implements ObservadorCelda {
 	
@@ -65,6 +67,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		}
 		
 		this.setVisible(true);
+		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+		  .addKeyEventDispatcher(new TrucosKeyEventDispatcher(this));
 		
 
 		this.panelInfoJugador.notificarMensaje("Bienvenidos");
@@ -148,7 +153,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 				this.panelInfoJugador.actualizarDatosDelJugador();
 			} catch (Exception e) {
 				//JOptionPane.showMessageDialog(null, e.getMessage(), "AlgoCraft", 1);
-				this.panelInfoJugador.notificarMensaje(e.getMessage());
+				this.notificarMensaje(e.getMessage());
 				e.printStackTrace();
 			}
 			this.actualizarPantalla();
@@ -159,6 +164,10 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	
 	public void agregarAccionPendiente(AccionPendiente accion) {
 		this.accionPendiente = accion;
+	}
+	
+	public void notificarMensaje(String mensaje) {
+		this.panelInfoJugador.notificarMensaje(mensaje);
 	}
 	
 	public void removerAccionPendiente() {

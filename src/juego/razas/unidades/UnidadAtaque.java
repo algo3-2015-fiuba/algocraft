@@ -1,5 +1,6 @@
 package juego.razas.unidades;
 
+import vistas.acciones.unidades.excepciones.NadaSeleccionado;
 import juego.interfaces.Controlable;
 import juego.interfaces.excepciones.NoTieneVision;
 import juego.proxys.ProxyAtaque;
@@ -22,24 +23,18 @@ public abstract class UnidadAtaque extends Unidad {
 		return (this.proxyAtaque == null);
 	}
 	
-	public void atacarA(Controlable victima) throws NoTieneVision, AtaqueInvalido {
+	public void atacarA(Controlable victima) throws NoTieneVision, AtaqueInvalido, NadaSeleccionado {
 		
 		if (this.noAtacoEnEsteTurno()) {
 			
-			try {
-				
+			try {				
 				this.proxyAtaque = new ProxyAtaque(this.ataques, this.estrategiaDeMovimiento);
 				this.proxyAtaque.atacarA(this, victima);
 				
-			} catch (NoTieneVision ntv) {
+			} catch (NoTieneVision|AtaqueInvalido|NadaSeleccionado ntv) {
 				
 				this.proxyAtaque = null;
 				throw ntv;
-				
-			} catch (AtaqueInvalido ai) {
-				
-				this.proxyAtaque = null;
-				throw ai;
 				
 			}
 			

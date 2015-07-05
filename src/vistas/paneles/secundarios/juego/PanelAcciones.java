@@ -102,8 +102,8 @@ public class PanelAcciones extends JPanel {
 		this.panelAcciones.repaint();
 		
 		
-		this.ventanaOriginal.getContentPane().validate();
-		this.ventanaOriginal.getContentPane().repaint();
+		/*this.ventanaOriginal.getContentPane().validate();
+		this.ventanaOriginal.getContentPane().repaint();*/
 	}
 	
 	private void reiniciarPanelAcciones() {
