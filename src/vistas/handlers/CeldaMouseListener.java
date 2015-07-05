@@ -16,7 +16,6 @@ public class CeldaMouseListener extends MouseAdapter {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e);
 		
 		this.vista.seleccionar();
 	}

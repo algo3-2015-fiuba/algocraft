@@ -25,7 +25,6 @@ public class SeleccionarCoordenadaAccionListener extends MouseAdapter {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e);
 		
 		Controlable elementoSeleccionado = panelAcciones.elementoSeleccionado();
 		
