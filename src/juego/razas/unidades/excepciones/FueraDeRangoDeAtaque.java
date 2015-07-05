@@ -9,7 +9,7 @@ public class FueraDeRangoDeAtaque extends AtaqueInvalido {
 
 	@Override
 	public String getMensaje() {
-		return "La unidad/construcción atacable se encuentra fuera del rango de ataque.";
+		return "La unidad/construccion atacable se encuentra fuera del rango de ataque.";
 	}
 	
 }
