@@ -12,7 +12,7 @@ import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.CentroDeMineral;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.construcciones.terran.Fabrica;
-import juego.razas.construcciones.terran.PuertoEstelar;
+import juego.razas.construcciones.terran.PuertoEstelarTerran;
 import juego.razas.construcciones.terran.Refineria;
 
 public class JugadorTerran extends Jugador {
@@ -68,7 +68,7 @@ public class JugadorTerran extends Jugador {
 		
 	}
 	
-	public void construir(PuertoEstelar puertoEstelar, Coordenada posicion) 
+	public void construir(PuertoEstelarTerran puertoEstelar, Coordenada posicion) 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		if (!this.puertoEstelarHabilitado()) throw new RequiereFabrica();

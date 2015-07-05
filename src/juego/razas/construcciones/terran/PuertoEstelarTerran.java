@@ -16,9 +16,9 @@ import juego.razas.unidades.terran.Espectro;
 import juego.razas.unidades.terran.NaveCiencia;
 import juego.razas.unidades.terran.NaveTransporte;
 
-public class PuertoEstelar extends ConstruccionMilitar {
+public class PuertoEstelarTerran extends ConstruccionMilitar {
 
-	public PuertoEstelar() {
+	public PuertoEstelarTerran() {
 		super();
 		this.vida = new Vida(1300);
 		this.costos = new Costos(150,100,10,0);

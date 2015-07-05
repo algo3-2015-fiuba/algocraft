@@ -18,7 +18,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.terran.Barraca;
 import juego.razas.construcciones.terran.Fabrica;
-import juego.razas.construcciones.terran.PuertoEstelar;
+import juego.razas.construcciones.terran.PuertoEstelarTerran;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -58,7 +58,7 @@ public class PuertoEstelarTester {
 		Coordenada ubicacionValidaBarraca = new Coordenada(0,20);
 		Coordenada ubicacionValidaFabrica = new Coordenada(4,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
-		PuertoEstelar nuevoPuertoEstelar = new PuertoEstelar();
+		PuertoEstelarTerran nuevoPuertoEstelar = new PuertoEstelarTerran();
 		
 		/* El rango de celdas de un puerto estelar debe ser de seis
 		 * teniendo como coordenada determinante a la ingresada.
@@ -125,7 +125,7 @@ public class PuertoEstelarTester {
 		jugadorActual.recolectarMinerales(1000);
 
 		exception.expect(RequiereFabrica.class);
-		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelarTerran(), ubicacionValidaPuertoEstelar);
 		
 	}
 	
@@ -159,7 +159,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelarTerran(), ubicacionValidaPuertoEstelar);
 		
 	}
 
@@ -193,7 +193,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorTerran.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelarTerran(), ubicacionInvalidaPuertoEstelar);
 		
 	}
 
@@ -227,10 +227,10 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelarTerran(), ubicacionValidaPuertoEstelar);
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorTerran.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorTerran.construir(new PuertoEstelarTerran(), ubicacionValidaPuertoEstelar);
 		
 	}
 	

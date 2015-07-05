@@ -17,7 +17,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.protoss.Acceso;
-import juego.razas.construcciones.protoss.PuertoEstelar;
+import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -56,7 +56,7 @@ public class PuertoEstelarTester {
 		JugadorProtoss jugadorProtoss = (JugadorProtoss) juego.turnoDe();
 		Coordenada ubicacionValidaAcceso = new Coordenada(0,20);
 		Coordenada ubicacionValidaPuertoEstelar = new Coordenada(0,1);
-		PuertoEstelar nuevoPuertoEstelar = new PuertoEstelar();
+		PuertoEstelarProtoss nuevoPuertoEstelar = new PuertoEstelarProtoss();
 		
 		/* El rango de celdas de un puerto estelar debe ser de seis
 		 * teniendo como coordenada determinante a la ingresada.
@@ -112,7 +112,7 @@ public class PuertoEstelarTester {
 		jugadorProtoss.recolectarMinerales(1000);
 
 		exception.expect(RequiereAcceso.class);
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 	}
 	
@@ -138,7 +138,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(RecursosInsuficientes.class);
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 	}
 
@@ -164,7 +164,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(CoordenadaFueraDeRango.class);
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionInvalidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionInvalidaPuertoEstelar);
 		
 	}
 
@@ -190,7 +190,7 @@ public class PuertoEstelarTester {
 		}
 		
 		exception.expect(UbicacionInvalida.class);
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 	}
 

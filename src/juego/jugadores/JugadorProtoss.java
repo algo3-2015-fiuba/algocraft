@@ -13,7 +13,7 @@ import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.construcciones.protoss.Asimilador;
 import juego.razas.construcciones.protoss.NexoMineral;
 import juego.razas.construcciones.protoss.Pilon;
-import juego.razas.construcciones.protoss.PuertoEstelar;
+import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
 
 public class JugadorProtoss extends Jugador {
 
@@ -68,7 +68,7 @@ public class JugadorProtoss extends Jugador {
 		
 	}
 	
-	public void construir(PuertoEstelar puertoEstelar, Coordenada posicion) 
+	public void construir(PuertoEstelarProtoss puertoEstelar, Coordenada posicion) 
 			throws RecursosInsuficientes, UbicacionInvalida, RequerimientosInvalidos {
 		
 		if (!this.puertoEstelarHabilitado()) throw new RequiereAcceso();

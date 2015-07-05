@@ -18,7 +18,7 @@ import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
-import juego.razas.construcciones.protoss.PuertoEstelar;
+import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -84,7 +84,7 @@ public class ArchivoTemplarioTester {
 			jugadorActual = juego.turnoDe();
 		}
 
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
@@ -147,7 +147,7 @@ public class ArchivoTemplarioTester {
 			jugadorActual = juego.turnoDe();
 		}
 
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
@@ -181,7 +181,7 @@ public class ArchivoTemplarioTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();
@@ -215,7 +215,7 @@ public class ArchivoTemplarioTester {
 			jugadorActual = juego.turnoDe();
 		}
 		
-		jugadorProtoss.construir(new PuertoEstelar(), ubicacionValidaPuertoEstelar);
+		jugadorProtoss.construir(new PuertoEstelarProtoss(), ubicacionValidaPuertoEstelar);
 		
 		for (int i = 1; i < 11; i++) {
 			jugadorActual.finalizarTurno();

@@ -3,7 +3,7 @@ package vistas.acciones.construcciones.protoss;
 import juego.Juego;
 import juego.jugadores.JugadorProtoss;
 import juego.mapa.Coordenada;
-import juego.razas.construcciones.protoss.PuertoEstelar;
+import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
 import vistas.acciones.pendientes.AccionPendienteConstruccion;
 
 public class AccionCrearPuertoEstelarProtoss extends AccionPendienteConstruccion {
@@ -12,7 +12,7 @@ public class AccionCrearPuertoEstelarProtoss extends AccionPendienteConstruccion
 		
 		JugadorProtoss jugador = (JugadorProtoss) Juego.getInstance().turnoDe();
 		
-		jugador.construir(new PuertoEstelar(), destino);
+		jugador.construir(new PuertoEstelarProtoss(), destino);
 	}
 
 	@Override

@@ -17,9 +17,9 @@ import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.protoss.NaveTransporte;
 import juego.razas.unidades.protoss.Scout;
 
-public class PuertoEstelar extends ConstruccionMilitar {
+public class PuertoEstelarProtoss extends ConstruccionMilitar {
 	
-	public PuertoEstelar() {
+	public PuertoEstelarProtoss() {
 		super();
 		this.vida = new Escudo(new Vida(600), 600);
 		this.costos = new Costos(150,150,10,0);
