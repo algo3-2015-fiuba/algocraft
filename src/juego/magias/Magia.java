@@ -17,6 +17,7 @@ public abstract class Magia {
 		super();
 		this.costoEnergia = 0;
 		this.propietario = null;
+		this.mago = mago;
 		
 	}
 	

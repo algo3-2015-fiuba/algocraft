@@ -8,6 +8,7 @@ import java.awt.LinearGradientPaint;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.swing.JComponent;
 
@@ -18,6 +19,7 @@ import vistas.handlers.interfaces.ObservadorCelda;
 import vistas.utilidades.AsignadorVistas;
 import juego.Juego;
 import juego.jugadores.Jugador;
+import juego.magias.Magia;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.materiales.Material;
@@ -102,6 +104,7 @@ public class VistaCelda extends JComponent {
 			this.dibujarConstrucciones(g);
 			this.dibujarBases(g);
 			this.dibujarUnidades(g);
+			this.dibujarMagias(g);
 		} else {
 			this.dibujarSombraDeVision(g);
 		}
@@ -110,6 +113,16 @@ public class VistaCelda extends JComponent {
 			this.dibujarSeleccion(g);
 		}
 		
+	}
+
+	private void dibujarMagias(Graphics g) {
+		Collection<Magia> magias = this.celdaRepresentante.getMagiasActivas();
+		
+		for(Magia magia : magias) {
+			Actor actorResponsable = AsignadorVistas.getInstance()
+					.obtenerRepresentacion(magia.getClass(), magia);
+			actorResponsable.dibujar(g);
+		}
 	}
 
 	private void actualizarVisibilidad() {

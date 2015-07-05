@@ -50,6 +50,15 @@ public class TormentaPsionica extends Magia {
 	public void lanzar(Coordenada coordImpacto) {
 		//Se activa al finalizar el turno
 		this.coordImpacto = coordImpacto;
+		
+		Mapa mapa = Juego.getInstance().getMapa();		
+		Collection<Celda> celdasEnRango = mapa.obtenerRangoRadialDeCeldas(coordImpacto, 5);
+		
+		Iterator<Celda> it = celdasEnRango.iterator();
+		
+		while (it.hasNext()) {
+			it.next().agregarMagia(this);
+		}	
 	}
 
 	@Override

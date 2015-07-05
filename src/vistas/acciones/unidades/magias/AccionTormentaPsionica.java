@@ -22,14 +22,7 @@ public class AccionTormentaPsionica extends AccionPendienteUnidad {
 	
 	public void finalizar(Coordenada destino) throws Exception {
 		
-		Celda celdaSeleccionada = null;
-		try {
-			celdaSeleccionada = Juego.getInstance().getMapa().obtenerCelda(destino);
-		} catch (CoordenadaFueraDeRango e) {
-			e.printStackTrace();
-		}
-		
-		((AltoTemplario)this.unidadEmisora).lanzarTormentaPsionica(celdaSeleccionada.getPosicion());
+		((AltoTemplario)this.unidadEmisora).lanzarTormentaPsionica(destino);
 		
 	}
 

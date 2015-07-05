@@ -23,6 +23,7 @@ public class Celda implements Observable {
 	private Collection<Construccion> construcciones;
 	private Collection<Unidad> unidades;
 	private Collection<Controlable> observadores;
+	private Collection<Magia> magiasActivas;
 	
 	public Celda(Material material, Recurso recurso, Coordenada posicion) {
 		
@@ -33,6 +34,7 @@ public class Celda implements Observable {
 		this.construcciones = new ArrayList<Construccion>();
 		this.unidades = new ArrayList<Unidad>();
 		this.observadores = new ArrayList<Controlable>();
+		this.magiasActivas = new ArrayList<Magia>();
 		
 	}
 
@@ -135,11 +137,17 @@ public class Celda implements Observable {
 		}
 		
 		return false;
-		
+	}
+	
+	public Collection<Magia> getMagiasActivas() {
+		return this.magiasActivas;
+	}
+	
+	public void agregarMagia(Magia magia) {
+		this.magiasActivas.add(magia);
 	}
 
 	public void afectadaPorMagia(Magia magia) {
-		
 		Unidad unidades[] = new Unidad[this.unidades.size()];
 		unidades = this.unidades.toArray(unidades);
 		
@@ -147,6 +155,7 @@ public class Celda implements Observable {
 			magia.afectar(unidad);
 		}
 		
+		this.magiasActivas.remove(magia);
 	}
 	
 	public Controlable seleccionRelevante() {

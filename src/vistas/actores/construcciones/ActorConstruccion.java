@@ -19,7 +19,7 @@ public class ActorConstruccion extends ActorControlable {
 	
 	public ActorConstruccion() {
 		this.nombre = "Construccion";
-		this.urlConstruccion = Aplicacion.class.getResource("/assets/iconos/notificaciones/en construccion.png");
+		this.urlConstruccion = Aplicacion.class.getResource("/assets/iconos/notificaciones/en construccion_small.png");
 	}
 	
 	@Override
@@ -37,8 +37,8 @@ public class ActorConstruccion extends ActorControlable {
 				try {
 					BufferedImage image;
 					image = ImageIO.read(this.urlConstruccion);
-					Image scaled = image.getScaledInstance(altoImagen, altoImagen, Image.SCALE_SMOOTH);
-					g.drawImage(scaled, (int)(0), (int)(VistaCelda.lado*0.1), null);
+					//Image scaled = image.getScaledInstance(altoImagen, altoImagen, Image.SCALE_SMOOTH);
+					g.drawImage(image, (int)(0), (int)(VistaCelda.lado*0.1), null);
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

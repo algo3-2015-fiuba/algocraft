@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
+import juego.magias.Magia;
+import juego.magias.TormentaPsionica;
 import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
@@ -49,6 +51,8 @@ import vistas.actores.construcciones.terran.ActorFabrica;
 import vistas.actores.construcciones.terran.ActorRefineria;
 import vistas.actores.jugadores.ActorJugadorProtoss;
 import vistas.actores.jugadores.ActorJugadorTerran;
+import vistas.actores.magias.ActorMagia;
+import vistas.actores.magias.ActorTormenta;
 import vistas.actores.recursos.ActorGas;
 import vistas.actores.recursos.ActorMineral;
 import vistas.actores.recursos.ActorRecurso;
@@ -70,6 +74,9 @@ public class AsignadorVistas {
 		this.actores.put(JugadorProtoss.class, new ActorJugadorProtoss());
 		
 		this.actores.put(ConstruccionBase.class, new ActorBase());
+		
+		this.actores.put(Magia.class, new ActorMagia());
+		this.actores.put(TormentaPsionica.class, new ActorTormenta());
 		
 		this.actores.put(CentroDeMineral.class, new ActorCentroMineral());
 		this.actores.put(Barraca.class, new ActorBarraca());
