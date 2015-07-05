@@ -3,6 +3,7 @@ package vistas.actores;
 import java.awt.Graphics;
 import java.util.Vector;
 
+import juego.interfaces.Controlable;
 import vistas.acciones.pendientes.AccionPendiente;
 
 public abstract class Actor {
@@ -16,6 +17,8 @@ public abstract class Actor {
 	public Actor() {
 		this.acciones = new Vector<AccionPendiente>();
 	}
+	
+	public Controlable getControlable() { return ((Controlable)this.elemento); }
 	
 	public abstract void dibujar(Graphics g);
 

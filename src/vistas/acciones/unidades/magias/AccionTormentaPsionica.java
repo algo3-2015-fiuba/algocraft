@@ -20,6 +20,7 @@ public class AccionTormentaPsionica extends AccionPendienteUnidad {
 		
 	}
 	
+	@Override
 	public void finalizar(Coordenada destino) throws Exception {
 		
 		((AltoTemplario)this.unidadEmisora).lanzarTormentaPsionica(destino);

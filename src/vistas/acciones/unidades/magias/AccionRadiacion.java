@@ -23,6 +23,7 @@ public class AccionRadiacion extends AccionPendienteUnidad {
 		
 	}
 	
+	@Override
 	public void finalizar(Coordenada destino) throws Exception {
 		
 		Celda celdaSeleccionada = null;

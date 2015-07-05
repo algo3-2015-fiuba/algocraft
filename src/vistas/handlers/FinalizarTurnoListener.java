@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import juego.Juego;
 import vistas.ventanas.VentanaJuego;
 
 public class FinalizarTurnoListener extends MouseAdapter {

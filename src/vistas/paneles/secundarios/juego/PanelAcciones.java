@@ -125,15 +125,20 @@ public class PanelAcciones extends JPanel {
 	}
 	
 	private void agregarAccionesDeActor(Actor actorResponsable) {
-		for (AccionPendiente accion : actorResponsable.acciones()) {
-			
-			JLabel labelAccion = Aplicacion.titulo(accion.nombre(), 24f);
-			labelAccion
-					.addMouseListener(new SeleccionarCoordenadaAccionListener(
-							this, this.ventanaOriginal, accion));
 		
+		Jugador jugador = Juego.getInstance().turnoDe();
+		
+		if ((this.elementoSeleccionado == null) || (jugador.esAliado(this.elementoSeleccionado))) {
+			for (AccionPendiente accion : actorResponsable.acciones()) {
+				
+				JLabel labelAccion = Aplicacion.titulo(accion.nombre(), 24f);
+				labelAccion
+						.addMouseListener(new SeleccionarCoordenadaAccionListener(
+								this, this.ventanaOriginal, accion));
 			
-			this.panelAcciones.add(labelAccion);
+				
+				this.panelAcciones.add(labelAccion);
+			}
 		}
 	}
 

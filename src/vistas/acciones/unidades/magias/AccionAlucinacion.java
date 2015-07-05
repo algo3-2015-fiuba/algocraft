@@ -12,6 +12,7 @@ import juego.razas.unidades.protoss.AltoTemplario;
 
 public class AccionAlucinacion extends AccionPendienteUnidad {
 	
+	@Override
 	public void finalizar(Coordenada destino) throws Exception {
 		
 		Celda celdaSeleccionada = null;
