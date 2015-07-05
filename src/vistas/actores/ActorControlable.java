@@ -42,7 +42,6 @@ public abstract class ActorControlable extends Actor {
 				g.drawImage(scaled, margenXImagen, margenYImagen, null);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {

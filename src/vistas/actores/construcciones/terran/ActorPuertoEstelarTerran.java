@@ -7,17 +7,23 @@ import juego.razas.construcciones.terran.PuertoEstelarTerran;
 import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.acciones.construcciones.AccionUbicarEntrenable;
-import vistas.acciones.entrenamientos.terran.AccionEntrenarMarine;
+import vistas.acciones.entrenamientos.terran.AccionEntrenarEspectro;
+import vistas.acciones.entrenamientos.terran.AccionEntrenarNaveCiencia;
+import vistas.acciones.entrenamientos.terran.AccionEntrenarNaveTransporteTerran;
 import vistas.acciones.pendientes.AccionPendiente;
 import vistas.actores.construcciones.ActorConstruccion;
 
 public class ActorPuertoEstelarTerran extends ActorConstruccion {
 
 	public ActorPuertoEstelarTerran() {
+		
+		super();
 		this.nombre = "Puerto Estelar Terran";
 		this.url = Aplicacion.class.getResource("/assets/iconos/terran/construcciones/puerto estelar.png");
 		
-		this.acciones.add(new AccionEntrenarMarine());
+		this.acciones.add(new AccionEntrenarEspectro());
+		this.acciones.add(new AccionEntrenarNaveTransporteTerran());
+		this.acciones.add(new AccionEntrenarNaveCiencia());
 	}
 	
 	@Override

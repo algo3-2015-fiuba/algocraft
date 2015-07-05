@@ -15,6 +15,8 @@ import vistas.actores.construcciones.ActorConstruccion;
 public class ActorPuertoEstelarProtoss extends ActorConstruccion {
 
 	public ActorPuertoEstelarProtoss() {
+		
+		super();
 		this.nombre = "Puerto Estelar Protoss";
 		this.url = Aplicacion.class.getResource("/assets/iconos/protoss/construcciones/puerto estelar.png");
 		

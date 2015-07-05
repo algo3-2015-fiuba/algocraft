@@ -6,7 +6,7 @@ import juego.razas.construcciones.terran.PuertoEstelarTerran;
 import juego.razas.unidades.terran.NaveTransporte;
 import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
-public class AccionEntrenarNaveTransporte extends AccionPendienteEntrenamiento {
+public class AccionEntrenarNaveTransporteTerran extends AccionPendienteEntrenamiento {
 	
 	public void iniciar(Controlable controlable) throws Exception {
 		
