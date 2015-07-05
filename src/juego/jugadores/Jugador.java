@@ -49,6 +49,10 @@ public abstract class Jugador {
 	public String getNombre() { return this.nombre; }
 	public boolean perdio() { return (this.bases.size() == 0); }
 	
+	public void rendirse() {
+		this.bases.clear();
+	}
+	
 	public void finalizarTurno() {	
 		Juego.getInstance().finalizarTurno();		
 	}
