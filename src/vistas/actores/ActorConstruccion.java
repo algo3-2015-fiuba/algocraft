@@ -6,6 +6,4 @@ public class ActorConstruccion extends ActorControlable {
 		this.nombre = "Unidad";
 	}
 	
-	
-
 }

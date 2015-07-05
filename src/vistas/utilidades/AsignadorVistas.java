@@ -6,6 +6,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.construcciones.protoss.Acceso;
+import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.construcciones.protoss.Asimilador;
 import juego.razas.construcciones.protoss.NexoMineral;
 import juego.razas.construcciones.protoss.Pilon;
@@ -14,8 +15,12 @@ import juego.razas.construcciones.terran.CentroDeMineral;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.construcciones.terran.Fabrica;
 import juego.razas.construcciones.terran.Refineria;
+import juego.razas.unidades.protoss.AltoTemplario;
+import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.Scout;
 import juego.razas.unidades.protoss.Zealot;
+import juego.razas.unidades.terran.Espectro;
+import juego.razas.unidades.terran.Golliat;
 import juego.razas.unidades.terran.Marine;
 import juego.razas.unidades.terran.NaveCiencia;
 import juego.recursos.GasVespeno;
@@ -23,12 +28,17 @@ import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import vistas.actores.Actor;
 import vistas.actores.ActorBase;
+import vistas.actores.unidades.protoss.ActorAltoTemplario;
+import vistas.actores.unidades.protoss.ActorDragon;
 import vistas.actores.unidades.protoss.ActorScout;
 import vistas.actores.unidades.protoss.ActorZealot;
+import vistas.actores.unidades.terran.ActorEspectro;
+import vistas.actores.unidades.terran.ActorGolliat;
 import vistas.actores.unidades.terran.ActorMarine;
 import vistas.actores.unidades.terran.ActorNaveCiencia;
 import vistas.actores.ActorObject;
 import vistas.actores.construcciones.protoss.ActorAcceso;
+import vistas.actores.construcciones.protoss.ActorArchivoTemplario;
 import vistas.actores.construcciones.protoss.ActorAsimilador;
 import vistas.actores.construcciones.protoss.ActorNexoMineral;
 import vistas.actores.construcciones.protoss.ActorPilon;
@@ -49,6 +59,7 @@ public class AsignadorVistas {
 	private HashMap<Class<?>, Actor> actores;
 	
 	private AsignadorVistas() {
+		
 		this.actores = new HashMap<Class<?>, Actor>();
 		
 		this.actores.put(Recurso.class, new ActorRecurso());
@@ -70,12 +81,18 @@ public class AsignadorVistas {
 		this.actores.put(Pilon.class, new ActorPilon());
 		this.actores.put(Asimilador.class, new ActorAsimilador());
 		this.actores.put(Acceso.class, new ActorAcceso());
-		
+		this.actores.put(ArchivoTemplario.class, new ActorArchivoTemplario());
 		
 		this.actores.put(Marine.class, new ActorMarine());
+		this.actores.put(Golliat.class, new ActorGolliat());
+		this.actores.put(NaveCiencia.class, new ActorNaveCiencia());
+		this.actores.put(Espectro.class, new ActorEspectro());
+		
 		this.actores.put(Zealot.class, new ActorZealot());
 		this.actores.put(Scout.class, new ActorScout());
-		this.actores.put(NaveCiencia.class, new ActorNaveCiencia());
+		this.actores.put(Dragon.class, new ActorDragon());
+		this.actores.put(AltoTemplario.class, new ActorAltoTemplario());
+		
 	}
 	
 	public static AsignadorVistas getInstance() {

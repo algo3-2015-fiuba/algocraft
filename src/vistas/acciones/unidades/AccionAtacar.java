@@ -16,7 +16,6 @@ public class AccionAtacar extends AccionPendienteUnidad {
 		try {
 			celdaSeleccionada = Juego.getInstance().getMapa().obtenerCelda(destino);
 		} catch (CoordenadaFueraDeRango e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
