@@ -18,7 +18,6 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -33,7 +32,6 @@ import vistas.ventanas.VentanaMenu;
 
 public class Aplicacion {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) throws BasicPlayerException  {
 
 		System.setProperty("awt.useSystemAAFontSettings", "on");
@@ -43,11 +41,11 @@ public class Aplicacion {
 			@Override
 			public void run() {
 				try {
+					
 					estilos();
 					iniciarInterfaz();
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -86,7 +84,6 @@ public class Aplicacion {
 			image = ImageIO.read(url);
 			logo.setIcon(new ImageIcon(image));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -131,7 +128,6 @@ public class Aplicacion {
 			boton.setIcon(new ImageIcon(url));
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -168,7 +164,6 @@ public class Aplicacion {
             //register the font
             ge.registerFont(font);
 		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

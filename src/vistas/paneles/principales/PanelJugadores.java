@@ -8,7 +8,6 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +17,11 @@ import vistas.acciones.IniciarJuego;
 import vistas.paneles.secundarios.SeleccionJugador;
 
 public class PanelJugadores extends MenuPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1503084291594194257L;
 	
 	private SeleccionJugador seleccionJugador1;
 	private SeleccionJugador seleccionJugador2;

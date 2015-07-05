@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3493119338408102635L;
+	
 	protected JPanel panelBase;
 	
 	public MenuPanel(JPanel panelBase) {

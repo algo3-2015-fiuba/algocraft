@@ -11,7 +11,6 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
@@ -31,6 +30,11 @@ import vistas.paneles.secundarios.juego.PanelMapa;
 import vistas.utilidades.ScalablePane;
 
 public class VentanaJuego extends JFrame implements ObservadorCelda {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7544026564974384314L;
 	
 	private Vector<Jugador> jugadores;
 	private PanelMapa panelMapa;

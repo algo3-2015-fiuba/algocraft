@@ -24,7 +24,6 @@ public class SeleccionJugador extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
-	private String nombre;
 	private String nombrePredeterminado;
 	private CampoDeTextoPredeterminado nombreDelJugador;
 	private JComboBox<String> seleccionDeRaza;
@@ -33,7 +32,6 @@ public class SeleccionJugador extends JPanel {
 	@SuppressWarnings("unchecked")
 	public SeleccionJugador(String nombre, int indexSeleccionColor) {
 		
-		this.nombre = nombre;
 		this.nombrePredeterminado = nombre;
 
 		this.setBackground(new Color(0, 0, 0, 0));

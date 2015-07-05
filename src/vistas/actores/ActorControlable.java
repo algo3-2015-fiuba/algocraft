@@ -46,6 +46,7 @@ public abstract class ActorControlable extends Actor {
 				e.printStackTrace();
 			}
 		} else {
+			@SuppressWarnings("unused")
 			BufferedImage image;
 		}
 	}
@@ -63,7 +64,7 @@ public abstract class ActorControlable extends Actor {
 		
 		int tamanioFondo = 50;
 		
-		int altoImagen = (int) (lado * 0.8);
+		//int altoImagen = (int) (lado * 0.8);
 		int margenXImagen = (int) ((lado * 0.1) - (tamanioFondo * 0.5));
 		int margenYImagen = (int) (lado * this.posicionCelda.posicion() - (tamanioFondo * 0.5));
 

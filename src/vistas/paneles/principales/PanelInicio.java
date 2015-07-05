@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,6 +16,11 @@ import vistas.acciones.SiguientePanel;
 import vistas.acciones.sonido.AlternarEstadoDeSonido;
 
 public class PanelInicio extends MenuPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8456039160364255697L;
 
 	public PanelInicio(JPanel panelBase) {
 		super(panelBase);

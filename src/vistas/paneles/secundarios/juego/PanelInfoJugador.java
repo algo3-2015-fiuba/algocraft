@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,6 +18,11 @@ import vistas.ventanas.VentanaJuego;
 
 public class PanelInfoJugador extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5410581133764772432L;
+	
 	private VentanaJuego ventanaOriginal;
 	private JLabel labelNombreJugador;
 	private JLabel labelMinerales;

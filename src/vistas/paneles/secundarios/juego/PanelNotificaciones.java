@@ -1,29 +1,25 @@
 package vistas.paneles.secundarios.juego;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import juego.Juego;
-import juego.jugadores.Jugador;
 import vistas.Aplicacion;
-import vistas.acciones.sonido.AlternarEstadoDeSonido;
-import vistas.handlers.FinalizarTurnoListener;
 import vistas.sonido.Sonido;
 import vistas.ventanas.VentanaJuego;
 
 public class PanelNotificaciones extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7060834467081499042L;
+	
 	private VentanaJuego ventanaOriginal;
 	private JLabel sectorNotificaciones;
 	private Timer timer;
