@@ -4,18 +4,24 @@ import juego.energia.Energia;
 import juego.interfaces.excepciones.EnergiaInsuficiente;
 import juego.jugadores.Jugador;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.UnidadMagica;
 
 public abstract class Magia {
 
 	protected int costoEnergia;
+	protected UnidadMagica mago;
 	protected Jugador propietario;
 	
-	public Magia() {
+	public Magia(UnidadMagica mago) {
 		
 		super();
 		this.costoEnergia = 0;
 		this.propietario = null;
 		
+	}
+	
+	public boolean lanzadoPor(UnidadMagica mago) {
+		return (this.mago.equals(mago));
 	}
 	
 	public boolean energiaSuficiente(Energia energia) {

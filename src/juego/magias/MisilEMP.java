@@ -8,16 +8,17 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.terran.NaveCiencia;
 
 public class MisilEMP extends Magia {
 	
-	public MisilEMP() {
+	public MisilEMP(NaveCiencia mago) {
 		
-		super();
+		super(mago);
 		this.costoEnergia = 100;
 		
 	}
-
+	
 	public void lanzar(Coordenada coordenadaImpacto) {
 		
 		Mapa mapa = Juego.getInstance().getMapa();

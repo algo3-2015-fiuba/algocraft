@@ -2,12 +2,13 @@ package juego.magias;
 
 import juego.Juego;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.protoss.AltoTemplario;
 
 public class Alucinacion extends Magia {
 
-	public Alucinacion() {
+	public Alucinacion(AltoTemplario mago) {
 		
-		super();
+		super(mago);
 		this.costoEnergia = 100;
 		
 	}

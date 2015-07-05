@@ -8,6 +8,7 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.protoss.AltoTemplario;
 
 public class TormentaPsionica extends Magia {
 
@@ -15,9 +16,9 @@ public class TormentaPsionica extends Magia {
 	private int turnosActiva;
 	private int danio;
 	
-	public TormentaPsionica() {
+	public TormentaPsionica(AltoTemplario mago) {
 		
-		super();
+		super(mago);
 		this.costoEnergia = 100;
 		this.coordImpacto = null;
 		this.turnosActiva = 2;

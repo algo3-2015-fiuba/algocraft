@@ -7,14 +7,15 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.terran.NaveCiencia;
 
 public class Radiacion extends Magia {
 	
 	private Unidad infectado;
 	
-	public Radiacion() {
+	public Radiacion(NaveCiencia mago) {
 		
-		super();
+		super(mago);
 		this.costoEnergia = 75;
 		this.infectado = null;
 		

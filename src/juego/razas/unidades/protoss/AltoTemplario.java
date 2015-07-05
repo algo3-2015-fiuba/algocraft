@@ -2,13 +2,14 @@ package juego.razas.unidades.protoss;
 
 import juego.estrategias.MovimientoTerrestre;
 import juego.interfaces.excepciones.EnergiaInsuficiente;
+import juego.magias.Alucinacion;
 import juego.magias.TormentaPsionica;
 import juego.mapa.Coordenada;
 import juego.razas.unidades.Unidad;
+import juego.razas.unidades.UnidadAlucinada;
 import juego.razas.unidades.UnidadMagica;
 import juego.costos.Costos;
 import juego.decoradores.*;
-import juego.magias.*;
 
 public class AltoTemplario extends UnidadMagica {
 	
@@ -29,9 +30,31 @@ public class AltoTemplario extends UnidadMagica {
 		this.activarMagias();
 	}
 	
+	@Override
+	public void afectadaPorMagia(TormentaPsionica tormenta) {
+		if (!tormenta.lanzadoPor(this)) {
+			this.recibirAtaque(tormenta.getDanio());
+		}
+	}
+	
+	@Override
+	public void afectadaPorMagia(Alucinacion alucinacion) {
+		
+		if (!alucinacion.lanzadoPor(this)) {
+			
+			for (int i = 0; i < 2; i++) {
+				UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento, this.vida.nivelMaximo());
+				this.alucinaciones.add(alucinada);
+				this.propietario.asignarUnidad(alucinada);
+				alucinada.ubicar(this.posicion);
+			}
+		}
+		
+	}	
+	
 	public void lanzarTormentaPsionica(Coordenada coordImpacto) throws EnergiaInsuficiente {
 		
-		TormentaPsionica tormentaPsionica = new TormentaPsionica();
+		TormentaPsionica tormentaPsionica = new TormentaPsionica(this);
 		
 		if (tormentaPsionica.energiaSuficiente(this.energia)) {
 			tormentaPsionica.consumir(this.energia);
@@ -43,7 +66,7 @@ public class AltoTemplario extends UnidadMagica {
 	
 	public void lanzarAlucinacion(Unidad unidadACopiar) throws EnergiaInsuficiente {
 		
-		Alucinacion alucinacion = new Alucinacion();
+		Alucinacion alucinacion = new Alucinacion(this);
 		
 		if (alucinacion.energiaSuficiente(this.energia)) {
 			alucinacion.consumir(this.energia);

@@ -21,9 +21,32 @@ public class NaveCiencia extends UnidadMagica {
 		
 	}
 	
+	@Override
+	public void afectadaPorMagia(MisilEMP emp) {
+		if (!emp.lanzadoPor(this)){
+			this.vida.deshabilitar();
+		}
+	}
+	
+	@Override
+	public void afectadaPorMagia(Radiacion radiacion) {
+		
+		if (!radiacion.lanzadoPor(this)) {
+			
+			this.vida.afectadoPorRadiacion();
+			
+			if (this.vida.vidaAgotada()) {
+				this.morir();
+				radiacion.fallecido(this);
+			}	
+			
+		}
+		
+	}
+	
 	public void lanzarEMP(Coordenada coordImpacto) throws EnergiaInsuficiente {
 		
-		MisilEMP misilEmp = new MisilEMP();
+		MisilEMP misilEmp = new MisilEMP(this);
 		
 		if (misilEmp.energiaSuficiente(this.energia)) {
 			misilEmp.consumir(this.energia);
@@ -34,7 +57,7 @@ public class NaveCiencia extends UnidadMagica {
 	
 	public void lanzarRadiacion(Unidad unidad) throws EnergiaInsuficiente {
 		
-		Radiacion radiacion = new Radiacion();
+		Radiacion radiacion = new Radiacion(this);
 			
 		if (radiacion.energiaSuficiente(this.energia)) {
 			radiacion.consumir(this.energia);
