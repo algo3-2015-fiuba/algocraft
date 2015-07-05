@@ -113,7 +113,7 @@ public abstract class BarraGenerica extends JPanel {
 	}
 	
 	private void actualizarVida() {
-		this.porcentajeVida = this.seleccionado.vidaActual() / 300.0;
+		this.porcentajeVida = this.seleccionado.vidaActual();
 		
 		this.texto.setText(Float.toString(this.seleccionado.vidaActual()));
 	}

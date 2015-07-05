@@ -1,5 +1,7 @@
 package juego.decoradores;
 
+import java.util.Vector;
+
 import juego.interfaces.Atacable;
 
 public class Escudo implements Atacable {
@@ -8,21 +10,17 @@ public class Escudo implements Atacable {
 	private float escudoActual, escudoMaximo;
 	
 	public Escudo(float escudoMaximo) {
-		
 		super();
 		this.proteger = null;
 		this.escudoMaximo = escudoMaximo;
 		this.escudoActual = escudoMaximo;
-		
 	}
 	
 	public Escudo(Atacable aProteger, float escudoMaximo) {
-		
 		super();
 		this.proteger = aProteger;
 		this.escudoMaximo = escudoMaximo;
 		this.escudoActual = escudoMaximo;
-		
 	}
 
 	@Override
@@ -42,27 +40,20 @@ public class Escudo implements Atacable {
 			if (this.proteger != null) this.proteger.daniar(restoDelDanio);
 			
 		} else {
-			
 			this.escudoActual -= danio;
-			
 		}
 	}
 	
-	public float escudoActual() {
+	public float nivelActual() {
 		return this.escudoActual;
 	}
 	
-	public float escudoMaximo() {
+	public float nivelMaximo() {
 		return this.escudoMaximo;
 	}
 	
 	public boolean escudoAgotado() {
 		return (this.escudoActual == 0);
-	}
-	
-	@Override
-	public float vidaActual() {
-		return (this.proteger != null) ? this.proteger.vidaActual() : 0;
 	}
 	
 	@Override
@@ -103,7 +94,19 @@ public class Escudo implements Atacable {
 				
 			}
 		}
-
+	}
+	
+	@Override
+	public Vector<Atacable> nivelesDeVida() {
+		Vector<Atacable> niveles = new Vector<Atacable>();
+		
+		niveles.add(this);
+		
+		if(this.proteger != null) {
+			niveles.addAll(this.proteger.nivelesDeVida());
+		}
+		
+		return niveles;
 	}
 	
 }

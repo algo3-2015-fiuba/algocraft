@@ -22,8 +22,6 @@ public class AccionAtacar extends AccionPendienteUnidad {
 		
 		Controlable victima = celdaSeleccionada.seleccionRelevante();
 		
-		
-		
 		((UnidadAtaque)this.unidadEmisora).atacarA(victima);
 		
 	}

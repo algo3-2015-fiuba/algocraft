@@ -45,7 +45,7 @@ public abstract class Construccion implements Construible, Controlable {
 	}
 	
 	public float vidaActual() {
-		return this.vida.vidaActual();
+		return this.vida.nivelActual();
 	}	
 	
 	/* * * * * * * * * * * * * * * *

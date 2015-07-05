@@ -63,9 +63,6 @@ public class PanelUnidadSeleccionada extends JPanel {
 		this.seleccionado = seleccionado;
 		this.vida.seleccionarUnidad(this.seleccionado);
 		this.asignarNombre();
-		
-		
-		
 	}
 	
 	public void removerSeleccion() {

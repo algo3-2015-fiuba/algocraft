@@ -1,5 +1,7 @@
 package juego.decoradores;
 
+import java.util.Vector;
+
 import juego.interfaces.Atacable;
 
 public class Vida implements Atacable {
@@ -37,8 +39,13 @@ public class Vida implements Atacable {
 	}
 	
 	@Override
-	public float vidaActual() {
+	public float nivelActual() {
 		return this.vida;
+	}
+	
+	@Override
+	public float nivelMaximo() {
+		return this.vidaMaxima;
 	}
 	
 	private float danioRadiacion() {
@@ -48,6 +55,15 @@ public class Vida implements Atacable {
 	@Override
 	public void afectadoPorRadiacion() {
 		this.daniar(this.danioRadiacion());
+	}
+
+	@Override
+	public Vector<Atacable> nivelesDeVida() {
+		Vector<Atacable> niveles = new Vector<Atacable>();
+		
+		niveles.add(this);
+		
+		return niveles;
 	}
 	
 }

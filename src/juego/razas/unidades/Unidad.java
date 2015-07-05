@@ -3,6 +3,7 @@ package juego.razas.unidades;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Vector;
 
 import juego.Juego;
 import juego.costos.Costos;
@@ -93,8 +94,11 @@ public abstract class Unidad implements Controlable, Entrenable, Transportable {
 	}
 	
 	public float vidaActual() {
-		return this.vida.vidaActual();
-	}	
+		
+		Vector<Atacable> niveles = this.vida.nivelesDeVida();
+		
+		return niveles.get(niveles.size() - 1).nivelActual();
+	}
 	
 	
 	/* * * * * * * * * * * *
@@ -125,7 +129,7 @@ public abstract class Unidad implements Controlable, Entrenable, Transportable {
 	public void afectadaPorMagia(Alucinacion alucinacion) {
 		
 		for (int i = 0; i < 2; i++) {
-			UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento, ((Escudo)this.vida).escudoMaximo());
+			UnidadAlucinada alucinada = new UnidadAlucinada(this, this.estrategiaDeMovimiento, this.vida.nivelMaximo());
 			this.alucinaciones.add(alucinada);
 			this.propietario.asignarUnidad(alucinada);
 			alucinada.ubicar(this.posicion);

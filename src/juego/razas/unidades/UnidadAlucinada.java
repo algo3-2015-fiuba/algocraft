@@ -35,7 +35,11 @@ public class UnidadAlucinada extends Unidad {
 	 * * * * * * * * * * * * */
 	
 	public float escudoActual() {
-		return ((Escudo)this.vida).escudoActual();
+		return this.vida.nivelActual();
+	}
+	
+	public float vidaActual() {
+		return 0;
 	}
 	
 	@Override
