@@ -1,7 +1,7 @@
 package vistas.actores.construcciones.protoss;
 
 import vistas.Aplicacion;
-import vistas.actores.ActorConstruccion;
+import vistas.actores.construcciones.ActorConstruccion;
 
 public class ActorBaseProtoss extends ActorConstruccion {
 

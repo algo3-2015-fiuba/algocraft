@@ -9,7 +9,7 @@ import vistas.Aplicacion;
 import vistas.acciones.construcciones.AccionUbicarEntrenable;
 import vistas.acciones.entrenamientos.terran.AccionEntrenarMarine;
 import vistas.acciones.pendientes.AccionPendiente;
-import vistas.actores.ActorConstruccion;
+import vistas.actores.construcciones.ActorConstruccion;
 
 public class ActorPuertoEstelar extends ActorConstruccion {
 

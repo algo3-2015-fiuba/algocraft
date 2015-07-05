@@ -1,7 +1,7 @@
 package vistas.actores.construcciones.terran;
 
 import vistas.Aplicacion;
-import vistas.actores.ActorConstruccion;
+import vistas.actores.construcciones.ActorConstruccion;
 
 public class ActorBaseTerran extends ActorConstruccion {
 

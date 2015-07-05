@@ -1,9 +1,10 @@
-package vistas.actores;
+package vistas.actores.construcciones;
 
 import java.awt.Graphics;
 
 import juego.interfaces.Controlable;
 import juego.jugadores.Jugador;
+import vistas.actores.ActorControlable;
 import vistas.actores.jugadores.ActorJugador;
 import vistas.utilidades.AsignadorVistas;
 
