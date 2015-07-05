@@ -37,7 +37,13 @@ public class ConstruccionBase extends Construccion {
 	}
 	
 	public void inicializarMapa() {
+		
 		this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
+		
+		while (!this.costos.construccionFinalizada()) {
+			this.costos.disminuirTiempoDeConstruccion();
+		}
+		
 	}
 	
 	@Override
