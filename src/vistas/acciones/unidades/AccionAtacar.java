@@ -1,6 +1,7 @@
 package vistas.acciones.unidades;
 
 import vistas.acciones.pendientes.AccionPendienteUnidad;
+import vistas.acciones.unidades.excepciones.NadaSeleccionado;
 import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.mapa.Celda;
@@ -20,6 +21,8 @@ public class AccionAtacar extends AccionPendienteUnidad {
 		}
 		
 		Controlable victima = celdaSeleccionada.seleccionRelevante();
+		
+		if (victima == null) throw new NadaSeleccionado();
 		
 		((UnidadAtaque)this.unidadEmisora).atacarA(victima);
 		

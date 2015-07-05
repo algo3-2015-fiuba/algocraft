@@ -4,6 +4,7 @@ import java.net.URL;
 
 import vistas.Aplicacion;
 import vistas.acciones.pendientes.AccionPendienteUnidad;
+import vistas.acciones.unidades.excepciones.NadaSeleccionado;
 import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.mapa.Celda;
@@ -32,6 +33,8 @@ public class AccionRadiacion extends AccionPendienteUnidad {
 		}
 		
 		Controlable victima = celdaSeleccionada.seleccionRelevante();
+		
+		if (victima == null) throw new NadaSeleccionado();
 		
 		((NaveCiencia)this.unidadEmisora).lanzarRadiacion((Unidad) victima);
 		
