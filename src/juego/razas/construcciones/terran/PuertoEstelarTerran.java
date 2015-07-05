@@ -14,7 +14,7 @@ import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.construcciones.ConstruccionMilitar;
 import juego.razas.unidades.terran.Espectro;
 import juego.razas.unidades.terran.NaveCiencia;
-import juego.razas.unidades.terran.NaveTransporte;
+import juego.razas.unidades.terran.NaveTransporteTerran;
 
 public class PuertoEstelarTerran extends ConstruccionMilitar {
 
@@ -37,7 +37,7 @@ public class PuertoEstelarTerran extends ConstruccionMilitar {
 		}
 	}
 
-	public void entrenar(NaveTransporte naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
+	public void entrenar(NaveTransporteTerran naveTransporte) throws RecursosInsuficientes, SobrePoblacion {
 		if (this.propietario == Juego.getInstance().turnoDe()) {
 			this.iniciarEntrenamiento(naveTransporte);
 		}

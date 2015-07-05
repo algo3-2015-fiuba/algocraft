@@ -11,7 +11,7 @@ import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.razas.unidades.protoss.Dragon;
-import juego.razas.unidades.protoss.NaveTransporte;
+import juego.razas.unidades.protoss.NaveTransporteProtoss;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,7 +47,7 @@ public class NaveTransporteTester {
 		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		jugadorTerran.finalizarTurno();
 		JugadorProtoss jugadorProtoss = (JugadorProtoss)Juego.getInstance().turnoDe();
-		NaveTransporte naveTransporteProtoss = new NaveTransporte();
+		NaveTransporteProtoss naveTransporteProtoss = new NaveTransporteProtoss();
 		Dragon dragon1 = new Dragon();
 		Dragon dragon2 = new Dragon();
 		Dragon dragon3 = new Dragon();
@@ -95,7 +95,7 @@ public class NaveTransporteTester {
 		JugadorTerran jugadorTerran = (JugadorTerran)Juego.getInstance().turnoDe();
 		jugadorTerran.finalizarTurno();
 		JugadorProtoss jugadorProtoss = (JugadorProtoss)Juego.getInstance().turnoDe();
-		NaveTransporte naveTransporteProtoss = new NaveTransporte();
+		NaveTransporteProtoss naveTransporteProtoss = new NaveTransporteProtoss();
 		Dragon dragon1 = new Dragon();
 		Dragon dragon2 = new Dragon();
 		Dragon dragon3 = new Dragon();

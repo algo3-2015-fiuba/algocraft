@@ -1,7 +1,6 @@
 package vistas.acciones.unidades;
 
 import vistas.acciones.pendientes.AccionPendienteUnidad;
-import vistas.acciones.unidades.excepciones.NadaSeleccionado;
 import juego.Juego;
 import juego.interfaces.Controlable;
 import juego.mapa.Celda;

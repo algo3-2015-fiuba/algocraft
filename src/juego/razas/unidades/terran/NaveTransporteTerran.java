@@ -5,9 +5,9 @@ import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
 import juego.razas.unidades.UnidadTransporte;
 
-public class NaveTransporte extends UnidadTransporte {
+public class NaveTransporteTerran extends UnidadTransporte {
 
-	public NaveTransporte() {
+	public NaveTransporteTerran() {
 		
 		super();
 		this.vida = new Vida(150);		

@@ -6,9 +6,9 @@ import juego.decoradores.Vida;
 import juego.estrategias.MovimientoTerrestre;
 import juego.razas.unidades.UnidadTransporte;
 
-public class NaveTransporte extends UnidadTransporte {
+public class NaveTransporteProtoss extends UnidadTransporte {
 
-	public NaveTransporte() {
+	public NaveTransporteProtoss() {
 		
 		super();
 		this.vida = new Escudo(new Vida(80), 60);		

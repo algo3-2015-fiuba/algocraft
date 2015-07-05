@@ -3,7 +3,7 @@ package vistas.acciones.entrenamientos.protoss;
 import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
-import juego.razas.unidades.protoss.NaveTransporte;
+import juego.razas.unidades.protoss.NaveTransporteProtoss;
 import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarNaveTransporteProtoss extends AccionPendienteEntrenamiento {
@@ -12,7 +12,7 @@ public class AccionEntrenarNaveTransporteProtoss extends AccionPendienteEntrenam
 		
 		super.iniciar(controlable);
 		PuertoEstelarProtoss puertoEstelar = (PuertoEstelarProtoss) this.construccionSeleccionada;
-		puertoEstelar.entrenar(new NaveTransporte());
+		puertoEstelar.entrenar(new NaveTransporteProtoss());
 		
 	}
 

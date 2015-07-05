@@ -8,7 +8,6 @@ import juego.razas.unidades.Unidad;
 import vistas.Aplicacion;
 import vistas.acciones.construcciones.AccionUbicarEntrenable;
 import vistas.acciones.entrenamientos.protoss.AccionEntrenarAltoTemplario;
-import vistas.acciones.entrenamientos.protoss.AccionEntrenarZealot;
 import vistas.acciones.pendientes.AccionPendiente;
 import vistas.actores.construcciones.ActorConstruccion;
 

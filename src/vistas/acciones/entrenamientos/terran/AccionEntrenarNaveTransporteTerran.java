@@ -3,7 +3,7 @@ package vistas.acciones.entrenamientos.terran;
 import juego.interfaces.Controlable;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.PuertoEstelarTerran;
-import juego.razas.unidades.terran.NaveTransporte;
+import juego.razas.unidades.terran.NaveTransporteTerran;
 import vistas.acciones.pendientes.AccionPendienteEntrenamiento;
 
 public class AccionEntrenarNaveTransporteTerran extends AccionPendienteEntrenamiento {
@@ -12,7 +12,7 @@ public class AccionEntrenarNaveTransporteTerran extends AccionPendienteEntrenami
 		
 		super.iniciar(controlable);
 		PuertoEstelarTerran puertoEstelar = (PuertoEstelarTerran) this.construccionSeleccionada;
-		puertoEstelar.entrenar(new NaveTransporte());
+		puertoEstelar.entrenar(new NaveTransporteTerran());
 		
 	}
 
