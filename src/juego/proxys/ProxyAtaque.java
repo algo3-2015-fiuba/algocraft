@@ -48,10 +48,10 @@ public class ProxyAtaque {
 		
 		if (this.esAliado(victima)) throw new NoSePuedenAtacarUnidadesAliadas();
 		
-		if (!this.atacanteTieneVision(victima)) throw new NoTieneVision();
-		
 		if (!this.ataques.estaEnRango(this.tacticaMovimiento, mapa.obtenerUbicacion(agresor), victima)) throw new FueraDeRangoDeAtaque();
 	
+		if (!this.atacanteTieneVision(victima)) throw new NoTieneVision();
+		
 		this.ataques.atacar(this.tacticaMovimiento, victima);
 		
 	}	
