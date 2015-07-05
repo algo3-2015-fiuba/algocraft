@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import juego.interfaces.Controlable;
+import juego.interfaces.Observable;
 import juego.jugadores.Jugador;
 import juego.magias.Magia;
 import juego.materiales.Material;
@@ -13,7 +14,7 @@ import juego.razas.construcciones.ConstruccionBase;
 import juego.razas.unidades.Unidad;
 import juego.recursos.Recurso;
 
-public class Celda {
+public class Celda implements Observable {
 	
 	private Material material;
 	private Recurso recurso;
@@ -105,20 +106,24 @@ public class Celda {
 		
 	}
 	
+	@Override
 	public void agregarObservador(Controlable controlable) {
 		if (!this.observadores.contains(controlable)) {
 			this.observadores.add(controlable);
 		}
 	}
 	
+	@Override
 	public void removerObservador(Controlable controlable) {
 		this.observadores.remove(controlable);
 	}
 	
+	@Override
 	public boolean observadaPor(Controlable controlable) {
 		return (this.observadores.contains(controlable));
 	}
 	
+	@Override
 	public boolean observadaPor(Jugador jugador) {
 		
 		Iterator<Controlable> it = this.observadores.iterator();
