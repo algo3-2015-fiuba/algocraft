@@ -35,9 +35,10 @@ public class PanelAcciones extends JPanel {
 
 		this.ventanaOriginal = ventanaOriginal;
 
-		this.setBackground(new Color(0, 0, 0, 180));
+		this.setBackground(new Color(0, 0, 0, 255));
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setOpaque(true);
 
 		JLabel titulo = Aplicacion.titulo("Acciones", 42f);
 		titulo.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -79,27 +80,27 @@ public class PanelAcciones extends JPanel {
 		
 		this.reiniciarPanelAcciones();
 		
-		this.panelAcciones.revalidate();
-		this.panelAcciones.repaint();
+		
+		Actor actorResponsable = null;
 
 		if (this.elementoSeleccionado != null) {
-			Actor actorResponsable = AsignadorVistas.getInstance()
+			actorResponsable = AsignadorVistas.getInstance()
 					.obtenerRepresentacion(this.elementoSeleccionado.getClass(), this.elementoSeleccionado);
 			
-			//Actor actorResponsable = new ActorMineral();
-
-			this.agregarAccionesDeActor(actorResponsable);
 		} else {
 			
 			Jugador jugadorActual = Juego.getInstance().turnoDe();
 			
-			Actor actorResponsable = AsignadorVistas.getInstance()
+			actorResponsable = AsignadorVistas.getInstance()
 					.obtenerRepresentacion(jugadorActual.getClass(), this.elementoSeleccionado);
-			
-			//Actor actorResponsable = new ActorMineral();
-
-			this.agregarAccionesDeActor(actorResponsable);
 		}
+		
+		this.agregarAccionesDeActor(actorResponsable);
+		
+
+		this.panelAcciones.revalidate();
+		this.panelAcciones.repaint();
+		
 		
 		this.ventanaOriginal.getContentPane().validate();
 		this.ventanaOriginal.getContentPane().repaint();

@@ -25,6 +25,7 @@ public class PanelInfoJugador extends JPanel {
 	private JLabel labelGas;
 	private JLabel labelSuministros;
 	private JLabel finalizarTurnoButton;
+	private PanelNotificaciones sectorNotificaciones;
 	private JLabel detenerSonidoButton;
 
 	public PanelInfoJugador(VentanaJuego ventanaOriginal) {
@@ -39,13 +40,22 @@ public class PanelInfoJugador extends JPanel {
 		this.labelMinerales = new JLabel();
 		this.labelGas = new JLabel();
 		this.labelSuministros = new JLabel();
+		
+		this.sectorNotificaciones = new PanelNotificaciones(this.ventanaOriginal);
+		
 		this.finalizarTurnoButton = new JLabel("Finalizar Turno");
+		this.finalizarTurnoButton.setForeground(Color.decode("#FFDC00"));
+		this.finalizarTurnoButton.setFont(Aplicacion.fontBebas(24f));
 		this.finalizarTurnoButton.addMouseListener(new FinalizarTurnoListener(this.ventanaOriginal));
 		
 		this.detenerSonidoButton = Aplicacion.boton("/assets/botones/sound_small.png");
 		this.detenerSonidoButton.addMouseListener(new AlternarEstadoDeSonido());
 
 		this.actualizarDatosDelJugador();
+	}
+	
+	public void notificarMensaje(String mensaje) {
+		this.sectorNotificaciones.notificar(mensaje);
 	}
 	
 	private void comandosDeJugador() {
@@ -158,16 +168,23 @@ public class PanelInfoJugador extends JPanel {
 
 		this.add(this.labelSuministros, c);
 		
-		c.insets = new Insets(0, 20, 0, 0);
 		c.gridx = 4;
 		c.gridy = 0;
 		c.weightx = 10;
+
+		this.add(this.sectorNotificaciones, c);
+		
+		
+		c.insets = new Insets(0, 20, 0, 0);
+		c.gridx = 5;
+		c.gridy = 0;
+		c.weightx = 1;
 		c.anchor = GridBagConstraints.LINE_END;
 		
 		this.add(this.labelNombreJugador, c);
 		
 		c.insets = new Insets(0, 0, 0, 40);
-		c.gridx = 5;
+		c.gridx = 6;
 		c.gridy = 0;
 		c.weightx = 1;
 		c.anchor = GridBagConstraints.LINE_END;

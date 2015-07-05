@@ -47,6 +47,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize(1280, 720);
 		this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+
 		
 		this.setLocationRelativeTo( null );
 		this.setTitle("AlgoCraft - Juego");
@@ -60,6 +61,10 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		}
 		
 		this.setVisible(true);
+		
+
+		this.panelInfoJugador.notificarMensaje("Bienvenidos");
+		
 	}
 	
 	private void prepararFondo() {
@@ -138,7 +143,8 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 				
 				this.panelInfoJugador.actualizarDatosDelJugador();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Error al ejecutar la accion:" + e.getClass().getSimpleName(), "AlgoCraft", 1);
+				//JOptionPane.showMessageDialog(null, e.getMessage(), "AlgoCraft", 1);
+				this.panelInfoJugador.notificarMensaje(e.getMessage());
 				e.printStackTrace();
 			}
 			this.actualizarPantalla();
@@ -167,7 +173,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	}
 	
 	public void actualizarPantalla() {
-		this.panelInfoJugador.actualizarDatosDelJugador();
+		if(this.panelInfoJugador != null) {
+			this.panelInfoJugador.actualizarDatosDelJugador();
+		}
 		this.getContentPane().validate();
 		this.getContentPane().repaint();
 	}

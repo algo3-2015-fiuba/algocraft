@@ -33,6 +33,34 @@ public class Sonido implements BasicPlayerListener {
 	public static Sonido getInstance() {
 		return instance;
 	}
+	
+	public void reproducirNotificacion() {
+		if (this.reproduciendo) {
+			
+			
+			Thread t = new Thread() {
+			    public void run() {
+					BasicPlayer playerNotificacion = new BasicPlayer();
+					
+					try {
+						URL url = this.getClass().getResource("/assets/audio/alert.mp3");
+						playerNotificacion.open(url);
+					} catch (BasicPlayerException e) {
+						e.printStackTrace();
+					}
+				
+					try {
+						playerNotificacion.play();
+					} catch (BasicPlayerException e) {
+						e.printStackTrace();
+					}
+			    }
+			};
+			t.start();
+			
+			
+		}
+	}
 
 	public void alternar() {
 		try {

@@ -7,7 +7,8 @@ public class SobrePoblacion extends Exception {
 	 */
 	private static final long serialVersionUID = -2690226574573720701L;
 
-	public String getMensaje() {
+	@Override
+	public String getMessage() {
 		return "Limite de poblacion alcanzado.";
 	}
 	
