@@ -40,7 +40,7 @@ public class MovimientoConstruccion extends EstrategiaMovimiento {
 				while (itDesc.hasNext()) {
 					itDesc.next().agregarObservador(controlable);
 				}
-				
+
 				propietario.mapaDescubierto(descubierto);
 				
 			}

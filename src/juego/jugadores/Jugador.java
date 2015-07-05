@@ -93,7 +93,9 @@ public abstract class Jugador {
 	public boolean esAliado(Controlable controlable) { 
 	
 		if (this.unidades.contains(controlable)) return true;	
-		return (this.construcciones.contains(controlable)); 
+		if ((this.construcciones.contains(controlable))) return true;
+		
+		return (this.bases.contains(controlable)); 
 	
 	}
 	

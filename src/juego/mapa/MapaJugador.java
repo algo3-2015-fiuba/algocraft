@@ -23,7 +23,6 @@ public class MapaJugador {
 	public void celdaDescubierta(Celda celda) {
 		
 		Coordenada coordenadaDeCelda = celda.getPosicion();
-		
 		if (!this.mapaDescubierto.contiene(celda)) {
 			this.mapaDescubierto.agregarCelda(coordenadaDeCelda, celda);
 		}

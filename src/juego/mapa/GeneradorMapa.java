@@ -117,6 +117,7 @@ public class GeneradorMapa {
         		
         	}
         	
+        	//Para agregar las bases restantes no asignadas
         	Iterator<Celda> it = posiblesBases.iterator();
         	while (it.hasNext()) {
         		Celda celda = it.next();

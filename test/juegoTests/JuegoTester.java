@@ -16,6 +16,8 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.razas.unidades.excepciones.NoSePuedenAtacarUnidadesAliadas;
+import juego.razas.unidades.terran.Marine;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -160,5 +162,47 @@ public class JuegoTester {
 		
 	}
 	
+	@Test
+	public void testSiJugadorTrataDeAtacarSuPropiaBaseErrorUnidadAliada() throws Exception {
+		
+		
+		this.inicioJuegoCorrectamente();
+		Juego juego = Juego.getInstance();
+		Coordenada coordBaseJugador1 = new Coordenada(5,0);
+		Coordenada coordBaseJugador2 = new Coordenada(6,0);
+		Coordenada coordMarineJugador1 = new Coordenada(5,1);
+		Marine marine = new Marine();
+		Jugador jugador1 = new JugadorTerran("jugadorTerran1", Color.red);
+		Jugador jugador2 = new JugadorTerran("jugadorTerran2", Color.blue);
+		
+		juego.crearJugador(jugador1);
+		juego.crearJugador(jugador2);
+		juego.iniciarJuego("mapas/small.map");
+		Mapa mapa = juego.getMapa();	
+		
+		Celda celdaBase1 = mapa.obtenerCelda(coordBaseJugador1);
+		Celda celdaBase2 = mapa.obtenerCelda(coordBaseJugador2);
+		jugador1.asignarUnidad(marine);
+		marine.moverse(coordMarineJugador1);
+		
+		assertTrue(jugador1.tieneVision(celdaBase1));
+		assertTrue(jugador1.tieneVision(celdaBase2));
+		assertTrue(jugador2.tieneVision(celdaBase1));
+		assertTrue(jugador2.tieneVision(celdaBase2));
+		
+		//Al otorgarse random las bases no se cual pertenece a cada jugador
+		if (jugador1.esAliado(celdaBase1.getBase())) {
+			
+			exception.expect(NoSePuedenAtacarUnidadesAliadas.class);
+			marine.atacarA(celdaBase1.getBase());
+			
+		} else {
+			
+			exception.expect(NoSePuedenAtacarUnidadesAliadas.class);
+			marine.atacarA(celdaBase2.getBase());
+			
+		}
+		
+	}
 	
 }
