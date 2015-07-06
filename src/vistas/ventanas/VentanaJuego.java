@@ -156,7 +156,6 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 			} catch (Exception e) {
 				//JOptionPane.showMessageDialog(null, e.getMessage(), "AlgoCraft", 1);
 				this.notificarMensaje(e.getMessage());
-				e.printStackTrace();
 			}
 			this.actualizarPantalla();
 			
