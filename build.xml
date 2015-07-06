@@ -57,6 +57,7 @@
 	<target name="setup">
 		<delete dir="${build}" />
 		<mkdir dir="${build}" />
+		<mkdir dir="${build}/dist" />
 		<mkdir dir="${build}/classes" />
 		<mkdir dir="${build}/tests" />
 	</target>
@@ -151,10 +152,23 @@
 	</target>
 
 	<target name="empaquetar.con.assets" depends="compilar.paquete">
-			<copy todir="${build}/classes/assets">
-		 		<fileset dir="${assets.dir}" includes="**"/>
-			</copy>
-			<jar destfile="${build}/dist/ProgramaPrincipal.jar" basedir="${build}/classes"/>
+		<copy todir="${build}/classes/assets">
+			<fileset dir="${assets.dir}" includes="**" />
+		</copy>
+
+		<!-- Fancy task that takes the pain out creating properly formatted manifest value -->
+		<manifestclasspath property="mf.classpath" jarfile="${build}/dist/ProgramaPrincipal.jar">
+			<classpath refid="classpath" />
+			<classpath refid="audio.path" />
+			<!--end tag-->
+		</manifestclasspath>
+
+		<jar destfile="${build}/dist/ProgramaPrincipal.jar" basedir="${build}/classes">
+			<manifest>
+				<attribute name="Main-Class" value="vistas.Aplicacion" />
+				<attribute name="Class-Path" value="${mf.classpath}"/>
+			</manifest>
+		</jar>
 	</target>
 
 	<target name="jugar" depends="empaquetar.con.assets">
@@ -165,7 +179,7 @@
 		</java>
 	</target>
 
-	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
+	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes" />
 
 	<!-- Ivy installation -->
 	<target name="download-ivy" unless="skip.download">
@@ -187,20 +201,20 @@
 	<!-- Resolve dependencies -->
 	<target name="resolve" depends="install-ivy" description="--> retrieve dependencies with ivy">
 		<ivy:retrieve conf="build" pattern="${libs}/[artifact]-[type]-[revision].[ext]" />
-		<ivy:retrieve conf="analysis" pattern="${libs}/analysis/[artifact](-[classifier]).[ext]"/>
+		<ivy:retrieve conf="analysis" pattern="${libs}/analysis/[artifact](-[classifier]).[ext]" />
 
 	</target>
 	<!-- End of 'Resolve dependencies -->
 
 	<target name="run-pmd" depends="setup, resolve">
-		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" >
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask">
 			<classpath refid="pmd.classpath" />
 		</taskdef>
 		<pmd shortFilenames="true">
 			<ruleset>rulesets/favorites.xml</ruleset>
 			<ruleset>basic</ruleset>
 			<ruleset>imports</ruleset>
-			<formatter type="html" toFile="pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" toConsole="true"/>
+			<formatter type="html" toFile="pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" toConsole="true" />
 			<fileset dir="src">
 				<include name="**/*.java" />
 			</fileset>

@@ -103,6 +103,10 @@ public abstract class Unidad implements Controlable, Entrenable, Transportable {
 		return this.vida.nivelesDeVida();
 	}
 	
+	public boolean esAliadaCon(Controlable controlable) {
+		return this.propietario.esAliado(controlable);
+	}
+	
 	
 	/* * * * * * * * * * * *
 	 *                     *

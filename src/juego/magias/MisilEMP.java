@@ -37,7 +37,7 @@ public class MisilEMP extends Magia {
 
 	@Override
 	public void afectar(Unidad unidad) {
-		if (!this.propietario.esAliado(unidad)) {
+		if (!this.mago.esAliadaCon(unidad)) {
 			unidad.afectadaPorMagia(this);		
 		}
 	}	
