@@ -6,6 +6,9 @@ import juego.interfaces.Controlable;
 import juego.interfaces.Transportable;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
+import juego.razas.unidades.excepciones.ImposibleTransportar;
+import juego.razas.unidades.excepciones.SoloSePuedenTransportarUnidadesAliadas;
+import juego.razas.unidades.excepciones.TransporteLleno;
 import juego.transportes.CargaTransporte;
 
 public abstract class UnidadTransporte extends Unidad {
@@ -40,10 +43,16 @@ public abstract class UnidadTransporte extends Unidad {
 		return this.cargaTransporte.capacidadActual();
 	}
 	
-	public void transportar(Transportable transportable) {
+	public void transportar(Transportable transportable) throws ImposibleTransportar {
 		
-		if ((this.propietario.esAliado((Controlable)transportable)) && (this.cargaTransporte.puedeSubir(transportable))) {
-			this.cargaTransporte.subir(transportable);
+		if (this.propietario.esAliado((Controlable)transportable)) {
+			if (this.cargaTransporte.puedeSubir(transportable)) {
+				this.cargaTransporte.subir(transportable);
+			} else {
+				throw new TransporteLleno();
+			}
+		} else {
+			throw new SoloSePuedenTransportarUnidadesAliadas();
 		}
 		
 	}

@@ -10,6 +10,7 @@ import juego.jugadores.JugadorProtoss;
 import juego.jugadores.JugadorTerran;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
+import juego.razas.unidades.excepciones.TransporteLleno;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.NaveTransporteProtoss;
 
@@ -81,6 +82,7 @@ public class NaveTransporteTester {
 		
 		assertTrue(naveTransporteProtoss.capacidadActual() == 8);
 		
+		exception.expect(TransporteLleno.class);
 		naveTransporteProtoss.transportar(dragon3);
 		
 		assertTrue(naveTransporteProtoss.capacidadActual() == 8);
