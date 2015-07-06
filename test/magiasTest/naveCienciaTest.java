@@ -89,7 +89,6 @@ public class naveCienciaTest {
 		}
 		jugadorReceptor.finalizarTurno();
 		
-		System.out.println(marine.vidaActual());
 		assertTrue(marine.vidaActual() == 0);
 		
 	}	
