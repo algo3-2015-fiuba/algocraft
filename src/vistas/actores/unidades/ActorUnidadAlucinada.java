@@ -47,6 +47,8 @@ public class ActorUnidadAlucinada extends ActorControlable {
 				.obtenerRepresentacion(alucinada.unidadAlucinada().getClass(),
 						alucinada.unidadAlucinada());
 		
+		this.nombre = actorAlucinada.nombre();
+		
 		actorAlucinada.dibujar(g);
 		
 		Jugador turnoActual = Juego.getInstance().turnoDe();
