@@ -21,6 +21,7 @@ import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.construcciones.terran.Fabrica;
 import juego.razas.construcciones.terran.PuertoEstelarTerran;
 import juego.razas.construcciones.terran.Refineria;
+import juego.razas.unidades.UnidadAlucinada;
 import juego.razas.unidades.protoss.AltoTemplario;
 import juego.razas.unidades.protoss.Dragon;
 import juego.razas.unidades.protoss.NaveTransporteProtoss;
@@ -35,6 +36,7 @@ import juego.recursos.GasVespeno;
 import juego.recursos.Mineral;
 import juego.recursos.Recurso;
 import vistas.actores.Actor;
+import vistas.actores.unidades.ActorUnidadAlucinada;
 import vistas.actores.unidades.protoss.ActorAltoTemplario;
 import vistas.actores.unidades.protoss.ActorDragon;
 import vistas.actores.unidades.protoss.ActorNaveTransporteProtoss;
@@ -105,6 +107,8 @@ public class AsignadorVistas {
 		this.actores.put(Acceso.class, new ActorAcceso());
 		this.actores.put(PuertoEstelarProtoss.class, new ActorPuertoEstelarProtoss());
 		this.actores.put(ArchivoTemplario.class, new ActorArchivoTemplario());
+		
+		this.actores.put(UnidadAlucinada.class, new ActorUnidadAlucinada());
 		
 		this.actores.put(Marine.class, new ActorMarine());
 		this.actores.put(Golliat.class, new ActorGolliat());
