@@ -31,7 +31,6 @@ public class ActorUnidadAlucinada extends ActorControlable {
 			this.nombre = "Unidad Alucinada";
 		}
 		this.acciones.add(new AccionMover());
-		
 	}
 	
 	public void dibujar(Graphics g) {
