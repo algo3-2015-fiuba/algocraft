@@ -12,6 +12,9 @@ import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.Mapa;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import juego.proxys.ProxyMovimiento;
+import juego.razas.unidades.excepciones.AccionInvalida;
+import juego.razas.unidades.excepciones.YaSeMovioEnEsteTurno;
 
 public class UnidadAlucinada extends Unidad {
 
@@ -97,14 +100,6 @@ public class UnidadAlucinada extends Unidad {
 			this.estrategiaDeMovimiento.descubrirMapa(this.propietario, this);
 		}
 		
-	}
-	
-	@Override
-	public void moverse(Coordenada coordFinal) throws UbicacionInvalida {
-		
-		this.estrategiaDeMovimiento.moverse(this.propietario, this, coordFinal);
-		this.posicion = coordFinal;
-
 	}
 	
 	@Override

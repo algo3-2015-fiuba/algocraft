@@ -169,8 +169,8 @@ public class altoTemplarioTest {
 		
 		//El algoritmo busca posiciones disponibles para ubicar a la unidad alucinada
 		//En el mapa test, y debido a la ubicacion del zealot, estas posiciones son
-		Coordenada ubicacionAlucinacion1 = new Coordenada(0,16);
-		Coordenada ubicacionAlucinacion2 = new Coordenada(0,17);
+		Coordenada ubicacionAlucinacion1 = new Coordenada(0,19);
+		Coordenada ubicacionAlucinacion2 = new Coordenada(0,20);
 		
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
@@ -240,8 +240,8 @@ public class altoTemplarioTest {
 		
 		//El algoritmo busca posiciones disponibles para ubicar a la unidad alucinada
 		//En el mapa test, y debido a la ubicacion del zealot, estas posiciones son
-		Coordenada ubicacionAlucinacion1 = new Coordenada(0,16);
-		Coordenada ubicacionAlucinacion2 = new Coordenada(0,17);
+		Coordenada ubicacionAlucinacion1 = new Coordenada(0,19);
+		Coordenada ubicacionAlucinacion2 = new Coordenada(0,20);
 		
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion1).colisiona(zealot));
 		assertFalse(mapa.obtenerCelda(ubicacionAlucinacion2).colisiona(zealot));
