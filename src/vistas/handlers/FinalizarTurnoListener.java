@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import juego.Juego;
 import vistas.ventanas.VentanaJuego;
 
 public class FinalizarTurnoListener extends MouseAdapter {
@@ -16,12 +15,7 @@ public class FinalizarTurnoListener extends MouseAdapter {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		
-		for(int i = 0; i < 10; i++) {
-			Juego.getInstance().turnoDe().finalizarTurno();
-		}
-		
+	public void mouseReleased(MouseEvent e) {		
 		
 		this.ventanaOriginal.finalizarTurno();		
 	}
