@@ -54,7 +54,7 @@ public class Radiacion extends Magia {
 
 	@Override
 	public boolean activa() {
-		return (this.infectado == null);
+		return (this.infectado != null);
 	}
 
 }

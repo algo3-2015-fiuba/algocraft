@@ -82,7 +82,17 @@ public class naveCienciaTest {
 		//Deberia perder un 20% de su vida, 32
 		
 		assertEquals(marine.vidaActual(), 32, 0.001);
-	}
+	
+		for (int i = 0; i < 7; i ++) {
+			jugadorReceptor.finalizarTurno();
+			jugadorAtacante.finalizarTurno();
+		}
+		jugadorReceptor.finalizarTurno();
+		
+		System.out.println(marine.vidaActual());
+		assertTrue(marine.vidaActual() == 0);
+		
+	}	
 	
 	@Test
 	public void testSiUnMarineEstaIrradiadoLastimaASusCercanos() throws Exception {
