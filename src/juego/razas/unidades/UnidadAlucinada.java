@@ -42,6 +42,10 @@ public class UnidadAlucinada extends Unidad {
 		return 0;
 	}
 	
+	public Unidad unidadAlucinada() {
+		return this.alucinada;
+	}
+	
 	@Override
 	public int suministrosNecesarios() { return 0; }	
 	
@@ -75,7 +79,7 @@ public class UnidadAlucinada extends Unidad {
 	public void ubicar(Coordenada posicionCentral) {
 		
 		//Este metodo trata de ubicar a la unidad alucinada en un rango radial de 5.
-		Iterator<Celda> celdasPosiblesDeOcupacion = Juego.getInstance().getMapa().obtenerRangoRadialDeCeldas(posicionCentral, 5).iterator();
+		Iterator<Celda> celdasPosiblesDeOcupacion = Juego.getInstance().getMapa().obtenerRangoRadialDeCeldas(posicionCentral, 3).iterator();
 		boolean ubicado = false;
 		
 		while ((celdasPosiblesDeOcupacion.hasNext()) && (!ubicado)) {

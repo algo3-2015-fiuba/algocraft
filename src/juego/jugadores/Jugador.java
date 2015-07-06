@@ -290,8 +290,11 @@ public abstract class Jugador {
 		
 		Iterator<Unidad> it = this.unidades.iterator();
 		
-		while(it.hasNext()) {
-			it.next().actualizar();	
+		ArrayList<Unidad> arrayUnidades = new ArrayList<Unidad>(this.unidades);
+		
+		//Hacemos esto para poder modificar en el medio del loop
+		for (int i = 0; i < arrayUnidades.size(); i++) {
+			arrayUnidades.get(i).actualizar();
 		}
 		
 	}
