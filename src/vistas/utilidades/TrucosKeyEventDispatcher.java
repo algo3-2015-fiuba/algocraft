@@ -25,7 +25,6 @@ public class TrucosKeyEventDispatcher implements KeyEventDispatcher {
 	public boolean dispatchKeyEvent(KeyEvent e) {
 		if(e.getID() == KeyEvent.KEY_TYPED) {
 			this.teclasApretadas.addElement(e.getKeyChar());
-			System.out.println("Got key event! " + e.getKeyChar());
 			
 			if(this.trucoEscrito()) {
 				

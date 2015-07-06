@@ -167,7 +167,11 @@
 			<manifest>
 				<attribute name="Main-Class" value="vistas.Aplicacion" />
 				<attribute name="Class-Path" value="${mf.classpath}"/>
-			</manifest>
+            </manifest>
+
+            <fileset dir="${classes.dir}" includes="**/*.class" />
+            <zipgroupfileset dir="${libs}" includes="**/*.jar" />
+            <zipgroupfileset dir="${audio.libs}" includes="**/*.jar" />
 		</jar>
 	</target>
 

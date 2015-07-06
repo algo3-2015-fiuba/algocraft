@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 		this.ventanaOriginal = ventanaOriginal;
 
 		this.setBackground(new Color(0, 0, 0, 255));
-		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 30));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		JLabel titulo = Aplicacion.titulo("Unidad Seleccionada", 24f);
@@ -65,7 +66,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(300, 200);
+		return new Dimension(300, 250);
 	}
 
 	public void seleccionarElemento(Controlable seleccionado) {
@@ -102,6 +103,9 @@ public class PanelUnidadSeleccionada extends JPanel {
 			for (Atacable nivel : nivelesDeUnidad) {
 				BarraDeVida vida = new BarraDeVida(nivel);
 				this.barrasDeNivel.add(vida);
+				
+				this.add(Box.createRigidArea(new Dimension(10,0)));
+
 			}
 		}
 
