@@ -1,5 +1,6 @@
 package vistas.actores.unidades;
 
+import vistas.acciones.unidades.AccionDescender;
 import vistas.acciones.unidades.AccionMover;
 import vistas.acciones.unidades.AccionTransportar;
 import vistas.actores.ActorControlable;
@@ -13,7 +14,7 @@ public class ActorUnidadTransporte extends ActorControlable {
 		
 		this.acciones.add(new AccionMover());
 		this.acciones.add(new AccionTransportar());
-		//this.acciones.add(new AccionDescender());
+		this.acciones.add(new AccionDescender());
 	}
 	
 }

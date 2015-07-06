@@ -51,6 +51,14 @@ public class CargaTransporte {
 		this.transportados.add(transportable);	
 
 	}
+	
+	public void bajarPrimero(Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
+		if (!this.transportados.isEmpty()) {
+			Iterator<Transportable> it = this.transportados.iterator();
+			this.bajar(it.next(), coordActual, coordBajar);
+		}
+		
+	}
 
 	public void bajar(Transportable transportable, Coordenada coordActual, Coordenada coordBajar) throws UbicacionInvalida {
 		if (this.transportados.contains(transportable)) {

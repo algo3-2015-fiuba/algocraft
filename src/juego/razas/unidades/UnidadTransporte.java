@@ -53,5 +53,11 @@ public abstract class UnidadTransporte extends Unidad {
 		this.cargaTransporte.bajar(transportable, this.posicion, coordBajar);
 		
 	}
+
+	public void bajarPrimero(Coordenada coordBajar) throws UbicacionInvalida {
+
+		this.cargaTransporte.bajarPrimero(this.posicion, coordBajar);
+		
+	}
 	
 }

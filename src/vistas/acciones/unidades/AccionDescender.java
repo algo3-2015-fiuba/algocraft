@@ -1,22 +1,20 @@
 package vistas.acciones.unidades;
 
 import vistas.acciones.pendientes.AccionPendienteUnidad;
-import juego.Juego;
-import juego.interfaces.Transportable;
-import juego.mapa.Celda;
 import juego.mapa.Coordenada;
+import juego.razas.unidades.UnidadTransporte;
 
 public class AccionDescender extends AccionPendienteUnidad {
 
 	@Override
 	public void finalizar(Coordenada destino) throws Exception {
 		
-		Celda celdaSeleccionada = null;
-		celdaSeleccionada = Juego.getInstance().getMapa().obtenerCelda(destino);
-		
-		Transportable transportable = (Transportable) celdaSeleccionada.seleccionRelevante();
-		
-		//Accion de descender unidad
+		if(this.unidadEmisora != null) {
+			UnidadTransporte unidadTransporte = ((UnidadTransporte) this.unidadEmisora);
+			unidadTransporte.bajarPrimero(destino);
+		} else {
+			throw new Exception("La unidad de transporte no posee unidades para descender.");
+		}
 		
 	}
 
