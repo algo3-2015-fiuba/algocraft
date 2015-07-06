@@ -60,6 +60,8 @@ public class AltoTemplario extends UnidadMagica {
 			tormentaPsionica.consumir(this.energia);
 			tormentaPsionica.lanzar(coordImpacto);
 			this.magiasActivas.add(tormentaPsionica);
+		} else {
+			throw new EnergiaInsuficiente();
 		}
 		
 	}

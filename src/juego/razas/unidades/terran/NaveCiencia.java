@@ -51,6 +51,8 @@ public class NaveCiencia extends UnidadMagica {
 		if (misilEmp.energiaSuficiente(this.energia)) {
 			misilEmp.consumir(this.energia);
 			misilEmp.lanzar(coordImpacto);
+		} else {
+			throw new EnergiaInsuficiente();
 		}
 		
 	}
@@ -63,6 +65,8 @@ public class NaveCiencia extends UnidadMagica {
 			radiacion.consumir(this.energia);
 			radiacion.infectar(unidad);
 			this.magiasActivas.add(radiacion);
+		} else {
+			throw new EnergiaInsuficiente();
 		}
 		
 	}
