@@ -12,6 +12,8 @@ public class ActorNaveCiencia extends ActorUnidadMagica {
 		super();
 		this.nombre = "Nave Ciencia";
 		this.url = Aplicacion.class.getResource("/assets/iconos/terran/unidades/nave ciencia.png");
+		this.posicionCelda = posicionCelda.AIRE;
+		
 		this.acciones.addElement(new AccionMisilEMP());
 		this.acciones.addElement(new AccionRadiacion());
 		

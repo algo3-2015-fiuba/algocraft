@@ -8,11 +8,13 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 
 import vistas.Aplicacion;
 import vistas.actores.Actor;
 import vistas.mapa.VistaCelda;
+import vistas.utilidades.CacheImagenes;
 
 public class ActorRecurso extends Actor {
 
@@ -32,9 +34,7 @@ public class ActorRecurso extends Actor {
 		if (url != null) {
 
 			try {
-				BufferedImage image;
-				image = ImageIO.read(url);
-				Image scaled = image.getScaledInstance(lado, lado, Image.SCALE_SMOOTH);
+				Image scaled = CacheImagenes.getInstance().getImage(this.url, lado);
 				g.drawImage(scaled, 0, 0, null);
 				
 			} catch (IOException e) {

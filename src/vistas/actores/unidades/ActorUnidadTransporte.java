@@ -9,6 +9,8 @@ public class ActorUnidadTransporte extends ActorControlable {
 	public ActorUnidadTransporte() {
 		
 		this.nombre = "Unidad Transporte";	
+		this.posicionCelda = posicionCelda.AIRE;
+		
 		this.acciones.add(new AccionMover());
 		this.acciones.add(new AccionTransportar());
 		

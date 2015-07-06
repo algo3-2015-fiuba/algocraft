@@ -71,7 +71,7 @@ public class PanelAcciones extends JPanel {
 		
 		int finalHeight = (prevHeight > minHeight) ? prevHeight : minHeight;
 		
-		return new Dimension(super.getPreferredSize().width, finalHeight);
+		return new Dimension(super.getPreferredSize().width + 20, finalHeight);
 	}
 
 	public void seleccionarElemento(Controlable elementoSeleccionado) {

@@ -18,6 +18,7 @@ import vistas.actores.ActorControlable;
 import vistas.actores.jugadores.ActorJugador;
 import vistas.mapa.VistaCelda;
 import vistas.utilidades.AsignadorVistas;
+import vistas.utilidades.CacheImagenes;
 
 public class ActorTormenta extends ActorMagia {
 
@@ -25,7 +26,7 @@ public class ActorTormenta extends ActorMagia {
 
 	public ActorTormenta() {
 		this.urlTormenta = Aplicacion.class
-				.getResource("/assets/iconos/protoss/unidades/magias/tormenta psionica_small.png");
+				.getResource("/assets/iconos/protoss/unidades/magias/tormenta psionica.png");
 	}
 
 	@Override
@@ -33,23 +34,33 @@ public class ActorTormenta extends ActorMagia {
 
 		super.dibujar(g);
 
-		int altoImagen = (int) (VistaCelda.lado * 1);
+		int altoImagen = (int) (VistaCelda.lado * 0.3);
 
 		Magia magia = (Magia) this.elemento;
 
 		if (this.urlTormenta != null) {
-
+			
+			Image image;
+			try {
+				image = CacheImagenes.getInstance().getImage(this.urlTormenta, altoImagen);
+				g.drawImage(image, (int) (0), (int) (altoImagen * 0.6), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			/*
 			try {
 				BufferedImage image;
 				image = ImageIO.read(this.urlTormenta);
-				/*Image scaled = image.getScaledInstance(altoImagen, altoImagen,
-						Image.SCALE_SMOOTH);*/
+				//Image scaled = image.getScaledInstance(altoImagen, altoImagen,
+						//Image.SCALE_SMOOTH);
 				g.drawImage(image, (int) (0), (int) (altoImagen * 0.6), null);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 }

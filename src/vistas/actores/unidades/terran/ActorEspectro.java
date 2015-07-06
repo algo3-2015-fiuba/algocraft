@@ -8,6 +8,7 @@ public class ActorEspectro extends ActorUnidadAtaque {
 	public ActorEspectro() {
 		this.nombre = "Espectro";
 		this.url = Aplicacion.class.getResource("/assets/iconos/terran/unidades/espectro.png");
+		this.posicionCelda = posicionCelda.AIRE;
 	}
 
 }

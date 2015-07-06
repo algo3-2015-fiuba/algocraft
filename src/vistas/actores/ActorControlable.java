@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 import vistas.mapa.VistaCelda;
+import vistas.utilidades.CacheImagenes;
 
 public abstract class ActorControlable extends Actor {
 	
@@ -36,9 +37,13 @@ public abstract class ActorControlable extends Actor {
 		if (this.url != null) {
 
 			try {
+				/*
 				BufferedImage image;
 				image = ImageIO.read(this.url);
 				Image scaled = image.getScaledInstance(altoImagen, altoImagen, Image.SCALE_SMOOTH);
+				g.drawImage(scaled, margenXImagen, margenYImagen, null);*/
+				
+				Image scaled = CacheImagenes.getInstance().getImage(this.url, altoImagen);
 				g.drawImage(scaled, margenXImagen, margenYImagen, null);
 				
 			} catch (IOException e) {
@@ -62,6 +67,7 @@ public abstract class ActorControlable extends Actor {
 		int lado = VistaCelda.lado;
 		
 		int tamanioFondo = 50;
+		int tamanioImagen = 100;
 		
 		//int altoImagen = (int) (lado * 0.8);
 		int margenXImagen = (int) ((lado * 0.1) - (tamanioFondo * 0.5));
@@ -73,9 +79,12 @@ public abstract class ActorControlable extends Actor {
 		
 		if (fondoDeColor != null) {
 			try {
+				/*
 				BufferedImage image;
 				image = ImageIO.read(fondoDeColor);
-				Image scaled = image;
+				Image scaled = image;*/
+				
+				Image scaled = CacheImagenes.getInstance().getImage(fondoDeColor, tamanioImagen);
 				g.drawImage(scaled, margenXImagen, margenYImagen, null);
 				
 			} catch (IOException e) {
