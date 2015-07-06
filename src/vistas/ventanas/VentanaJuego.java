@@ -144,7 +144,9 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 		
 		elementoSeleccionado = celdaSeleccionada.seleccionRelevante();
 		
-		this.panelIzquierdo.seleccionarElemento(elementoSeleccionado);
+		if(this.accionPendiente == null) {
+			this.panelIzquierdo.seleccionarElemento(elementoSeleccionado);
+		}
 		
 		if(this.accionPendiente != null) {
 			try {
