@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JPanel;
 
 class PanPanel extends JPanel {
@@ -13,9 +14,11 @@ class PanPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 7365101067933914366L;
+	@SuppressWarnings("unused")
 	private int x, y;
     private int times;
-    private int width = 1024, height = 500;
+    @SuppressWarnings("unused")
+	private int width = 1024, height = 500;
     BufferedImage img;
     private final static RenderingHints textRenderHints = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
     private final static RenderingHints imageRenderHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

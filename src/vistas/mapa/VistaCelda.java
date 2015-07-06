@@ -8,8 +8,6 @@ import java.awt.LinearGradientPaint;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-
 import javax.swing.JComponent;
 
 import vistas.actores.Actor;

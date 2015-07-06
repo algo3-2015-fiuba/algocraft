@@ -1,7 +1,6 @@
 package vistas.actores.construcciones;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +21,7 @@ public class ActorConstruccion extends ActorControlable {
 		this.urlConstruccion = Aplicacion.class.getResource("/assets/iconos/notificaciones/en construccion_small.png");
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void dibujar(Graphics g) {
 		super.dibujar(g);

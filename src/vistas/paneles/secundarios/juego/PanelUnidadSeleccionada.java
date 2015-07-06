@@ -16,7 +16,6 @@ import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 import vistas.actores.Actor;
 import vistas.paneles.secundarios.juego.BarraDeVida;
-import vistas.paneles.secundarios.juego.BarraGenerica;
 import vistas.utilidades.AsignadorVistas;
 import vistas.ventanas.VentanaJuego;
 
@@ -29,6 +28,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 	private Controlable seleccionado;
 	private JLabel nombreUnidad;
 	private JPanel barrasDeNivel;
+	@SuppressWarnings("unused")
 	private VentanaJuego ventanaOriginal;
 
 	public PanelUnidadSeleccionada(VentanaJuego ventanaOriginal) {

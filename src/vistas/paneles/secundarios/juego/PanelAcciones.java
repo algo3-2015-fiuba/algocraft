@@ -27,6 +27,7 @@ public class PanelAcciones extends JPanel {
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
 	private Controlable elementoSeleccionado;
+	@SuppressWarnings("unused")
 	private JLabel nombreUnidad;
 	private JPanel panelAcciones;
 	private VentanaJuego ventanaOriginal;
@@ -65,6 +66,7 @@ public class PanelAcciones extends JPanel {
 	@Override
 	public Dimension getPreferredSize() {
 		
+		@SuppressWarnings("unused")
 		int prevWidth = super.getPreferredSize().width;
 		int prevHeight = super.getPreferredSize().height;
 		int minHeight = 250;

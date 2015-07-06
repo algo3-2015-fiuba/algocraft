@@ -14,6 +14,7 @@ public class ActorMagia extends Actor {
 
 	protected URL urlMagia;
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void dibujar(Graphics g) {
 

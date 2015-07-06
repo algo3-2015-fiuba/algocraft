@@ -4,10 +4,7 @@ import java.net.URL;
 
 import vistas.Aplicacion;
 import vistas.acciones.pendientes.AccionPendienteUnidad;
-import juego.Juego;
-import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.mapa.excepciones.CoordenadaFueraDeRango;
 import juego.razas.unidades.protoss.AltoTemplario;
 
 public class AccionTormentaPsionica extends AccionPendienteUnidad {

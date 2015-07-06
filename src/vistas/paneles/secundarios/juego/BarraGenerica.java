@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import juego.interfaces.Atacable;
-import juego.interfaces.Controlable;
 import vistas.Aplicacion;
 
 public abstract class BarraGenerica extends JPanel {

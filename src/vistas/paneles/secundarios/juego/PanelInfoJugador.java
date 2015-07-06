@@ -129,6 +129,7 @@ public class PanelInfoJugador extends JPanel {
 
 	public void actualizarDatosDelJugador() {
 
+		@SuppressWarnings("unused")
 		Jugador jugador = Juego.getInstance().turnoDe();
 
 		this.actualizarMinerales();

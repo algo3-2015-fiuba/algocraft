@@ -28,7 +28,9 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
 
+	@SuppressWarnings("unused")
 	private int celdas_x;
+	@SuppressWarnings("unused")
 	private int celdas_y;
 	private Mapa mapa;
 	private VentanaJuego ventanaOriginal;
@@ -52,8 +54,6 @@ public class PanelMapa extends JPanel implements ObservadorCelda {
 	private void agregarCeldasDeMapa(Mapa mapa) {
 
 		HashMap<Coordenada, Celda> celdas = mapa.obtenerMapa();
-
-		int i = 0;
 
 		for (Map.Entry<Coordenada, Celda> parCelda : celdas.entrySet()) {
 

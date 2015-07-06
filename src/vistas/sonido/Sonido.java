@@ -104,10 +104,12 @@ public class Sonido implements BasicPlayerListener {
 		this.player.open(url);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void opened(Object arg0, Map arg1) {
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void progress(int arg0, long arg1, byte[] arg2, Map arg3) {
 	}

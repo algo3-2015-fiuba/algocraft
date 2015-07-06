@@ -20,7 +20,9 @@ public class PanelIzquierdoJuego extends JPanel {
 	 */
 	private static final long serialVersionUID = -9039207266491791439L;
 	private VentanaJuego ventanaOriginal;
+	@SuppressWarnings("unused")
 	private JComboBox<String> seleccionDeRaza;
+	@SuppressWarnings("unused")
 	private JComboBox<Item> seleccionDeColor;
 	private PanelUnidadSeleccionada panelSeleccion;
 	private PanelAcciones panelAcciones;

@@ -38,6 +38,7 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	 */
 	private static final long serialVersionUID = 7544026564974384314L;
 	
+	@SuppressWarnings("unused")
 	private Vector<Jugador> jugadores;
 	private PanelMapa panelMapa;
 	private PanelIzquierdoJuego panelIzquierdo;

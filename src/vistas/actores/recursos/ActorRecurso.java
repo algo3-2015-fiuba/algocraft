@@ -5,11 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-
-import javax.imageio.ImageIO;
 
 import vistas.Aplicacion;
 import vistas.actores.Actor;
@@ -21,6 +18,7 @@ public class ActorRecurso extends Actor {
 	protected Color color = Color.white;
 	protected URL url;
 
+	@SuppressWarnings("unused")
 	@Override
 	public void dibujar(Graphics g) {
 		
@@ -50,6 +48,7 @@ public class ActorRecurso extends Actor {
 
 	}
 	
+	@SuppressWarnings("unused")
 	private void dibujarNombre(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 	    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

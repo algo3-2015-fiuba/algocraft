@@ -288,8 +288,6 @@ public abstract class Jugador {
 	
 	private void actualizarUnidades() {
 		
-		Iterator<Unidad> it = this.unidades.iterator();
-		
 		ArrayList<Unidad> arrayUnidades = new ArrayList<Unidad>(this.unidades);
 		
 		//Hacemos esto para poder modificar en el medio del loop

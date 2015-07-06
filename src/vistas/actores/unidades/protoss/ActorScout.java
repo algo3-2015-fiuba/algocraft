@@ -8,7 +8,7 @@ public class ActorScout extends ActorUnidadAtaque {
 	public ActorScout() {
 		this.nombre = "Scout";
 		this.url = Aplicacion.class.getResource("/assets/iconos/protoss/unidades/scout.png");
-		this.posicionCelda = posicionCelda.AIRE;
+		this.posicionCelda = PosicionEnCelda.AIRE;
 		
 	}
 	
