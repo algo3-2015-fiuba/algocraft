@@ -38,10 +38,10 @@ public class PanelUnidadSeleccionada extends JPanel {
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		JLabel titulo = Aplicacion.titulo("Unidad Seleccionada", 18f);
+		JLabel titulo = Aplicacion.titulo("Unidad Seleccionada", 24f);
 		titulo.setHorizontalTextPosition(SwingConstants.LEFT);
 
-		this.nombreUnidad = Aplicacion.titulo("", 26f);
+		this.nombreUnidad = Aplicacion.titulo("", 42f);
 		this.nombreUnidad.setHorizontalTextPosition(SwingConstants.LEFT);
 		this.nombreUnidad.setBorder(BorderFactory.createEmptyBorder(20, 0, 20,
 				0));
@@ -65,7 +65,7 @@ public class PanelUnidadSeleccionada extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(250, 200);
+		return new Dimension(300, 200);
 	}
 
 	public void seleccionarElemento(Controlable seleccionado) {

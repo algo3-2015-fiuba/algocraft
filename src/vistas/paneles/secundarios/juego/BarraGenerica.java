@@ -62,7 +62,7 @@ public abstract class BarraGenerica extends JPanel {
         contenedorBarraDentro.setHorizontalTextPosition(SwingConstants.LEFT);
         contenedorBarraDentro.setBounds(margen, margen, contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
         
-        this.texto = Aplicacion.titulo("60/100", 16f);
+        this.texto = Aplicacion.titulo("60/100", 22f);
         texto.setHorizontalTextPosition(SwingConstants.LEFT);
         
         texto.setBounds((int)(margen*3), (int)(margen*1.5), contenedorBarraDentro.getIcon().getIconWidth(), contenedorBarraDentro.getIcon().getIconHeight());
