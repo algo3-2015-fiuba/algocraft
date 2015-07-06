@@ -128,7 +128,7 @@ public class PanelAcciones extends JPanel {
 		
 		Jugador jugador = Juego.getInstance().turnoDe();
 		
-		if ((this.elementoSeleccionado == null) || (jugador.esAliado(this.elementoSeleccionado))) {
+		if (jugador.esAliado(this.elementoSeleccionado)) {
 			for (AccionPendiente accion : actorResponsable.acciones()) {
 				
 				JLabel labelAccion = Aplicacion.titulo(accion.nombre(), 24f);

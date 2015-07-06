@@ -11,6 +11,7 @@ import juego.mapa.Coordenada;
 import juego.razas.construcciones.protoss.Acceso;
 import juego.razas.construcciones.protoss.ArchivoTemplario;
 import juego.razas.construcciones.protoss.Asimilador;
+import juego.razas.construcciones.protoss.BaseProtoss;
 import juego.razas.construcciones.protoss.NexoMineral;
 import juego.razas.construcciones.protoss.Pilon;
 import juego.razas.construcciones.protoss.PuertoEstelarProtoss;
@@ -38,6 +39,11 @@ public class JugadorProtoss extends Jugador {
 	public void activarArchivoTemplario(boolean fabricaActiva) {
 		if (fabricaActiva) this.archivoTemplarioHabilitado++;
 		else archivoTemplarioHabilitado--;
+	}
+	
+	@Override
+	public BaseProtoss crearBase(Coordenada posicion) throws UbicacionInvalida {
+		return new BaseProtoss(this, posicion);
 	}
 
 	public void construir(NexoMineral nexoMineral, Coordenada posicion) 

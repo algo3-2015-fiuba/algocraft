@@ -97,7 +97,7 @@ public abstract class Jugador {
 	public boolean esAliado(Controlable controlable) { 
 	
 		if (this.unidades.contains(controlable)) return true;	
-		if ((this.construcciones.contains(controlable))) return true;
+		if (this.construcciones.contains(controlable)) return true;
 		
 		return (this.bases.contains(controlable)); 
 	
@@ -305,5 +305,7 @@ public abstract class Jugador {
 		}
 		
 	}
+
+	public abstract ConstruccionBase crearBase(Coordenada posicion) throws UbicacionInvalida;
 	
 }

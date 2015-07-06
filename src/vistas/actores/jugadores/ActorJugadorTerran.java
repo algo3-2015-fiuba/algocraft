@@ -2,12 +2,6 @@ package vistas.actores.jugadores;
 
 import java.awt.Graphics;
 
-import vistas.acciones.construcciones.terran.AccionCrearBarraca;
-import vistas.acciones.construcciones.terran.AccionCrearCentroMineral;
-import vistas.acciones.construcciones.terran.AccionCrearDepositoDeSuministro;
-import vistas.acciones.construcciones.terran.AccionCrearFabrica;
-import vistas.acciones.construcciones.terran.AccionCrearPuertoEstelarTerran;
-import vistas.acciones.construcciones.terran.AccionCrearRefineria;
 import vistas.actores.Actor;
 import vistas.actores.construcciones.terran.ActorBaseTerran;
 
@@ -15,12 +9,6 @@ public class ActorJugadorTerran extends ActorJugador {
 	
 	public ActorJugadorTerran() {
 		this.nombre = "Unidad";
-		this.acciones.add(new AccionCrearCentroMineral());
-		this.acciones.add(new AccionCrearRefineria());
-		this.acciones.add(new AccionCrearDepositoDeSuministro());
-		this.acciones.add(new AccionCrearBarraca());
-		this.acciones.add(new AccionCrearFabrica());
-		this.acciones.add(new AccionCrearPuertoEstelarTerran());		
 	}
 
 	@Override

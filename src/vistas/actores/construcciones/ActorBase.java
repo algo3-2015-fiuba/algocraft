@@ -8,10 +8,11 @@ import vistas.actores.ActorControlable;
 import vistas.actores.jugadores.ActorJugador;
 import vistas.utilidades.AsignadorVistas;
 
-public class ActorBase extends ActorControlable {
+public abstract class ActorBase extends ActorControlable {
 	
 	public ActorBase() {
 		this.nombre = "Construccion Base";
+		
 	}
 	
 	@Override

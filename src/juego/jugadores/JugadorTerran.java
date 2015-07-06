@@ -9,6 +9,7 @@ import juego.interfaces.excepciones.RequiereFabrica;
 import juego.interfaces.excepciones.UbicacionInvalida;
 import juego.mapa.Coordenada;
 import juego.razas.construcciones.terran.Barraca;
+import juego.razas.construcciones.terran.BaseTerran;
 import juego.razas.construcciones.terran.CentroDeMineral;
 import juego.razas.construcciones.terran.DepositoSuministro;
 import juego.razas.construcciones.terran.Fabrica;
@@ -38,6 +39,11 @@ public class JugadorTerran extends Jugador {
 	public void activarPuertoEstelar(boolean puertoEstelarActivo) {
 		if (puertoEstelarActivo) this.puertoEstelarHabilitado++;
 		else this.puertoEstelarHabilitado--;
+	}
+	
+	@Override
+	public BaseTerran crearBase(Coordenada posicion) throws UbicacionInvalida {
+		return new BaseTerran(this, posicion);
 	}
 	
 	public void construir(CentroDeMineral centroDeMineral, Coordenada posicion) 
