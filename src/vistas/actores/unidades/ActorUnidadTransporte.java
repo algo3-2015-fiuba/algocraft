@@ -13,7 +13,7 @@ public class ActorUnidadTransporte extends ActorControlable {
 		
 		this.acciones.add(new AccionMover());
 		this.acciones.add(new AccionTransportar());
-		
+		//this.acciones.add(new AccionDescender());
 	}
 	
 }

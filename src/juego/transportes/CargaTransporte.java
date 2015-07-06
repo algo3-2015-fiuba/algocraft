@@ -27,6 +27,10 @@ public class CargaTransporte {
 		
 		return ((transportable.pesoTransporte() + this.capacidadActual()) <= this.capacidadMaxima);
 	}
+	
+	public boolean tieneCapacidad() {
+		return (this.capacidadActual() < this.capacidadMaxima);
+	}
 
 	public int capacidadActual() {
 		
@@ -64,4 +68,5 @@ public class CargaTransporte {
 		}
 		
 	}
+	
 }

@@ -32,6 +32,10 @@ public abstract class UnidadTransporte extends Unidad {
 		
 	}
 	
+	public boolean tieneCapacidad() {
+		return (this.cargaTransporte.tieneCapacidad());
+	}
+	
 	public int capacidadActual() {
 		return this.cargaTransporte.capacidadActual();
 	}

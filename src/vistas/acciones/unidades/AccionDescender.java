@@ -5,9 +5,8 @@ import juego.Juego;
 import juego.interfaces.Transportable;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
-import juego.razas.unidades.UnidadTransporte;
 
-public class AccionTransportar extends AccionPendienteUnidad {
+public class AccionDescender extends AccionPendienteUnidad {
 
 	@Override
 	public void finalizar(Coordenada destino) throws Exception {
@@ -17,13 +16,13 @@ public class AccionTransportar extends AccionPendienteUnidad {
 		
 		Transportable transportable = (Transportable) celdaSeleccionada.seleccionRelevante();
 		
-		((UnidadTransporte)this.unidadEmisora).transportar(transportable);
+		//Accion de descender unidad
 		
 	}
 
 	@Override
 	public String nombre() {
-		return "Transportar";
+		return "Descender";
 	}
 	
 }

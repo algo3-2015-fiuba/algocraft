@@ -83,12 +83,12 @@ public class AsignadorVistas {
 		this.actores.put(JugadorTerran.class, new ActorJugadorTerran());
 		this.actores.put(JugadorProtoss.class, new ActorJugadorProtoss());
 		
-		this.actores.put(BaseTerran.class, new ActorBaseTerran());
-		this.actores.put(BaseProtoss.class, new ActorBaseProtoss());
-		
 		this.actores.put(Magia.class, new ActorMagia());
 		this.actores.put(TormentaPsionica.class, new ActorTormenta());
 		
+		this.actores.put(BaseTerran.class, new ActorBaseTerran());
+		this.actores.put(BaseProtoss.class, new ActorBaseProtoss());
+				
 		this.actores.put(CentroDeMineral.class, new ActorCentroMineral());
 		this.actores.put(Barraca.class, new ActorBarraca());
 		this.actores.put(DepositoSuministro.class, new ActorDepositoSuministro());
