@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
@@ -22,6 +23,7 @@ import juego.jugadores.Jugador;
 import juego.mapa.Celda;
 import juego.mapa.Coordenada;
 import juego.mapa.excepciones.CoordenadaFueraDeRango;
+import vistas.Aplicacion;
 import vistas.acciones.pendientes.AccionPendiente;
 import vistas.handlers.HandScrollListener;
 import vistas.handlers.interfaces.ObservadorCelda;
@@ -179,12 +181,22 @@ public class VentanaJuego extends JFrame implements ObservadorCelda {
 	
 	public void finalizarTurno() {
 		Juego.getInstance().turnoDe().finalizarTurno();
+		if (!Juego.getInstance().finalizo()) {
+			this.removerAccionPendiente();
+			this.panelIzquierdo.seleccionarElemento(null);
 		
-		
-		this.removerAccionPendiente();
-		this.panelIzquierdo.seleccionarElemento(null);
-		
-		this.actualizarPantalla();
+			this.actualizarPantalla();
+		} else {
+			JOptionPane.showMessageDialog(null, "El juego ha finalizado, el ganador es: "+Juego.getInstance().ganador().getNombre(), "AlgoCraft", JOptionPane.INFORMATION_MESSAGE);
+			Juego.reiniciar();
+			this.dispose();
+			try {
+				Aplicacion.iniciarInterfaz();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	public void actualizarPantalla() {

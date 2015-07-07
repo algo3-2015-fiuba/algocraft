@@ -19,7 +19,7 @@ public class ConstruccionBase extends Construccion {
 		
 		super();
 		this.propietario = propietario;
-		this.vida = new Vida(1000);
+		this.vida = new Vida(500);
 		this.costos = new Costos(150,100,10,0);
 		this.estrategiaDeMovimiento = new MovimientoConstruccion(10);
 		this.posicion = posicion;
